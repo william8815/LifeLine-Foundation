@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import { useSeoMeta, useHead } from "@unhead/vue";
 import Header from "./components/layout/Header.vue";
+import Footer from "./components/layout/Footer.vue";
 
 // 預設 SEO Meta 資訊
 useSeoMeta({
@@ -19,7 +20,7 @@ useSeoMeta({
     <main class="flex-grow">
       <RouterView />
     </main>
-    <!-- Future TheFooter goes here -->
+    <Footer />
   </div>
 </template>
 
