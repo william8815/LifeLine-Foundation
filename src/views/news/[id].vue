@@ -52,7 +52,7 @@ onMounted(() => {
       </button>
 
       <!-- Overlay Content -->
-      <div class="absolute bottom-0 left-0 w-full p-10 md:p-20 container mx-auto max-w-5xl">
+      <div class="absolute bottom-0 left-0 w-full p-10 md:p-20 container mx-auto px-4 md:px-6">
         <!-- 文字加上白色陰影 -->
          <span class="inline-block px-4 py-1.5 bg-foundation-blue text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-xl">
            {{ newsItem.category }}
@@ -72,7 +72,7 @@ onMounted(() => {
     </div>
 
     <!-- Article Content Area -->
-    <main class="container mx-auto max-w-4xl px-6 md:px-0 pt-20">
+    <main class="container mx-auto px-4 md:px-6 pt-20">
       <article class="prose prose-xl max-w-none">
         <div class="space-y-10 text-gray-600 leading-[1.8] font-medium text-lg md:text-xl">
            <p v-for="(p, i) in newsItem.content.split('\n\n')" :key="i">

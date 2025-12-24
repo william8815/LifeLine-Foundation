@@ -66,7 +66,7 @@ const donationMethods = [
       subtitle="您的每一份支持，都是長輩力量的來源"
     />
 
-    <main class="container mx-auto px-4 max-w-7xl -mt-10 relative z-10">
+    <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-10">
       <!-- Intro Section -->
       <section class="bg-white rounded-[40px] shadow-premium p-10 md:p-16 mb-16 relative overflow-hidden text-center border border-gray-100">
         <div class="absolute top-0 right-0 w-64 h-64 bg-foundation-blue/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>

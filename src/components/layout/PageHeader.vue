@@ -33,7 +33,7 @@ defineProps({
     </div>
 
     <!-- Content -->
-    <div class="container mx-auto px-4 md:px-8 relative z-10">
+    <div class="container mx-auto px-4 md:px-6 relative z-10">
       <div class="max-w-4xl">
         <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6 group cursor-default">
           <span class="w-2 h-2 bg-foundation-orange rounded-full animate-pulse"></span>

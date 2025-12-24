@@ -100,7 +100,7 @@ const goToDetail = (id) => {
       subtitle="隨時掌握基金會動態與健康衛教資訊"
     />
 
-    <main class="container mx-auto px-4 lg:px-8 max-w-7xl -mt-10 relative z-30">
+    <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-30">
       <!-- Category Filter -->
       <div class="bg-white/80 backdrop-blur-xl rounded-2xl shadow-sm p-4 mb-10 flex overflow-x-auto no-scrollbar space-x-2 sticky top-24 z-20 border border-white/50">
         <button 
