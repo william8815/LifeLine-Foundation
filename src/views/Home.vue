@@ -149,6 +149,56 @@ onMounted(() => {
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(240,110,0,0.05)_0%,transparent_70%)]"></div>
     </section>
 
+    <!-- Mission Section -->
+    <section class="py-32 bg-white relative overflow-hidden">
+      <div class="container mx-auto px-4 md:px-6 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-20">
+          <div class="lg:w-1/2 space-y-12">
+            <div class="space-y-6">
+              <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Our Mission</span>
+              <h2 class="text-4xl md:text-6xl font-black text-foundation-blue tracking-tighter italic">
+                服務宗旨：<br>
+                <span class="text-foundation-lightblue">厚澤民生</span>
+              </h2>
+            </div>
+            <div class="space-y-8 text-gray-500 text-lg md:text-xl font-medium leading-[2] italic">
+              <p>
+                生命連線中心秉持著「厚澤民生」之宗旨，結合社會福利、衛生緊急醫療網及消防等單位，辦理獨居或中低收入戶長者、身心障礙者及猝發性疾病患者在宅緊急救護通報服務方案。
+              </p>
+              <p>
+                我們致力於提升服務品質，建立通報系統及個人相關資料連貫之網路，使緊急救護服務具備全天候、自動化立即反應之功能。同時提供居家安全和到院前的緊急醫療照護，協助弱勢族群減輕生活壓力，擁抱獨立自主的生活。
+              </p>
+            </div>
+            <div class="flex items-center space-x-8 pt-4">
+               <div class="flex flex-col">
+                  <span class="text-3xl font-black text-foundation-blue italic">全天候</span>
+                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Response</span>
+               </div>
+               <div class="w-px h-10 bg-gray-100"></div>
+               <div class="flex flex-col">
+                  <span class="text-3xl font-black text-foundation-blue italic">自動化</span>
+                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Technology</span>
+               </div>
+               <div class="w-px h-10 bg-gray-100"></div>
+               <div class="flex flex-col">
+                  <span class="text-3xl font-black text-foundation-blue italic">在地化</span>
+                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Care</span>
+               </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 relative">
+            <div class="relative rounded-[60px] overflow-hidden shadow-2xl group">
+               <img src="https://picsum.photos/1000/1200?random=55" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="Mission Image">
+               <div class="absolute inset-0 bg-gradient-to-t from-foundation-blue/40 to-transparent"></div>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-foundation-orange/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute -left-10 -bottom-10 w-60 h-60 bg-foundation-blue/5 rounded-full blur-3xl"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Service Hub Section -->
     <section class="py-32 bg-gray-50 relative">
       <div class="container mx-auto px-4 md:px-6 relative z-10">
