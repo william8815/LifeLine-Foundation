@@ -73,7 +73,7 @@ const timeline = [
 
                   <!-- Date for MD+ screens -->
                   <div :class="[
-                    'hidden md:block absolute top-1/2 -translate-y-1/2 w-[45%] text-gray-300 font-black italic text-6xl opacity-30 group-hover:opacity-100 transition-opacity pointer-events-none',
+                    'hidden md:block absolute top-1/2 -translate-y-1/2 w-[45%] text-gray-300 font-black italic text-6xl opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none',
                     index % 2 === 0 ? 'left-[55%] text-left pl-12' : 'right-[55%] text-right pr-12'
                   ]">
                     {{ item.year }}
