@@ -69,11 +69,11 @@ const isActive = (path) => route.path === path
     <div class="container mx-auto px-4 md:px-6 flex justify-between items-center w-full">
       <!-- Logo Section -->
       <RouterLink to="/" class="flex items-center group" @click="closeMenu">
-        <div class="relative w-11 h-11 bg-foundation-blue rounded-xl flex items-center justify-center shadow-md group-hover:rotate-12 transition-transform duration-300">
+        <!-- <div class="relative w-11 h-11 bg-foundation-blue rounded-xl flex items-center justify-center shadow-md group-hover:rotate-12 transition-transform duration-300">
           <span class="text-white font-black text-2xl tracking-tighter">L</span>
           <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-foundation-orange rounded-full border-2 border-white"></div>
-        </div>
-        <div class="ml-3 flex flex-col">
+        </div> -->
+        <div class="flex flex-col">
           <span class="text-foundation-blue font-extrabold text-xl leading-none tracking-tight uppercase">Lifeline</span>
           <span class="text-foundation-orange text-[10px] font-bold tracking-widest uppercase mt-1">生命連線基金會</span>
         </div>

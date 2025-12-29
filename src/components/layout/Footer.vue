@@ -40,15 +40,15 @@ const footerLinks = [
         <!-- Brand & Info -->
         <div class="space-y-4">
           <RouterLink to="/" class="flex items-center space-x-2">
-            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
+            <!-- <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
               <span class="text-foundation-blue font-bold text-xl">L</span>
-            </div>
+            </div> -->
             <div class="flex flex-col">
-              <span class="text-white font-bold text-lg leading-tight uppercase tracking-wider">Foundation</span>
+              <span class="text-white font-bold text-lg leading-tight uppercase tracking-wider">LifeLine</span>
               <span class="text-foundation-lightblue text-xs font-medium">生命連線基金會</span>
             </div>
           </RouterLink>
-          <p class="text-foundation-lightblue/80 text-sm leading-relaxed">
+          <p class="text-white text-sm leading-relaxed">
             秉持守護生命、關懷長者的初心，提供全方位的居家醫療與防護支援，讓每位長輩都能安享健康的晚年生活。
           </p>
           <div class="flex space-x-4">
@@ -102,7 +102,7 @@ const footerLinks = [
           </div>
           <div class="text-sm">
             <p class="text-foundation-lightblue font-bold mb-0.5">服務地址</p>
-            <p class="text-foundation-lightblue/90">110 台北市信義區忠孝東路五段 550 號 5 樓</p>
+            <p class="text-white">110 台北市信義區忠孝東路五段 550 號 5 樓</p>
           </div>
         </div>
         <div class="flex items-center space-x-4 bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
@@ -113,7 +113,7 @@ const footerLinks = [
           </div>
           <div class="text-sm">
             <p class="text-foundation-lightblue font-bold mb-0.5">諮詢專線</p>
-            <p class="text-foundation-lightblue/90">(02) 87585858</p>
+            <p class="text-white">(02) 87585858</p>
           </div>
         </div>
         <div class="flex items-center space-x-4 bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
@@ -124,13 +124,13 @@ const footerLinks = [
           </div>
           <div class="text-sm">
             <p class="text-foundation-lightblue font-bold mb-0.5">電子郵件</p>
-            <p class="text-foundation-lightblue/90">foundation@lifeline.net.tw</p>
+            <p class="text-white">foundation@lifeline.net.tw</p>
           </div>
         </div>
       </div>
 
       <!-- Copyright -->
-      <div class="text-center pt-8 border-t border-white/10 text-foundation-lightblue/60 text-xs tracking-wide">
+      <div class="text-center pt-8 border-t border-white/10 text-foundation-lightblue text-xs tracking-wide">
         <p>© {{ currentYear }} 生命連線基金會 版權所有. All Rights Reserved.</p>
       </div>
     </div>

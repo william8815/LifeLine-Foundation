@@ -2,15 +2,13 @@
 import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 
+// images
+import imgHero from '@/assets/images/hero-banner.jpeg'
+import imgHero_2 from '@/assets/images/hero-banner2.jpg'
+const heroImageLoaded = ref(false)
+const heroImage2Loaded = ref(false)
+
 const services = [
-  {
-    title: '緊急救援系統',
-    subtitle: '救護支援・救援即時抵達',
-    desc: '包含意外通報、救護車緊急救護及聯絡人通知，確保黃金時間獲得協助。',
-    href: '/service-emergency',
-    icon: 'fire',
-    features: ['24小時即時通報', '醫護/警政連動', '緊急聯絡人第一時間通知']
-  },
   {
     title: '家醫計畫',
     subtitle: '專業護理・居家健康守護',
@@ -18,6 +16,14 @@ const services = [
     href: '/service-home-care',
     icon: 'heart',
     features: ['護理師定期訪視', '疾病預防衛教', '專業醫護評估紀錄']
+  },
+  {
+    title: '緊急救援系統',
+    subtitle: '救護支援・救援即時抵達',
+    desc: '包含意外通報、救護車緊急救護及聯絡人通知，確保黃金時間獲得協助。',
+    href: '/service-emergency',
+    icon: 'fire',
+    features: ['24小時即時通報', '醫護/警政連動', '緊急聯絡人第一時間通知']
   },
   {
     title: '跌倒偵測系統',
@@ -35,21 +41,26 @@ const services = [
     icon: 'map-pin',
     features: ['NFC 感應通報', 'GPS 精準定位', '派出所資訊即時整合']
   },
-  {
-    title: '諮詢與轉介服務',
-    subtitle: '社會福利・解決生活疑難',
-    desc: '協助社福資源申請、看診交通安排，讓長輩不再孤軍奮戰。',
-    href: '/contact',
-    icon: 'chat',
-    features: ['社福問題轉介', '看診交通代排', '急難救助諮詢']
-  }
 ]
 
+const formatNumber = (num) => {
+  if (!num || isNaN(num)) return num
+  if (num >= 1000000) {
+    const m = num / 1000000
+    return m % 1 === 0 ? `${m}M` : `${m.toFixed(1)}M`
+  }
+  if (num >= 1000) {
+    const k = num / 1000
+    return k % 1 === 0 ? `${k}k` : `${k.toFixed(1)}k`
+  }
+  return num
+}
+
 const stats = [
-  { label: '累積服務人次', value: '1,000,000+', suffix: '人' },
-  { label: '守護據點', value: '500+', suffix: '處' },
-  { label: '深耕台灣', value: '20', suffix: '年' },
-  { label: '專業團隊', value: '1,000+', suffix: '名' }
+  { label: '累積服務人次', value: 1200000, suffix: '人', showPlus: true },
+  { label: '守護據點', value: 500, suffix: '處', showPlus: true },
+  { label: '深耕台灣', value: 20, suffix: '年', showPlus: false },
+  { label: '專業團隊', value: 1000, suffix: '名', showPlus: true }
 ]
 
 const latestNews = [
@@ -84,8 +95,9 @@ onMounted(() => {
     <!-- Hero Section -->
     <section class="relative h-screen min-h-[700px] flex items-center overflow-hidden">
       <div class="absolute inset-0 z-0">
-        <img src="https://picsum.photos/1920/1080?grayscale&random=50" class="w-full h-full object-cover opacity-30 transform scale-110 animate-slow-zoom" alt="Hero Background">
-        <div class="absolute inset-0 bg-gradient-to-br from-foundation-blue via-foundation-blue/80 to-transparent"></div>
+        <img :src="imgHero" class="w-full h-full object-cover transition-opacity duration-500" alt="Hero Background" loading="lazy" :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
+        @load="heroImageLoaded = true" />
+        <div class="absolute inset-0 bg-black/50"></div>
       </div>
       
       <div class="container mx-auto px-4 md:px-6 relative z-10">
@@ -126,11 +138,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center">
-         <span class="text-white/30 text-xs font-black uppercase tracking-widest mb-4">Scroll to Explore</span>
-         <div class="w-0.5 h-20 bg-gradient-to-t from-white/30 to-transparent"></div>
-      </div>
     </section>
 
     <!-- Stats Section -->
@@ -138,9 +145,9 @@ onMounted(() => {
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
           <div v-for="stat in stats" :key="stat.label" class="text-center group">
-            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-foundation-lightblue mb-4">{{ stat.label }}</p>
+            <p class="text-[1rem] font-black uppercase tracking-[0.3em] text-foundation-lightblue mb-4">{{ stat.label }}</p>
             <div class="flex items-baseline justify-center space-x-1 group-hover:scale-110 transition-transform duration-500">
-               <span class="text-4xl md:text-7xl font-black text-white italic tracking-tighter">{{ stat.value }}</span>
+               <span class="text-4xl md:text-5xl font-black text-white italic tracking-tighter">{{ formatNumber(stat.value) }}{{ stat.showPlus ? '+' : '' }}</span>
                <span class="text-xl md:text-2xl font-bold text-white/50">{{ stat.suffix }}</span>
             </div>
           </div>
@@ -158,7 +165,7 @@ onMounted(() => {
               <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Our Mission</span>
               <h2 class="text-4xl md:text-6xl font-black text-foundation-blue tracking-tighter italic">
                 服務宗旨：<br>
-                <span class="text-foundation-lightblue">厚澤民生</span>
+                <span class="text-foundation-lightblue pl-[2rem]">厚澤民生</span>
               </h2>
             </div>
             <div class="space-y-8 text-gray-500 text-lg md:text-xl font-medium leading-[2] italic">
@@ -188,7 +195,7 @@ onMounted(() => {
           </div>
           <div class="lg:w-1/2 relative">
             <div class="relative rounded-[60px] overflow-hidden shadow-2xl group">
-               <img src="https://picsum.photos/1000/1200?random=55" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="Mission Image">
+               <img :src="imgHero_2" class="w-full h-full object-cover transition-opacity duration-500" alt="Mission Image" :class="heroImage2Loaded ? 'opacity-100' : 'opacity-0'" @load="heroImage2Loaded = true" loading="lazy">
                <div class="absolute inset-0 bg-gradient-to-t from-foundation-blue/40 to-transparent"></div>
             </div>
             <!-- Decorative Elements -->
@@ -225,7 +232,6 @@ onMounted(() => {
                   <svg v-if="service.icon === 'map-pin'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                   <svg v-if="service.icon === 'chat'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                </div>
-               <p class="text-[10px] font-black uppercase text-gray-300 tracking-[0.3em] rotate-90 origin-right translate-y-6">Secure</p>
             </div>
 
             <div class="flex-grow space-y-4">
@@ -292,7 +298,7 @@ onMounted(() => {
     <section class="py-24 container mx-auto px-4 md:px-6 mb-24">
        <div class="bg-foundation-blue rounded-[60px] p-12 md:p-24 text-white text-center relative overflow-hidden group">
           <div class="relative z-10 max-w-3xl mx-auto space-y-12">
-             <h2 class="text-4xl md:text-7xl font-black leading-tight italic transition-all duration-700 group-hover:scale-105">
+             <h2 class="text-4xl md:text-5xl font-black leading-tight italic transition-all duration-700 group-hover:scale-105">
                您的愛心，<br>是長輩生命中最溫暖的連線。
              </h2>
              <p class="text-xl text-white/70 font-bold italic leading-relaxed">
