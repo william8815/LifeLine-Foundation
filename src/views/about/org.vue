@@ -30,9 +30,9 @@ const partners = [
           <div class="max-w-5xl mx-auto">
             
             <!-- Section 1: 24/7 Service -->
-            <div class="relative mb-32">
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-                <div class="lg:col-span-7">
+            <div class="relative mb-16">
+              <div class="grid grid-cols-1 gap-16 items-center">
+                <div class="">
                   <div class="inline-flex items-center space-x-2 bg-foundation-blue/5 text-foundation-blue px-4 py-2 rounded-full mb-8">
                     <div class="w-1.5 h-1.5 bg-foundation-blue rounded-full animate-ping"></div>
                     <span class="text-xs font-black uppercase tracking-widest">Real-time Response</span>
@@ -44,38 +44,14 @@ const partners = [
                     生命連線服務連結使用者與親人、鄰居、朋友、社區及救護單位、醫療機構等緊急救援網絡。
                   </p>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="flex items-start space-x-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-foundation-blue/10 hover:bg-white hover:shadow-xl transition-all">
+                    <div class="flex items-center space-x-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-foundation-blue/10 hover:bg-white hover:shadow-xl transition-all">
                        <svg class="w-8 h-8 text-foundation-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                        <p class="text-gray-500 text-sm">室內收訊範圍內，不論在家中或是庭院皆可全面防護。</p>
                     </div>
-                    <div class="flex items-start space-x-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-foundation-blue/10 hover:bg-white hover:shadow-xl transition-all">
+                    <div class="flex items-center space-x-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-foundation-blue/10 hover:bg-white hover:shadow-xl transition-all">
                        <svg class="w-8 h-8 text-foundation-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
                        <p class="text-gray-500 text-sm">隨身救護發射器，一鍵聯繫，24小時全年無休。</p>
                     </div>
-                  </div>
-                </div>
-                <div class="lg:col-span-5 relative">
-                  <div class="aspect-square bg-gradient-to-br from-foundation-blue to-blue-900 rounded-[50px] p-1 shadow-2xl overflow-hidden group">
-                    <div class="w-full h-full bg-blue-900/40 backdrop-blur-sm rounded-[48px] flex flex-col items-center justify-center relative overflow-hidden">
-                       <!-- Decorative Circles -->
-                       <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full group-hover:scale-125 transition-transform duration-700"></div>
-                       <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-foundation-orange/20 rounded-full blur-2xl"></div>
-                       
-                       <div class="relative z-10 text-center px-10">
-                         <div class="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-white/20">
-                           <svg class="w-12 h-12 text-foundation-orange animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                         </div>
-                         <h3 class="text-white text-3xl font-black mb-2 italic">Lifeline</h3>
-                         <p class="text-white/60 font-black tracking-widest uppercase text-xs">Unceasing Care Since Day One</p>
-                       </div>
-                    </div>
-                  </div>
-                  <!-- Floating Badge -->
-                  <div class="absolute -bottom-6 -right-6 bg-white shadow-2xl p-6 rounded-3xl border border-gray-100 flex items-center space-x-4">
-                     <div class="w-12 h-12 bg-foundation-orange rounded-2xl flex items-center justify-center">
-                       <span class="text-white font-black text-xl">24</span>
-                     </div>
-                     <p class="text-foundation-blue font-black tracking-tighter leading-none">HRS<br><span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Active</span></p>
                   </div>
                 </div>
               </div>
@@ -86,10 +62,10 @@ const partners = [
               <div class="absolute -left-12 top-1/2 -translate-y-1/2 w-1 h-24 bg-foundation-orange/30"></div>
               <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-12">
                 <div v-for="(stat, index) in stats" :key="stat.label" class="relative">
-                  <div class="flex flex-col">
+                  <div class="flex flex-col items-center">
                     <span class="text-gray-100 text-6xl font-black italic absolute -top-8 -left-2 z-0 opacity-40">0{{ index + 1 }}</span>
                     <p class="text-4xl md:text-5xl font-black text-foundation-blue mb-2 relative z-10 tracking-tighter">{{ stat.value }}</p>
-                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px] relative z-10">{{ stat.label }}</p>
+                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[1rem] relative z-10">{{ stat.label }}</p>
                   </div>
                 </div>
               </div>
@@ -161,18 +137,6 @@ const partners = [
                 </div>
               </div>
             </div>
-
-            <!-- Bottom Callout -->
-            <div class="mt-40 text-center relative">
-               <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden w-24 opacity-10">
-                 <svg viewBox="0 0 100 100" class="fill-foundation-blue"><circle cx="50" cy="50" r="50"/></svg>
-               </div>
-               <div class="inline-flex flex-col items-center relative z-10">
-                 <p class="text-foundation-blue font-black tracking-[0.4em] uppercase text-xs mb-6">Lifeline Foundation</p>
-                 <div class="h-px w-20 bg-foundation-orange"></div>
-               </div>
-            </div>
-
           </div>
         </div>
       </div>
