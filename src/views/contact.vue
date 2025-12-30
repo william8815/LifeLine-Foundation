@@ -71,7 +71,7 @@ const transportation = [
           <div 
             v-for="info in contactInfo" 
             :key="info.label"
-            class="bg-white p-8 rounded-[32px] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group"
+            class="bg-white p-6 md:p-8 rounded-[32px] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group"
           >
             <div class="flex items-center space-x-6">
               <div class="shrink-0 w-14 h-14 rounded-2xl bg-foundation-blue/5 flex items-center justify-center text-foundation-blue group-hover:bg-foundation-blue group-hover:text-white transition-all duration-500">
@@ -84,11 +84,11 @@ const transportation = [
                 <a 
                   v-if="info.type" 
                   :href="`${info.type}:${info.value}`" 
-                  class="text-xl font-black text-foundation-blue hover:text-foundation-lightblue transition-colors"
+                  class="text-[1rem] md:text-xl font-black text-foundation-blue hover:text-foundation-lightblue transition-colors"
                 >
                   {{ info.value }}
                 </a>
-                <p v-else class="text-lg font-black text-foundation-blue leading-tight">
+                <p v-else class="text-[1rem] md:text-lg font-black text-foundation-blue leading-tight">
                   {{ info.value }}
                 </p>
                 <p v-if="info.note" class="text-xs text-foundation-lightblue font-bold mt-1">{{ info.note }}</p>
@@ -132,7 +132,7 @@ const transportation = [
                     </div>
                     <span class="text-2xl font-black text-foundation-blue">{{ trans.title }}</span>
                   </div>
-                  <span class="text-[10px] font-black text-gray-300 uppercase tracking-widest">{{ trans.category }} GUIDES</span>
+                  <!-- <span class="text-[10px] font-black text-gray-300 uppercase tracking-widest">{{ trans.category }} GUIDES</span> -->
                </div>
                
                <div class="flex flex-wrap gap-2">
@@ -163,7 +163,7 @@ const transportation = [
       </section>
 
       <!-- Bottom Help Section -->
-      <div class="mt-24 p-12 bg-foundation-blue rounded-[50px] text-white overflow-hidden relative group">
+      <!-- <div class="mt-24 p-12 bg-foundation-blue rounded-[50px] text-white overflow-hidden relative group">
         <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
            <div class="space-y-2 text-center md:text-left">
               <h3 class="text-3xl font-black italic italic">還在尋找其它資訊嗎？</h3>
@@ -179,7 +179,7 @@ const transportation = [
            </div>
         </div>
         <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
-      </div>
+      </div> -->
     </main>
   </div>
 </template>

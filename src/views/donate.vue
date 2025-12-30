@@ -68,11 +68,11 @@ const donationMethods = [
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-10">
       <!-- Intro Section -->
-      <section class="bg-white rounded-[40px] shadow-premium p-10 md:p-16 mb-16 relative overflow-hidden text-center border border-gray-100">
+      <section class="bg-white rounded-[40px] shadow-premium p-8 md:p-10 mb-16 relative overflow-hidden text-center border border-gray-100">
         <div class="absolute top-0 right-0 w-64 h-64 bg-foundation-blue/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
         <div class="relative z-10 max-w-3xl mx-auto space-y-6">
           <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Donation Support</span>
-          <h2 class="text-3xl md:text-5xl font-black text-foundation-blue leading-tight italic">
+          <h2 class="text-2xl md:text-5xl font-black text-foundation-blue leading-tight italic">
             守護弱勢長者的健康，<br><span class="text-foundation-lightblue">您也可以盡一份力！</span>
           </h2>
           <p class="text-gray-500 text-lg font-medium leading-relaxed italic">
@@ -97,29 +97,29 @@ const donationMethods = [
         <div 
           v-for="method in donationMethods" 
           :key="method.title"
-          class="bg-white rounded-[40px] shadow-sm hover:shadow-2xl transition-all duration-700 border border-gray-50 flex flex-col group overflow-hidden"
+          class="p-6 md:p-8 bg-white rounded-[40px] shadow-sm hover:shadow-2xl transition-all duration-700 border border-gray-50 flex flex-col gap-6 group overflow-hidden"
         >
           <!-- Card Header -->
-          <div class="p-8 md:p-12 flex items-start justify-between border-b border-gray-50 bg-gradient-to-br from-white to-gray-50/50">
-             <div>
-               <h3 class="text-3xl font-black text-foundation-blue mb-4 tracking-tighter">{{ method.title }}</h3>
-               <div class="space-y-3">
-                 <div v-for="detail in method.details" :key="detail.label" class="flex flex-col md:flex-row md:items-center">
-                    <span class="text-xs font-black text-gray-400 uppercase tracking-widest md:w-24 shrink-0">{{ detail.label }}</span>
-                    <span :class="['font-black text-lg md:text-xl', detail.highlight ? 'text-foundation-lightblue underline decoration-foundation-lightblue/30 underline-offset-8' : 'text-foundation-blue/80']">{{ detail.value }}</span>
-                 </div>
-               </div>
-             </div>
-             <div class="w-16 h-16 bg-foundation-blue/5 rounded-3xl flex items-center justify-center text-foundation-blue group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                <svg v-if="method.icon === 'post'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                <svg v-if="method.icon === 'atm'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <svg v-if="method.icon === 'check'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <svg v-if="method.icon === 'cash'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-             </div>
+          <div class="border-b border-gray-50 bg-gradient-to-br from-white to-gray-50/50">
+            <div class="flex gap-2 items-center justify-between mb-4">
+              <h3 class="text-3xl font-black text-foundation-blue tracking-tighter">{{ method.title }}</h3>
+              <div class="w-16 h-16 bg-foundation-blue/5 rounded-3xl flex items-center justify-center text-foundation-blue group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                  <svg v-if="method.icon === 'post'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  <svg v-if="method.icon === 'atm'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <svg v-if="method.icon === 'check'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <svg v-if="method.icon === 'cash'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div v-for="detail in method.details" :key="detail.label" class="flex flex-col md:flex-row md:items-center">
+                <span class="text-xs font-black text-gray-400 uppercase tracking-widest md:w-24 shrink-0">{{ detail.label }}</span>
+                <span :class="['font-black text-lg md:text-xl', detail.highlight ? 'text-foundation-lightblue underline decoration-foundation-lightblue/30 underline-offset-8' : 'text-foundation-blue/80']">{{ detail.value }}</span>
+              </div>
+            </div>
           </div>
 
           <!-- Card Body -->
-          <div class="p-8 md:p-12 space-y-6 flex-grow">
+          <div class="space-y-6 flex-grow">
             <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest flex items-center">
               <span class="w-8 h-px bg-gray-200 mr-3"></span>
               流程說明
