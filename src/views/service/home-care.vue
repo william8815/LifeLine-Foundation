@@ -221,7 +221,7 @@ const submitSurvey = () => {
                   </div>
                   <div class="aspect-video bg-gray-900 rounded-md shadow-[0_50px_120px_rgba(0,0,0,0.2)] overflow-hidden flex items-center justify-center relative group cursor-pointer border-[6px] border-foundation-lightblue">
                     <video controls="" controlslist="nodownload" width="100%">
-                      <source src="../images/6/R5.mp4" type="video/mp4">
+                      <!-- <source src="../images/6/R5.mp4" type="video/mp4"> -->
                       您的瀏覽器不支援此影片格式
                     </video>
                   </div>
