@@ -1,6 +1,28 @@
 <script setup>
 import { ref } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+// images
+import emergency1_1 from "@/assets/images/services/emergency1_1.png"
+import emergency1_2 from "@/assets/images/services/emergency1_2.png"
+import emergency1_3 from "@/assets/images/services/emergency1_3.png"
+import emergency1_4 from "@/assets/images/services/emergency1_4.png"
+import emergency2_1 from "@/assets/images/services/emergency2_1.png"
+import emergency2_2 from "@/assets/images/services/emergency2_2.png"
+import emergency2_3 from "@/assets/images/services/emergency2_3.png"
+import emergency2_4 from "@/assets/images/services/emergency2_4.png"
+import emergency2_5 from "@/assets/images/services/emergency2_5.png"
+
+const imageLoaded = ref({
+  emergency1_1: false,
+  emergency1_2: false,
+  emergency1_3: false,
+  emergency1_4: false,
+  emergency2_1: false,
+  emergency2_2: false,
+  emergency2_3: false,
+  emergency2_4: false,
+  emergency2_5: false
+})
 
 const activeTab = ref('intro')
 const tabs = [
@@ -16,29 +38,29 @@ const workflowSteps = [
     title: '按鈕呼救',
     content: '當有狀況發生，只要按下隨身發射器，即可啟動平安機。',
     icon: 'touch',
-    image: 'https://picsum.photos/600/400?random=20'
+    image: emergency1_1
   },
   {
     id: 2,
     title: '專業人員接聽',
     content: '您的平安機會自動連線至 Lifeline 生命連線中心，並建立雙向的語音溝通。',
     icon: 'operator',
-    image: 'https://picsum.photos/600/400?random=21'
+    image: emergency1_2
   },
   {
     id: 3,
     title: '個人化的協助',
     content: '中心人員檢視您的個人檔案，並評估整個狀況。',
     icon: 'profile',
-    image: 'https://picsum.photos/600/400?random=22'
+    image: emergency1_3
   },
   {
     id: 4,
     title: '環環相扣',
     content: '中心人員將根據您的需求，連絡鄰居、家人或醫護人員，並持續連線，直到確定援助抵達。',
     icon: 'link',
-    image: 'https://picsum.photos/600/400?random=23'
-  }
+    image: emergency1_4
+  }   
 ]
 
 const devices = {
@@ -46,7 +68,7 @@ const devices = {
     {
       type: '一般式',
       desc: 'Lifeline 生命連線平安機能與您現有的室內電話結合，提供 24 小時的緊急援助，以及雙向的語音通話。',
-      image: 'https://picsum.photos/800/600?random=10',
+      image: emergency2_1,
       features: [
         '可設定 6 組語音小叮嚀 (服藥、會客、進食或運動提示)',
         '大型背光按鈕與撥號語音朗誦，適合視力不佳者',
@@ -61,7 +83,7 @@ const devices = {
     {
       type: '電話式',
       desc: '專門設計用來提供全面的醫療照護功能，同時增進您的生活品質。',
-      image: 'https://picsum.photos/800/600?random=11',
+      image: emergency2_2,
       features: [
         '涵蓋一般式所有核心功能',
         '強化醫療照護與生活品質優化設計',
@@ -75,7 +97,7 @@ const devices = {
     {
       type: '項鍊式',
       desc: '可當成飾品穿戴，具有簡潔、低調的設計，能依需求調整成合適的長度。僅重 14 公克，防水設計。',
-      image: 'https://picsum.photos/800/600?random=12',
+      image: emergency2_3,
       specs: [
         '可在家中任何地點使用，包括地下室、車庫以及庭院',
         '長達 5 年的電池壽命，不必擔心更換問題',
@@ -85,7 +107,7 @@ const devices = {
     {
       type: '手環式',
       desc: '僅重 14 公克，防水設計。能以項鍊或手環的方式穿戴，適合浴室等高風險區域。',
-      image: 'https://picsum.photos/800/600?random=13',
+      image: emergency2_4,
       specs: [
         '室內全域覆蓋使用',
         '5 年長效電池',
@@ -95,7 +117,7 @@ const devices = {
     {
       type: '手錶式',
       desc: '與鐘錶大廠 Timex 合作，結合美觀可靠的手錶與隨身發射器功能。',
-      image: 'https://picsum.photos/800/600?random=14',
+      image: emergency2_5,
       specs: [
         '二合一設計：Timex 精準計時 + Lifeline 即時服務',
         '中性且具吸引力的美觀設計',
@@ -191,7 +213,7 @@ const devices = {
                       <!-- Image Side -->
                       <div class="w-full md:w-1/2 group">
                         <div class="relative aspect-video rounded-[32px] overflow-hidden shadow-xl border border-gray-100 transition-all duration-700 group-hover:shadow-foundation-blue/10 group-hover:-translate-y-2">
-                           <img :src="step.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" :alt="step.title">
+                           <img :src="step.image" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" :class="imageLoaded[step.image] ? 'opacity-100' : 'opacity-0'"  :alt="step.title" loading="lazy" @load="imageLoaded[step.image] = true">
                            <!-- Step Number Badge Overlay -->
                            <div class="absolute top-4" :class="idx % 2 === 1 ? 'right-4' : 'left-4'">
                               <div class="w-12 h-12 rounded-2xl bg-foundation-blue text-white flex items-center justify-center font-black shadow-lg">
@@ -224,14 +246,14 @@ const devices = {
             <div v-else-if="activeTab === 'devices'" :key="'devices'" class="space-y-16">
               <!-- Peace Machines -->
               <section>
-                <div class="flex items-center space-x-6 mb-12">
-                   <h2 class="text-3xl font-black text-foundation-blue italic">平安機系列</h2>
+                <div class="flex items-center space-x-6 mb-20">
+                   <h2 class="text-3xl font-black text-foundation-lightblue italic">平安機系列</h2>
                    <div class="h-px flex-grow bg-gray-100"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                    <div v-for="machine in devices.machines" :key="machine.type" class="bg-white rounded-[40px] overflow-hidden shadow-premium border border-gray-100 group">
-                      <div class="aspect-[16/10] overflow-hidden relative">
-                         <img :src="machine.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                      <div class="overflow-hidden relative aspect-[1/1]">
+                         <img :src="machine.image" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded[machine.type] ? 'opacity-100' : 'opacity-0'" :alt="machine.type" loading="lazy" @load="imageLoaded[machine.type] = true">
                          <div class="absolute top-6 left-6">
                             <span class="px-6 py-2 bg-foundation-blue text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">{{ machine.type }}</span>
                          </div>
@@ -255,14 +277,14 @@ const devices = {
                    <h2 class="text-3xl font-black text-foundation-blue italic">隨身發射器</h2>
                    <div class="h-px flex-grow bg-gray-100"></div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                    <div v-for="item in devices.transmitters" :key="item.type" class="bg-white rounded-[40px] p-10 shadow-premium border border-gray-100 group">
                       <div class="aspect-square rounded-[32px] overflow-hidden mb-10 border border-gray-50">
-                         <img :src="item.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                         <img :src="item.image" class="w-full h-full object-cover transition-transform duration-1000">
                       </div>
                       <h3 class="text-2xl font-black text-foundation-blue mb-4 tracking-tighter">{{ item.type }}</h3>
                       <p class="text-gray-400 font-medium text-sm mb-8 leading-relaxed italic">{{ item.desc }}</p>
-                      <ul class="space-y-3 border-t border-gray-50 pt-8">
+                      <ul class="space-y-3 border-t border-gray-50">
                          <li v-for="spec in item.specs" :key="spec" class="flex items-start text-xs font-bold text-gray-400">
                             <span class="w-1.5 h-1.5 rounded-full bg-foundation-lightblue mr-3 mt-1.5 shrink-0"></span>
                             {{ spec }}
@@ -276,7 +298,7 @@ const devices = {
             <!-- Tab: Fees -->
             <div v-else-if="activeTab === 'fees'" :key="'fees'" class="space-y-8">
               <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100 relative overflow-hidden">
-                <div class="relative z-10 flex flex-col md:flex-row items-center gap-16">
+                <div class="relative z-10 flex flex-col xl:flex-row items-center gap-16">
                    <div class="flex-grow space-y-8">
                       <h2 class="text-3xl md:text-4xl font-black text-foundation-blue italic">服務費用說明</h2>
                       <div class="space-y-6 text-gray-500 text-lg font-medium leading-relaxed italic">
