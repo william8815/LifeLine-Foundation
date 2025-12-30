@@ -1,6 +1,24 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, nextTick } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+
+// images
+import homeCare1 from '@/assets/images/services/home-care1.png'
+import homeCare3_1 from '@/assets/images/services/home-care3_1.jpg'
+import homeCare3_2 from '@/assets/images/services/home-care3_2.jpg'
+import homeCare3_3 from '@/assets/images/services/home-care3_3.jpg'
+import homeCare3_4 from '@/assets/images/services/home-care3_4.jpg'
+import homeCare3_5 from '@/assets/images/services/home-care3_5.jpg'
+import homeCare3_6 from '@/assets/images/services/home-care3_6.jpg'
+import homeCare3_7 from '@/assets/images/services/home-care3_7.jpg'
+const homeCare1Loaded = ref(false)
+const homeCare3_1Loaded = ref(false)
+const homeCare3_2Loaded = ref(false)
+const homeCare3_3Loaded = ref(false)
+const homeCare3_4Loaded = ref(false)
+const homeCare3_5Loaded = ref(false)
+const homeCare3_6Loaded = ref(false)
+const homeCare3_7Loaded = ref(false)
 
 // Tab Management
 const activeTab = ref('intro')
@@ -13,6 +31,16 @@ const tabs = [
 
 // Survey State
 const surveyStep = ref(1) // 1: Filter, 2: Yes-Path, 3: No-Path, 4: Final Information
+const surveyRef = ref(null)
+
+const scrollToTop = async () => {
+  await nextTick()
+  if (surveyRef.value) {
+    const yOffset = -120 
+    const y = surveyRef.value.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+}
 const surveyData = reactive({
   joinedBefore: null, // 'yes' or 'no'
   // Step 2 & 3 & 4 data
@@ -41,21 +69,29 @@ const surveyData = reactive({
   }
 })
 
-const goToNext = () => {
+const goToNext = async () => {
   if (surveyStep.value === 1) {
     if (surveyData.joinedBefore === 'yes') surveyStep.value = 2
     else if (surveyData.joinedBefore === 'no') surveyStep.value = 3
   } else if (surveyStep.value === 2 || surveyStep.value === 3) {
     surveyStep.value = 4
   }
+  await scrollToTop()
 }
 
-const goToPrev = () => {
+const goToPrev = async () => {
   if (surveyStep.value === 2 || surveyStep.value === 3) {
     surveyStep.value = 1
   } else if (surveyStep.value === 4) {
     surveyStep.value = surveyData.joinedBefore === 'yes' ? 2 : 3
   }
+  await scrollToTop()
+}
+
+const selectInitialPath = async (path) => {
+  surveyData.joinedBefore = path
+  surveyStep.value = path === 'yes' ? 2 : 3
+  await scrollToTop()
 }
 
 const submitSurvey = () => {
@@ -103,19 +139,19 @@ const submitSurvey = () => {
         <div class="flex-grow">
           <div class="bg-white rounded-[40px] shadow-[0_20px_100px_rgba(0,0,0,0.06)] p-8 md:p-16 border border-gray-50 min-h-[700px] relative overflow-hidden">
             
-            <!-- Tab 1: Intro -->
             <transition name="fade-slide" mode="out-in">
+              <!-- Tab 1: Intro -->
               <div v-if="activeTab === 'intro'" key="intro" class="space-y-16 animate-fade-in">
                 <div class="max-w-4xl">
                   <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-8 border border-foundation-blue/10">Project Origin</span>
-                  <h2 class="text-3xl md:text-6xl font-black text-foundation-blue leading-[1.15] mb-10">
-                    厚澤民生，<br><span class="text-foundation-lightblue relative inline-block">
+                  <h2 class="text-3xl md:text-5xl font-black text-foundation-blue leading-[1.15] mb-10">
+                    <span class="text-foundation-lightblue relative inline-block">
                       雲端智慧醫療
-                      <svg class="absolute -bottom-4 left-0 w-full h-3 text-foundation-lightblue/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5 L 100 10 L 0 10 Z" fill="currentColor"/></svg>
+                      <!-- <svg class="absolute -bottom-4 left-0 w-full h-3 text-foundation-lightblue/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5 L 100 10 L 0 10 Z" fill="currentColor"/></svg> -->
                     </span>的領航者
                   </h2>
                   <div class="prose prose-xl max-w-none text-gray-500 leading-relaxed font-medium space-y-8">
-                    <p class="first-letter:text-6xl first-letter:font-black first-letter:text-foundation-blue first-letter:mr-3 first-letter:float-left first-letter:leading-[1]">
+                    <p class="first-letter:text-5xl first-letter:font-black first-letter:text-foundation-blue first-letter:mr-3 first-letter:float-left first-letter:leading-[1]">
                       生命連線基金會秉持「厚澤民生」之宗旨，以美國 Lifeline 技術為基礎，發展雲端智慧醫療照護暨個性化高端健康管家服務，獨步全台。
                     </p>
                     <div class="p-10 md:p-14 bg-gradient-to-br from-foundation-blue to-blue-800 rounded-[50px] shadow-2xl shadow-foundation-blue/30 relative overflow-hidden group">
@@ -135,17 +171,14 @@ const submitSurvey = () => {
                 </div>
                 <!-- Image Placeholder -->
                 <div class="rounded-[60px] overflow-hidden shadow-2xl h-[500px] border-8 border-white group relative">
-                   <div class="w-full h-full bg-gray-100 flex items-center justify-center">
-                     <div class="absolute inset-0 bg-gradient-to-tr from-foundation-blue/20 via-transparent to-foundation-lightblue/20 animate-pulse-slow"></div>
-                     <span class="text-foundation-blue/10 font-black italic text-4xl group-hover:scale-125 transition-transform duration-1000 uppercase tracking-tighter">Visual Identity</span>
-                   </div>
+                   <img :src="homeCare1" class="w-full h-full object-contain transition-opacity duration-300" :class="homeCare1Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare1Loaded = true" />
                 </div>
               </div>
 
               <!-- Tab 2: Performance -->
               <div v-else-if="activeTab === 'performance'" key="performance" class="space-y-24 animate-fade-in">
                 <!-- Section 1 -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="grid grid-cols-1 gap-20 items-center">
                    <div class="space-y-8">
                      <span class="px-4 py-1.5 bg-gray-100 text-gray-400 rounded-full text-[10px] font-black tracking-widest uppercase">Territory & Network</span>
                      <h3 class="text-4xl md:text-5xl font-black text-foundation-blue leading-tight">Lifeline 照護網<br><span class="text-foundation-lightblue">社區醫療群</span></h3>
@@ -185,17 +218,12 @@ const submitSurvey = () => {
                       <h3 class="text-3xl md:text-4xl font-black text-foundation-blue mb-4 tracking-tighter underline decoration-foundation-lightblue decoration-8 underline-offset-8">專業醫師一致認可</h3>
                       <p class="text-gray-400 font-medium italic text-lg mt-6">Hear the testimonials from clinical leaders across the nation.</p>
                     </div>
-                    <div class="flex -space-x-4">
-                      <div v-for="i in 4" :key="i" class="w-16 h-16 rounded-full border-4 border-white bg-gray-200"></div>
-                      <div class="w-16 h-16 rounded-full border-4 border-white bg-foundation-blue flex items-center justify-center text-white text-xs font-black">+100</div>
-                    </div>
                   </div>
-                  <div class="aspect-video bg-gray-900 rounded-[64px] shadow-[0_50px_120px_rgba(0,0,0,0.2)] overflow-hidden flex items-center justify-center relative group cursor-pointer border-[12px] border-white/50">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-foundation-blue/40 via-transparent to-foundation-lightblue/40 mix-blend-overlay"></div>
-                    <div class="w-28 h-28 bg-foundation-blue text-white rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(30,64,175,0.5)] group-hover:scale-110 transition-all duration-700 relative z-20">
-                       <svg class="w-12 h-12 translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                  <div class="aspect-video bg-gray-900 rounded-md shadow-[0_50px_120px_rgba(0,0,0,0.2)] overflow-hidden flex items-center justify-center relative group cursor-pointer border-[6px] border-foundation-lightblue">
+                    <video controls="" controlslist="nodownload" width="100%">
+                      <source src="../images/6/R5.mp4" type="video/mp4">
+                      您的瀏覽器不支援此影片格式
+                    </video>
                   </div>
                 </div>
               </div>
@@ -204,18 +232,18 @@ const submitSurvey = () => {
               <div v-else-if="activeTab === 'advantage'" key="advantage" class="space-y-24 animate-fade-in">
                 <div class="text-center group max-w-5xl mx-auto">
                   <span class="inline-block px-4 py-1.5 bg-foundation-lightblue/10 text-foundation-lightblue rounded-full text-[10px] font-black uppercase tracking-widest mb-10 border border-foundation-lightblue/10">Value Proposition</span>
-                  <h2 class="text-5xl md:text-8xl font-black text-foundation-blue mb-10 tracking-tighter leading-none">
-                    Do less & <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-foundation-lightblue to-foundation-blue italic drop-shadow-sm">Earn more.</span>
+                  <h2 class="text-4xl md:text-6xl font-black text-foundation-blue mb-10 tracking-tighter leading-none">
+                    Do less & <span class="text-transparent bg-clip-text bg-gradient-to-r from-foundation-lightblue to-foundation-blue italic drop-shadow-sm">Earn more.</span>
                   </h2>
                   <p class="text-gray-400 text-xl font-medium max-w-2xl mx-auto italic mb-16">協助診所行政減壓，提升醫療給付效益與患者滿意度。</p>
                   
                   <div class="relative rounded-[60px] overflow-hidden shadow-2xl h-[450px] border-8 border-white bg-gray-50">
-                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8),transparent)]"></div>
-                     <div class="flex items-center justify-center h-full text-gray-200 font-black italic text-2xl uppercase tracking-[0.5em]">Advantage Comparison</div>
+                    <img :src="homeCare3_1" class="w-full h-full object-contain transition-all duration-500"
+                    :class="homeCare3_1Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_1Loaded = true" loading="lazy" alt="Advantage Comparison">
                   </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="grid grid-cols-1 gap-12">
                   <!-- Feature Card 1 -->
                   <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
                     <div class="bg-white rounded-[50px] p-12 h-full border border-gray-100 group-hover:border-foundation-blue/10 transition-colors">
@@ -224,9 +252,15 @@ const submitSurvey = () => {
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">中央政策落實</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">定期與合作醫院、健保局溝通，為診所精確對接醫政窗口。</p>
-                      <div class="grid grid-cols-2 gap-4 opacity-40 group-hover:opacity-100 transition-opacity">
-                        <div class="h-24 bg-gray-50 rounded-2xl border border-dashed border-gray-200"></div>
-                        <div class="h-24 bg-gray-50 rounded-2xl border border-dashed border-gray-200"></div>
+                      <div class="flex flex-wrap gap-4 justify-around transition-opacity">
+                        <div class="h-24">
+                          <img :src="homeCare3_2" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_2Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_2Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
+                        <div class="h-24">
+                          <img :src="homeCare3_3" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_3Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_3Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -239,32 +273,61 @@ const submitSurvey = () => {
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">照護品質提升</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">專業個案討論會，促進基層同儕交流，強化醫療網共生價值。</p>
-                      <div class="grid grid-cols-2 gap-4 opacity-40 group-hover:opacity-100 transition-opacity">
-                        <div class="h-24 bg-gray-50 rounded-2xl border border-dashed border-gray-200"></div>
-                        <div class="h-24 bg-gray-50 rounded-2xl border border-dashed border-gray-200"></div>
+                      <div class="flex flex-wrap gap-4 justify-around transition-opacity">
+                        <div class="h-24">
+                          <img :src="homeCare3_2" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_2Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_2Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
+                        <div class="h-24">
+                          <img :src="homeCare3_3" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_3Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_3Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature Card 3 -->
+                  <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
+                    <div class="bg-white rounded-[50px] p-12 h-full border border-gray-100 group-hover:border-foundation-lightblue/10 transition-colors">
+                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-10 group-hover:bg-foundation-lightblue group-hover:-rotate-12 transition-all duration-500">
+                        <svg class="w-10 h-10 text-foundation-lightblue group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                      </div>
+                      <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">彰顯基層醫療</h4>
+                      <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">走入居家，細心照護</p>
+                      <div class="flex flex-wrap gap-4 justify-around transition-opacity">
+                        <div class="h-24">
+                          <img :src="homeCare3_5" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_5Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_5Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
+                        <div class="h-24">
+                          <img :src="homeCare3_6" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_6Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_6Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
+                        <div class="h-24">
+                          <img :src="homeCare3_7" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_7Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_7Loaded = true" loading="lazy" alt="Advantage Comparison">
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-[64px] p-14 md:p-24 relative overflow-hidden flex flex-col lg:flex-row gap-20 items-center">
-                   <div class="lg:w-1/2 relative z-10 space-y-10">
+                <div class="bg-foundation-blue rounded-[64px] p-12 relative overflow-hidden flex flex-col gap-[3rem] items-center">
+                   <div class="relative z-10 grid grid-cols-[1fr_auto] items-center gap-[2rem]">
+                    <div>
                      <span class="text-foundation-lightblue font-black text-sm tracking-[0.3em] uppercase">Excellence in Care</span>
-                     <h3 class="text-4xl md:text-6xl font-black text-white leading-tight">24H 資源連線</h3>
-                     <p class="text-white/50 text-xl leading-relaxed font-medium italic">專業服務團隊 24 小時無間斷，協助診所與患者間的即時溝通，醫師照護更從容。</p>
-                     <div class="flex gap-4">
-                       <div class="px-8 py-4 bg-white/10 rounded-2xl text-white font-bold text-sm hover:bg-white/20 transition-colors">Emergency Link</div>
-                       <div class="px-8 py-4 bg-white/10 rounded-2xl text-white font-bold text-sm hover:bg-white/20 transition-colors">Tele-Care</div>
-                     </div>
+                     <h3 class="text-3xl font-black text-white leading-tight">生命連線資源利用</h3>
+                    </div>
+                    <div class=" w-16 h-16 bg-foundation-lightblue rounded-3xl shadow-2xl animate-bounce-slow flex items-center justify-center">
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    </div>
+                    <p class="col-span-2 text-white/50 text-xl leading-relaxed font-medium italic">專業服務團隊 24 小時無間斷，協助診所與患者間的即時溝通，醫師照護更從容。</p>
                    </div>
-                   <div class="lg:w-1/2 relative z-10 w-full group">
-                      <div class="aspect-square bg-gradient-to-br from-foundation-blue/20 to-transparent border-2 border-white/10 rounded-[60px] p-8 relative">
-                         <div class="w-full h-full bg-white/5 rounded-[40px] flex items-center justify-center text-white/10 font-black italic tracking-widest text-lg">[ 24H 互動示意圖 ]</div>
-                         <!-- Floating Elements -->
-                         <div class="absolute -top-4 -right-4 w-32 h-32 bg-foundation-lightblue rounded-3xl shadow-2xl animate-bounce-slow flex items-center justify-center">
-                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                         </div>
-                      </div>
+                   <div class="relative z-10 w-full group">
+                    <div class="w-full h-full rounded-lg overflow-hidden">
+                      <img :src="homeCare3_4" class="w-full h-full object-contain transition-all duration-500"
+                          :class="homeCare3_4Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_4Loaded = true" loading="lazy" alt="Advantage Comparison">
+                    </div>
                    </div>
                 </div>
               </div>
@@ -277,21 +340,33 @@ const submitSurvey = () => {
                 </div>
 
                 <!-- Form Card -->
-                <div class="bg-gray-50 rounded-[44px] p-8 md:p-16 border border-gray-100 relative">
+                <div ref="surveyRef" class="bg-gray-50 rounded-lg p-8 md:p-16 border border-gray-100 relative">
                   <!-- Progress Bar -->
-                  <div class="absolute top-0 left-0 w-full h-2 bg-gray-100 overflow-hidden">
-                    <div class="h-full bg-foundation-blue transition-all duration-500" :style="{ width: surveyStep === 1 ? '33.33%' : (surveyStep < 4 ? '66.66%' : '100%') }"></div>
+                  <div class="absolute top-0 left-0 w-full h-3 bg-gray-100/50 overflow-hidden rounded-t-lg">
+                    <div 
+                      class="h-full bg-gradient-to-r from-foundation-lightblue to-foundation-blue transition-all duration-700 ease-out relative shadow-[0_0_20px_rgba(30,64,175,0.3)]" 
+                      :style="{ width: surveyStep === 1 ? '33.33%' : (surveyStep < 4 ? '66.66%' : '100%') }"
+                    >
+                      <!-- Shining Effect -->
+                      <div class="absolute top-0 right-0 w-20 h-full bg-white/20 blur-md -skew-x-12 translate-x-10 animate-pulse"></div>
+                    </div>
+                    
+                    <!-- Step Markers -->
+                    <div class="absolute top-0 left-0 w-full h-full flex justify-between px-[33.33%] pointer-events-none">
+                      <div class="w-1 h-full bg-white/30"></div>
+                      <div class="w-1 h-full bg-white/30"></div>
+                    </div>
                   </div>
 
                   <!-- Step 1 -->
                   <div v-if="surveyStep === 1" class="transition-all">
                     <h3 class="text-2xl font-black text-foundation-blue mb-10">1. 請問貴診所是否曾加入【社區醫療群】？</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                       <button @click="surveyData.joinedBefore = 'yes'; surveyStep = 2" class="p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
+                       <button @click="selectInitialPath('yes')" class="p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
                           <p class="text-2xl font-black text-foundation-blue group-hover:text-white mb-2">是</p>
                           <p class="text-gray-400 font-bold group-hover:text-white/60">曾加入過醫療群計畫</p>
                        </button>
-                       <button @click="surveyData.joinedBefore = 'no'; surveyStep = 3" class="p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
+                       <button @click="selectInitialPath('no')" class="p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
                           <p class="text-2xl font-black text-foundation-blue group-hover:text-white mb-2">否</p>
                           <p class="text-gray-400 font-bold group-hover:text-white/60">尚未加入任何醫療群</p>
                        </button>
@@ -360,7 +435,7 @@ const submitSurvey = () => {
                     </div>
 
                     <div class="flex justify-between items-center pt-10 border-t border-gray-200 mt-12">
-                      <button @click="surveyStep = 1" class="text-gray-400 font-black hover:text-gray-600 transition-colors flex items-center">
+                      <button @click="goToPrev" class="text-gray-400 font-black hover:text-gray-600 transition-colors flex items-center">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                         上一步
                       </button>
@@ -378,7 +453,7 @@ const submitSurvey = () => {
                       <div class="space-y-4">
                          <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">(可複選，至多3項)</label>
                          <div class="space-y-3">
-                           <label v-for="opt in ['與家醫計畫理念不同', '行政文書繁瑣', '補助有限', '診所人力不足', '太花時間', '沒有人邀約', '其他']" :key="opt" class="flex items-center p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-blue/5 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
+                           <label v-for="opt in ['與家醫計畫理念不同', '行政文書繁瑣', '補助有限', '診所人力不足', '太花時間', '沒有人邀約', '其他']" :key="opt" class="flex items-center p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
                               <div class="w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center transition-colors" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
                                  <svg v-if="surveyData.notJoiningReasons.includes(opt)" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                               </div>
@@ -390,7 +465,7 @@ const submitSurvey = () => {
                       </div>
                     </div>
                     <div class="flex justify-between items-center pt-10 border-t border-gray-200 mt-12">
-                      <button @click="surveyStep = 1" class="text-gray-400 font-black hover:text-gray-600 flex items-center">
+                      <button @click="goToPrev" class="text-gray-400 font-black hover:text-gray-600 flex items-center">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                         上一步
                       </button>
@@ -400,12 +475,12 @@ const submitSurvey = () => {
 
                   <!-- Step 4: Final Information -->
                   <div v-else-if="surveyStep === 4" class="space-y-16 animate-fade-in max-w-3xl mx-auto">
-                    <div class="bg-gradient-to-br from-foundation-blue to-blue-900 p-10 md:p-14 rounded-[40px] text-white relative overflow-hidden shadow-2xl">
+                    <div class="bg-gradient-to-br from-foundation-blue to-blue-900 p-8 rounded-[40px] text-white relative overflow-hidden shadow-2xl">
                       <div class="relative z-10">
-                        <p class="text-xl md:text-3xl font-black mb-8 italic leading-snug">如果以上問題可以獲得全程協助，而您只需由給付額中抽出極小比例，您是否有意願加入家醫計畫？</p>
+                        <p class="text-xl font-black mb-8 italic leading-snug">如果以上問題可以獲得全程協助，而您只需由給付額中抽出極小比例，您是否有意願加入家醫計畫？</p>
                         <div class="flex flex-wrap gap-4">
-                          <button @click="surveyData.interestInFuture = 'yes'" :class="['px-12 py-5 rounded-2xl font-black transition-all text-xl shadow-lg', surveyData.interestInFuture === 'yes' ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">是，有意願</button>
-                          <button @click="surveyData.interestInFuture = 'no'" :class="['px-12 py-5 rounded-2xl font-black transition-all text-xl shadow-lg', surveyData.interestInFuture === 'no' ? 'bg-gray-800 text-white scale-105' : 'bg-white/10 hover:bg-white/20']">否，暫無意願</button>
+                          <button @click="surveyData.interestInFuture = 'yes'" :class="['px-4 py-2 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'yes' ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">是，有意願</button>
+                          <button @click="surveyData.interestInFuture = 'no'" :class="['px-4 py-2 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'no' ? 'bg-gray-800 text-white scale-105' : 'bg-white/10 hover:bg-white/20']">否，暫無意願</button>
                         </div>
                       </div>
                       <div class="absolute -right-20 -top-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
