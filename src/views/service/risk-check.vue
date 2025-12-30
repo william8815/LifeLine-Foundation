@@ -98,21 +98,21 @@ const submitForm = async () => {
           <div class="overflow-x-auto">
             <table class="w-full text-left">
               <thead>
-                <tr class="bg-gray-50/50">
-                  <th class="px-8 py-6 text-sm font-black text-gray-400 uppercase tracking-widest">檢測項目</th>
-                  <th class="px-8 py-6 text-sm font-black text-gray-400 uppercase tracking-widest text-center w-32">是 (Yes)</th>
-                  <th class="px-8 py-6 text-sm font-black text-gray-400 uppercase tracking-widest text-center w-32">否 (No)</th>
+                <tr class="bg-foundation-blue text-xs md:text-sm">
+                  <th class="px-4 md:px-8 py-4 md:py-6 font-black text-white uppercase tracking-widest">檢測項目</th>
+                  <th class="px-2 md:px-8 py-4 md:py-6 font-black text-white uppercase tracking-widest text-center w-20 md:w-32">是 (Yes)</th>
+                  <th class="px-2 md:px-8 py-4 md:py-6 font-black text-white uppercase tracking-widest text-center w-20 md:w-32">否 (No)</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-50">
-                <tr v-for="(q, idx) in questions" :key="idx" class="group hover:bg-foundation-blue/5 transition-colors">
-                  <td class="px-8 py-10 transition-colors">
-                    <div class="flex items-center gap-6">
-                       <span class="text-foundation-lightblue font-black text-xl italic group-hover:scale-110 transition-transform">{{ String(idx + 1).padStart(2, '0') }}</span>
-                       <span class="text-gray-600 font-bold text-lg leading-relaxed group-hover:text-foundation-blue transition-colors">{{ q }}</span>
+                <tr v-for="(q, idx) in questions" :key="idx" class="group hover:bg-foundation-blue/10 transition-colors">
+                  <td class="px-4 md:px-8 py-6 md:py-10 transition-colors">
+                    <div class="flex items-center gap-3 md:gap-6">
+                       <span class="text-foundation-lightblue font-black text-base md:text-xl italic group-hover:scale-110 transition-transform shrink-0">{{ String(idx + 1).padStart(2, '0') }}</span>
+                       <span class="text-gray-600 font-bold text-sm md:text-lg leading-relaxed group-hover:text-foundation-blue transition-colors">{{ q }}</span>
                     </div>
                   </td>
-                  <td class="px-8 py-10 text-center bg-blue-50/20">
+                  <td class="px-2 md:px-8 py-6 md:py-10 text-center ">
                     <label class="relative inline-flex items-center cursor-pointer group/radio">
                       <input 
                         type="radio" 
@@ -121,12 +121,15 @@ const submitForm = async () => {
                         v-model="answers[idx]" 
                         class="peer sr-only"
                       >
-                      <div class="w-10 h-10 rounded-2xl border-2 border-gray-200 bg-white peer-checked:border-foundation-blue peer-checked:bg-foundation-blue shadow-sm peer-checked:shadow-foundation-blue/20 transition-all duration-300 relative group-hover/radio:border-foundation-lightblue">
-                         <svg class="absolute inset-2 text-white scale-0 peer-checked:scale-100 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                      <div class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-200 bg-white peer-checked:border-foundation-blue 
+                        shadow-sm peer-checked:shadow-foundation-blue/30 transition-all duration-300 relative
+                        after:content-[''] after:absolute after:inset-1.5 md:after:inset-2 after:bg-foundation-blue after:rounded-full after:scale-0 
+                        peer-checked:after:scale-100 after:transition-transform after:duration-300
+                        group-hover/radio:border-foundation-lightblue">
                       </div>
                     </label>
                   </td>
-                  <td class="px-8 py-10 text-center bg-blue-50/20">
+                  <td class="px-2 md:px-8 py-6 md:py-10 text-center ">
                     <label class="relative inline-flex items-center cursor-pointer group/radio">
                       <input 
                         type="radio" 
@@ -135,8 +138,11 @@ const submitForm = async () => {
                         v-model="answers[idx]" 
                         class="peer sr-only"
                       >
-                      <div class="w-10 h-10 rounded-2xl border-2 border-gray-200 bg-white peer-checked:border-foundation-blue peer-checked:bg-foundation-blue shadow-sm peer-checked:shadow-foundation-blue/20 transition-all duration-300 relative group-hover/radio:border-foundation-lightblue">
-                         <svg class="absolute inset-2 text-white scale-0 peer-checked:scale-100 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                      <div class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-200 bg-white peer-checked:border-foundation-blue 
+                        shadow-sm peer-checked:shadow-foundation-blue/30 transition-all duration-300 relative
+                        after:content-[''] after:absolute after:inset-1.5 md:after:inset-2 after:bg-foundation-blue after:rounded-full after:scale-0 
+                        peer-checked:after:scale-100 after:transition-transform after:duration-300
+                        group-hover/radio:border-foundation-lightblue">
                       </div>
                     </label>
                   </td>
@@ -145,16 +151,16 @@ const submitForm = async () => {
             </table>
           </div>
 
-          <div class="p-12 flex flex-col md:flex-row justify-center gap-6">
+          <div class="p-8 md:p-12 flex flex-col md:flex-row justify-center gap-4 md:gap-6">
              <button 
                @click="clearForm"
-               class="px-12 py-5 bg-gray-100 text-gray-500 rounded-3xl font-black text-lg hover:bg-gray-200 transition-all active:scale-95"
+               class="w-full md:w-auto px-12 py-4 md:py-5 bg-gray-100 text-gray-500 rounded-3xl font-black text-base md:text-lg hover:bg-gray-200 transition-all active:scale-95"
              >
                 清除內容
              </button>
              <button 
                @click="submitForm"
-               class="px-20 py-5 bg-foundation-blue text-white rounded-3xl font-black text-lg shadow-xl shadow-foundation-blue/20 hover:scale-105 transition-all active:scale-95"
+               class="w-full md:w-auto px-20 py-4 md:py-5 bg-foundation-blue text-white rounded-3xl font-black text-base md:text-lg shadow-xl shadow-foundation-blue/20 hover:scale-105 transition-all active:scale-95"
              >
                 看檢測結果
              </button>
@@ -171,11 +177,11 @@ const submitForm = async () => {
                 </div>
 
                 <!-- Percentage Box -->
-                <div class="text-center space-y-4">
-                   <p class="text-sm font-black text-gray-400 uppercase tracking-widest">您的風險指數</p>
+                <div class="text-center space-y-2 md:space-y-4">
+                   <p class="text-xs md:text-sm font-black text-gray-400 uppercase tracking-widest">您的風險指數</p>
                    <div class="flex items-baseline justify-center space-x-2">
-                      <span class="text-8xl md:text-9xl font-black italic tracking-tighter" :class="riskMessage.color">{{ riskPercentage }}</span>
-                      <span class="text-3xl font-black text-gray-300">%</span>
+                      <span class="text-7xl md:text-9xl font-black italic tracking-tighter" :class="riskMessage.color">{{ riskPercentage }}</span>
+                      <span class="text-2xl md:text-3xl font-black text-gray-300">%</span>
                    </div>
                 </div>
 
@@ -203,11 +209,11 @@ const submitForm = async () => {
                 </div>
 
                 <!-- Advice Content -->
-                <div class="pt-10 border-t border-gray-50 text-center space-y-8">
-                   <h4 class="text-4xl md:text-5xl font-black italic tracking-tighter" :class="riskMessage.color">
+                <div class="pt-10 border-t border-gray-50 text-center space-y-6 md:space-y-8">
+                   <h4 class="text-3xl md:text-5xl font-black italic tracking-tighter" :class="riskMessage.color">
                       {{ riskMessage.title }}
                    </h4>
-                   <p class="text-gray-500 text-xl font-medium leading-[2] italic max-w-2xl mx-auto">
+                   <p class="text-gray-500 text-base md:text-xl font-medium leading-relaxed md:leading-[2] italic max-w-2xl mx-auto">
                       {{ riskMessage.content }}
                    </p>
                    
