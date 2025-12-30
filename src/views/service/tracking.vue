@@ -162,7 +162,7 @@ const reportingMethods = [
                           <span class="text-5xl font-black italic tracking-tighter">200</span>
                        </div>
                        
-                       <a href="#" class="w-full md:w-auto px-8 py-3 bg-white text-foundation-blue rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl">
+                       <a href="#" class="w-full md:w-auto px-8 py-3 bg-white text-foundation-blue rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl text-center">
                          立即購買
                        </a>
                     </div>

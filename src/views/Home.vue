@@ -97,7 +97,7 @@ onMounted(() => {
       <div class="absolute inset-0 z-0">
         <img :src="imgHero" class="w-full h-full object-cover transition-opacity duration-500" alt="Hero Background" loading="lazy" :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
         @load="heroImageLoaded = true" />
-        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
       </div>
       
       <div class="container mx-auto px-4 md:px-6 relative z-10">
@@ -111,7 +111,7 @@ onMounted(() => {
           </div>
 
           <h1 
-            class="text-5xl md:text-8xl font-black text-white leading-tight tracking-tighter transition-all duration-1000 delay-300"
+            class="text-5xl md:text-8xl font-black text-white leading-tight tracking-tighter transition-all duration-500 delay-300"
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
              守護生命，<br>
@@ -157,7 +157,7 @@ onMounted(() => {
     </section>
 
     <!-- Mission Section -->
-    <section class="py-32 bg-white relative overflow-hidden">
+    <section class="py-8 md:py-32 bg-white relative overflow-hidden">
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="flex flex-col lg:flex-row items-center gap-20">
           <div class="lg:w-1/2 space-y-12">
@@ -176,7 +176,7 @@ onMounted(() => {
                 我們致力於提升服務品質，建立通報系統及個人相關資料連貫之網路，使緊急救護服務具備全天候、自動化立即反應之功能。同時提供居家安全和到院前的緊急醫療照護，協助弱勢族群減輕生活壓力，擁抱獨立自主的生活。
               </p>
             </div>
-            <div class="flex items-center space-x-8 pt-4">
+            <div class="flex items-center justify-around flex-wrap pt-4 gap-4">
                <div class="flex flex-col">
                   <span class="text-3xl font-black text-foundation-blue italic">全天候</span>
                   <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Response</span>
@@ -207,7 +207,7 @@ onMounted(() => {
     </section>
 
     <!-- Service Hub Section -->
-    <section class="py-32 bg-gray-50 relative">
+    <section class="py-8 md:py-32 bg-gray-50 relative">
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="text-center mb-24 max-w-3xl mx-auto space-y-6">
           <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Service Overview</span>
@@ -262,7 +262,7 @@ onMounted(() => {
     </section>
 
     <!-- News Showcase Section -->
-    <section class="py-32 bg-white relative">
+    <section class="py-8 md:py-32 bg-white relative">
        <div class="container mx-auto px-4 md:px-6">
          <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div class="space-y-4">
@@ -298,17 +298,17 @@ onMounted(() => {
     <section class="py-24 container mx-auto px-4 md:px-6 mb-24">
        <div class="bg-foundation-blue rounded-[60px] p-12 md:p-24 text-white text-center relative overflow-hidden group">
           <div class="relative z-10 max-w-3xl mx-auto space-y-12">
-             <h2 class="text-4xl md:text-5xl font-black leading-tight italic transition-all duration-700 group-hover:scale-105">
+             <h2 class="text-2xl md:text-5xl font-black leading-tight italic transition-all duration-700 group-hover:scale-105">
                您的愛心，<br>是長輩生命中最溫暖的連線。
              </h2>
-             <p class="text-xl text-white/70 font-bold italic leading-relaxed">
+             <p class="text-lg text-white/70 font-bold italic leading-relaxed">
                每一分捐助都將轉化為第一線的守護服務，協助獨居長者安享晚年，不再孤單。
              </p>
              <div class="flex flex-wrap justify-center gap-6 pt-6">
-                <RouterLink to="/donate" class="px-16 py-6 bg-white text-foundation-blue rounded-3xl font-black text-xl shadow-xl hover:-translate-y-2 transition-all">
+                <RouterLink to="/donate" class="px-8 py-4 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-xl hover:-translate-y-2 transition-all">
                   我願貢獻一份力
                 </RouterLink>
-                <RouterLink to="/contact" class="px-16 py-6 bg-white/10 border border-white/20 backdrop-blur-md rounded-3xl font-black text-xl shadow-xl hover:bg-white/20 transition-all">
+                <RouterLink to="/contact" class="px-8 py-4 bg-white/10 border border-white/20 backdrop-blur-md rounded-3xl font-black text-lg shadow-xl hover:bg-white/20 transition-all">
                   了解更多聯絡方式
                 </RouterLink>
              </div>

@@ -75,7 +75,7 @@ const partners = [
             <div class="relative mb-32 group">
               <div class="bg-gray-50 rounded-[50px] overflow-hidden border border-gray-100 shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-500">
                 <div class="flex flex-col lg:flex-row">
-                  <div class="lg:w-1/3 bg-foundation-blue p-12 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                  <div class="lg:w-1/3 bg-foundation-blue p-6 md:p-12 flex flex-col justify-center items-center text-center relative overflow-hidden">
                     <!-- Background Ornament -->
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent)]"></div>
                     <div class="relative z-10">
@@ -84,7 +84,7 @@ const partners = [
                       <div class="w-12 h-1 bg-foundation-orange mx-auto mt-6 rounded-full"></div>
                     </div>
                   </div>
-                  <div class="lg:w-2/3 p-10 md:p-14 space-y-8">
+                  <div class="lg:w-2/3 p-6 md:p-10 space-y-8">
                     <div>
                       <h3 class="text-3xl font-black text-foundation-blue mb-6">獨立自主、安全與尊嚴</h3>
                       <p class="text-gray-600 leading-relaxed text-lg">

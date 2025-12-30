@@ -188,9 +188,6 @@ const devices = {
                        生命連線的隨身發射器讓您及時與專業的中心人員連線，再第一時間提供您協助，一天二十四小時，全年無休。
                      </p>
                    </div>
-                   <div class="mt-12 flex justify-end">
-                     <div class="w-32 h-32 bg-foundation-blue/5 rounded-full blur-3xl"></div>
-                   </div>
                 </div>
               </div>
             </div>

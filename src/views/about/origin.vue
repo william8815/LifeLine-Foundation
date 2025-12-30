@@ -26,7 +26,7 @@ const pageDescription = '財團法人生命連線基金會致力於推動成立�
             </div>
             
             <div class="prose prose-lg max-w-none">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-20">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-20">
                 <div class="space-y-6">
                   <p class="text-gray-600 leading-relaxed text-lg first-letter:text-5xl first-letter:font-black first-letter:text-foundation-blue first-letter:mr-3 first-letter:float-left">
                     財團法人生命連線基金會，源於基金會多位發起人為維護國民健康，並參照先進國家，推動成立有效的緊急救護救援服務，改善獨居長者之生活品質。

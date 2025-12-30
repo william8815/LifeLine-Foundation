@@ -170,7 +170,7 @@ const submitSurvey = () => {
                   </div>
                 </div>
                 <!-- Image Placeholder -->
-                <div class="rounded-[60px] overflow-hidden shadow-2xl h-[500px] border-8 border-white group relative">
+                <div class="rounded-[32px] overflow-hidden shadow-2xl border-8 border-white group relative">
                    <img :src="homeCare1" class="w-full h-full object-contain transition-opacity duration-300" :class="homeCare1Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare1Loaded = true" />
                 </div>
               </div>
