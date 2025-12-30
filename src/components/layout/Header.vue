@@ -53,6 +53,7 @@ const navigation = [
     ]
   },
   { name: '最新消息', href: '/news' },
+  { name: '友站連結', href: '/links' },
   { name: '聯絡我們', href: '/contact' },
 ]
 
