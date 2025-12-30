@@ -1,6 +1,29 @@
 <script setup>
 import { ref } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '跌倒偵測 | 生命連線基金會 LifeLine Foundation - 4G智慧協尋與自動偵測',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '跌倒偵測, 自動報警, 衛星定位器, 4G智慧協尋, 電子圍籬, 長者安全, 生命連線, 輔具補助, 低收入補助, 黃金救援' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '跌倒偵測 | 生命連線基金會 LifeLine Foundation - 4G智慧協尋與自動偵測',
+  description: '生命連線「跌倒偵測」服務採用 Carenet 4G 智慧協尋衛星定位器，具備高靈敏度自動跌倒偵測、GPS 定位與電子圍籬功能。提供政府輔具補助諮詢，24 小時守護長者安全，爭取黃金救援時間。',
+  ogTitle: '跌倒偵測 - Carenet 4G 智慧協尋，守護每一步的安全 | 生命連線基金會',
+  ogDescription: '先進高靈敏度偵測技術，偵測跌倒自動發出警報。整合 24 小時服務中心與政府補助，為長者打造最完善的安全網。',
+  ogImage: falldetection1_1,
+  twitterCard: 'summary_large_image',
+  twitterTitle: '跌倒偵測 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: 'Carenet 4G 智慧協尋，爭取黃金救援時間。'
+})
 // images
 import falldetection1_1 from "@/assets/images/services/falldetection1_1.png"
 import falldetection2_1 from "@/assets/images/services/falldetection2_1.png"

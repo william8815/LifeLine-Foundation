@@ -1,5 +1,27 @@
 <script setup>
 import PageHeader from '../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '愛心捐款 | 生命連線基金會 LifeLine Foundation - 守護弱勢長者的健康',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '愛心捐款, 公益捐款, 捐款方式, 郵政劃撥捐款, 生命連線捐款, 社會救助, 弱勢長者支持, 磁性收據' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '愛心捐款 | 生命連線基金會 LifeLine Foundation - 守護弱勢長者的健康',
+  description: '您的每一份支持，都是長輩力量的來源。生命連線基金會提供郵政劃撥、ATM 轉帳、支票及現金等多種捐款管道，所有捐款皆開立正式收據。讓我們一起守護弱勢長輩，讓愛不走失。',
+  ogTitle: '愛心捐款 - 守護弱勢長者的健康，您也可以盡一份力！ | 生命連線基金會',
+  ogDescription: '「愛心無界，長者有依」。您的捐款將用於提升長輩照護品質與緊急救援服務。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '愛心捐款 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '守護弱勢長者，讓愛不走失。'
+})
 
 const donationMethods = [
   {

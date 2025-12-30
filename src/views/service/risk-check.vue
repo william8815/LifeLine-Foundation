@@ -1,6 +1,28 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '獨居能力檢測 | 生命連線基金會 LifeLine Foundation - 規劃未來守護獨立生活',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '獨居能力檢測, 跌倒風險評估, 居家安全測驗, 老年生活規劃, 緊急救援服務諮詢, 生命連線, 健康篩檢, 獨立生活守護' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '獨居能力檢測 | 生命連線基金會 LifeLine Foundation - 規劃未來守護獨立生活',
+  description: '您或家中的長輩適合獨居嗎？生命連線「獨居能力檢測」提供專業的跌倒風險評估與健康狀況篩檢。透過簡單的問測，幫助您提早為居家安全作好規劃，守護長者的生活尊嚴與獨立性。',
+  ogTitle: '獨居能力檢測 - 為未來生活作好計畫，健康主動出擊 | 生命連線基金會',
+  ogDescription: '規劃未來也許困難，但沒有計畫會讓人付出代價。立即填寫檢測，了解您或長輩的居家風險指數。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '獨居能力檢測 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '守護獨立生活，從專業檢測開始。'
+})
 
 const questions = [
   '每天有數小時是獨自行動 (白天或晚上)？',

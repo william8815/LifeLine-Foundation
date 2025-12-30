@@ -1,5 +1,27 @@
 <script setup>
 import PageHeader from '../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '聯絡我們 | 生命連線基金會 LifeLine Foundation - 專業諮詢與服務據點',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '聯絡生命連線, 服務據點, 免付費諮詢電話, 台北市信義區, 交通指南, 捷運永春站, 長者照護諮詢, 基金會聯絡資訊' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '聯絡我們 | 生命連線基金會 LifeLine Foundation - 專業諮詢與服務據點',
+  description: '有任何關於長輩照護、緊急救援系統或家醫計畫的疑問嗎？歡迎透過免付費服務電話、電子郵件或親臨本會諮詢。生命連線基金會位於台北市信義區，提供詳細的交通指南，隨時為您服務。',
+  ogTitle: '聯絡我們 - 專業諮詢與協助，隨時為您服務 | 生命連線基金會',
+  ogDescription: '廿年專業背景，守護百萬生命。如果您有任何需求，請隨時與我們聯絡。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '聯絡我們 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '專業諮詢與服務據點，隨時為您服務。'
+})
 
 const contactInfo = [
   {

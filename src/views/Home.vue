@@ -1,6 +1,30 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '生命連線, 基金會, 緊急救援, 居家照護, 跌倒偵測, 智慧協尋, 老人守護, 厚澤民生, 雲端醫療, 24小時救護' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生',
+  description: '生命連線基金會深耕台灣 20 年，提供全台最大的緊急救護通報服務。結合智慧醫療與在地關懷，包含家醫計畫、緊急救援、跌倒偵測及智慧協尋，守護每一位長輩的尊嚴與健康。',
+  ogTitle: '生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生',
+  ogDescription: '20 年專業守護，全台領先的緊急救護與居家醫療服務，讓獨居長者安享晚年。',
+  ogImage: imgHero,
+  twitterCard: 'summary_large_image',
+  twitterTitle: '生命連線基金會 LifeLine Foundation',
+  twitterDescription: '結合智慧科技與專業醫護，為長輩編織最堅固的安全網。',
+  twitterImage: imgHero
+})
 
 // images
 import imgHero from '@/assets/images/hero-banner.jpeg'

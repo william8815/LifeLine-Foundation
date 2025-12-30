@@ -1,9 +1,27 @@
 <script setup>
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
 
-// SEO Keywords for this page
-const pageTitle = '成立緣起 - 生命連線基金會'
-const pageDescription = '財團法人生命連線基金會致力於推動成立有效的緊急救護救援服務，改善獨居長者之生活品質，建立居家長者及家庭支持網絡。'
+// SEO Metadata
+useHead({
+  title: '成立緣起 | 生命連線基金會 LifeLine Foundation',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '成立緣起, 服務宗旨, 生命連線, 緊急救護, 社區照護, 老人福利, 獨居長者, 社會救助, 智慧醫療' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '成立緣起 | 生命連線基金會 LifeLine Foundation',
+  description: '探索生命連線基金會的成立初衷。我們致力於推動先進的緊急救護救援服務，落實老人福利與照護社區化，為獨居長者建立安全且尊嚴的生活保障。',
+  ogTitle: '成立緣起 - 守護生命的初衷 | 生命連線基金會',
+  ogDescription: '致力於架構具功能性與結構性的醫療服務網絡，減輕社會照顧負擔，擁抱獨立自主的生活。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '成立緣起 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '探索生命連線基金會的成立初衷，為長輩編織最堅固的安全網。'
+})
 </script>
 
 <template>

@@ -1,5 +1,27 @@
 <script setup>
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '組織介紹 | 生命連線基金會 LifeLine Foundation',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '組織架構, 關於我們, 生命連線, 緊急救援中心, 居家安全, 專業救護, 合作醫院, 北美標準, 尊嚴照護' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '組織介紹 | 生命連線基金會 LifeLine Foundation',
+  description: '了解生命連線基金會的專業服務體系。我們採用北美先進標準，提供 24/7 全年無休的緊急救援中心，並與台大醫院、台中榮總及多數縣市政府合作，守護超過 400 萬用戶的居家安全。',
+  ogTitle: '組織介紹 - 專業、尊嚴與全天候守護 | 生命連線基金會',
+  ogDescription: '北美領先個人救護服務設計，結合國內頂尖醫療體系，為長輩打造最堅固的安全網。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '組織介紹 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '了解生命連線基金會的國際級救援體系。'
+})
 
 // Statistics Data
 const stats = [

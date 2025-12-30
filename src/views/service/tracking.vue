@@ -1,6 +1,29 @@
 <script setup>
 import { ref } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '智慧協尋追蹤 | 生命連線基金會 LifeLine Foundation - NFC智慧感應守護回家的路',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '智慧協尋, 老人走失預防, NFC手環, GPS追蹤, 協尋平台, 平安手環, 生命連線, 失智症救援, 快速通報, 數位身分證' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '智慧協尋追蹤 | 生命連線基金會 LifeLine Foundation - NFC智慧感應守護回家的路',
+  description: '生命連線「智慧協尋追蹤」系統結合 NFC 與 GPS 技術，透過平安手環與協尋平台，為失智長者提供即時定位與快速通報服務。防水矽膠材質手環，24小時全心守護預防走失。',
+  ogTitle: '智慧協尋追蹤 - 科技守護，讓愛不走失 | 生命連線基金會',
+  ogDescription: '領先 NFC 感應技術，一秒啟動救援。協助走失長者快速找到回家的路，每分每秒都是最溫暖的守護。',
+  ogImage: tracking2_1,
+  twitterCard: 'summary_large_image',
+  twitterTitle: '智慧協尋追蹤 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: 'NFC智慧感應守護，讓愛不走失。'
+})
 // images
 import tracking1_1 from "@/assets/images/services/tracking1_1.png"
 import tracking1_2 from "@/assets/images/services/tracking1_2.png"

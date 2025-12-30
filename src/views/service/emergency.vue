@@ -1,6 +1,29 @@
 <script setup>
 import { ref } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '緊急救援系統 | 生命連線基金會 LifeLine Foundation - 24小時守護長者安全',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '緊急救援系統, 平安機, 緊急通報, 獨居老人守護, 24小時救援中心, 跌倒救護, 救命按鈕, 生命連線, 居家安全, 防水發射器' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '緊急救援系統 | 生命連線基金會 LifeLine Foundation - 24小時守護長者安全',
+  description: '生命連線緊急救援系統專為長者設計，一觸即發。結合平安機與多款防水平安發射器，提供 24 小時專業人員連線救援。守護長者獨居安全，讓家成為最安心的堡壘。',
+  ogTitle: '緊急救援系統 - 救援一觸可及，守護長者獨居安全 | 生命連線基金會',
+  ogDescription: '廿年專業守護背景，北美領先技術。無論跌倒或突發狀況，專業中心隨時為您連線救援。',
+  ogImage: emergency2_1,
+  twitterCard: 'summary_large_image',
+  twitterTitle: '緊急救援系統 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '24小時守護長者安全的緊急救援領導者。'
+})
 // images
 import emergency1_1 from "@/assets/images/services/emergency1_1.png"
 import emergency1_2 from "@/assets/images/services/emergency1_2.png"

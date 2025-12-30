@@ -2,6 +2,28 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '最新消息 | 生命連線基金會 LifeLine Foundation - 掌握健康與關懷動態',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '最新消息, 生命連線消息, 健康衛教, 銀髮活動, 基金會公告, 長輩照護資訊, 醫療新聞, 社會公益動態' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '最新消息 | 生命連線基金會 LifeLine Foundation - 掌握健康與關懷動態',
+  description: '隨時掌握生命連線基金會的最即時動態。我們提供專業的健康衛教資訊、基金會重要公告、活動花絮以及長輩照護資源。透過新聞分享，將「厚澤民生」的愛心傳遞到每個角落。',
+  ogTitle: '最新消息 - 掌握健康衛教與基金會動態 | 生命連線基金會',
+  ogDescription: '廿年專業背景，守護百萬生命。獲取最新的健康衛教資訊與基金會活動公告。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '最新消息 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '掌握最新的健康衛教與基金會動態。'
+})
 
 const router = useRouter()
 const activeCategory = ref('全部')

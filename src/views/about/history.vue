@@ -1,5 +1,27 @@
 <script setup>
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '歷史沿革 | 生命連線基金會 LifeLine Foundation',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '歷史沿革, 榮獲獎項, 成功案例, 哈佛大學研討, 麻省理工個案, 成長策略獎, 生命連線歷史, 專業認證' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '歷史沿革 | 生命連線基金會 LifeLine Foundation',
+  description: '橫跨數十載的榮耀指標，從哈佛大學與麻省理工學院的成功個案研討，到獲得北美成長策略領先獎。深入了解生命連線基金會如何以卓越品質守護無數生命。',
+  ogTitle: '歷史沿革 - 卓越品質與永續守護 | 生命連線基金會',
+  ogDescription: '數十載的榮耀不僅是對過去的肯定，更是我們對每一個生命承諾的基石。探索我們的榮耀里程碑。',
+  twitterCard: 'summary_large_image',
+  twitterTitle: '歷史沿革 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '橫跨數十載的品質榮耀。'
+})
 
 const timeline = [
   { year: '2008', title: 'Frost & Sullivan 頒北美成長策略領先獎', type: 'award' },

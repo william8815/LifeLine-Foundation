@@ -1,6 +1,29 @@
 <script setup>
 import { ref, reactive, nextTick } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+// SEO Metadata
+useHead({
+  title: '家醫計畫 | 生命連線基金會 LifeLine Foundation - 雲端智慧醫療領航者',
+  meta: [
+    { 
+      name: 'keywords', 
+      content: '家醫計畫, 社區醫療群, 雲端醫療, 居家照護, 健康管家, 緊急救護通報, 醫療諮詢, 生命連線, 診所加盟, 厚澤民生' 
+    }
+  ]
+})
+
+useSeoMeta({
+  title: '家醫計畫 | 生命連線基金會 LifeLine Foundation - 雲端智慧醫療領航者',
+  description: '生命連線基金會「家醫計畫」提供 24 小時緊急醫療通報、專業護理訪視與雲端健康管理，協助診所與社區醫療群實現【Do more with less】，提升照護品質並維護長輩健康尊嚴。',
+  ogTitle: '家醫計畫 - 雲端智慧醫療與個性化健康管家 | 生命連線基金會',
+  ogDescription: '廿年專業經驗，守護百萬生命。為診所減壓，為長輩安享晚年。',
+  ogImage: homeCare1,
+  twitterCard: 'summary_large_image',
+  twitterTitle: '家醫計畫 | 生命連線基金會 LifeLine Foundation',
+  twitterDescription: '雲端智慧醫療與個性化健康管家服務的領航者。'
+})
 
 // images
 import homeCare1 from '@/assets/images/services/home-care1.png'
