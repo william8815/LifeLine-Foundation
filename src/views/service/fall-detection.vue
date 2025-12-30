@@ -1,6 +1,19 @@
 <script setup>
 import { ref } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+// images
+import falldetection1_1 from "@/assets/images/services/falldetection1_1.png"
+import falldetection2_1 from "@/assets/images/services/falldetection2_1.png"
+import falldetection2_2 from "@/assets/images/services/falldetection2_2.png"
+import falldetection2_3 from "@/assets/images/services/falldetection2_3.png"
+import falldetection2_4 from "@/assets/images/services/falldetection2_4.png"
+const imageLoaded = ref({
+  falldetection1_1: false,
+  falldetection2_1: false,
+  falldetection2_2: false,
+  falldetection2_3: false,
+  falldetection2_4: false,
+})
 
 const activeTab = ref('device')
 const tabs = [
@@ -13,22 +26,22 @@ const features = [
   {
     title: '跌倒偵測',
     desc: '內建高靈敏度加速感應器，當偵測到疑似跌倒衝擊時，將自動發出警報並通知中心。',
-    image: 'https://picsum.photos/600/400?random=40'
+    image: falldetection2_1
   },
   {
     title: '電子圍籬',
     desc: '可設定安全活動範圍，一旦長者超出預設區域，系統將立即推播提醒家屬。',
-    image: 'https://picsum.photos/600/400?random=41'
+    image: falldetection2_2
   },
   {
     title: 'GPS 定位',
     desc: '採用多重導航衛星系統，提供精準的即時位置資訊，有效縮短搜救時間。',
-    image: 'https://picsum.photos/600/400?random=42'
+    image: falldetection2_3
   },
   {
     title: '專業服務',
     desc: '連動 24 小時生命連線中心，由專業護理人員與社工提供最即時的關懷與轉介。',
-    image: 'https://picsum.photos/600/400?random=43'
+    image: falldetection2_4
   }
 ]
 
@@ -79,18 +92,15 @@ const subsidies = [
           <transition name="fade-slide" mode="out-in">
             <!-- Tab: Device -->
             <div v-if="activeTab === 'device'" :key="'device'" class="space-y-12">
-               <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100">
-                  <h2 class="text-3xl font-black text-foundation-blue mb-12 italic flex items-center">
+               <div class="bg-white rounded-[40px] p-6 md:p-10 shadow-premium border border-gray-100">
+                  <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-12 italic flex items-center">
                     <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
                     Carenet 4G 智慧協尋衛星定位器
                   </h2>
                   
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                     <div class="rounded-[40px] overflow-hidden shadow-2xl border border-gray-50 aspect-[4/3] group">
-                        <img src="https://picsum.photos/800/600?random=44" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
-                     </div>
-                     <div class="rounded-[40px] overflow-hidden shadow-2xl border border-gray-50 aspect-[4/3] group">
-                        <img src="https://picsum.photos/800/600?random=45" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                  <div class="grid gap-8 mb-12">
+                     <div class="rounded-[40px] overflow-hidden shadow-2xl border border-gray-50 aspect-[2/1] group">
+                        <img :src="falldetection1_1" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded.falldetection1_1 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.falldetection1_1 = true">
                      </div>
                   </div>
 
@@ -110,8 +120,8 @@ const subsidies = [
                     :key="idx"
                     class="bg-white rounded-[40px] overflow-hidden shadow-premium border border-gray-100 group"
                   >
-                    <div class="aspect-video overflow-hidden">
-                       <img :src="feature.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                    <div class="aspect-[16/9] overflow-hidden">
+                       <img :src="feature.image" class="w-full h-full object-contain transition-all duration-500" :class="imageLoaded.falldetection1_1 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.falldetection1_1 = true">
                     </div>
                     <div class="p-10">
                        <h3 class="text-2xl font-black text-foundation-blue mb-4 tracking-tighter italic">{{ feature.title }}</h3>
@@ -123,9 +133,9 @@ const subsidies = [
 
             <!-- Tab: Pricing -->
             <div v-else-if="activeTab === 'pricing'" :key="'pricing'" class="space-y-8">
-               <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100">
+               <div class="bg-white rounded-[40px] p-4 md:p-10 shadow-premium border border-gray-100">
                   <!-- Subsidy Notice -->
-                  <div class="mb-16 p-8 bg-foundation-blue/5 rounded-[32px] border border-foundation-blue/10 flex items-start gap-6">
+                  <div class="mb-8 md:mb-16 p-6 md:p-8 bg-foundation-blue/5 rounded-[32px] border border-foundation-blue/10 flex flex-col md:flex-row items-start gap-6">
                     <div class="w-12 h-12 rounded-2xl bg-foundation-blue text-white flex items-center justify-center shrink-0 shadow-lg">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>
@@ -135,9 +145,9 @@ const subsidies = [
                   </div>
 
                   <!-- Price Card -->
-                  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                  <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 items-center">
                     <div class="lg:col-span-7 space-y-10">
-                       <h2 class="text-4xl font-black text-foundation-blue italic">費用與政府補助</h2>
+                       <h2 class="text-2xl md:text-4xl font-black text-foundation-blue italic">費用與政府補助</h2>
                        <div class="space-y-4">
                           <div v-for="sub in subsidies" :key="sub.level" class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-foundation-blue transition-all duration-300">
                              <div class="flex items-center space-x-4">
@@ -150,13 +160,13 @@ const subsidies = [
                     </div>
                     
                     <div class="lg:col-span-5">
-                       <div class="bg-foundation-blue rounded-[40px] p-10 text-white shadow-2xl relative overflow-hidden group">
+                       <div class="bg-foundation-blue rounded-[40px] p-6 md:p-10 text-white shadow-2xl relative overflow-hidden group">
                           <div class="relative z-10 text-center space-y-8">
                              <div>
                                 <p class="text-blue-200 font-black uppercase tracking-widest text-xs mb-4">Carenet 4G Positioning Device</p>
                                 <div class="flex items-baseline justify-center space-x-2">
                                    <span class="text-xl opacity-60 font-black">NT.</span>
-                                   <span class="text-6xl font-black italic tracking-tighter">10,000</span>
+                                   <span class="text-3xl md:text-6xl font-black italic tracking-tighter">10,000</span>
                                 </div>
                              </div>
                              <div class="space-y-4 border-t border-white/10 pt-8">
