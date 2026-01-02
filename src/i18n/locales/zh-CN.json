@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "认识我们",
+    "about_origin": "成立起源",
+    "about_org": "组织介绍",
+    "about_history": "历史沿革",
+    "services": "服务项目",
+    "service_home_care": "家医计划",
+    "service_emergency": "紧急救援系统",
+    "service_tracking": "老人协寻",
+    "service_fall_detection": "跌倒侦测",
+    "service_risk_check": "风险检测",
+    "news": "最新消息",
+    "links": "友站连结",
+    "contact": "联络我们",
+    "donate": "爱心捐款",
+    "donate_short": "捐款",
+    "menu": "选单"
+  },
+  "common": {
+    "foundation_name": "生命连线基金会",
+    "foundation_name_en": "Lifeline",
+    "support_us": "支持我们・爱心捐款",
+    "phone": "(02) 87585858"
+  },
+  "seo": {
+    "title": "生命连线基金会 - 官方网站",
+    "description": "致力于家医计划、紧急救援系统与老人协寻等守护生命的服务。",
+    "keywords": "生命连线, 基金会, 家医计划, 紧急救援, 老人协寻, 跌倒侦测"
+  },
+  "language": {
+    "zh_TW": "繁体中文",
+    "zh_CN": "简体中文",
+    "switch": "切换语系"
+  }
+}
+

@@ -32,6 +32,7 @@ export default [
         defineNuxtConfig: "readonly",
         process: "readonly",
         ViteSSG: "readonly",
+        window: "readonly",
       },
     },
     rules: {

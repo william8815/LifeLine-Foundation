@@ -117,7 +117,7 @@ onMounted(() => {
 <template>
   <div class="overflow-x-hidden bg-white">
     <!-- Hero Section -->
-    <section class="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+    <section class="relative h-[calc(100vh-80px)] flex items-center overflow-hidden">
       <div class="absolute inset-0 z-0">
         <img :src="imgHero" class="w-full h-full object-cover transition-opacity duration-500" alt="Hero Background" loading="lazy" :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
         @load="heroImageLoaded = true" />
@@ -153,10 +153,10 @@ onMounted(() => {
             class="flex flex-wrap gap-4 pt-6 transition-all duration-1000 delay-700"
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
-            <RouterLink to="/service-home-care" class="px-12 py-6 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all">
+            <RouterLink to="/service-home-care" class="px-6 py-4 lg:px-12 lg:py-6 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all">
               了解服務內容
             </RouterLink>
-            <RouterLink to="/donate" class="px-12 py-6 bg-foundation-orange text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
+            <RouterLink to="/donate" class="px-6 py-4 lg:px-12 lg:py-6 bg-foundation-orange text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
               立即支持我們
             </RouterLink>
           </div>

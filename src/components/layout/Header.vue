@@ -1,7 +1,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
+const { t } = useI18n()
 const route = useRoute()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
@@ -33,28 +36,28 @@ onUnmounted(() => {
 })
 
 const navigation = [
-  { name: '首頁', href: '/' },
+  { nameKey: 'nav.home', href: '/' },
   {
-    name: '認識我們',
+    nameKey: 'nav.about',
     items: [
-      { name: '成立起源', href: '/about-origin' },
-      { name: '組織介紹', href: '/about-org' },
-      { name: '歷史沿革', href: '/about-history' },
+      { nameKey: 'nav.about_origin', href: '/about-origin' },
+      { nameKey: 'nav.about_org', href: '/about-org' },
+      { nameKey: 'nav.about_history', href: '/about-history' },
     ]
   },
   {
-    name: '服務項目',
+    nameKey: 'nav.services',
     items: [
-      { name: '家醫計畫', href: '/service-home-care' },
-      { name: '緊急救援系統', href: '/service-emergency' },
-      { name: '老人協尋', href: '/service-tracking' },
-      { name: '跌倒偵測', href: '/service-fall-detection' },
-      { name: '風險檢測', href: '/service-risk-check' },
+      { nameKey: 'nav.service_home_care', href: '/service-home-care' },
+      { nameKey: 'nav.service_emergency', href: '/service-emergency' },
+      { nameKey: 'nav.service_tracking', href: '/service-tracking' },
+      { nameKey: 'nav.service_fall_detection', href: '/service-fall-detection' },
+      { nameKey: 'nav.service_risk_check', href: '/service-risk-check' },
     ]
   },
-  { name: '最新消息', href: '/news' },
-  { name: '友站連結', href: '/links' },
-  { name: '聯絡我們', href: '/contact' },
+  { nameKey: 'nav.news', href: '/news' },
+  { nameKey: 'nav.links', href: '/links' },
+  { nameKey: 'nav.contact', href: '/contact' },
 ]
 
 const isActive = (path) => route.path === path
@@ -75,14 +78,14 @@ const isActive = (path) => route.path === path
           <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-foundation-orange rounded-full border-2 border-white"></div>
         </div> -->
         <div class="flex flex-col">
-          <span class="text-foundation-blue font-extrabold text-xl leading-none tracking-tight uppercase">Lifeline</span>
-          <span class="text-foundation-orange text-[10px] font-bold tracking-widest uppercase mt-1">生命連線基金會</span>
+          <span class="text-foundation-blue font-extrabold text-xl leading-none tracking-tight uppercase">{{ t('common.foundation_name_en') }}</span>
+          <span class="text-foundation-orange text-[10px] font-bold tracking-widest uppercase mt-1">{{ t('common.foundation_name') }}</span>
         </div>
       </RouterLink>
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-1">
-        <template v-for="item in navigation" :key="item.name">
+        <div v-for="item in navigation" :key="item.nameKey">
           <!-- Normal Link -->
           <RouterLink
             v-if="!item.items"
@@ -92,7 +95,7 @@ const isActive = (path) => route.path === path
               isActive(item.href) ? 'text-foundation-blue bg-foundation-blue/5' : 'text-gray-600 hover:text-foundation-blue hover:bg-gray-50'
             ]"
           >
-            {{ item.name }}
+            {{ t(item.nameKey) }}
           </RouterLink>
 
           <!-- Dropdown Link -->
@@ -103,7 +106,7 @@ const isActive = (path) => route.path === path
                 item.items.some(sub => isActive(sub.href)) ? 'text-foundation-blue bg-foundation-blue/5' : 'text-gray-600 group-hover:text-foundation-blue group-hover:bg-gray-50'
               ]"
             >
-              {{ item.name }}
+              {{ t(item.nameKey) }}
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-50 group-hover:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -114,36 +117,42 @@ const isActive = (path) => route.path === path
               <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden p-2">
                 <RouterLink
                   v-for="subItem in item.items"
-                  :key="subItem.name"
+                  :key="subItem.nameKey"
                   :to="subItem.href"
                   :class="[
                     'block px-4 py-2.5 text-sm font-medium rounded-xl transition-colors',
                     isActive(subItem.href) ? 'bg-foundation-blue text-white' : 'text-gray-600 hover:bg-foundation-blue/5 hover:text-foundation-blue'
                   ]"
                 >
-                  {{ subItem.name }}
+                  {{ t(subItem.nameKey) }}
                 </RouterLink>
               </div>
             </div>
           </div>
-        </template>
+        </div>
 
         <!-- CTA Button -->
-        <div class="ml-4 pl-4 border-l border-gray-200">
+        <div class="ml-4 px-4 border-l border-gray-200">
           <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-full bg-foundation-orange text-white text-sm font-black shadow-lg shadow-foundation-orange/30 hover:scale-105 active:scale-95 transition-all">
-            愛心捐款
+            {{ t('nav.donate') }}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </RouterLink>
         </div>
+
+        <!-- Language Switcher -->
+        <div class="ml-2 pl-2 border-l border-gray-200">
+          <LanguageSwitcher />
+        </div>
       </nav>
 
       <!-- Mobile Controls -->
       <div class="flex items-center lg:hidden">
-        <RouterLink to="/donate" class="mr-4 px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black uppercase tracking-tight">
-          捐款
-        </RouterLink>
+        <LanguageSwitcher />
+        <!-- <RouterLink to="/donate" class="mx-2 px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black uppercase tracking-tight">
+          {{ t('nav.donate_short') }}
+        </RouterLink> -->
         <button 
           @click="toggleMenu"
           class="p-2 text-foundation-blue focus:outline-none"
@@ -180,25 +189,28 @@ const isActive = (path) => route.path === path
         leave-from-class="translate-x-0"
         leave-to-class="translate-x-full"
       >
-        <div v-if="isMenuOpen" class="fixed top-0 right-0 h-full w-[280px] sm:w-[320px] bg-white z-[120] shadow-[-20px_0_50px_rgba(0,0,0,0.1)] overflow-y-auto">
-          <div class="p-6 flex flex-col h-full">
-            <div class="flex justify-between items-center mb-8">
-              <span class="text-foundation-blue font-black text-xl tracking-tight uppercase">Menu</span>
+        <div v-if="isMenuOpen" class="fixed top-0 right-0 h-full w-[280px] sm:w-[320px] bg-white z-[120] shadow-[-20px_0_50px_rgba(0,0,0,0.1)]">
+          <!-- header -->
+          <div class="p-6 h-[80px] absolute top-0 left-0 w-full bg-white">
+            <div class="flex justify-between items-center">
+              <span class="text-foundation-blue font-black text-xl tracking-tight uppercase">{{ t('nav.menu') }}</span>
               <button @click="closeMenu" class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-
+          </div>
+          <!-- body -->
+          <div class="p-6 flex flex-col h-[calc(100vh-80px)] overflow-y-auto mt-[80px]">
             <nav class="flex flex-col space-y-4">
-              <template v-for="item in navigation" :key="item.name">
+              <div v-for="item in navigation" :key="item.nameKey">
                 <div v-if="item.items" class="flex flex-col">
-                  <span class="text-[10px] font-black uppercase text-gray-400 tracking-[0.2em] mb-3 ml-4">{{ item.name }}</span>
+                  <span class="text-[10px] font-black uppercase text-gray-400 tracking-[0.2em] mb-3 ml-4">{{ t(item.nameKey) }}</span>
                   <div class="space-y-1">
                     <RouterLink 
                       v-for="sub in item.items" 
-                      :key="sub.name" 
+                      :key="sub.nameKey" 
                       :to="sub.href"
                       @click="closeMenu"
                       :class="[
@@ -206,7 +218,7 @@ const isActive = (path) => route.path === path
                         isActive(sub.href) ? 'bg-foundation-blue text-white shadow-lg shadow-foundation-blue/20' : 'text-gray-700 active:bg-gray-100'
                       ]"
                     >
-                      {{ sub.name }}
+                      {{ t(sub.nameKey) }}
                     </RouterLink>
                   </div>
                 </div>
@@ -219,19 +231,19 @@ const isActive = (path) => route.path === path
                     isActive(item.href) ? 'bg-foundation-blue text-white shadow-lg shadow-foundation-blue/20' : 'text-gray-700 active:bg-gray-100'
                   ]"
                 >
-                  {{ item.name }}
+                  {{ t(item.nameKey) }}
                 </RouterLink>
-              </template>
+              </div>
             </nav>
 
             <div class="mt-auto pt-8">
               <RouterLink to="/donate" @click="closeMenu" class="w-full flex justify-center py-4 bg-foundation-orange text-white rounded-2xl font-black shadow-xl shadow-foundation-orange/30">
-                支持我們・愛心捐款
+                {{ t('common.support_us') }}
               </RouterLink>
               <div class="mt-6 text-center">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-loose">
-                  Lifeline Foundation<br>
-                  (02) 87585858
+                  {{ t('common.foundation_name_en') }} Foundation<br>
+                  {{ t('common.phone') }}
                 </p>
               </div>
             </div>
@@ -240,8 +252,6 @@ const isActive = (path) => route.path === path
       </Transition>
     </Teleport>
   </header>
-  <!-- Spacer to prevent content jump since header is fixed (Fixed 80px) -->
-  <div class="h-20"></div>
 </template>
 
 <style scoped>

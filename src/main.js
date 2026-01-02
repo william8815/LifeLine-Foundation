@@ -4,6 +4,7 @@ import "./assets/main.css";
 import { ViteSSG } from "vite-ssg";
 import { routes } from "./router/routes"; // 這邊 router 只要給好的路由即可 (下方有例子)
 import App from "./App.vue";
+import i18n from "./i18n"; // 引入 i18n
 
 // `export const createApp` is required instead of the original `createApp(App).mount('#app')`
 export const createApp = ViteSSG(
@@ -22,8 +23,9 @@ export const createApp = ViteSSG(
     },
   },
   // function to have custom setups
-  () => {
+  ({ app }) => {
     // params : { app, router, routes, isClient, initialState }
     // install plugins etc.
+    app.use(i18n); // 安裝 i18n 插件
   }
 );

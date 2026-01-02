@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "首頁",
+    "about": "認識我們",
+    "about_origin": "成立起源",
+    "about_org": "組織介紹",
+    "about_history": "歷史沿革",
+    "services": "服務項目",
+    "service_home_care": "家醫計畫",
+    "service_emergency": "緊急救援系統",
+    "service_tracking": "老人協尋",
+    "service_fall_detection": "跌倒偵測",
+    "service_risk_check": "風險檢測",
+    "news": "最新消息",
+    "links": "友站連結",
+    "contact": "聯絡我們",
+    "donate": "愛心捐款",
+    "donate_short": "捐款",
+    "menu": "選單"
+  },
+  "common": {
+    "foundation_name": "生命連線基金會",
+    "foundation_name_en": "Lifeline",
+    "support_us": "支持我們・愛心捐款",
+    "phone": "(02) 87585858"
+  },
+  "seo": {
+    "title": "生命連線基金會 - 官方網站",
+    "description": "致力於家醫計畫、緊急救援系統與老人協尋等守護生命的服務。",
+    "keywords": "生命連線, 基金會, 家醫計畫, 緊急救援, 老人協尋, 跌倒偵測"
+  },
+  "language": {
+    "zh_TW": "繁體中文",
+    "zh_CN": "簡體中文",
+    "switch": "切換語系"
+  }
+}
+

@@ -17,7 +17,7 @@ useSeoMeta({
 <template>
   <div class="min-h-screen flex flex-col font-sans text-gray-900">
     <Header />
-    <main class="flex-grow">
+    <main class="flex-grow mt-[80px]">
       <RouterView />
     </main>
     <Footer />
