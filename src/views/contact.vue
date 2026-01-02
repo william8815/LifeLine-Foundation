@@ -1,88 +1,92 @@
 <script setup>
+import { computed } from 'vue'
 import PageHeader from '../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '聯絡我們 | 生命連線基金會 LifeLine Foundation - 專業諮詢與服務據點',
+  title: computed(() => t('contact.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '聯絡生命連線, 服務據點, 免付費諮詢電話, 台北市信義區, 交通指南, 捷運永春站, 長者照護諮詢, 基金會聯絡資訊' 
+      content: computed(() => t('contact.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '聯絡我們 | 生命連線基金會 LifeLine Foundation - 專業諮詢與服務據點',
-  description: '有任何關於長輩照護、緊急救援系統或家醫計畫的疑問嗎？歡迎透過免付費服務電話、電子郵件或親臨本會諮詢。生命連線基金會位於台北市信義區，提供詳細的交通指南，隨時為您服務。',
-  ogTitle: '聯絡我們 - 專業諮詢與協助，隨時為您服務 | 生命連線基金會',
-  ogDescription: '廿年專業背景，守護百萬生命。如果您有任何需求，請隨時與我們聯絡。',
+  title: computed(() => t('contact.seo.title')),
+  description: computed(() => t('contact.seo.description')),
+  ogTitle: computed(() => t('contact.seo.og_title')),
+  ogDescription: computed(() => t('contact.seo.og_description')),
   twitterCard: 'summary_large_image',
-  twitterTitle: '聯絡我們 | 生命連線基金會 LifeLine Foundation',
-  twitterDescription: '專業諮詢與服務據點，隨時為您服務。'
+  twitterTitle: computed(() => t('contact.seo.twitter_title')),
+  twitterDescription: computed(() => t('contact.seo.twitter_description'))
 })
 
-const contactInfo = [
+const contactInfo = computed(() => [
   {
-    label: '服務電話',
+    label: t('contact.info.phone_label'),
     value: '0809-088-999',
     icon: 'phone',
     type: 'tel'
   },
   {
-    label: '電子郵件',
+    label: t('contact.info.email_label'),
     value: 'services@lifeline.net.tw',
     icon: 'email',
     type: 'mailto'
   },
   {
-    label: '服務地址',
-    value: '110 台北市信義區忠孝東路五段 552 號 15 樓',
-    note: '(任遠忠孝大樓 健康福祉事業股份有限公司)',
+    label: t('contact.info.address_label'),
+    value: t('contact.info.address_value'),
+    note: t('contact.info.address_note'),
     icon: 'location'
   }
-]
+])
 
-const transportation = [
+const transportation = computed(() => [
   {
-    title: '搭乘捷運',
+    title: t('contact.transportation.metro_title'),
     category: 'Metro',
-    lines: ['板南線'],
+    lines: [t('contact.transportation.metro_line')],
     items: [
       {
-        station: '永春站 4 號出口',
-        content: '出站後直行，沿忠孝東路步行約 5 分鐘，即可抵達任遠忠孝大樓。'
+        station: t('contact.transportation.metro_station1'),
+        content: t('contact.transportation.metro_content1')
       },
       {
-        station: '後山埤站 2 號出口',
-        content: '出站後直行，沿忠孝東路步行約 5 分鐘，即可抵達任遠忠孝大樓。'
+        station: t('contact.transportation.metro_station2'),
+        content: t('contact.transportation.metro_content2')
       }
     ]
   },
   {
-    title: '搭乘公車',
+    title: t('contact.transportation.bus_title'),
     category: 'Bus',
     lines: ['212(直行)', '270', '270(區)', '46', '51', '忠孝新幹線', '信義幹線(副)'],
     items: [
       {
-        station: '永春里站',
-        content: '下車後沿忠孝東路往東步行約 3 分鐘，即可抵達任遠忠孝大樓。'
+        station: t('contact.transportation.bus_station1'),
+        content: t('contact.transportation.bus_content1')
       },
       {
-        station: '協和工商站',
-        content: '下車後沿忠孝東路往西步行約 3 分鐘，即可抵達任遠忠孝大樓。'
+        station: t('contact.transportation.bus_station2'),
+        content: t('contact.transportation.bus_content2')
       }
     ]
   }
-]
+])
 </script>
 
 <template>
   <div class="bg-gray-50 min-h-screen pb-24">
     <PageHeader 
-      title="聯絡我們" 
-      subtitle="隨時為您提供最專業的諮詢與協助"
+      :title="t('contact.page_header.title')" 
+      :subtitle="t('contact.page_header.subtitle')"
     />
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-10">
@@ -93,7 +97,7 @@ const transportation = [
           <div 
             v-for="info in contactInfo" 
             :key="info.label"
-            class="bg-white p-6 md:p-8 rounded-[32px] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group"
+            class="bg-white p-6 rounded-[32px] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group"
           >
             <div class="flex items-center space-x-6">
               <div class="shrink-0 w-14 h-14 rounded-2xl bg-foundation-blue/5 flex items-center justify-center text-foundation-blue group-hover:bg-foundation-blue group-hover:text-white transition-all duration-500">
@@ -102,19 +106,21 @@ const transportation = [
                 <svg v-if="info.icon === 'location'" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               </div>
               <div>
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">{{ info.label }}</p>
-                <a 
-                  v-if="info.type" 
-                  :href="`${info.type}:${info.value}`" 
-                  class="text-[1rem] md:text-xl font-black text-foundation-blue hover:text-foundation-lightblue transition-colors"
-                >
-                  {{ info.value }}
-                </a>
-                <p v-else class="text-[1rem] md:text-lg font-black text-foundation-blue leading-tight">
-                  {{ info.value }}
-                </p>
-                <p v-if="info.note" class="text-xs text-foundation-lightblue font-bold mt-1">{{ info.note }}</p>
+                <p class="text-[1rem] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">{{ info.label }}</p>
               </div>
+            </div>
+            <div class="mt-4">
+              <a 
+                v-if="info.type" 
+                :href="`${info.type}:${info.value}`" 
+                class="block text-[1rem] md:text-lg font-black text-foundation-blue leading-tight hover:text-foundation-lightblue transition-colors"
+              >
+                {{ info.value }}
+              </a>
+              <p v-else class="text-[1rem] md:text-lg font-black text-foundation-blue leading-tight">
+                {{ info.value }}
+              </p>
+              <p v-if="info.note" class="text-xs text-foundation-lightblue font-bold mt-1">{{ info.note }}</p>
             </div>
           </div>
         </div>
@@ -135,7 +141,7 @@ const transportation = [
       <section class="space-y-8">
         <div class="flex items-center space-x-4 mb-12">
           <div class="w-20 h-1.5 bg-foundation-blue rounded-full"></div>
-          <h2 class="text-3xl font-black text-foundation-blue italic">交通方式</h2>
+          <h2 class="text-3xl font-black text-foundation-blue italic">{{ t('contact.transportation.section_title') }}</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

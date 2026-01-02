@@ -683,5 +683,41 @@
       "p6_desc": "致力于守护植物人与孤苦长者，提供长期且专业的安养照护。"
     },
     "visit_partner": "Visit Partner"
+  },
+  "contact": {
+    "seo": {
+      "title": "联络我们 | 生命连线基金会 LifeLine Foundation - 专业咨询与服务据点",
+      "description": "有任何关于长辈照护、紧急救援系统或家医计划的疑问吗？欢迎透过免付费服务电话、电子邮件或亲临本会咨询。生命连线基金会位于台北市信义区，提供详细的交通指南，随时为您服务。",
+      "keywords": "联络生命连线, 服务据点, 免付费咨询电话, 台北市信义区, 交通指南, 捷运永春站, 长者照护咨询, 基金会联络资讯",
+      "og_title": "联络我们 - 专业咨询与协助，随时为您服务 | 生命连线基金会",
+      "og_description": "廿年专业背景，守护百万生命。如果您有任何需求，请随时与我们联络。",
+      "twitter_title": "联络我们 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "专业咨询与服务据点，随时为您服务。"
+    },
+    "page_header": {
+      "title": "联络我们",
+      "subtitle": "随时为您提供最专业的咨询与协助"
+    },
+    "info": {
+      "phone_label": "服务电话",
+      "email_label": "电子邮件",
+      "address_label": "服务地址",
+      "address_value": "110 台北市信义区忠孝东路五段 552 号 15 楼",
+      "address_note": "(任远忠孝大楼 健康福祉事业股份有限公司)"
+    },
+    "transportation": {
+      "section_title": "交通方式",
+      "metro_title": "搭乘捷运",
+      "metro_line": "板南线",
+      "metro_station1": "永春站 4 号出口",
+      "metro_content1": "出站后直行，沿忠孝东路步行约 5 分钟，即可抵达任远忠孝大楼。",
+      "metro_station2": "后山埤站 2 号出口",
+      "metro_content2": "出站后直行，沿忠孝东路步行约 5 分钟，即可抵达任远忠孝大楼。",
+      "bus_title": "搭乘公车",
+      "bus_station1": "永春里站",
+      "bus_content1": "下车后沿忠孝东路往东步行约 3 分钟，即可抵达任远忠孝大楼。",
+      "bus_station2": "协和工商站",
+      "bus_content2": "下车后沿忠孝东路往西步行约 3 分钟，即可抵达任远忠孝大楼。"
+    }
   }
 }

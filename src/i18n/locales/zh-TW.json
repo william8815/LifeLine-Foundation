@@ -683,5 +683,41 @@
       "p6_desc": "致力於守護植物人與孤苦長者，提供長期且專業的安養照護。"
     },
     "visit_partner": "Visit Partner"
+  },
+  "contact": {
+    "seo": {
+      "title": "聯絡我們 | 生命連線基金會 LifeLine Foundation - 專業諮詢與服務據點",
+      "description": "有任何關於長輩照護、緊急救援系統或家醫計畫的疑問嗎？歡迎透過免付費服務電話、電子郵件或親臨本會諮詢。生命連線基金會位於台北市信義區，提供詳細的交通指南，隨時為您服務。",
+      "keywords": "聯絡生命連線, 服務據點, 免付費諮詢電話, 台北市信義區, 交通指南, 捷運永春站, 長者照護諮詢, 基金會聯絡資訊",
+      "og_title": "聯絡我們 - 專業諮詢與協助，隨時為您服務 | 生命連線基金會",
+      "og_description": "廿年專業背景，守護百萬生命。如果您有任何需求，請隨時與我們聯絡。",
+      "twitter_title": "聯絡我們 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "專業諮詢與服務據點，隨時為您服務。"
+    },
+    "page_header": {
+      "title": "聯絡我們",
+      "subtitle": "隨時為您提供最專業的諮詢與協助"
+    },
+    "info": {
+      "phone_label": "服務電話",
+      "email_label": "電子郵件",
+      "address_label": "服務地址",
+      "address_value": "110 台北市信義區忠孝東路五段 552 號 15 樓",
+      "address_note": "(任遠忠孝大樓 健康福祉事業股份有限公司)"
+    },
+    "transportation": {
+      "section_title": "交通方式",
+      "metro_title": "搭乘捷運",
+      "metro_line": "板南線",
+      "metro_station1": "永春站 4 號出口",
+      "metro_content1": "出站後直行，沿忠孝東路步行約 5 分鐘，即可抵達任遠忠孝大樓。",
+      "metro_station2": "後山埤站 2 號出口",
+      "metro_content2": "出站後直行，沿忠孝東路步行約 5 分鐘，即可抵達任遠忠孝大樓。",
+      "bus_title": "搭乘公車",
+      "bus_station1": "永春里站",
+      "bus_content1": "下車後沿忠孝東路往東步行約 3 分鐘，即可抵達任遠忠孝大樓。",
+      "bus_station2": "協和工商站",
+      "bus_content2": "下車後沿忠孝東路往西步行約 3 分鐘，即可抵達任遠忠孝大樓。"
+    }
   }
 }
