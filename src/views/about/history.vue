@@ -1,46 +1,50 @@
 <script setup>
+import { computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '歷史沿革 | 生命連線基金會 LifeLine Foundation',
+  title: computed(() => t('about_history.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '歷史沿革, 榮獲獎項, 成功案例, 哈佛大學研討, 麻省理工個案, 成長策略獎, 生命連線歷史, 專業認證' 
+      content: computed(() => t('about_history.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '歷史沿革 | 生命連線基金會 LifeLine Foundation',
-  description: '橫跨數十載的榮耀指標，從哈佛大學與麻省理工學院的成功個案研討，到獲得北美成長策略領先獎。深入了解生命連線基金會如何以卓越品質守護無數生命。',
-  ogTitle: '歷史沿革 - 卓越品質與永續守護 | 生命連線基金會',
-  ogDescription: '數十載的榮耀不僅是對過去的肯定，更是我們對每一個生命承諾的基石。探索我們的榮耀里程碑。',
+  title: computed(() => t('about_history.seo.title')),
+  description: computed(() => t('about_history.seo.description')),
+  ogTitle: computed(() => t('about_history.seo.og_title')),
+  ogDescription: computed(() => t('about_history.seo.og_description')),
   twitterCard: 'summary_large_image',
-  twitterTitle: '歷史沿革 | 生命連線基金會 LifeLine Foundation',
-  twitterDescription: '橫跨數十載的品質榮耀。'
+  twitterTitle: computed(() => t('about_history.seo.twitter_title')),
+  twitterDescription: computed(() => t('about_history.seo.twitter_description'))
 })
 
-const timeline = [
-  { year: '2008', title: 'Frost & Sullivan 頒北美成長策略領先獎', type: 'award' },
-  { year: '2005', title: '美國財富雜誌年度最佳成長獎', type: 'award' },
-  { year: '2004', title: '美國商業週刊年度最佳表現獎', type: 'award' },
-  { year: '2001', title: '美國高齡協會年度最佳服務獎', type: 'award' },
-  { year: '1997-99', title: '哈佛大學列為成功個案研討', type: 'academic' },
-  { year: '1998-99', title: '麻省理工史隆管理學院列為成功科技個案研討', type: 'academic' },
-  { year: '1994', title: '美國老人學會最佳產品設計獎', type: 'award' },
-  { year: '1991', title: '美國 The Blue Chip 藍籌股年度第一績優獎', type: 'award' },
-  { year: '1991', title: '美國最佳品質管制獎等獎項', type: 'award' }
-]
+const timeline = computed(() => [
+  { yearKey: 'about_history.timeline.item1_year', titleKey: 'about_history.timeline.item1_title', type: 'award' },
+  { yearKey: 'about_history.timeline.item2_year', titleKey: 'about_history.timeline.item2_title', type: 'award' },
+  { yearKey: 'about_history.timeline.item3_year', titleKey: 'about_history.timeline.item3_title', type: 'award' },
+  { yearKey: 'about_history.timeline.item4_year', titleKey: 'about_history.timeline.item4_title', type: 'award' },
+  { yearKey: 'about_history.timeline.item5_year', titleKey: 'about_history.timeline.item5_title', type: 'academic' },
+  { yearKey: 'about_history.timeline.item6_year', titleKey: 'about_history.timeline.item6_title', type: 'academic' },
+  { yearKey: 'about_history.timeline.item7_year', titleKey: 'about_history.timeline.item7_title', type: 'award' },
+  { yearKey: 'about_history.timeline.item8_year', titleKey: 'about_history.timeline.item8_title', type: 'award' },
+  { yearKey: 'about_history.timeline.item9_year', titleKey: 'about_history.timeline.item9_title', type: 'award' }
+])
 </script>
 
 <template>
   <div class="bg-white min-h-screen pb-32">
     <PageHeader 
-      title="歷史沿革" 
-      subtitle="榮耀與里程碑"
+      :title="t('about_history.page_header.title')" 
+      :subtitle="t('about_history.page_header.subtitle')"
     />
 
     <main class="relative">
@@ -49,9 +53,9 @@ const timeline = [
           
           <div class="max-w-4xl mx-auto">
             <div class="text-center mb-20">
-              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-sm font-black uppercase tracking-widest mb-6">Honors & Milestones</span>
+              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-sm font-black uppercase tracking-widest mb-6">{{ t('about_history.intro.badge') }}</span>
               <h2 class="text-3xl md:text-5xl font-black text-foundation-blue leading-tight">
-                凝聚專業與信賴的軌跡
+                {{ t('about_history.intro.title') }}
               </h2>
             </div>
 
@@ -75,11 +79,11 @@ const timeline = [
                       'inline-block px-4 py-1 rounded-full text-xs font-black tracking-widest mb-4',
                       item.type === 'award' ? 'bg-foundation-orange/10 text-foundation-orange' : 'bg-foundation-blue/10 text-foundation-blue'
                     ]">
-                      {{ item.year }}
+                      {{ t(item.yearKey) }}
                     </div>
                     
                     <h3 class="text-xl md:text-2xl font-black text-foundation-blue leading-snug">
-                      {{ item.title }}
+                      {{ t(item.titleKey) }}
                     </h3>
 
                     <!-- Award Icon (Optional) -->
@@ -98,7 +102,7 @@ const timeline = [
                     'hidden md:block absolute top-1/2 -translate-y-1/2 w-[45%] text-gray-300 font-black italic text-6xl opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none',
                     index % 2 === 0 ? 'left-[55%] text-left pl-12' : 'right-[55%] text-right pr-12'
                   ]">
-                    {{ item.year }}
+                    {{ t(item.yearKey) }}
                   </div>
                 </div>
               </div>
@@ -110,9 +114,9 @@ const timeline = [
                  <div class="w-12 h-12 bg-foundation-blue/5 rounded-full flex items-center justify-center mb-8">
                    <svg class="w-6 h-6 text-foundation-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                  </div>
-                 <h4 class="text-2xl font-black text-foundation-blue mb-4">卓越品質，永續守護</h4>
+                 <h4 class="text-2xl font-black text-foundation-blue mb-4">{{ t('about_history.conclusion.title') }}</h4>
                  <p class="text-gray-400 max-w-md mx-auto leading-relaxed">
-                   數十載的榮耀不僅是對過去的肯定，更是我們對每一個生命承諾的基石。
+                   {{ t('about_history.conclusion.description') }}
                  </p>
                </div>
             </div>

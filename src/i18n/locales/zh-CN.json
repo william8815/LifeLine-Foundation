@@ -131,6 +131,142 @@
       "btn_donate": "我愿贡献一份力",
       "btn_contact": "了解更多联络方式"
     }
+  },
+  "about_origin": {
+    "seo": {
+      "title": "成立缘起 | 生命连线基金会 LifeLine Foundation",
+      "description": "探索生命连线基金会的成立初衷。我们致力于推动先进的紧急救护救援服务，落实老人福利与照护社区化，为独居长者建立安全且尊严的生活保障。",
+      "keywords": "成立缘起, 服务宗旨, 生命连线, 紧急救护, 社区照护, 老人福利, 独居长者, 社会救助, 智慧医疗",
+      "og_title": "成立缘起 - 守护生命的初衷 | 生命连线基金会",
+      "og_description": "致力于架构具功能性与结构性的医疗服务网络，减轻社会照顾负担，拥抱独立自主的生活。",
+      "twitter_title": "成立缘起 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "探索生命连线基金会的成立初衷，为长辈编织最坚固的安全网。"
+    },
+    "page_header": {
+      "title": "成立缘起",
+      "subtitle": "先进有效的紧急救护救援服务"
+    },
+    "vision": {
+      "badge": "Our Vision",
+      "title": "建立守护生命的初衷"
+    },
+    "content": {
+      "paragraph1": "财团法人生命连线基金会，源于基金会多位发起人为维护国民健康，并参照先进国家，推动成立有效的紧急救护救援服务，改善独居长者之生活品质。",
+      "paragraph2": "并改善到医院前的紧急医疗照顾与通报后送，以期架构成为具功能性与结构性的医疗服务网络。",
+      "quote": "落实老人福利及照护社区化的政策，结合社福机构及志愿服务社区资源，建立居家长者及家庭支持网络。",
+      "paragraph3": "提供独居长者、身心障碍、及弱势群族办理各项咨询服务，心理咨商、团康活动、居家等服务项目，期使民众在心理、生理、社会及育乐等各方面得以均衡发展，以协助独居长者、身心障碍者之家庭、及弱势群族，减轻生活压力，使其能自立自主的生活。",
+      "paragraph4": "减少家人及社会之照顾负担及促进医药保健、生命保护和社会福祉之统合，进行相关之研究发展和教育宣导工作，加强与国际有关机构交流，增进国民健康福祉及举办或捐助社区照护服务事业为宗旨。",
+      "paragraph5": "发展社区照护及加强环境保护，而发起募捐并拟于民国八十九年九月成立。其主要的目的在于结合各方力量组成智库，并致力于从事政策性、学术性、教育性与技术性之开发研究，期能加速各项建设，早日实现安和乐利的生活环境。"
+    },
+    "pillars": {
+      "emergency": {
+        "title": "紧急救护救援",
+        "description": "参照先进国家标准，建立功能完善的通报后送网络，守护每一份紧急需求。"
+      },
+      "community": {
+        "title": "社区照护连结",
+        "description": "整合社福机构与志工资源，将关怀实践于邻里，实现照护社区化。"
+      }
+    }
+  },
+  "about_org": {
+    "seo": {
+      "title": "组织介绍 | 生命连线基金会 LifeLine Foundation",
+      "description": "了解生命连线基金会的专业服务体系。我们采用北美先进标准，提供 24/7 全年无休的紧急救援中心，并与台大医院、台中荣总及多数县市政府合作，守护超过 400 万用户的居家安全。",
+      "keywords": "组织架构, 关于我们, 生命连线, 紧急救援中心, 居家安全, 专业救护, 合作医院, 北美标准, 尊严照护",
+      "og_title": "组织介绍 - 专业、尊严与全天候守护 | 生命连线基金会",
+      "og_description": "北美领先个人救护服务设计，结合国内顶尖医疗体系，为长辈打造最坚固的安全网。",
+      "twitter_title": "组织介绍 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "了解生命连线基金会的国际级救援体系。"
+    },
+    "page_header": {
+      "title": "组织介绍",
+      "subtitle": "独立自主・安全・尊严"
+    },
+    "service": {
+      "badge": "Real-time Response",
+      "title_line1": "全年无休的",
+      "title_line2": "生命守护",
+      "description": "生命连线服务连结使用者与亲人、邻居、朋友、社区及救护单位、医疗机构等紧急救援网络。",
+      "feature1": "室内收讯范围内，不论在家中或是庭院皆可全面防护。",
+      "feature2": "随身救护发射器，一键联系，24小时全年无休。"
+    },
+    "stats": {
+      "stat1_value": "2500+",
+      "stat1_label": "北美健康照护机构",
+      "stat2_value": "4M+",
+      "stat2_label": "全球服务用户数",
+      "stat3_value": "24/7",
+      "stat3_label": "全天候服务中心",
+      "stat4_value": "1974",
+      "stat4_label": "创始年份"
+    },
+    "history": {
+      "founded": "Founded",
+      "title": "独立自主、安全与尊严",
+      "description": "生命连线是在 1974 年时由 Dr.Andrew Dibner 和他的妻子 Susan 所发明的，迅速成为个人救护服务的领导设计，确保高危险群于紧急危难时，能够得到立即救援。",
+      "quote": "「让使用者能够独立自主、安全、尊严地居住在自己熟悉的生活环境中疗养恢复。」"
+    },
+    "trust": {
+      "badge": "Proven Trust",
+      "title_line1": "广受信赖的",
+      "title_line2": "全方位专业体系",
+      "description": "目前北美地区已有超过 2500 家健康照护机构使用生命连线服务，使用者超过 400 万 位民众。",
+      "north_america": "NORTH",
+      "standard": "America Standard"
+    },
+    "partners": {
+      "title": "Domestic Partners",
+      "partner1": "台大医院",
+      "partner2": "中心诊所",
+      "partner3": "台中荣总",
+      "partner4": "光田医院",
+      "partner5": "多数县市政府委托",
+      "footer": "深获各级政府与顶尖医院合作肯定，为国内长者居家安全的领导品牌。"
+    }
+  },
+  "about_history": {
+    "seo": {
+      "title": "历史沿革 | 生命连线基金会 LifeLine Foundation",
+      "description": "横跨数十载的荣耀指标，从哈佛大学与麻省理工学院的成功个案研讨，到获得北美成长策略领先奖。深入了解生命连线基金会如何以卓越品质守护无数生命。",
+      "keywords": "历史沿革, 荣获奖项, 成功案例, 哈佛大学研讨, 麻省理工个案, 成长策略奖, 生命连线历史, 专业认证",
+      "og_title": "历史沿革 - 卓越品质与永续守护 | 生命连线基金会",
+      "og_description": "数十载的荣耀不仅是对过去的肯定，更是我们对每一个生命承诺的基石。探索我们的荣耀里程碑。",
+      "twitter_title": "历史沿革 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "横跨数十载的品质荣耀。"
+    },
+    "page_header": {
+      "title": "历史沿革",
+      "subtitle": "荣耀与里程碑"
+    },
+    "intro": {
+      "badge": "Honors & Milestones",
+      "title": "凝聚专业与信赖的轨迹"
+    },
+    "timeline": {
+      "item1_year": "2008",
+      "item1_title": "Frost & Sullivan 颁北美成长策略领先奖",
+      "item2_year": "2005",
+      "item2_title": "美国财富杂志年度最佳成长奖",
+      "item3_year": "2004",
+      "item3_title": "美国商业周刊年度最佳表现奖",
+      "item4_year": "2001",
+      "item4_title": "美国高龄协会年度最佳服务奖",
+      "item5_year": "1997-99",
+      "item5_title": "哈佛大学列为成功个案研讨",
+      "item6_year": "1998-99",
+      "item6_title": "麻省理工史隆管理学院列为成功科技个案研讨",
+      "item7_year": "1994",
+      "item7_title": "美国老人学会最佳产品设计奖",
+      "item8_year": "1991",
+      "item8_title": "美国 The Blue Chip 蓝筹股年度第一绩优奖",
+      "item9_year": "1991",
+      "item9_title": "美国最佳品质管制奖等奖项"
+    },
+    "conclusion": {
+      "title": "卓越品质，永续守护",
+      "description": "数十载的荣耀不仅是对过去的肯定，更是我们对每一个生命承诺的基石。"
+    }
   }
 }
 

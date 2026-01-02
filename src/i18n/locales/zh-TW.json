@@ -131,5 +131,141 @@
       "btn_donate": "我願貢獻一份力",
       "btn_contact": "了解更多聯絡方式"
     }
+  },
+  "about_origin": {
+    "seo": {
+      "title": "成立緣起 | 生命連線基金會 LifeLine Foundation",
+      "description": "探索生命連線基金會的成立初衷。我們致力於推動先進的緊急救護救援服務，落實老人福利與照護社區化，為獨居長者建立安全且尊嚴的生活保障。",
+      "keywords": "成立緣起, 服務宗旨, 生命連線, 緊急救護, 社區照護, 老人福利, 獨居長者, 社會救助, 智慧醫療",
+      "og_title": "成立緣起 - 守護生命的初衷 | 生命連線基金會",
+      "og_description": "致力於架構具功能性與結構性的醫療服務網路，減輕社會照顧負擔，擁抱獨立自主的生活。",
+      "twitter_title": "成立緣起 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "探索生命連線基金會的成立初衷，為長輩編織最堅固的安全網。"
+    },
+    "page_header": {
+      "title": "成立緣起",
+      "subtitle": "先進有效的緊急救護救援服務"
+    },
+    "vision": {
+      "badge": "Our Vision",
+      "title": "建立守護生命的初衷"
+    },
+    "content": {
+      "paragraph1": "財團法人生命連線基金會，源於基金會多位發起人為維護國民健康，並參照先進國家，推動成立有效的緊急救護救援服務，改善獨居長者之生活品質。",
+      "paragraph2": "並改善到醫院前的緊急醫療照顧與通報後送，以期架構成為具功能性與結構性的醫療服務網路。",
+      "quote": "落實老人福利及照護社區化的政策，結合社福機構及志願服務社區資源，建立居家長者及家庭支持網絡。",
+      "paragraph3": "提供獨居長者、身心障礙、及弱勢群族辦理各項諮詢服務，心理諮商、團康活動、居家等服務項目，期使民眾在心理、生理、社會及育樂等各方面得以均衡發展，以協助獨居長者、身心障礙者之家庭、及弱勢群族，減輕生活壓力，使其能自立自主的生活。",
+      "paragraph4": "減少家人及社會之照顧負擔及促進醫藥保健、生命保護和社會福祉之統合，進行相關之研究發展和教育宣導工作，加強與國際有關機構交流，增進國民健康福祉及舉辦或捐助社區照護服務事業為宗旨。",
+      "paragraph5": "發展社區照護及加強環境保護，而發起募捐並擬於民國八十九年九月成立。其主要的目的在於結合各方力量組成智庫，並致力於從事政策性、學術性、教育性與技術性之開發研究，期能加速各項建設，早日實現安和樂利的生活環境。"
+    },
+    "pillars": {
+      "emergency": {
+        "title": "緊急救護救援",
+        "description": "參照先進國家標準，建立功能完善的通報後送網絡，守護每一份緊急需求。"
+      },
+      "community": {
+        "title": "社區照護連結",
+        "description": "整合社福機構與志工資源，將關懷實踐於鄰里，實現照護社區化。"
+      }
+    }
+  },
+  "about_org": {
+    "seo": {
+      "title": "組織介紹 | 生命連線基金會 LifeLine Foundation",
+      "description": "了解生命連線基金會的專業服務體系。我們採用北美先進標準，提供 24/7 全年無休的緊急救援中心，並與台大醫院、台中榮總及多數縣市政府合作，守護超過 400 萬用戶的居家安全。",
+      "keywords": "組織架構, 關於我們, 生命連線, 緊急救援中心, 居家安全, 專業救護, 合作醫院, 北美標準, 尊嚴照護",
+      "og_title": "組織介紹 - 專業、尊嚴與全天候守護 | 生命連線基金會",
+      "og_description": "北美領先個人救護服務設計，結合國內頂尖醫療體系，為長輩打造最堅固的安全網。",
+      "twitter_title": "組織介紹 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "了解生命連線基金會的國際級救援體系。"
+    },
+    "page_header": {
+      "title": "組織介紹",
+      "subtitle": "獨立自主・安全・尊嚴"
+    },
+    "service": {
+      "badge": "Real-time Response",
+      "title_line1": "全年無休的",
+      "title_line2": "生命守護",
+      "description": "生命連線服務連結使用者與親人、鄰居、朋友、社區及救護單位、醫療機構等緊急救援網絡。",
+      "feature1": "室內收訊範圍內，不論在家中或是庭院皆可全面防護。",
+      "feature2": "隨身救護發射器，一鍵聯繫，24小時全年無休。"
+    },
+    "stats": {
+      "stat1_value": "2500+",
+      "stat1_label": "北美健康照護機構",
+      "stat2_value": "4M+",
+      "stat2_label": "全球服務用戶數",
+      "stat3_value": "24/7",
+      "stat3_label": "全天候服務中心",
+      "stat4_value": "1974",
+      "stat4_label": "創始年份"
+    },
+    "history": {
+      "founded": "Founded",
+      "title": "獨立自主、安全與尊嚴",
+      "description": "生命連線是在 1974 年時由 Dr.Andrew Dibner 和他的妻子 Susan 所發明的，迅速成為個人救護服務的領導設計，確保高危險群於緊急危難時，能夠得到立即救援。",
+      "quote": "「讓使用者能夠獨立自主、安全、尊嚴地居住在自己熟悉的生活環境中療養恢復。」"
+    },
+    "trust": {
+      "badge": "Proven Trust",
+      "title_line1": "廣受信賴的",
+      "title_line2": "全方位專業體系",
+      "description": "目前北美地區已有超過 2500 家健康照護機構使用生命連線服務，使用者超過 400 萬 位民眾。",
+      "north_america": "NORTH",
+      "standard": "America Standard"
+    },
+    "partners": {
+      "title": "Domestic Partners",
+      "partner1": "台大醫院",
+      "partner2": "中心診所",
+      "partner3": "台中榮總",
+      "partner4": "光田醫院",
+      "partner5": "多數縣市政府委託",
+      "footer": "深獲各級政府與頂尖醫院合作肯定，為國內長者居家安全的領導品牌。"
+    }
+  },
+  "about_history": {
+    "seo": {
+      "title": "歷史沿革 | 生命連線基金會 LifeLine Foundation",
+      "description": "橫跨數十載的榮耀指標，從哈佛大學與麻省理工學院的成功個案研討，到獲得北美成長策略領先獎。深入了解生命連線基金會如何以卓越品質守護無數生命。",
+      "keywords": "歷史沿革, 榮獲獎項, 成功案例, 哈佛大學研討, 麻省理工個案, 成長策略獎, 生命連線歷史, 專業認證",
+      "og_title": "歷史沿革 - 卓越品質與永續守護 | 生命連線基金會",
+      "og_description": "數十載的榮耀不僅是對過去的肯定，更是我們對每一個生命承諾的基石。探索我們的榮耀里程碑。",
+      "twitter_title": "歷史沿革 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "橫跨數十載的品質榮耀。"
+    },
+    "page_header": {
+      "title": "歷史沿革",
+      "subtitle": "榮耀與里程碑"
+    },
+    "intro": {
+      "badge": "Honors & Milestones",
+      "title": "凝聚專業與信賴的軌跡"
+    },
+    "timeline": {
+      "item1_year": "2008",
+      "item1_title": "Frost & Sullivan 頒北美成長策略領先獎",
+      "item2_year": "2005",
+      "item2_title": "美國財富雜誌年度最佳成長獎",
+      "item3_year": "2004",
+      "item3_title": "美國商業週刊年度最佳表現獎",
+      "item4_year": "2001",
+      "item4_title": "美國高齡協會年度最佳服務獎",
+      "item5_year": "1997-99",
+      "item5_title": "哈佛大學列為成功個案研討",
+      "item6_year": "1998-99",
+      "item6_title": "麻省理工史隆管理學院列為成功科技個案研討",
+      "item7_year": "1994",
+      "item7_title": "美國老人學會最佳產品設計獎",
+      "item8_year": "1991",
+      "item8_title": "美國 The Blue Chip 藍籌股年度第一績優獎",
+      "item9_year": "1991",
+      "item9_title": "美國最佳品質管制獎等獎項"
+    },
+    "conclusion": {
+      "title": "卓越品質，永續守護",
+      "description": "數十載的榮耀不僅是對過去的肯定，更是我們對每一個生命承諾的基石。"
+    }
   }
 }
