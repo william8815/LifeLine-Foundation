@@ -545,5 +545,54 @@
       "warranty": "保固期限：两年 (2 Years Warranty)",
       "buy_now": "立即购买"
     }
+  },
+  "service_tracking": {
+    "seo": {
+      "title": "智慧协寻追踪 | 生命连线基金会 LifeLine Foundation - NFC智慧感应守护回家的路",
+      "description": "生命连线「智慧协寻追踪」系统结合 NFC 与 GPS 技术，透过平安手环与协寻平台，为失智长者提供即时定位与快速通报服务。防水矽胶材质手环，24小时全心守护预防走失。",
+      "keywords": "智慧协寻, 老人走失预防, NFC手环, GPS追踪, 协寻平台, 平安手环, 生命连线, 失智症救援, 快速通报, 数位身分证",
+      "og_title": "智慧协寻追踪 - 科技守护，让爱不走失 | 生命连线基金会",
+      "og_description": "领先 NFC 感应技术，一秒启动救援。协助走失长者快速找到回家的路，每分每秒都是最温暖的守护。",
+      "twitter_title": "智慧协寻追踪 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "NFC智慧感应守护，让爱不走失。"
+    },
+    "page_header": {
+      "title": "老人协寻",
+      "subtitle": "NFC 智慧感应・守护回家的路"
+    },
+    "tabs": {
+      "workflow": "运作方式",
+      "device": "装置介绍",
+      "pricing": "费用说明"
+    },
+    "workflow": {
+      "title": "运作方式",
+      "description": "透过具 NFC 感应功能的智慧手机或行动装置感应手环立即 GPS 卫星定位，就能帮助走失者顺利回家。",
+      "app_title": "感应手环・快速通报",
+      "app_desc": "感应手环后，便会启动自订浏览器连接至协寻平台，提供三种通报方式，协助身分确认与位置锁定。",
+      "method1_title": "GPS 自动定位",
+      "method1_desc": "透过手机位置资讯，精准掌握走失者座标。",
+      "method2_title": "地图导引",
+      "method2_desc": "串接 Google Maps，即时规划前往路径。",
+      "method3_title": "即时通报",
+      "method3_desc": "一键拨通协寻中心与在地派出所，寻求公权力协助。"
+    },
+    "device": {
+      "title": "NFC 失踪协寻手环",
+      "subtitle": "结合防走失手链与 GPS 追踪优势，重新定义安全感。",
+      "badge": "NFC 科技配件",
+      "description": "和传统的防走失手链相较，多了传送定位、地图、派出所资讯等优势。平台上提供三种通报方式，可透过允许使用手机的位置资讯提供中心护理人员掌握协寻者目前定位，并直接拨通协寻中心专线。",
+      "feature1_title": "软性矽胶材质",
+      "feature1_desc": "防过敏、防水设计，适合长者全年 24 小时配戴不造成负担。",
+      "feature2_title": "动态定位优势",
+      "feature2_desc": "比起传统手链，能第一时间回传 GPS 座标、地图及最近派出所资讯。"
+    },
+    "pricing": {
+      "title": "服务费用说明",
+      "description": "我们致力于提供可负担且完善的协寻解决方案，让科技守护与预防不再遥不可及。",
+      "device_label": "NFC 失踪协寻手环",
+      "buy_now": "立即购买",
+      "notes": "* 购买后包含首年协寻平台基本使用权限。<br>* 详细购买细节与退换货政策请参阅平台规范。"
+    }
   }
 }

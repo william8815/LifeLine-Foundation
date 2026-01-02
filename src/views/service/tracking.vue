@@ -1,28 +1,31 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '智慧協尋追蹤 | 生命連線基金會 LifeLine Foundation - NFC智慧感應守護回家的路',
+  title: computed(() => t('service_tracking.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '智慧協尋, 老人走失預防, NFC手環, GPS追蹤, 協尋平台, 平安手環, 生命連線, 失智症救援, 快速通報, 數位身分證' 
+      content: computed(() => t('service_tracking.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '智慧協尋追蹤 | 生命連線基金會 LifeLine Foundation - NFC智慧感應守護回家的路',
-  description: '生命連線「智慧協尋追蹤」系統結合 NFC 與 GPS 技術，透過平安手環與協尋平台，為失智長者提供即時定位與快速通報服務。防水矽膠材質手環，24小時全心守護預防走失。',
-  ogTitle: '智慧協尋追蹤 - 科技守護，讓愛不走失 | 生命連線基金會',
-  ogDescription: '領先 NFC 感應技術，一秒啟動救援。協助走失長者快速找到回家的路，每分每秒都是最溫暖的守護。',
+  title: computed(() => t('service_tracking.seo.title')),
+  description: computed(() => t('service_tracking.seo.description')),
+  ogTitle: computed(() => t('service_tracking.seo.og_title')),
+  ogDescription: computed(() => t('service_tracking.seo.og_description')),
   ogImage: tracking2_1,
   twitterCard: 'summary_large_image',
-  twitterTitle: '智慧協尋追蹤 | 生命連線基金會 LifeLine Foundation',
-  twitterDescription: 'NFC智慧感應守護，讓愛不走失。'
+  twitterTitle: computed(() => t('service_tracking.seo.twitter_title')),
+  twitterDescription: computed(() => t('service_tracking.seo.twitter_description'))
 })
 // images
 import tracking1_1 from "@/assets/images/services/tracking1_1.png"
@@ -37,24 +40,24 @@ const imageLoaded = ref({
 })
 
 const activeTab = ref('workflow')
-const tabs = [
-  { id: 'workflow', name: '運作方式', icon: 'zap' },
-  { id: 'device', name: '裝置介紹', icon: 'watch' },
-  { id: 'pricing', name: '費用說明', icon: 'shopping-cart' }
-]
+const tabs = computed(() => [
+  { id: 'workflow', name: t('service_tracking.tabs.workflow'), icon: 'zap' },
+  { id: 'device', name: t('service_tracking.tabs.device'), icon: 'watch' },
+  { id: 'pricing', name: t('service_tracking.tabs.pricing'), icon: 'shopping-cart' }
+])
 
-const reportingMethods = [
-  { title: 'GPS 自動定位', desc: '透過手機位置資訊，精準掌握走失者座標。' },
-  { title: '地圖導引', desc: '串接 Google Maps，即時規劃前往路徑。' },
-  { title: '即時通報', desc: '一鍵撥通協尋中心與在地派出所，尋求公權力協助。' }
-]
+const reportingMethods = computed(() => [
+  { title: t('service_tracking.workflow.method1_title'), desc: t('service_tracking.workflow.method1_desc') },
+  { title: t('service_tracking.workflow.method2_title'), desc: t('service_tracking.workflow.method2_desc') },
+  { title: t('service_tracking.workflow.method3_title'), desc: t('service_tracking.workflow.method3_desc') }
+])
 </script>
 
 <template>
   <div class="bg-gray-50 min-h-screen pb-32">
     <PageHeader 
-      title="老人協尋" 
-      subtitle="NFC 智慧感應・守護回家的路"
+      :title="t('service_tracking.page_header.title')" 
+      :subtitle="t('service_tracking.page_header.subtitle')"
     />
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 md:-mt-20 relative z-30">
@@ -93,10 +96,10 @@ const reportingMethods = [
                <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100 overflow-hidden">
                   <h2 class="text-3xl font-black text-foundation-blue mb-8 italic flex items-center">
                     <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
-                    運作方式
+                    {{ t('service_tracking.workflow.title') }}
                   </h2>
                   <p class="text-gray-500 text-lg md:text-xl font-medium leading-[1.8] mb-12 italic">
-                    透過具 NFC 感應功能的智慧手機或行動裝置感應手環立即 GPS 衛星定位，就能幫助走失者順利回家。
+                    {{ t('service_tracking.workflow.description') }}
                   </p>
 
                   <!-- Hero Image -->
@@ -109,8 +112,8 @@ const reportingMethods = [
                   <div class="">
                     <div class="grid grid-cols-1 xl:grid-cols-2 gap-12 items-center mb-12">
                       <div class="bg-foundation-blue/5 p-8 rounded-[32px] border border-foundation-blue/10">
-                        <h3 class="text-2xl font-black text-foundation-blue mb-4">感應手環・快速通報</h3>
-                        <p class="text-gray-500 font-medium">感應手環後，便會啟動自訂瀏覽器連接至協尋平台，提供三種通報方式，協助身分確認與位置鎖定。</p>
+                        <h3 class="text-2xl font-black text-foundation-blue mb-4">{{ t('service_tracking.workflow.app_title') }}</h3>
+                        <p class="text-gray-500 font-medium">{{ t('service_tracking.workflow.app_desc') }}</p>
                       </div>
                       <div class="space-y-4">
                         <div v-for="(method, i) in reportingMethods" :key="i" class="flex items-start space-x-4 p-4 rounded-2xl hover:bg-white hover:shadow-md transition-all border border-transparent hover:border-gray-100 group">
@@ -139,31 +142,31 @@ const reportingMethods = [
             <div v-else-if="activeTab === 'device'" :key="'device'" class="space-y-12">
                <div class="bg-white rounded-[40px] p-10 shadow-premium border border-gray-100">
                   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-                    <h2 class="lg:col-span-2 text-4xl font-black text-foundation-blue tracking-tighter italic">NFC 失蹤協尋手環</h2>
-                    <p class="lg:col-span-2 text-foundation-lightblue font-black text-lg ">結合防走失手鍊與 GPS 追蹤優勢，重新定義安全感。</p>
+                    <h2 class="lg:col-span-2 text-4xl font-black text-foundation-blue tracking-tighter italic">{{ t('service_tracking.device.title') }}</h2>
+                    <p class="lg:col-span-2 text-foundation-lightblue font-black text-lg ">{{ t('service_tracking.device.subtitle') }}</p>
                     <div class="lg:col-span-2 relative rounded-[1.5rem] overflow-hidden shadow-xl border border-gray-50 group">
                       <img :src="tracking2_1" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded.tracking2_1 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking2_1 = true">
                       <div class="absolute top-6 left-6">
-                        <span class="px-6 py-2 bg-foundation-blue text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">NFC 科技配件</span>
+                        <span class="px-6 py-2 bg-foundation-blue text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">{{ t('service_tracking.device.badge') }}</span>
                       </div>
                     </div>
                     <p class="lg:col-span-2 text-gray-500 font-medium leading-relaxed italic">
-                      和傳統的防走失手鍊相較，多了傳送定位、地圖、派出所資訊等優勢。平台上提供三種通報方式，可透過允許使用手機的位置資訊提供中心護理人員掌握協尋者目前定位，並直接撥通協尋中心專線。
+                      {{ t('service_tracking.device.description') }}
                     </p>
                     <!-- Features List -->
                     <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100 group hover:border-foundation-blue transition-colors">
                       <div class="w-10 h-10 rounded-xl bg-foundation-blue/10 flex items-center justify-center text-foundation-blue mb-4 group-hover:bg-foundation-blue group-hover:text-white transition-all">
                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                       </div>
-                      <h4 class="font-black text-foundation-blue mb-2">軟性矽膠材質</h4>
-                      <p class="text-xs text-gray-400 font-medium">防過敏、防水設計，適合長者全年 24 小時配戴不造成負擔。</p>
+                      <h4 class="font-black text-foundation-blue mb-2">{{ t('service_tracking.device.feature1_title') }}</h4>
+                      <p class="text-xs text-gray-400 font-medium">{{ t('service_tracking.device.feature1_desc') }}</p>
                     </div>
                     <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100 group hover:border-foundation-blue transition-colors">
                       <div class="w-10 h-10 rounded-xl bg-foundation-blue/10 flex items-center justify-center text-foundation-blue mb-4 group-hover:bg-foundation-blue group-hover:text-white transition-all">
                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                       </div>
-                      <h4 class="font-black text-foundation-blue mb-2">動態定位優勢</h4>
-                      <p class="text-xs text-gray-400 font-medium">比起傳統手鍊，能第一時間回傳 GPS 座標、地圖及最近派出所資訊。</p>
+                      <h4 class="font-black text-foundation-blue mb-2">{{ t('service_tracking.device.feature2_title') }}</h4>
+                      <p class="text-xs text-gray-400 font-medium">{{ t('service_tracking.device.feature2_desc') }}</p>
                     </div>
                   </div>
                </div>
@@ -173,27 +176,24 @@ const reportingMethods = [
             <div v-else-if="activeTab === 'pricing'" :key="'pricing'" class="space-y-12">
                <div class="bg-white rounded-[40px] p-4 lg:p-10 shadow-premium border border-gray-100 relative overflow-hidden">
                   <div class="relative z-10 max-w-2xl mx-auto grid gap-6">
-                    <h2 class="text-4xl font-black text-foundation-blue italic">服務費用說明</h2>
+                    <h2 class="text-4xl font-black text-foundation-blue italic">{{ t('service_tracking.pricing.title') }}</h2>
                     <p class="text-gray-500 font-medium text-lg leading-relaxed">
-                      我們致力於提供可負擔且完善的協尋解決方案，讓科技守護與預防不再遙不可及。
+                      {{ t('service_tracking.pricing.description') }}
                     </p>
 
                     <div class="p-4 bg-foundation-blue rounded-[40px] text-white shadow-2xl shadow-foundation-blue/20 flex flex-col items-center gap-4 justify-center mx-auto min-w-[250px]">
-                       <span class="text-blue-200 font-black uppercase tracking-widest text-sm ">NFC 失蹤協尋手環</span>
+                       <span class="text-blue-200 font-black uppercase tracking-widest text-sm ">{{ t('service_tracking.pricing.device_label') }}</span>
                        <div class="flex items-baseline space-x-2">
                           <span class="text-2xl font-black opacity-60">NT.</span>
                           <span class="text-5xl font-black italic tracking-tighter">200</span>
                        </div>
                        
                        <a href="#" class="w-full md:w-auto px-8 py-3 bg-white text-foundation-blue rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl text-center">
-                         立即購買
+                         {{ t('service_tracking.pricing.buy_now') }}
                        </a>
                     </div>
 
-                    <p class="text-gray-400 font-bold text-sm">
-                      * 購買後包含首年協尋平台基本使用權限。<br>
-                      * 詳細購買細節與退換貨政策請參閱平台規範。
-                    </p>
+                    <p class="text-gray-400 font-bold text-sm" v-html="t('service_tracking.pricing.notes')"></p>
                   </div>
                </div>
             </div>
