@@ -1,76 +1,80 @@
 <script setup>
+import { computed } from 'vue'
 import PageHeader from '../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '友站連結 | 生命連線基金會 LifeLine Foundation - 共創高齡友善社會',
+  title: computed(() => t('links.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '友站連結, 老人福利, 基金會夥伴, 弘道老人福利基金會, 華山基金會, 老盟, 生命連線夥伴, 高齡社會資源' 
+      content: computed(() => t('links.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '友站連結 | 生命連線基金會 LifeLine Foundation - 共創高齡友善社會',
-  description: '連結各大老人福利機構與基金會，共創高齡友善社會。生命連線基金會與老盟、弘道、愚人之友等夥伴攜手，為長輩提供全面的照護資源與社會支持。',
-  ogTitle: '友站連結 - 攜手公益，共創銀髮福址 | 生命連線基金會',
-  ogDescription: '我們與各大高齡照護機構建立連結，為台灣長者打造更完善的社會支持網絡。',
+  title: computed(() => t('links.seo.title')),
+  description: computed(() => t('links.seo.description')),
+  ogTitle: computed(() => t('links.seo.og_title')),
+  ogDescription: computed(() => t('links.seo.og_description')),
   twitterCard: 'summary_large_image',
-  twitterTitle: '友站連結 | 生命連線基金會 LifeLine Foundation',
-  twitterDescription: '共創高齡友善社會的公益連結。'
+  twitterTitle: computed(() => t('links.seo.twitter_title')),
+  twitterDescription: computed(() => t('links.seo.twitter_description'))
 })
 
-const partners = [
+const partners = computed(() => [
   {
-    name: "老人福利推動聯盟",
+    name: t('links.partners.p1_name'),
     url: "https://www.oldpeople.org.tw/pop/",
-    desc: "推動老人相關福利政策與社會權益，建立友善高齡環境。"
+    desc: t('links.partners.p1_desc')
   },
   {
-    name: "愚人之友基金會",
+    name: t('links.partners.p2_name'),
     url: "https://www.qif.org.tw/",
-    desc: "深耕偏鄉長照服務，提供專業且溫暖的居家服務與日照中心。"
+    desc: t('links.partners.p2_desc')
   },
   {
-    name: "弘道老人福利基金會",
+    name: t('links.partners.p3_name'),
     url: "https://www.hondao.org.tw/",
-    desc: "致力於預防老化、關懷孤老，推廣『不老夢想』精神。"
+    desc: t('links.partners.p3_desc')
   },
   {
-    name: "老五老基金會",
+    name: t('links.partners.p4_name'),
     url: "https://www.ofo.org.tw/",
-    desc: "推展高齡者在地老化、快樂參與，落實越老活越好。"
+    desc: t('links.partners.p4_desc')
   },
   {
-    name: "華山基金會",
+    name: t('links.partners.p5_name'),
     url: "https://www.elder.org.tw/",
-    desc: "服務全台失智、失能、失依老人，提供免費到宅關懷與協助。"
+    desc: t('links.partners.p5_desc')
   },
   {
-    name: "創世社會福利基金會",
+    name: t('links.partners.p6_name'),
     url: "https://www.genesis.org.tw/",
-    desc: "致力於守護植物人與孤苦長者，提供長期且專業的安養照護。"
+    desc: t('links.partners.p6_desc')
   }
-]
+])
 </script>
 
 <template>
   <div class="bg-[#f8fafc] min-h-screen pb-32">
     <PageHeader 
-      title="友站連結" 
-      subtitle="攜手社會各界夥伴・共創長輩幸福未來"
+      :title="t('links.page_header.title')" 
+      :subtitle="t('links.page_header.subtitle')"
     />
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 md:-mt-20 relative z-10">
       <!-- Info Card -->
       <section class="max-w-4xl mx-auto mb-16">
         <div class="bg-white rounded-[40px] p-8 md:p-12 shadow-premium border border-white text-center">
-          <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6 italic">夥伴連結・愛無界限</h2>
+          <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6 italic">{{ t('links.info.title') }}</h2>
           <p class="text-gray-500 font-medium leading-relaxed italic max-w-2xl mx-auto">
-            生命連線基金會深感高齡照護需社會多方協作。我們特別整理了國內長期致力於長輩福利的優質機構，希望能為您與家人提供更全面的資源支援。
+            {{ t('links.info.description') }}
           </p>
         </div>
       </section>
@@ -110,7 +114,7 @@ const partners = [
 
             <div class="pt-6 flex items-center text-xs font-black uppercase tracking-widest text-foundation-lightblue group-hover:text-white/60 transition-colors">
               <span class="w-8 h-px bg-foundation-lightblue/20 group-hover:bg-white/20 mr-3"></span>
-              Visit Partner
+              {{ t('links.visit_partner') }}
             </div>
           </div>
         </a>
