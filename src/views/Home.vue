@@ -1,28 +1,31 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生',
+  title: computed(() => t('home.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '生命連線, 基金會, 緊急救援, 居家照護, 跌倒偵測, 智慧協尋, 老人守護, 厚澤民生, 雲端醫療, 24小時救護' 
+      content: computed(() => t('home.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生',
-  description: '生命連線基金會深耕台灣 20 年，提供全台最大的緊急救護通報服務。結合智慧醫療與在地關懷，包含家醫計畫、緊急救援、跌倒偵測及智慧協尋，守護每一位長輩的尊嚴與健康。',
-  ogTitle: '生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生',
-  ogDescription: '20 年專業守護，全台領先的緊急救護與居家醫療服務，讓獨居長者安享晚年。',
+  title: computed(() => t('home.seo.title')),
+  description: computed(() => t('home.seo.description')),
+  ogTitle: computed(() => t('home.seo.og_title')),
+  ogDescription: computed(() => t('home.seo.og_description')),
   ogImage: imgHero,
   twitterCard: 'summary_large_image',
-  twitterTitle: '生命連線基金會 LifeLine Foundation',
-  twitterDescription: '結合智慧科技與專業醫護，為長輩編織最堅固的安全網。',
+  twitterTitle: computed(() => t('home.seo.twitter_title')),
+  twitterDescription: computed(() => t('home.seo.twitter_description')),
   twitterImage: imgHero
 })
 
@@ -32,40 +35,40 @@ import imgHero_2 from '@/assets/images/hero-banner2.jpg'
 const heroImageLoaded = ref(false)
 const heroImage2Loaded = ref(false)
 
-const services = [
+const services = computed(() => [
   {
-    title: '家醫計畫',
-    subtitle: '專業護理・居家健康守護',
-    desc: '派遣護理師定期訪視與身體健康評量，並提供 24 小時健康諮詢。',
+    titleKey: 'home.services.home_care.title',
+    subtitleKey: 'home.services.home_care.subtitle',
+    descKey: 'home.services.home_care.description',
     href: '/service-home-care',
     icon: 'heart',
-    features: ['護理師定期訪視', '疾病預防衛教', '專業醫護評估紀錄']
+    featuresKeys: ['home.services.home_care.feature1', 'home.services.home_care.feature2', 'home.services.home_care.feature3']
   },
   {
-    title: '緊急救援系統',
-    subtitle: '救護支援・救援即時抵達',
-    desc: '包含意外通報、救護車緊急救護及聯絡人通知，確保黃金時間獲得協助。',
+    titleKey: 'home.services.emergency.title',
+    subtitleKey: 'home.services.emergency.subtitle',
+    descKey: 'home.services.emergency.description',
     href: '/service-emergency',
     icon: 'fire',
-    features: ['24小時即時通報', '醫護/警政連動', '緊急聯絡人第一時間通知']
+    featuresKeys: ['home.services.emergency.feature1', 'home.services.emergency.feature2', 'home.services.emergency.feature3']
   },
   {
-    title: '跌倒偵測系統',
-    subtitle: '智慧監測・降低居家風險',
-    desc: '採用 4G 定位器與不活動監控，預防長者在各角落發生意外。',
+    titleKey: 'home.services.fall_detection.title',
+    subtitleKey: 'home.services.fall_detection.subtitle',
+    descKey: 'home.services.fall_detection.description',
     href: '/service-fall-detection',
     icon: 'activity',
-    features: ['高精準跌倒偵測', '不活動警訊監控', '自主監測安全安心']
+    featuresKeys: ['home.services.fall_detection.feature1', 'home.services.fall_detection.feature2', 'home.services.fall_detection.feature3']
   },
   {
-    title: '智慧協尋手環',
-    subtitle: 'NFC 感應・守護回家的路',
-    desc: 'NFC 手環結合 GPS 定位，三種通報方式幫助走失者順利回家。',
+    titleKey: 'home.services.tracking.title',
+    subtitleKey: 'home.services.tracking.subtitle',
+    descKey: 'home.services.tracking.description',
     href: '/service-tracking',
     icon: 'map-pin',
-    features: ['NFC 感應通報', 'GPS 精準定位', '派出所資訊即時整合']
+    featuresKeys: ['home.services.tracking.feature1', 'home.services.tracking.feature2', 'home.services.tracking.feature3']
   },
-]
+])
 
 const formatNumber = (num) => {
   if (!num || isNaN(num)) return num
@@ -80,33 +83,33 @@ const formatNumber = (num) => {
   return num
 }
 
-const stats = [
-  { label: '累積服務人次', value: 1200000, suffix: '人', showPlus: true },
-  { label: '守護據點', value: 500, suffix: '處', showPlus: true },
-  { label: '深耕台灣', value: 20, suffix: '年', showPlus: false },
-  { label: '專業團隊', value: 1000, suffix: '名', showPlus: true }
-]
+const stats = computed(() => [
+  { labelKey: 'home.stats.service_count', value: 1200000, suffixKey: 'home.stats.suffix_people', showPlus: true },
+  { labelKey: 'home.stats.locations', value: 500, suffixKey: 'home.stats.suffix_locations', showPlus: true },
+  { labelKey: 'home.stats.years', value: 20, suffixKey: 'home.stats.suffix_years', showPlus: false },
+  { labelKey: 'home.stats.team', value: 1000, suffixKey: 'home.stats.suffix_members', showPlus: true }
+])
 
-const latestNews = [
+const latestNews = computed(() => [
   {
     id: 1,
-    title: '生命連線 20 週年：厚澤民生，共創未來',
-    date: '2023.12.24',
+    titleKey: 'home.news.news1_title',
+    dateKey: 'home.news.news1_date',
     image: 'https://picsum.photos/800/600?random=1'
   },
   {
     id: 2,
-    title: '寒冬送暖：基金會走訪偏鄉提供智慧醫療包',
-    date: '2023.12.15',
+    titleKey: 'home.news.news2_title',
+    dateKey: 'home.news.news2_date',
     image: 'https://picsum.photos/800/600?random=2'
   },
   {
     id: 3,
-    title: '愛心無界：企業回饋資助清寒老人專案',
-    date: '2023.12.01',
+    titleKey: 'home.news.news3_title',
+    dateKey: 'home.news.news3_date',
     image: 'https://picsum.photos/800/600?random=3'
   }
-]
+])
 
 const isVisible = ref(false)
 onMounted(() => {
@@ -131,22 +134,22 @@ onMounted(() => {
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
             <span class="w-2.5 h-2.5 bg-foundation-orange rounded-full animate-pulse"></span>
-            <span class="text-white text-sm font-black uppercase tracking-[0.3em]">20 Years of Excellence</span>
+            <span class="text-white text-sm font-black uppercase tracking-[0.3em]">{{ t('home.hero.badge') }}</span>
           </div>
 
           <h1 
             class="text-5xl md:text-8xl font-black text-white leading-tight tracking-tighter transition-all duration-500 delay-300"
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
-             守護生命，<br>
-             <span class="text-foundation-lightblue italic">厚澤民生。</span>
+             {{ t('home.hero.title_line1') }}<br>
+             <span class="text-foundation-lightblue italic">{{ t('home.hero.title_line2') }}</span>
           </h1>
 
           <p 
             class="text-xl md:text-2xl text-white/70 font-bold max-w-2xl leading-relaxed italic transition-all duration-1000 delay-500"
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
-            全台最大的緊急救護通報中心，結合雲端智慧醫療與在地關懷，我們守護每一位長輩的尊嚴與笑容。
+            {{ t('home.hero.description') }}
           </p>
 
           <div 
@@ -154,10 +157,10 @@ onMounted(() => {
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
             <RouterLink to="/service-home-care" class="px-6 py-4 lg:px-12 lg:py-6 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all">
-              了解服務內容
+              {{ t('home.hero.btn_services') }}
             </RouterLink>
             <RouterLink to="/donate" class="px-6 py-4 lg:px-12 lg:py-6 bg-foundation-orange text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
-              立即支持我們
+              {{ t('home.hero.btn_donate') }}
             </RouterLink>
           </div>
         </div>
@@ -168,11 +171,11 @@ onMounted(() => {
     <section class="py-24 bg-foundation-blue relative overflow-hidden">
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
-          <div v-for="stat in stats" :key="stat.label" class="text-center group">
-            <p class="text-[1rem] font-black uppercase tracking-[0.3em] text-foundation-lightblue mb-4">{{ stat.label }}</p>
+          <div v-for="stat in stats" :key="stat.labelKey" class="text-center group">
+            <p class="text-[1rem] font-black uppercase tracking-[0.3em] text-foundation-lightblue mb-4">{{ t(stat.labelKey) }}</p>
             <div class="flex items-baseline justify-center space-x-1 group-hover:scale-110 transition-transform duration-500">
                <span class="text-4xl md:text-5xl font-black text-white italic tracking-tighter">{{ formatNumber(stat.value) }}{{ stat.showPlus ? '+' : '' }}</span>
-               <span class="text-xl md:text-2xl font-bold text-white/50">{{ stat.suffix }}</span>
+               <span class="text-xl md:text-2xl font-bold text-white/50">{{ t(stat.suffixKey) }}</span>
             </div>
           </div>
         </div>
@@ -186,34 +189,34 @@ onMounted(() => {
         <div class="flex flex-col lg:flex-row items-center gap-20">
           <div class="lg:w-1/2 space-y-12">
             <div class="space-y-6">
-              <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Our Mission</span>
+              <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.mission.badge') }}</span>
               <h2 class="text-4xl md:text-6xl font-black text-foundation-blue tracking-tighter italic">
-                服務宗旨：<br>
-                <span class="text-foundation-lightblue pl-[2rem]">厚澤民生</span>
+                {{ t('home.mission.title_line1') }}<br>
+                <span class="text-foundation-lightblue pl-[2rem]">{{ t('home.mission.title_line2') }}</span>
               </h2>
             </div>
             <div class="space-y-8 text-gray-500 text-lg md:text-xl font-medium leading-[2] italic">
               <p>
-                生命連線中心秉持著「厚澤民生」之宗旨，結合社會福利、衛生緊急醫療網及消防等單位，辦理獨居或中低收入戶長者、身心障礙者及猝發性疾病患者在宅緊急救護通報服務方案。
+                {{ t('home.mission.paragraph1') }}
               </p>
               <p>
-                我們致力於提升服務品質，建立通報系統及個人相關資料連貫之網路，使緊急救護服務具備全天候、自動化立即反應之功能。同時提供居家安全和到院前的緊急醫療照護，協助弱勢族群減輕生活壓力，擁抱獨立自主的生活。
+                {{ t('home.mission.paragraph2') }}
               </p>
             </div>
             <div class="flex items-center justify-around flex-wrap pt-4 gap-4">
                <div class="flex flex-col">
-                  <span class="text-3xl font-black text-foundation-blue italic">全天候</span>
-                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Response</span>
+                  <span class="text-3xl font-black text-foundation-blue italic">{{ t('home.mission.feature1') }}</span>
+                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">{{ t('home.mission.feature1_en') }}</span>
                </div>
                <div class="w-px h-10 bg-gray-100"></div>
                <div class="flex flex-col">
-                  <span class="text-3xl font-black text-foundation-blue italic">自動化</span>
-                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Technology</span>
+                  <span class="text-3xl font-black text-foundation-blue italic">{{ t('home.mission.feature2') }}</span>
+                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">{{ t('home.mission.feature2_en') }}</span>
                </div>
                <div class="w-px h-10 bg-gray-100"></div>
                <div class="flex flex-col">
-                  <span class="text-3xl font-black text-foundation-blue italic">在地化</span>
-                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">Care</span>
+                  <span class="text-3xl font-black text-foundation-blue italic">{{ t('home.mission.feature3') }}</span>
+                  <span class="text-xs font-bold text-gray-400 tracking-widest uppercase">{{ t('home.mission.feature3_en') }}</span>
                </div>
             </div>
           </div>
@@ -234,17 +237,17 @@ onMounted(() => {
     <section class="py-8 md:py-32 bg-gray-50 relative">
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="text-center mb-24 max-w-3xl mx-auto space-y-6">
-          <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Service Overview</span>
-          <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic">全方位的守護計畫</h2>
+          <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.services.badge') }}</span>
+          <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic">{{ t('home.services.title') }}</h2>
           <p class="text-gray-500 font-medium text-lg leading-relaxed italic">
-            從緊急救援到居家生活輔助，我們將專業內容轉化為直覺的導引服務，確保每項需求都能找到最合適的對策。
+            {{ t('home.services.description') }}
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div 
             v-for="service in services" 
-            :key="service.title"
+            :key="service.titleKey"
             class="group bg-white rounded-[50px] p-10 md:p-14 shadow-premium border border-transparent hover:border-foundation-blue/20 transition-all duration-700 flex flex-col hover:-translate-y-2"
           >
             <div class="mb-10 flex items-start justify-between">
@@ -259,14 +262,14 @@ onMounted(() => {
             </div>
 
             <div class="flex-grow space-y-4">
-               <p class="text-foundation-lightblue font-black text-sm uppercase tracking-widest">{{ service.subtitle }}</p>
-               <h3 class="text-3xl font-black text-foundation-blue tracking-tighter">{{ service.title }}</h3>
-               <p class="text-gray-400 font-medium italic leading-relaxed">{{ service.desc }}</p>
+               <p class="text-foundation-lightblue font-black text-sm uppercase tracking-widest">{{ t(service.subtitleKey) }}</p>
+               <h3 class="text-3xl font-black text-foundation-blue tracking-tighter">{{ t(service.titleKey) }}</h3>
+               <p class="text-gray-400 font-medium italic leading-relaxed">{{ t(service.descKey) }}</p>
                
                <ul class="pt-8 space-y-3">
-                  <li v-for="f in service.features" :key="f" class="flex items-center text-sm font-bold text-gray-500 group/li">
+                  <li v-for="fKey in service.featuresKeys" :key="fKey" class="flex items-center text-sm font-bold text-gray-500 group/li">
                      <span class="w-1.5 h-1.5 rounded-full bg-foundation-blue mr-3 group-hover/li:scale-150 transition-transform"></span>
-                     {{ f }}
+                     {{ t(fKey) }}
                   </li>
                </ul>
             </div>
@@ -276,7 +279,7 @@ onMounted(() => {
                  :to="service.href"
                  class="inline-flex items-center space-x-3 text-foundation-blue font-black group-hover:text-foundation-orange transition-colors"
                 >
-                 <span>查看詳細內容</span>
+                 <span>{{ t('home.services.view_details') }}</span>
                  <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                </RouterLink>
             </div>
@@ -290,11 +293,11 @@ onMounted(() => {
        <div class="container mx-auto px-4 md:px-6">
          <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div class="space-y-4">
-              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">Latest Updates</span>
-              <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic italic">最新動態</h2>
+              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.news.badge') }}</span>
+              <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic italic">{{ t('home.news.title') }}</h2>
             </div>
             <RouterLink to="/news" class="font-black text-foundation-blue hover:text-foundation-orange transition-colors flex items-center group">
-              探索所有動態
+              {{ t('home.news.view_all') }}
               <svg class="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </RouterLink>
          </div>
@@ -309,9 +312,9 @@ onMounted(() => {
               <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700">
                 <img :src="news.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
               </div>
-              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ news.date }}</span>
+              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ t(news.dateKey) }}</span>
               <h3 class="text-xl md:text-2xl font-black text-foundation-blue leading-tight group-hover:text-foundation-lightblue transition-colors line-clamp-2 italic tracking-tighter">
-                {{ news.title }}
+                {{ t(news.titleKey) }}
               </h3>
             </RouterLink>
          </div>
@@ -323,17 +326,17 @@ onMounted(() => {
        <div class="bg-foundation-blue rounded-[60px] p-12 md:p-24 text-white text-center relative overflow-hidden group">
           <div class="relative z-10 max-w-3xl mx-auto space-y-12">
              <h2 class="text-2xl md:text-5xl font-black leading-tight italic transition-all duration-700 group-hover:scale-105">
-               您的愛心，<br>是長輩生命中最溫暖的連線。
+               {{ t('home.cta.title_line1') }}<br>{{ t('home.cta.title_line2') }}
              </h2>
              <p class="text-lg text-white/70 font-bold italic leading-relaxed">
-               每一分捐助都將轉化為第一線的守護服務，協助獨居長者安享晚年，不再孤單。
+               {{ t('home.cta.description') }}
              </p>
              <div class="flex flex-wrap justify-center gap-6 pt-6">
                 <RouterLink to="/donate" class="px-8 py-4 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-xl hover:-translate-y-2 transition-all">
-                  我願貢獻一份力
+                  {{ t('home.cta.btn_donate') }}
                 </RouterLink>
                 <RouterLink to="/contact" class="px-8 py-4 bg-white/10 border border-white/20 backdrop-blur-md rounded-3xl font-black text-lg shadow-xl hover:bg-white/20 transition-all">
-                  了解更多聯絡方式
+                  {{ t('home.cta.btn_contact') }}
                 </RouterLink>
              </div>
           </div>

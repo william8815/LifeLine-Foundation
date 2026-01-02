@@ -33,6 +33,103 @@
     "zh_TW": "繁體中文",
     "zh_CN": "簡體中文",
     "switch": "切換語系"
+  },
+  "home": {
+    "seo": {
+      "title": "生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生",
+      "description": "生命連線基金會深耕台灣 20 年，提供全台最大的緊急救護通報服務。結合智慧醫療與在地關懷，包含家醫計畫、緊急救援、跌倒偵測及智慧協尋，守護每一位長輩的尊嚴與健康。",
+      "keywords": "生命連線, 基金會, 緊急救援, 居家照護, 跌倒偵測, 智慧協尋, 老人守護, 厚澤民生, 雲端醫療, 24小時救護",
+      "og_title": "生命連線基金會 LifeLine Foundation | 守護生命，厚澤民生",
+      "og_description": "20 年專業守護，全台領先的緊急救護與居家醫療服務，讓獨居長者安享晚年。",
+      "twitter_title": "生命連線基金會 LifeLine Foundation",
+      "twitter_description": "結合智慧科技與專業醫護，為長輩編織最堅固的安全網。"
+    },
+    "hero": {
+      "badge": "20 Years of Excellence",
+      "title_line1": "守護生命，",
+      "title_line2": "厚澤民生。",
+      "description": "全台最大的緊急救護通報中心，結合雲端智慧醫療與在地關懷，我們守護每一位長輩的尊嚴與笑容。",
+      "btn_services": "了解服務內容",
+      "btn_donate": "立即支持我們"
+    },
+    "stats": {
+      "service_count": "累積服務人次",
+      "locations": "守護據點",
+      "years": "深耕台灣",
+      "team": "專業團隊",
+      "suffix_people": "人",
+      "suffix_locations": "處",
+      "suffix_years": "年",
+      "suffix_members": "名"
+    },
+    "mission": {
+      "badge": "Our Mission",
+      "title_line1": "服務宗旨：",
+      "title_line2": "厚澤民生",
+      "paragraph1": "生命連線中心秉持著「厚澤民生」之宗旨，結合社會福利、衛生緊急醫療網及消防等單位，辦理獨居或中低收入戶長者、身心障礙者及猝發性疾病患者在宅緊急救護通報服務方案。",
+      "paragraph2": "我們致力於提升服務品質，建立通報系統及個人相關資料連貫之網路，使緊急救護服務具備全天候、自動化立即反應之功能。同時提供居家安全和到院前的緊急醫療照護，協助弱勢族群減輕生活壓力，擁抱獨立自主的生活。",
+      "feature1": "全天候",
+      "feature1_en": "Response",
+      "feature2": "自動化",
+      "feature2_en": "Technology",
+      "feature3": "在地化",
+      "feature3_en": "Care"
+    },
+    "services": {
+      "badge": "Service Overview",
+      "title": "全方位的守護計畫",
+      "description": "從緊急救援到居家生活輔助，我們將專業內容轉化為直覺的導引服務，確保每項需求都能找到最合適的對策。",
+      "home_care": {
+        "title": "家醫計畫",
+        "subtitle": "專業護理・居家健康守護",
+        "description": "派遣護理師定期訪視與身體健康評量，並提供 24 小時健康諮詢。",
+        "feature1": "護理師定期訪視",
+        "feature2": "疾病預防衛教",
+        "feature3": "專業醫護評估紀錄"
+      },
+      "emergency": {
+        "title": "緊急救援系統",
+        "subtitle": "救護支援・救援即時抵達",
+        "description": "包含意外通報、救護車緊急救護及聯絡人通知，確保黃金時間獲得協助。",
+        "feature1": "24小時即時通報",
+        "feature2": "醫護/警政連動",
+        "feature3": "緊急聯絡人第一時間通知"
+      },
+      "fall_detection": {
+        "title": "跌倒偵測系統",
+        "subtitle": "智慧監測・降低居家風險",
+        "description": "採用 4G 定位器與不活動監控，預防長者在各角落發生意外。",
+        "feature1": "高精準跌倒偵測",
+        "feature2": "不活動警訊監控",
+        "feature3": "自主監測安全安心"
+      },
+      "tracking": {
+        "title": "智慧協尋手環",
+        "subtitle": "NFC 感應・守護回家的路",
+        "description": "NFC 手環結合 GPS 定位，三種通報方式幫助走失者順利回家。",
+        "feature1": "NFC 感應通報",
+        "feature2": "GPS 精準定位",
+        "feature3": "派出所資訊即時整合"
+      },
+      "view_details": "查看詳細內容"
+    },
+    "news": {
+      "badge": "Latest Updates",
+      "title": "最新動態",
+      "view_all": "探索所有動態",
+      "news1_title": "生命連線 20 週年：厚澤民生，共創未來",
+      "news1_date": "2023.12.24",
+      "news2_title": "寒冬送暖：基金會走訪偏鄉提供智慧醫療包",
+      "news2_date": "2023.12.15",
+      "news3_title": "愛心無界：企業回饋資助清寒老人專案",
+      "news3_date": "2023.12.01"
+    },
+    "cta": {
+      "title_line1": "您的愛心，",
+      "title_line2": "是長輩生命中最溫暖的連線。",
+      "description": "每一分捐助都將轉化為第一線的守護服務，協助獨居長者安享晚年，不再孤單。",
+      "btn_donate": "我願貢獻一份力",
+      "btn_contact": "了解更多聯絡方式"
+    }
   }
 }
-
