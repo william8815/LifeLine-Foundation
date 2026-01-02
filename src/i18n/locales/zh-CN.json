@@ -414,5 +414,89 @@
       "next_step": "下一步",
       "back_to_modify": "返回上一步修改资料"
     }
+  },
+  "service_emergency": {
+    "seo": {
+      "title": "紧急救援系统 | 生命连线基金会 LifeLine Foundation - 24小时守护长者安全",
+      "description": "生命连线紧急救援系统专为长者设计，一触即发。结合平安机与多款防水平安发射器，提供 24 小时专业人员连线救援。守护长者独居安全，让家成为最安心的堡垒。",
+      "keywords": "紧急救援系统, 平安机, 紧急通报, 独居老人守护, 24小时救援中心, 跌倒救护, 救命按钮, 生命连线, 居家安全, 防水发射器",
+      "og_title": "紧急救援系统 - 救援一触可及，守护长者独居安全 | 生命连线基金会",
+      "og_description": "廿年专业守护背景，北美领先技术。无论跌倒或突发状况，专业中心随时为您连线救援。",
+      "twitter_title": "紧急救援系统 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "24小时守护长者安全的紧急救援领导者。"
+    },
+    "page_header": {
+      "title": "紧急救援系统",
+      "subtitle": "救援一触可及・守护长者独居安全"
+    },
+    "tabs": {
+      "intro": "认识系统",
+      "workflow": "运作方式",
+      "devices": "装置介绍",
+      "fees": "服务费用"
+    },
+    "intro": {
+      "title": "认识紧急救援系统",
+      "paragraph1": "家是您最熟悉的环境，也是最让您感到自在的地方。但对长者而言，超过半数的跌倒意外都在家中发生。",
+      "paragraph2": "生命连线是简单易用的紧急医疗救援服务，专门设计用来降低长者独居的意外风险。当跌倒意外等紧急状况发生，救援一「触」可及。",
+      "paragraph3": "生命连线的随身发射器让您及时与专业的中心人员连线，再第一时间提供您协助，一天二十四小时，全年无休。"
+    },
+    "workflow": {
+      "title": "救援服务运作方式",
+      "step1_title": "按钮呼救",
+      "step1_content": "当有状况发生，只要按下随身发射器，即可启动平安机。",
+      "step2_title": "专业人员接听",
+      "step2_content": "您的平安机会自动连线至 Lifeline 生命连线中心，并建立双向的语音沟通。",
+      "step3_title": "个人化的协助",
+      "step3_content": "中心人员检视您的个人档案，并评估整个状况。",
+      "step4_title": "环环相扣",
+      "step4_content": "中心人员将根据您的需求，连络邻居、家人或医护人员，并持续连线，直到确定援助抵达。"
+    },
+    "devices": {
+      "machines_title": "平安机系列",
+      "transmitters_title": "随身发射器",
+      "machine1_type": "一般式",
+      "machine1_desc": "Lifeline 生命连线平安机能与您现有的室内电话结合，提供 24 小时的紧急援助，以及双向的语音通话。",
+      "machine1_feature1": "可设定 6 组语音小叮咛 (服药、会客、进食或运动提示)",
+      "machine1_feature2": "大型背光按钮与拨号语音朗诵，适合视力不佳者",
+      "machine1_feature3": "语音报时功能，清晰为您报时",
+      "machine1_feature4": "定期检测提示，提醒每月至少与中心通话一次",
+      "machine1_feature5": "高分贝扩音器与助听话筒，音量可调整",
+      "machine1_feature6": "远端接听功能，按下随身发射器即可接听来电",
+      "machine1_feature7": "内建 24 小时备援电力，预防停电状况",
+      "machine1_feature8": "相容手环式、项链式或手表式随身发射器",
+      "machine2_type": "电话式",
+      "machine2_desc": "专门设计用来提供全面的医疗照护功能，同时增进您的生活品质。",
+      "machine2_feature1": "涵盖一般式所有核心功能",
+      "machine2_feature2": "强化医疗照护与生活品质优化设计",
+      "machine2_feature3": "同样支援 6 组语音小叮咛设定",
+      "machine2_feature4": "大型背光按钮与高分贝通话系统",
+      "machine2_feature5": "支援多款随身发射器搭配使用",
+      "transmitter1_type": "项链式",
+      "transmitter1_desc": "可当成饰品穿戴，具有简洁、低调的设计，能依需求调整成合适的长度。仅重 14 公克，防水设计。",
+      "transmitter1_spec1": "可在家中任何地点使用，包括地下室、车库以及庭院",
+      "transmitter1_spec2": "长达 5 年的电池寿命，不必担心更换问题",
+      "transmitter1_spec3": "相容于所有 Lifeline 平安机型",
+      "transmitter2_type": "手环式",
+      "transmitter2_desc": "仅重 14 公克，防水设计。能以项链或手环的方式穿戴，适合浴室等高风险区域。",
+      "transmitter2_spec1": "室内全域覆盖使用",
+      "transmitter2_spec2": "5 年长效电池",
+      "transmitter2_spec3": "多配戴方式：项链或手环",
+      "transmitter3_type": "手表式",
+      "transmitter3_desc": "与钟表大厂 Timex 合作，结合美观可靠的手表与随身发射器功能。",
+      "transmitter3_spec1": "二合一设计：Timex 精准计时 + Lifeline 即时服务",
+      "transmitter3_spec2": "中性且具吸引力的美观设计",
+      "transmitter3_spec3": "金属或皮革表带供选择，具备防水能力"
+    },
+    "fees": {
+      "title": "服务费用说明",
+      "paragraph1": "在北美洲已有超过 3000 家的医院和养护中心提供 Lifeline 生命连线的服务，本服务非常经济且简单易用。",
+      "paragraph2": "服务费用会因为您所在位置及选择的服务方案而有所不同。",
+      "paragraph3": "请拨打下方的服务专线，或以电子邮件联系我们的健康管理护理师，他们将会提供您所在地区的收费标准。",
+      "note": "注：来电前请先准备好您想申装地区的邮递区号。",
+      "hotline_label": "Support Hotline",
+      "more_info": "更多问题与细节",
+      "contact_us": "联络我们"
+    }
   }
 }

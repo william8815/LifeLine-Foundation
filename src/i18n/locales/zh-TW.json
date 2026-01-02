@@ -414,5 +414,89 @@
       "next_step": "下一步",
       "back_to_modify": "返回上一步修改資料"
     }
+  },
+  "service_emergency": {
+    "seo": {
+      "title": "緊急救援系統 | 生命連線基金會 LifeLine Foundation - 24小時守護長者安全",
+      "description": "生命連線緊急救援系統專為長者設計，一觸即發。結合平安機與多款防水平安發射器，提供 24 小時專業人員連線救援。守護長者獨居安全，讓家成為最安心的堡壘。",
+      "keywords": "緊急救援系統, 平安機, 緊急通報, 獨居老人守護, 24小時救援中心, 跌倒救護, 救命按鈕, 生命連線, 居家安全, 防水發射器",
+      "og_title": "緊急救援系統 - 救援一觸可及，守護長者獨居安全 | 生命連線基金會",
+      "og_description": "廿年專業守護背景，北美領先技術。無論跌倒或突發狀況，專業中心隨時為您連線救援。",
+      "twitter_title": "緊急救援系統 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "24小時守護長者安全的緊急救援領導者。"
+    },
+    "page_header": {
+      "title": "緊急救援系統",
+      "subtitle": "救援一觸可及・守護長者獨居安全"
+    },
+    "tabs": {
+      "intro": "認識系統",
+      "workflow": "運作方式",
+      "devices": "裝置介紹",
+      "fees": "服務費用"
+    },
+    "intro": {
+      "title": "認識緊急救援系統",
+      "paragraph1": "家是您最熟悉的環境，也是最讓您感到自在的地方。但對長者而言，超過半數的跌倒意外都在家中發生。",
+      "paragraph2": "生命連線是簡單易用的緊急醫療救援服務，專門設計用來降低長者獨居的意外風險。當跌倒意外等緊急狀況發生，救援一「觸」可及。",
+      "paragraph3": "生命連線的隨身發射器讓您及時與專業的中心人員連線，再第一時間提供您協助，一天二十四小時，全年無休。"
+    },
+    "workflow": {
+      "title": "救援服務運作方式",
+      "step1_title": "按鈕呼救",
+      "step1_content": "當有狀況發生，只要按下隨身發射器，即可啟動平安機。",
+      "step2_title": "專業人員接聽",
+      "step2_content": "您的平安機會自動連線至 Lifeline 生命連線中心，並建立雙向的語音溝通。",
+      "step3_title": "個人化的協助",
+      "step3_content": "中心人員檢視您的個人檔案，並評估整個狀況。",
+      "step4_title": "環環相扣",
+      "step4_content": "中心人員將根據您的需求，連絡鄰居、家人或醫護人員，並持續連線，直到確定援助抵達。"
+    },
+    "devices": {
+      "machines_title": "平安機系列",
+      "transmitters_title": "隨身發射器",
+      "machine1_type": "一般式",
+      "machine1_desc": "Lifeline 生命連線平安機能與您現有的室內電話結合，提供 24 小時的緊急援助，以及雙向的語音通話。",
+      "machine1_feature1": "可設定 6 組語音小叮嚀 (服藥、會客、進食或運動提示)",
+      "machine1_feature2": "大型背光按鈕與撥號語音朗誦，適合視力不佳者",
+      "machine1_feature3": "語音報時功能，清晰為您報時",
+      "machine1_feature4": "定期檢測提示，提醒每月至少與中心通話一次",
+      "machine1_feature5": "高分貝擴音器與助聽話筒，音量可調整",
+      "machine1_feature6": "遠端接聽功能，按下隨身發射器即可接聽來電",
+      "machine1_feature7": "內建 24 小時備援電力，預防停電狀況",
+      "machine1_feature8": "相容手環式、項鍊式或手錶式隨身發射器",
+      "machine2_type": "電話式",
+      "machine2_desc": "專門設計用來提供全面的醫療照護功能，同時增進您的生活品質。",
+      "machine2_feature1": "涵蓋一般式所有核心功能",
+      "machine2_feature2": "強化醫療照護與生活品質優化設計",
+      "machine2_feature3": "同樣支援 6 組語音小叮嚀設定",
+      "machine2_feature4": "大型背光按鈕與高分貝通話系統",
+      "machine2_feature5": "支援多款隨身發射器搭配使用",
+      "transmitter1_type": "項鍊式",
+      "transmitter1_desc": "可當成飾品穿戴，具有簡潔、低調的設計，能依需求調整成合適的長度。僅重 14 公克，防水設計。",
+      "transmitter1_spec1": "可在家中任何地點使用，包括地下室、車庫以及庭院",
+      "transmitter1_spec2": "長達 5 年的電池壽命，不必擔心更換問題",
+      "transmitter1_spec3": "相容於所有 Lifeline 平安機型",
+      "transmitter2_type": "手環式",
+      "transmitter2_desc": "僅重 14 公克，防水設計。能以項鍊或手環的方式穿戴，適合浴室等高風險區域。",
+      "transmitter2_spec1": "室內全域覆蓋使用",
+      "transmitter2_spec2": "5 年長效電池",
+      "transmitter2_spec3": "多配戴方式：項鍊或手環",
+      "transmitter3_type": "手錶式",
+      "transmitter3_desc": "與鐘錶大廠 Timex 合作，結合美觀可靠的手錶與隨身發射器功能。",
+      "transmitter3_spec1": "二合一設計：Timex 精準計時 + Lifeline 即時服務",
+      "transmitter3_spec2": "中性且具吸引力的美觀設計",
+      "transmitter3_spec3": "金屬或皮革錶帶供選擇，具備防水能力"
+    },
+    "fees": {
+      "title": "服務費用說明",
+      "paragraph1": "在北美洲已有超過 3000 家的醫院和養護中心提供 Lifeline 生命連線的服務，本服務非常經濟且簡單易用。",
+      "paragraph2": "服務費用會因為您所在位置及選擇的服務方案而有所不同。",
+      "paragraph3": "請撥打下方的服務專線，或以電子郵件聯繫我們的健康管理護理師，他們將會提供您所在地區的收費標準。",
+      "note": "註：來電前請先準備好您想申裝地區的郵遞區號。",
+      "hotline_label": "Support Hotline",
+      "more_info": "更多問題與細節",
+      "contact_us": "聯絡我們"
+    }
   }
 }
