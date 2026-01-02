@@ -1,91 +1,95 @@
 <script setup>
+import { computed } from 'vue'
 import PageHeader from '../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '愛心捐款 | 生命連線基金會 LifeLine Foundation - 守護弱勢長者的健康',
+  title: computed(() => t('donate.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '愛心捐款, 公益捐款, 捐款方式, 郵政劃撥捐款, 生命連線捐款, 社會救助, 弱勢長者支持, 磁性收據' 
+      content: computed(() => t('donate.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '愛心捐款 | 生命連線基金會 LifeLine Foundation - 守護弱勢長者的健康',
-  description: '您的每一份支持，都是長輩力量的來源。生命連線基金會提供郵政劃撥、ATM 轉帳、支票及現金等多種捐款管道，所有捐款皆開立正式收據。讓我們一起守護弱勢長輩，讓愛不走失。',
-  ogTitle: '愛心捐款 - 守護弱勢長者的健康，您也可以盡一份力！ | 生命連線基金會',
-  ogDescription: '「愛心無界，長者有依」。您的捐款將用於提升長輩照護品質與緊急救援服務。',
+  title: computed(() => t('donate.seo.title')),
+  description: computed(() => t('donate.seo.description')),
+  ogTitle: computed(() => t('donate.seo.og_title')),
+  ogDescription: computed(() => t('donate.seo.og_description')),
   twitterCard: 'summary_large_image',
-  twitterTitle: '愛心捐款 | 生命連線基金會 LifeLine Foundation',
-  twitterDescription: '守護弱勢長者，讓愛不走失。'
+  twitterTitle: computed(() => t('donate.seo.twitter_title')),
+  twitterDescription: computed(() => t('donate.seo.twitter_description'))
 })
 
-const donationMethods = [
+const donationMethods = computed(() => [
   {
-    title: '郵政劃撥',
+    title: t('donate.methods.post.title'),
     icon: 'post',
     details: [
-      { label: '匯入帳號', value: '19578734', highlight: true },
-      { label: '戶名', value: '財團法人生命連線基金會' },
+      { label: t('donate.methods.post.account_label'), value: '19578734', highlight: true },
+      { label: t('donate.methods.post.name_label'), value: t('donate.methods.post.name_value') },
     ],
     steps: [
-      '請至全國各地郵局填寫劃撥單。',
-      '在寄款人欄位填上您的姓名、地址、電話。',
-      '若您是本站會員，請在通訊欄註明您的會員暱稱或 email 帳號，以便資料彙整。',
-      '本基金會會開立收據並寄至您提供的地址。'
+      t('donate.methods.post.step1'),
+      t('donate.methods.post.step2'),
+      t('donate.methods.post.step3'),
+      t('donate.methods.post.step4')
     ]
   },
   {
-    title: 'ATM 轉帳',
+    title: t('donate.methods.atm.title'),
     icon: 'atm',
     details: [
-      { label: '行庫代碼', value: '700', highlight: true },
-      { label: '匯入帳號', value: '0001990-0367989', highlight: true },
-      { label: '戶名', value: '生命連線基金會' },
+      { label: t('donate.methods.atm.bank_code_label'), value: '700', highlight: true },
+      { label: t('donate.methods.atm.account_label'), value: '0001990-0367989', highlight: true },
+      { label: t('donate.methods.atm.name_label'), value: t('donate.methods.atm.name_value') },
     ],
     steps: [
-      '完成匯款後請將交易明細表附上您的大名、地址、電話，傳真至 (02) 7718-2828。',
-      '若您是本站會員，請別忘了附上您的會員暱稱或 email 帳號，以便資料彙整。',
-      '本基金會會開立收據並寄至您提供的地址。'
+      t('donate.methods.atm.step1'),
+      t('donate.methods.atm.step2'),
+      t('donate.methods.atm.step3')
     ]
   },
   {
-    title: '支票捐款',
+    title: t('donate.methods.check.title'),
     icon: 'check',
     details: [
-      { label: '抬頭', value: '財團法人生命連線基金會' },
-      { label: '備註', value: '請註明「禁止背書轉讓」' },
+      { label: t('donate.methods.check.payee_label'), value: t('donate.methods.check.payee_value') },
+      { label: t('donate.methods.check.note_label'), value: t('donate.methods.check.note_value') },
     ],
     steps: [
-      '將支票以掛號寄至：110 台北市信義區忠孝東路五段 552 號 15 樓 生命連線基金會 收。',
-      '若您是本站會員，請別忘了附上您的會員暱稱或 email 帳號，以便資料彙整。',
-      '本基金會將在該善款入帳後開立收據。'
+      t('donate.methods.check.step1'),
+      t('donate.methods.check.step2'),
+      t('donate.methods.check.step3')
     ]
   },
   {
-    title: '現金捐款',
+    title: t('donate.methods.cash.title'),
     icon: 'cash',
     details: [
-      { label: '服務門市', value: '本基金會辦公室' },
-      { label: '辦公地址', value: '110 台北市信義區忠孝東路五段 552 號 15 樓' },
+      { label: t('donate.methods.cash.location_label'), value: t('donate.methods.cash.location_value') },
+      { label: t('donate.methods.cash.address_label'), value: t('donate.methods.cash.address_value') },
     ],
     steps: [
-      '請親洽本基金會，本會將有專員為您服務。',
-      '若您是本站會員，請別忘告知社工您的會員暱稱或 email 帳號。',
-      '完成捐款手續後將立即開立收據。'
+      t('donate.methods.cash.step1'),
+      t('donate.methods.cash.step2'),
+      t('donate.methods.cash.step3')
     ]
   }
-]
+])
 </script>
 
 <template>
   <div class="bg-gray-50 min-h-screen pb-24">
     <PageHeader 
-      title="愛心捐款" 
-      subtitle="您的每一份支持，都是長輩力量的來源"
+      :title="t('donate.page_header.title')" 
+      :subtitle="t('donate.page_header.subtitle')"
     />
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-10">
@@ -93,20 +97,16 @@ const donationMethods = [
       <section class="bg-white rounded-[40px] shadow-premium p-8 md:p-10 mb-16 relative overflow-hidden text-center border border-gray-100">
         <div class="absolute top-0 right-0 w-64 h-64 bg-foundation-blue/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
         <div class="relative z-10 max-w-3xl mx-auto space-y-6">
-          <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">Donation Support</span>
-          <h2 class="text-2xl md:text-5xl font-black text-foundation-blue leading-tight italic">
-            守護弱勢長者的健康，<br><span class="text-foundation-lightblue">您也可以盡一份力！</span>
-          </h2>
-          <p class="text-gray-500 text-lg font-medium leading-relaxed italic">
-            您的愛心可透過下列管道，傳達到長者的身上，<br class="hidden md:block">生命連線基金會感謝您的熱心參與。
-          </p>
+          <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('donate.intro.badge') }}</span>
+          <h2 class="text-2xl md:text-5xl font-black text-foundation-blue leading-tight italic" v-html="t('donate.intro.title')"></h2>
+          <p class="text-gray-500 text-lg font-medium leading-relaxed italic" v-html="t('donate.intro.description')"></p>
           <div class="pt-8 flex justify-center">
             <div class="bg-foundation-blue/5 rounded-3xl p-6 md:p-8 flex items-center space-x-6 border border-foundation-blue/10 group hover:bg-foundation-blue hover:text-white transition-all duration-500 cursor-pointer shadow-sm">
                <div class="w-14 h-14 rounded-2xl bg-foundation-blue flex items-center justify-center text-white shrink-0 shadow-lg group-hover:bg-white group-hover:text-foundation-blue">
                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                </div>
                <div class="text-left text-foundation-blue group-hover:text-white">
-                 <p class="text-sm font-black uppercase tracking-widest opacity-60">Toll-Free Support</p>
+                 <p class="text-sm font-black uppercase tracking-widest opacity-60">{{ t('donate.intro.phone_label') }}</p>
                  <a href="tel:0800056789" class="text-xl md:text-3xl font-black">0800-056-789</a>
                </div>
             </div>
@@ -144,7 +144,7 @@ const donationMethods = [
           <div class="space-y-6 flex-grow">
             <h4 class="text-sm font-black text-gray-400 uppercase tracking-widest flex items-center">
               <span class="w-8 h-px bg-gray-200 mr-3"></span>
-              流程說明
+              {{ t('donate.process_title') }}
             </h4>
             <ul class="space-y-4">
               <li v-for="(step, sIdx) in method.steps" :key="sIdx" class="flex items-start group/li transition-all">
@@ -160,14 +160,14 @@ const donationMethods = [
       <section class="mt-24 text-center space-y-8 pb-10">
          <div class="w-20 h-1 bg-foundation-lightblue mx-auto rounded-full"></div>
          <p class="text-foundation-blue font-black text-xl italic">
-           「愛心無界，長者有依」— 您的善款入帳後，基金會皆會依法開立正式收據。
+           {{ t('donate.footer.message') }}
          </p>
          <div class="flex flex-wrap justify-center gap-4">
             <RouterLink to="/service/home-care" class="px-10 py-5 bg-foundation-blue text-white rounded-2xl font-black shadow-xl hover:-translate-y-1 transition-all">
-              了解服務內容
+              {{ t('donate.footer.button1') }}
             </RouterLink>
             <RouterLink to="/news" class="px-10 py-5 bg-white text-foundation-blue border border-gray-100 rounded-2xl font-black shadow-lg hover:shadow-xl transition-all">
-              查看最新動態
+              {{ t('donate.footer.button2') }}
             </RouterLink>
          </div>
       </section>

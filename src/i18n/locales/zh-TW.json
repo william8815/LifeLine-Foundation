@@ -719,5 +719,74 @@
       "bus_station2": "協和工商站",
       "bus_content2": "下車後沿忠孝東路往西步行約 3 分鐘，即可抵達任遠忠孝大樓。"
     }
+  },
+  "donate": {
+    "seo": {
+      "title": "愛心捐款 | 生命連線基金會 LifeLine Foundation - 守護弱勢長者的健康",
+      "description": "您的每一份支持，都是長輩力量的來源。生命連線基金會提供郵政劃撥、ATM 轉帳、支票及現金等多種捐款管道，所有捐款皆開立正式收據。讓我們一起守護弱勢長輩，讓愛不走失。",
+      "keywords": "愛心捐款, 公益捐款, 捐款方式, 郵政劃撥捐款, 生命連線捐款, 社會救助, 弱勢長者支持, 磁性收據",
+      "og_title": "愛心捐款 - 守護弱勢長者的健康，您也可以盡一份力！ | 生命連線基金會",
+      "og_description": "「愛心無界，長者有依」。您的捐款將用於提升長輩照護品質與緊急救援服務。",
+      "twitter_title": "愛心捐款 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "守護弱勢長者，讓愛不走失。"
+    },
+    "page_header": {
+      "title": "愛心捐款",
+      "subtitle": "您的每一份支持，都是長輩力量的來源"
+    },
+    "intro": {
+      "badge": "Donation Support",
+      "title": "守護弱勢長者的健康，<br><span class=\"text-foundation-lightblue\">您也可以盡一份力！</span>",
+      "description": "您的愛心可透過下列管道，傳達到長者的身上，<br class=\"hidden md:block\">生命連線基金會感謝您的熱心參與。",
+      "phone_label": "Toll-Free Support"
+    },
+    "process_title": "流程說明",
+    "methods": {
+      "post": {
+        "title": "郵政劃撥",
+        "account_label": "匯入帳號",
+        "name_label": "戶名",
+        "name_value": "財團法人生命連線基金會",
+        "step1": "請至全國各地郵局填寫劃撥單。",
+        "step2": "在寄款人欄位填上您的姓名、地址、電話。",
+        "step3": "若您是本站會員，請在通訊欄註明您的會員暱稱或 email 帳號，以便資料彙整。",
+        "step4": "本基金會會開立收據並寄至您提供的地址。"
+      },
+      "atm": {
+        "title": "ATM 轉帳",
+        "bank_code_label": "行庫代碼",
+        "account_label": "匯入帳號",
+        "name_label": "戶名",
+        "name_value": "生命連線基金會",
+        "step1": "完成匯款後請將交易明細表附上您的大名、地址、電話，傳真至 (02) 7718-2828。",
+        "step2": "若您是本站會員，請別忘了附上您的會員暱稱或 email 帳號，以便資料彙整。",
+        "step3": "本基金會會開立收據並寄至您提供的地址。"
+      },
+      "check": {
+        "title": "支票捐款",
+        "payee_label": "抬頭",
+        "payee_value": "財團法人生命連線基金會",
+        "note_label": "備註",
+        "note_value": "請註明「禁止背書轉讓」",
+        "step1": "將支票以掛號寄至：110 台北市信義區忠孝東路五段 552 號 15 樓 生命連線基金會 收。",
+        "step2": "若您是本站會員，請別忘了附上您的會員暱稱或 email 帳號，以便資料彙整。",
+        "step3": "本基金會將在該善款入帳後開立收據。"
+      },
+      "cash": {
+        "title": "現金捐款",
+        "location_label": "服務門市",
+        "location_value": "本基金會辦公室",
+        "address_label": "辦公地址",
+        "address_value": "110 台北市信義區忠孝東路五段 552 號 15 樓",
+        "step1": "請親洽本基金會，本會將有專員為您服務。",
+        "step2": "若您是本站會員，請別忘告知社工您的會員暱稱或 email 帳號。",
+        "step3": "完成捐款手續後將立即開立收據。"
+      }
+    },
+    "footer": {
+      "message": "「愛心無界，長者有依」— 您的善款入帳後，基金會皆會依法開立正式收據。",
+      "button1": "了解服務內容",
+      "button2": "查看最新動態"
+    }
   }
 }

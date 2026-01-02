@@ -719,5 +719,74 @@
       "bus_station2": "协和工商站",
       "bus_content2": "下车后沿忠孝东路往西步行约 3 分钟，即可抵达任远忠孝大楼。"
     }
+  },
+  "donate": {
+    "seo": {
+      "title": "爱心捐款 | 生命连线基金会 LifeLine Foundation - 守护弱势长者的健康",
+      "description": "您的每一份支持，都是长辈力量的来源。生命连线基金会提供邮政划拨、ATM 转帐、支票及现金等多种捐款管道，所有捐款皆开立正式收据。让我们一起守护弱势长辈，让爱不走失。",
+      "keywords": "爱心捐款, 公益捐款, 捐款方式, 邮政划拨捐款, 生命连线捐款, 社会救助, 弱势长者支持, 磁性收据",
+      "og_title": "爱心捐款 - 守护弱势长者的健康，您也可以尽一份力！ | 生命连线基金会",
+      "og_description": "「爱心无界，长者有依」。您的捐款将用于提升长辈照护品质与紧急救援服务。",
+      "twitter_title": "爱心捐款 | 生命连线基金会 LifeLine Foundation",
+      "twitter_description": "守护弱势长者，让爱不走失。"
+    },
+    "page_header": {
+      "title": "爱心捐款",
+      "subtitle": "您的每一份支持，都是长辈力量的来源"
+    },
+    "intro": {
+      "badge": "Donation Support",
+      "title": "守护弱势长者的健康，<br><span class=\"text-foundation-lightblue\">您也可以尽一份力！</span>",
+      "description": "您的爱心可透过下列管道，传达到长者的身上，<br class=\"hidden md:block\">生命连线基金会感谢您的热心参与。",
+      "phone_label": "Toll-Free Support"
+    },
+    "process_title": "流程说明",
+    "methods": {
+      "post": {
+        "title": "邮政划拨",
+        "account_label": "汇入帐号",
+        "name_label": "户名",
+        "name_value": "财团法人生命连线基金会",
+        "step1": "请至全国各地邮局填写划拨单。",
+        "step2": "在寄款人栏位填上您的姓名、地址、电话。",
+        "step3": "若您是本站会员，请在通讯栏注明您的会员昵称或 email 帐号，以便资料汇整。",
+        "step4": "本基金会会开立收据并寄至您提供的地址。"
+      },
+      "atm": {
+        "title": "ATM 转帐",
+        "bank_code_label": "行库代码",
+        "account_label": "汇入帐号",
+        "name_label": "户名",
+        "name_value": "生命连线基金会",
+        "step1": "完成汇款后请将交易明细表附上您的大名、地址、电话，传真至 (02) 7718-2828。",
+        "step2": "若您是本站会员，请别忘了附上您的会员昵称或 email 帐号，以便资料汇整。",
+        "step3": "本基金会会开立收据并寄至您提供的地址。"
+      },
+      "check": {
+        "title": "支票捐款",
+        "payee_label": "抬头",
+        "payee_value": "财团法人生命连线基金会",
+        "note_label": "备注",
+        "note_value": "请注明「禁止背书转让」",
+        "step1": "将支票以挂号寄至：110 台北市信义区忠孝东路五段 552 号 15 楼 生命连线基金会 收。",
+        "step2": "若您是本站会员，请别忘了附上您的会员昵称或 email 帐号，以便资料汇整。",
+        "step3": "本基金会将在该善款入帐后开立收据。"
+      },
+      "cash": {
+        "title": "现金捐款",
+        "location_label": "服务门市",
+        "location_value": "本基金会办公室",
+        "address_label": "办公地址",
+        "address_value": "110 台北市信义区忠孝东路五段 552 号 15 楼",
+        "step1": "请亲洽本基金会，本会将有专员为您服务。",
+        "step2": "若您是本站会员，请别忘告知社工您的会员昵称或 email 帐号。",
+        "step3": "完成捐款手续后将立即开立收据。"
+      }
+    },
+    "footer": {
+      "message": "「爱心无界，长者有依」— 您的善款入帐后，基金会皆会依法开立正式收据。",
+      "button1": "了解服务内容",
+      "button2": "查看最新动态"
+    }
   }
 }
