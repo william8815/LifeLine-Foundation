@@ -498,5 +498,52 @@
       "more_info": "更多問題與細節",
       "contact_us": "聯絡我們"
     }
+  },
+  "service_fall_detection": {
+    "seo": {
+      "title": "跌倒偵測 | 生命連線基金會 LifeLine Foundation - 4G智慧協尋與自動偵測",
+      "description": "生命連線「跌倒偵測」服務採用 Carenet 4G 智慧協尋衛星定位器，具備高靈敏度自動跌倒偵測、GPS 定位與電子圍籬功能。提供政府輔具補助諮詢，24 小時守護長者安全，爭取黃金救援時間。",
+      "keywords": "跌倒偵測, 自動報警, 衛星定位器, 4G智慧協尋, 電子圍籬, 長者安全, 生命連線, 輔具補助, 低收入補助, 黃金救援",
+      "og_title": "跌倒偵測 - Carenet 4G 智慧協尋，守護每一步的安全 | 生命連線基金會",
+      "og_description": "先進高靈敏度偵測技術，偵測跌倒自動發出警報。整合 24 小時服務中心與政府補助，為長者打造最完善的安全網。",
+      "twitter_title": "跌倒偵測 | 生命連線基金會 LifeLine Foundation",
+      "twitter_description": "Carenet 4G 智慧協尋，爭取黃金救援時間。"
+    },
+    "page_header": {
+      "title": "跌倒偵測",
+      "subtitle": "Carenet 4G 智慧協尋・守護每一步的安全"
+    },
+    "tabs": {
+      "device": "裝置介紹",
+      "features": "功能特色",
+      "pricing": "費用與補助"
+    },
+    "device": {
+      "title": "Carenet 4G 智慧協尋衛星定位器",
+      "description": "結合先進的 4G 通訊與高精準度感測技術，Carenet 4G 智慧協尋衛星定位器不僅是長者的守護者，更是家屬最安心的依靠。透過即時追蹤與跌倒偵測，讓意外發生時的黃金救援時間得到最有效的利用。"
+    },
+    "features": {
+      "feature1_title": "跌倒偵測",
+      "feature1_desc": "內建高靈敏度加速感應器，當偵測到疑似跌倒衝擊時，將自動發出警報並通知中心。",
+      "feature2_title": "電子圍籬",
+      "feature2_desc": "可設定安全活動範圍，一旦長者超出預設區域，系統將立即推播提醒家屬。",
+      "feature3_title": "GPS 定位",
+      "feature3_desc": "採用多重導航衛星系統，提供精準的即時位置資訊，有效縮短搜救時間。",
+      "feature4_title": "專業服務",
+      "feature4_desc": "連動 24 小時生命連線中心，由專業護理人員與社工提供最即時的關懷與轉介。"
+    },
+    "pricing": {
+      "title": "費用與政府補助",
+      "notice": "購買前須經政府設置或委託辦理之輔具服務單位輔具評估人員（含該單位特約之輔具評估人員）申請開立<span class=\"underline decoration-foundation-lightblue underline-offset-4\">輔具評估報告書</span>。",
+      "subsidy1_level": "低收入戶",
+      "subsidy1_rate": "最高全額補助",
+      "subsidy2_level": "中低收入戶",
+      "subsidy2_rate": "最高補助 75%",
+      "subsidy3_level": "一般戶",
+      "subsidy3_rate": "最高補助 50%",
+      "device_label": "Carenet 4G Positioning Device",
+      "warranty": "保固期限：兩年 (2 Years Warranty)",
+      "buy_now": "立即購買"
+    }
   }
 }

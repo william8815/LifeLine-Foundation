@@ -1,28 +1,31 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // SEO Metadata
 useHead({
-  title: '跌倒偵測 | 生命連線基金會 LifeLine Foundation - 4G智慧協尋與自動偵測',
+  title: computed(() => t('service_fall_detection.seo.title')),
   meta: [
     { 
       name: 'keywords', 
-      content: '跌倒偵測, 自動報警, 衛星定位器, 4G智慧協尋, 電子圍籬, 長者安全, 生命連線, 輔具補助, 低收入補助, 黃金救援' 
+      content: computed(() => t('service_fall_detection.seo.keywords'))
     }
   ]
 })
 
 useSeoMeta({
-  title: '跌倒偵測 | 生命連線基金會 LifeLine Foundation - 4G智慧協尋與自動偵測',
-  description: '生命連線「跌倒偵測」服務採用 Carenet 4G 智慧協尋衛星定位器，具備高靈敏度自動跌倒偵測、GPS 定位與電子圍籬功能。提供政府輔具補助諮詢，24 小時守護長者安全，爭取黃金救援時間。',
-  ogTitle: '跌倒偵測 - Carenet 4G 智慧協尋，守護每一步的安全 | 生命連線基金會',
-  ogDescription: '先進高靈敏度偵測技術，偵測跌倒自動發出警報。整合 24 小時服務中心與政府補助，為長者打造最完善的安全網。',
+  title: computed(() => t('service_fall_detection.seo.title')),
+  description: computed(() => t('service_fall_detection.seo.description')),
+  ogTitle: computed(() => t('service_fall_detection.seo.og_title')),
+  ogDescription: computed(() => t('service_fall_detection.seo.og_description')),
   ogImage: falldetection1_1,
   twitterCard: 'summary_large_image',
-  twitterTitle: '跌倒偵測 | 生命連線基金會 LifeLine Foundation',
-  twitterDescription: 'Carenet 4G 智慧協尋，爭取黃金救援時間。'
+  twitterTitle: computed(() => t('service_fall_detection.seo.twitter_title')),
+  twitterDescription: computed(() => t('service_fall_detection.seo.twitter_description'))
 })
 // images
 import falldetection1_1 from "@/assets/images/services/falldetection1_1.png"
@@ -39,47 +42,47 @@ const imageLoaded = ref({
 })
 
 const activeTab = ref('device')
-const tabs = [
-  { id: 'device', name: '裝置介紹', icon: 'monitor' },
-  { id: 'features', name: '功能特色', icon: 'star' },
-  { id: 'pricing', name: '費用與補助', icon: 'calculator' }
-]
+const tabs = computed(() => [
+  { id: 'device', name: t('service_fall_detection.tabs.device'), icon: 'monitor' },
+  { id: 'features', name: t('service_fall_detection.tabs.features'), icon: 'star' },
+  { id: 'pricing', name: t('service_fall_detection.tabs.pricing'), icon: 'calculator' }
+])
 
-const features = [
+const features = computed(() => [
   {
-    title: '跌倒偵測',
-    desc: '內建高靈敏度加速感應器，當偵測到疑似跌倒衝擊時，將自動發出警報並通知中心。',
+    title: t('service_fall_detection.features.feature1_title'),
+    desc: t('service_fall_detection.features.feature1_desc'),
     image: falldetection2_1
   },
   {
-    title: '電子圍籬',
-    desc: '可設定安全活動範圍，一旦長者超出預設區域，系統將立即推播提醒家屬。',
+    title: t('service_fall_detection.features.feature2_title'),
+    desc: t('service_fall_detection.features.feature2_desc'),
     image: falldetection2_2
   },
   {
-    title: 'GPS 定位',
-    desc: '採用多重導航衛星系統，提供精準的即時位置資訊，有效縮短搜救時間。',
+    title: t('service_fall_detection.features.feature3_title'),
+    desc: t('service_fall_detection.features.feature3_desc'),
     image: falldetection2_3
   },
   {
-    title: '專業服務',
-    desc: '連動 24 小時生命連線中心，由專業護理人員與社工提供最即時的關懷與轉介。',
+    title: t('service_fall_detection.features.feature4_title'),
+    desc: t('service_fall_detection.features.feature4_desc'),
     image: falldetection2_4
   }
-]
+])
 
-const subsidies = [
-  { level: '低收入戶', rate: '最高全額補助', color: 'bg-foundation-blue' },
-  { level: '中低收入戶', rate: '最高補助 75%', color: 'bg-foundation-lightblue' },
-  { level: '一般戶', rate: '最高補助 50%', color: 'bg-gray-400' }
-]
+const subsidies = computed(() => [
+  { level: t('service_fall_detection.pricing.subsidy1_level'), rate: t('service_fall_detection.pricing.subsidy1_rate'), color: 'bg-foundation-blue' },
+  { level: t('service_fall_detection.pricing.subsidy2_level'), rate: t('service_fall_detection.pricing.subsidy2_rate'), color: 'bg-foundation-lightblue' },
+  { level: t('service_fall_detection.pricing.subsidy3_level'), rate: t('service_fall_detection.pricing.subsidy3_rate'), color: 'bg-gray-400' }
+])
 </script>
 
 <template>
   <div class="bg-gray-50 min-h-screen pb-32">
     <PageHeader 
-      title="跌倒偵測" 
-      subtitle="Carenet 4G 智慧協尋・守護每一步的安全"
+      :title="t('service_fall_detection.page_header.title')" 
+      :subtitle="t('service_fall_detection.page_header.subtitle')"
     />
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 md:-mt-20 relative z-30">
@@ -118,7 +121,7 @@ const subsidies = [
                <div class="bg-white rounded-[40px] p-6 md:p-10 shadow-premium border border-gray-100">
                   <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-12 italic flex items-center">
                     <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
-                    Carenet 4G 智慧協尋衛星定位器
+                    {{ t('service_fall_detection.device.title') }}
                   </h2>
                   
                   <div class="grid gap-8 mb-12">
@@ -129,7 +132,7 @@ const subsidies = [
 
                   <div class="bg-gray-50 p-10 rounded-[40px] border border-gray-100">
                     <p class="text-gray-500 text-lg md:text-xl font-medium leading-[2] italic">
-                      結合先進的 4G 通訊與高精準度感測技術，Carenet 4G 智慧協尋衛星定位器不僅是長者的守護者，更是家屬最安心的依靠。透過即時追蹤與跌倒偵測，讓意外發生時的黃金救援時間得到最有效的利用。
+                      {{ t('service_fall_detection.device.description') }}
                     </p>
                   </div>
                </div>
@@ -162,15 +165,13 @@ const subsidies = [
                     <div class="w-12 h-12 rounded-2xl bg-foundation-blue text-white flex items-center justify-center shrink-0 shadow-lg">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>
-                    <p class="text-foundation-blue font-bold text-lg leading-relaxed">
-                      購買前須經政府設置或委託辦理之輔具服務單位輔具評估人員（含該單位特約之輔具評估人員）申請開立<span class="underline decoration-foundation-lightblue underline-offset-4">輔具評估報告書</span>。
-                    </p>
+                    <p class="text-foundation-blue font-bold text-lg leading-relaxed" v-html="t('service_fall_detection.pricing.notice')"></p>
                   </div>
 
                   <!-- Price Card -->
                   <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 items-center">
                     <div class="lg:col-span-7 space-y-10">
-                       <h2 class="text-2xl md:text-4xl font-black text-foundation-blue italic">費用與政府補助</h2>
+                       <h2 class="text-2xl md:text-4xl font-black text-foundation-blue italic">{{ t('service_fall_detection.pricing.title') }}</h2>
                        <div class="space-y-4">
                           <div v-for="sub in subsidies" :key="sub.level" class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-foundation-blue transition-all duration-300">
                              <div class="flex items-center space-x-4">
@@ -186,16 +187,16 @@ const subsidies = [
                        <div class="bg-foundation-blue rounded-[40px] p-6 md:p-10 text-white shadow-2xl relative overflow-hidden group">
                           <div class="relative z-10 text-center space-y-8">
                              <div>
-                                <p class="text-blue-200 font-black uppercase tracking-widest text-xs mb-4">Carenet 4G Positioning Device</p>
+                                <p class="text-blue-200 font-black uppercase tracking-widest text-xs mb-4">{{ t('service_fall_detection.pricing.device_label') }}</p>
                                 <div class="flex items-baseline justify-center space-x-2">
                                    <span class="text-xl opacity-60 font-black">NT.</span>
                                    <span class="text-3xl md:text-6xl font-black italic tracking-tighter">10,000</span>
                                 </div>
                              </div>
                              <div class="space-y-4 border-t border-white/10 pt-8">
-                                <p class="text-sm font-bold italic opacity-80">保固期限：兩年 (2 Years Warranty)</p>
+                                <p class="text-sm font-bold italic opacity-80">{{ t('service_fall_detection.pricing.warranty') }}</p>
                                 <a href="#" class="block w-full py-5 bg-white text-foundation-blue rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl">
-                                  立即購買
+                                  {{ t('service_fall_detection.pricing.buy_now') }}
                                 </a>
                              </div>
                           </div>
