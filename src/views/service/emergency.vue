@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -224,11 +225,11 @@ const devices = computed(() => ({
                    <div 
                      v-for="(step, idx) in workflowSteps" 
                      :key="step.id" 
-                     class="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-20"
+                     class="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-20 group"
                      :class="idx % 2 === 1 ? 'md:flex-row-reverse' : ''"
                    >
                       <!-- Image Side -->
-                      <div class="w-full md:w-1/2 group">
+                      <div class="w-full md:w-1/2">
                         <div class="relative aspect-video rounded-[32px] overflow-hidden shadow-xl border border-gray-100 transition-all duration-700 group-hover:shadow-foundation-blue/10 group-hover:-translate-y-2">
                            <img :src="step.image" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" :class="imageLoaded[step.image] ? 'opacity-100' : 'opacity-0'"  :alt="step.title" loading="lazy" @load="imageLoaded[step.image] = true">
                            <!-- Step Number Badge Overlay -->
@@ -243,13 +244,13 @@ const devices = computed(() => ({
                       <!-- Content Side -->
                       <div class="w-full md:w-1/2 space-y-6 text-center" :class="idx % 2 === 1 ? 'md:text-right' : 'md:text-left'">
                         <div 
-                          class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-foundation-blue/5 text-foundation-blue mb-2 border border-foundation-blue/10"
+                          class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-foundation-blue/5 text-foundation-blue mb-2 border border-foundation-blue/10 group-hover:bg-foundation-blue group-hover:text-white transition-all duration-500"
                           :class="idx % 2 === 1 ? 'md:ml-auto' : ''"
                         >
-                          <svg v-if="step.id === 1" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>
-                          <svg v-if="step.id === 2" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m16-10a4 4 0 11-8 0 4 4 0 018 0zM9 7h.01" /></svg>
-                          <svg v-if="step.id === 3" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                          <svg v-if="step.id === 4" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                          <Icon v-if="step.id === 1" name="pointer" class="w-7 h-7" />
+                          <Icon v-if="step.id === 2" name="person" class="w-7 h-7" />
+                          <Icon v-if="step.id === 3" name="file" class="w-7 h-7" />
+                          <Icon v-if="step.id === 4" name="cycle" class="w-7 h-7" />
                         </div>
                         <h3 class="text-3xl font-black text-foundation-blue tracking-tighter">{{ step.title }}</h3>
                         <p class="text-gray-500 font-medium leading-relaxed text-lg max-w-lg" :class="idx % 2 === 1 ? 'md:ml-auto' : 'md:mr-auto'">{{ step.content }}</p>
@@ -280,7 +281,7 @@ const devices = computed(() => ({
                           <p class="text-gray-500 font-medium mb-8 italic-prose leading-relaxed">{{ machine.desc }}</p>
                           <ul class="space-y-4">
                               <li v-for="f in machine.features" :key="f" class="flex items-start text-sm font-medium text-gray-400 group/li">
-                                <svg class="w-4 h-4 text-foundation-lightblue mr-3 mt-0.5 shrink-0 group-hover/li:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                <Icon name="checkOutline" class="w-4 h-4 text-foundation-lightblue mr-3 mt-0.5 shrink-0 transition-transform" />
                                 {{ f }}
                               </li>
                           </ul>
@@ -338,7 +339,7 @@ const devices = computed(() => ({
                                <p class="text-sm font-bold opacity-80 mb-6 italic">{{ t('service_emergency.fees.more_info') }}</p>
                                <RouterLink to="/contact" class="flex items-center justify-between w-full p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all group/btn">
                                   <span class="font-black">{{ t('service_emergency.fees.contact_us') }}</span>
-                                  <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                  <Icon name="arrowForward" class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                                </RouterLink>
                             </div>
                          </div>

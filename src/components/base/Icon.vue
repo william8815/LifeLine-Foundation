@@ -24,6 +24,10 @@ import rainbow from "@/assets/icons/rainbow.svg";
 import building from "@/assets/icons/building.svg";
 import check from "@/assets/icons/check.svg";
 import checkOutline from "@/assets/icons/check-outline.svg";
+import pointer from "@/assets/icons/pointer.svg";
+import person from "@/assets/icons/person.svg";
+import file from "@/assets/icons/file.svg";
+import cycle from "@/assets/icons/cycle.svg";
 
 const icons = {
   favoriteOutline: favoriteOutline,
@@ -49,6 +53,10 @@ const icons = {
   building: building,
   check: check,
   checkOutline: checkOutline,
+  pointer: pointer,
+  person: person,
+  file: file,
+  cycle: cycle,
 };
 
 const props = defineProps({
