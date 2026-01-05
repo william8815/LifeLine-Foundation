@@ -3,6 +3,7 @@ import { ref, computed, nextTick } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -252,7 +253,7 @@ const submitForm = async () => {
                    <div class="pt-10">
                       <RouterLink to="/service-emergency" class="inline-flex items-center space-x-4 px-12 py-5 bg-foundation-blue text-white rounded-[24px] font-black shadow-2xl hover:scale-105 transition-all">
                          <span>{{ t('service_risk_check.result.cta_button') }}</span>
-                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                         <Icon name="arrowForward" class="w-6 h-6" />
                       </RouterLink>
                    </div>
                 </div>
