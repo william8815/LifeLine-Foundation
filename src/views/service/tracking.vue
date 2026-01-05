@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -117,7 +118,7 @@ const reportingMethods = computed(() => [
                       </div>
                       <div class="space-y-4">
                         <div v-for="(method, i) in reportingMethods" :key="i" class="flex items-start space-x-4 p-4 rounded-2xl hover:bg-white hover:shadow-md transition-all border border-transparent hover:border-gray-100 group">
-                           <div class="w-10 h-10 rounded-xl bg-foundation-blue text-white flex items-center justify-center font-black shrink-0 shadow-lg group-hover:rotate-12 transition-transform">{{ i + 1 }}</div>
+                           <div class="w-10 h-10 rounded-xl bg-foundation-blue text-white flex items-center justify-center font-black shrink-0 shadow-lg transition-transform">{{ i + 1 }}</div>
                            <div>
                               <h4 class="font-black text-foundation-blue">{{ method.title }}</h4>
                               <p class="text-sm text-gray-400 font-medium">{{ method.desc }}</p>
@@ -127,10 +128,10 @@ const reportingMethods = computed(() => [
                     </div>
                     <div class="flex justify-center gap-6">
                       <!-- Mobile Demos -->
-                      <div class="w-1/2 aspect-[447/763] bg-gray-900 rounded-[1.5rem] p-2 shadow-2xl border-[6px] border-gray-800 rotate-[-5deg] hover:rotate-0 transition-all duration-700">
+                      <div class="w-1/2 aspect-[447/763] bg-gray-900 rounded-[1.5rem] p-2 shadow-2xl border-[6px] border-gray-800 rotate-[-5deg]">
                          <img :src="tracking1_2" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_2 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_2 = true">
                       </div>
-                      <div class="w-1/2 aspect-[447/763] bg-gray-900 rounded-[1.5rem] p-2 shadow-2xl border-[6px] border-gray-800 translate-y-10 rotate-[5deg] hover:rotate-0 transition-all duration-700">
+                      <div class="w-1/2 aspect-[447/763] bg-gray-900 rounded-[1.5rem] p-2 shadow-2xl border-[6px] border-gray-800 translate-y-10 rotate-[5deg] ">
                          <img :src="tracking1_3" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_3 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_3 = true">
                       </div>
                     </div>
@@ -156,14 +157,14 @@ const reportingMethods = computed(() => [
                     <!-- Features List -->
                     <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100 group hover:border-foundation-blue transition-colors">
                       <div class="w-10 h-10 rounded-xl bg-foundation-blue/10 flex items-center justify-center text-foundation-blue mb-4 group-hover:bg-foundation-blue group-hover:text-white transition-all">
-                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          <Icon name="thunder" class="w-6 h-6" />
                       </div>
                       <h4 class="font-black text-foundation-blue mb-2">{{ t('service_tracking.device.feature1_title') }}</h4>
                       <p class="text-xs text-gray-400 font-medium">{{ t('service_tracking.device.feature1_desc') }}</p>
                     </div>
                     <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100 group hover:border-foundation-blue transition-colors">
                       <div class="w-10 h-10 rounded-xl bg-foundation-blue/10 flex items-center justify-center text-foundation-blue mb-4 group-hover:bg-foundation-blue group-hover:text-white transition-all">
-                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                          <Icon name="pin" class="w-6 h-6" />
                       </div>
                       <h4 class="font-black text-foundation-blue mb-2">{{ t('service_tracking.device.feature2_title') }}</h4>
                       <p class="text-xs text-gray-400 font-medium">{{ t('service_tracking.device.feature2_desc') }}</p>
