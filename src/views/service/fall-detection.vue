@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -163,14 +164,14 @@ const subsidies = computed(() => [
                   <!-- Subsidy Notice -->
                   <div class="mb-8 md:mb-16 p-6 md:p-8 bg-foundation-blue/5 rounded-[32px] border border-foundation-blue/10 flex flex-col md:flex-row items-start gap-6">
                     <div class="w-12 h-12 rounded-2xl bg-foundation-blue text-white flex items-center justify-center shrink-0 shadow-lg">
-                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <Icon name="info" class="w-6 h-6" />
                     </div>
                     <p class="text-foundation-blue font-bold text-lg leading-relaxed" v-html="t('service_fall_detection.pricing.notice')"></p>
                   </div>
 
                   <!-- Price Card -->
                   <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 space-y-10">
+                    <div class="xl:col-span-7 space-y-10">
                        <h2 class="text-2xl md:text-4xl font-black text-foundation-blue italic">{{ t('service_fall_detection.pricing.title') }}</h2>
                        <div class="space-y-4">
                           <div v-for="sub in subsidies" :key="sub.level" class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-foundation-blue transition-all duration-300">
@@ -183,7 +184,7 @@ const subsidies = computed(() => [
                        </div>
                     </div>
                     
-                    <div class="lg:col-span-5">
+                    <div class="xl:col-span-5">
                        <div class="bg-foundation-blue rounded-[40px] p-6 md:p-10 text-white shadow-2xl relative overflow-hidden group">
                           <div class="relative z-10 text-center space-y-8">
                              <div>
