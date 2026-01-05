@@ -30,6 +30,8 @@ import file from "@/assets/icons/file.svg";
 import cycle from "@/assets/icons/cycle.svg";
 import info from "@/assets/icons/info.svg";
 import external from "@/assets/icons/external.svg";
+import metro from "@/assets/icons/metro.svg";
+import bus from "@/assets/icons/bus.svg";
 
 const icons = {
   favoriteOutline: favoriteOutline,
@@ -61,6 +63,8 @@ const icons = {
   cycle: cycle,
   info: info,
   external: external,
+  metro: metro,
+  bus: bus,
 };
 
 const props = defineProps({
