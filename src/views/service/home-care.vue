@@ -272,7 +272,7 @@ const submitSurvey = () => {
                 <!-- Section 1 -->
                 <div class="grid grid-cols-1 gap-20 items-center">
                    <div class="space-y-8">
-                     <span class="px-4 py-1.5 bg-gray-100 text-gray-400 rounded-full text-[10px] font-black tracking-widest uppercase">{{ t('service_home_care.performance.badge') }}</span>
+                     <span class="px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-[10px] font-black tracking-widest uppercase border border-foundation-blue/10">{{ t('service_home_care.performance.badge') }}</span>
                      <h3 class="text-4xl md:text-5xl font-black text-foundation-blue leading-tight">{{ t('service_home_care.performance.title_line1') }}<br><span class="text-foundation-lightblue">{{ t('service_home_care.performance.title_line2') }}</span></h3>
                      <p class="text-gray-500 font-medium text-lg italic leading-relaxed">{{ t('service_home_care.performance.description') }}</p>
                      
@@ -323,7 +323,7 @@ const submitSurvey = () => {
               <!-- Tab 3: Advantage -->
               <div v-else-if="activeTab === 'advantage'" key="advantage" class="space-y-12 lg:space-y-24 animate-fade-in">
                 <div class="text-center group max-w-5xl mx-auto">
-                  <span class="inline-block px-4 py-1.5 bg-foundation-lightblue/10 text-foundation-lightblue rounded-full text-[10px] font-black uppercase tracking-widest mb-10 border border-foundation-lightblue/10">{{ t('service_home_care.advantage.badge') }}</span>
+                  <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-[10px] font-black uppercase tracking-widest mb-10 border border-foundation-lightblue/10">{{ t('service_home_care.advantage.badge') }}</span>
                   <h2 class="text-4xl md:text-6xl font-black text-foundation-blue mb-10 tracking-tighter leading-none">
                     {{ t('service_home_care.advantage.title_part1') }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-foundation-lightblue to-foundation-blue drop-shadow-sm">{{ t('service_home_care.advantage.title_part2') }}</span>
                   </h2>

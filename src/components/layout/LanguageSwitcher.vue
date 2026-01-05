@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { locale, t } = useI18n()
 const isOpen = ref(false)
@@ -52,13 +53,9 @@ onUnmounted(() => {
       class="flex items-center space-x-2 px-3 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-foundation-blue hover:bg-gray-50 transition-all duration-200"
       :title="t('language.switch')"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-      </svg>
+      <Icon name="translate" class="w-5 h-5" />
       <span class="hidden md:inline">{{ currentLanguage.flag }}</span>
-      <svg xmlns="http://www.w3.org/2000/svg" :class="['h-4 w-4 transition-transform duration-200', isOpen ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
+      <Icon :class="['transition-transform duration-200', isOpen ? 'rotate-180' : '']" name="arrowDown" class="w-5 h-5" />
     </button>
 
     <!-- 下拉選單 -->
@@ -88,9 +85,7 @@ onUnmounted(() => {
           >
             <span class="text-xl">{{ lang.flag }}</span>
             <span class="flex-1 text-left">{{ lang.name }}</span>
-            <svg v-if="locale === lang.code" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
+            <Icon v-if="locale === lang.code" name="check" class="w-5 h-5" />
           </button>
         </div>
       </div>

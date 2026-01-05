@@ -37,7 +37,6 @@ onUnmounted(() => {
 })
 
 const navigation = [
-  { nameKey: 'nav.home', href: '/' },
   {
     nameKey: 'nav.about',
     items: [
@@ -50,9 +49,9 @@ const navigation = [
     nameKey: 'nav.services',
     items: [
       { nameKey: 'nav.service_home_care', href: '/service-home-care' },
-      { nameKey: 'nav.service_emergency', href: '/service-emergency' },
-      { nameKey: 'nav.service_tracking', href: '/service-tracking' },
       { nameKey: 'nav.service_fall_detection', href: '/service-fall-detection' },
+      { nameKey: 'nav.service_tracking', href: '/service-tracking' },
+      { nameKey: 'nav.service_emergency', href: '/service-emergency' },
       { nameKey: 'nav.service_risk_check', href: '/service-risk-check' },
     ]
   },

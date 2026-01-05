@@ -290,7 +290,7 @@ onMounted(() => {
        <div class="container mx-auto px-4 md:px-6">
          <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div class="space-y-4">
-              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.news.badge') }}</span>
+              <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.news.badge') }}</span>
               <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic italic">{{ t('home.news.title') }}</h2>
             </div>
             <RouterLink to="/news" class="font-black text-foundation-blue hover:text-foundation-orange transition-colors flex items-center group">

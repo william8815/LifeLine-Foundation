@@ -34,6 +34,7 @@ import metro from "@/assets/icons/metro.svg";
 import bus from "@/assets/icons/bus.svg";
 import bank from "@/assets/icons/bank.svg";
 import cash from "@/assets/icons/cash.svg";
+import translate from "@/assets/icons/translate.svg";
 
 const icons = {
   favoriteOutline: favoriteOutline,
@@ -69,6 +70,7 @@ const icons = {
   bus: bus,
   cash: cash,
   bank: bank,
+  translate: translate,
 };
 
 const props = defineProps({
