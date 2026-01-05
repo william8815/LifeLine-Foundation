@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -59,7 +60,7 @@ useSeoMeta({
                 </div>
                 <div class="bg-foundation-blue rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
                   <div class="relative z-10 flex flex-col h-full justify-center">
-                    <svg class="w-12 h-12 text-foundation-orange opacity-50 mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V5C14.017 3.89543 14.9124 3 16.017 3H21.017C22.1216 3 23.017 3.89543 23.017 5V15C23.017 18.3137 20.3307 21 17.017 21H14.017ZM0.0170044 21L0.0170044 18C0.0170044 16.8954 0.912439 16 2.017 16H5.017C5.56928 16 6.017 15.5523 6.017 15V9C6.017 8.44772 5.56928 8 5.017 8H2.017C0.912439 8 0.0170044 7.10457 0.0170044 6V5C0.0170044 3.89543 0.912439 3 2.017 3H7.017C8.12157 3 9.017 3.89543 9.017 5V15C9.017 18.3137 6.33071 21 3.017 21H0.0170044Z" /></svg>
+                    <Icon name="quate" class="w-12 h-12 text-foundation-orange mb-2" />
                     <p class="text-xl font-bold leading-relaxed italic mb-0">
                       {{ t('about_origin.content.quote') }}
                     </p>
@@ -87,15 +88,15 @@ useSeoMeta({
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
                 <div class="group p-8 rounded-[32px] bg-gray-50 border border-transparent hover:border-foundation-blue/20 hover:bg-white hover:shadow-2xl hover:shadow-foundation-blue/10 transition-all duration-500">
                   <div class="w-14 h-14 bg-foundation-blue rounded-2xl flex items-center justify-center mb-8 shrink-0 shadow-lg group-hover:-rotate-6 transition-transform">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    <Icon name="thunder" class="w-7 h-7 text-white" />
                   </div>
                   <h4 class="text-xl font-black text-foundation-blue mb-4">{{ t('about_origin.pillars.emergency.title') }}</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">{{ t('about_origin.pillars.emergency.description') }}</p>
                 </div>
 
                 <div class="group p-8 rounded-[32px] bg-gray-50 border border-transparent hover:border-foundation-blue/20 hover:bg-white hover:shadow-2xl hover:shadow-foundation-blue/10 transition-all duration-500">
-                  <div class="w-14 h-14 bg-foundation-blue rounded-2xl flex items-center justify-center mb-8 shrink-0 shadow-lg group-hover:rotate-6 transition-transform">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                  <div class="w-14 h-14 bg-foundation-blue rounded-2xl flex items-center justify-center mb-8 shrink-0 shadow-lg group-hover:-rotate-6 transition-transform">
+                    <Icon name="group" class="w-7 h-7 text-white" />
                   </div>
                   <h4 class="text-xl font-black text-foundation-blue mb-4">{{ t('about_origin.pillars.community.title') }}</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">{{ t('about_origin.pillars.community.description') }}</p>

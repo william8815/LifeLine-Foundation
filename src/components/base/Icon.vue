@@ -14,6 +14,12 @@ import mailOutline from '@/assets/icons/mail-outline.svg';
 import fire from '@/assets/icons/fire.svg';
 import sensors from '@/assets/icons/sensors.svg';
 import arrowForward from '@/assets/icons/arrow-forward.svg';
+import thunder from '@/assets/icons/thunder.svg';
+import group from '@/assets/icons/group.svg';
+import quate from '@/assets/icons/quate.svg';
+import home from '@/assets/icons/home.svg';
+import key from '@/assets/icons/key.svg';
+import verifiedUser from "@/assets/icons/verified-user.svg";
 
 const icons = {
   favoriteOutline: favoriteOutline,
@@ -29,6 +35,12 @@ const icons = {
   fire: fire,
   sensors: sensors,
   arrowForward: arrowForward,
+  thunder: thunder,
+  group: group,
+  quate: quate,
+  home: home,
+  key: key,
+  verifiedUser: verifiedUser,
 };
 
 const props = defineProps({

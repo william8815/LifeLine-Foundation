@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -68,18 +69,18 @@ const partners = computed(() => [
                     <span class="text-xs font-black uppercase tracking-widest">{{ t('about_org.service.badge') }}</span>
                   </div>
                   <h2 class="text-4xl md:text-6xl font-black text-foundation-blue leading-tight mb-8">
-                    {{ t('about_org.service.title_line1') }}<span class="text-foundation-orange">{{ t('about_org.service.title_line2') }}</span>
+                    {{ t('about_org.service.title_line1') }}<span class="text-foundation-lightblue">{{ t('about_org.service.title_line2') }}</span>
                   </h2>
                   <p class="text-gray-600 leading-relaxed text-xl mb-10 font-medium">
                     {{ t('about_org.service.description') }}
                   </p>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="flex items-center space-x-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-foundation-blue/10 hover:bg-white hover:shadow-xl transition-all">
-                       <svg class="w-8 h-8 text-foundation-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                       <Icon name="home" class="w-8 h-8 text-foundation-blue shrink-0" />
                        <p class="text-gray-500 text-sm">{{ t('about_org.service.feature1') }}</p>
                     </div>
                     <div class="flex items-center space-x-4 p-5 rounded-2xl bg-gray-50 border border-transparent hover:border-foundation-blue/10 hover:bg-white hover:shadow-xl transition-all">
-                       <svg class="w-8 h-8 text-foundation-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+                       <Icon name="key" class="w-8 h-8 text-foundation-blue shrink-0" />
                        <p class="text-gray-500 text-sm">{{ t('about_org.service.feature2') }}</p>
                     </div>
                   </div>
