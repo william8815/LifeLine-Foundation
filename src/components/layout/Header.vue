@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -107,9 +108,7 @@ const isActive = (path) => route.path === path
               ]"
             >
               {{ t(item.nameKey) }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-50 group-hover:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
+              <Icon name="arrowDown" class="h-4 w-4 ml-1 opacity-50 group-hover:rotate-180 transition-transform duration-300" />
             </button>
             
             <!-- Dropdown Menu -->
@@ -133,11 +132,9 @@ const isActive = (path) => route.path === path
 
         <!-- CTA Button -->
         <div class="ml-4 px-4 border-l border-gray-200">
-          <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-full bg-foundation-orange text-white text-sm font-black shadow-lg shadow-foundation-orange/30 hover:scale-105 active:scale-95 transition-all">
+          <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-full bg-foundation-lightblue text-white text-sm font-black shadow-lg shadow-foundation-blue/30 hover:scale-105 active:scale-95 transition-all">
             {{ t('nav.donate') }}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
+            <Icon name="favoriteOutline" class="h-4 w-4 ml-2" />
           </RouterLink>
         </div>
 
@@ -195,9 +192,7 @@ const isActive = (path) => route.path === path
             <div class="flex justify-between items-center">
               <span class="text-foundation-blue font-black text-xl tracking-tight uppercase">{{ t('nav.menu') }}</span>
               <button @click="closeMenu" class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <Icon name="close" class="h-6 w-6" />
               </button>
             </div>
           </div>

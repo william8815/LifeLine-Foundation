@@ -159,7 +159,7 @@ onMounted(() => {
             <RouterLink to="/service-home-care" class="px-6 py-4 lg:px-12 lg:py-6 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all">
               {{ t('home.hero.btn_services') }}
             </RouterLink>
-            <RouterLink to="/donate" class="px-6 py-4 lg:px-12 lg:py-6 bg-foundation-orange text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
+            <RouterLink to="/donate" class="px-6 py-4 lg:px-12 lg:py-6 bg-foundation-lightblue text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
               {{ t('home.hero.btn_donate') }}
             </RouterLink>
           </div>
@@ -267,20 +267,20 @@ onMounted(() => {
                <p class="text-gray-400 font-medium italic leading-relaxed">{{ t(service.descKey) }}</p>
                
                <ul class="pt-8 space-y-3">
-                  <li v-for="fKey in service.featuresKeys" :key="fKey" class="flex items-center text-sm font-bold text-gray-500 group/li">
-                     <span class="w-1.5 h-1.5 rounded-full bg-foundation-blue mr-3 group-hover/li:scale-150 transition-transform"></span>
+                  <li v-for="fKey in service.featuresKeys" :key="fKey" class="flex items-center text-sm font-bold text-gray-500">
+                     <span class="w-1.5 h-1.5 rounded-full bg-foundation-blue mr-3"></span>
                      {{ t(fKey) }}
                   </li>
                </ul>
             </div>
 
-            <div class="mt-12">
+            <div class="mt-12 group/link">
                <RouterLink 
                  :to="service.href"
-                 class="inline-flex items-center space-x-3 text-foundation-blue font-black group-hover:text-foundation-orange transition-colors"
+                 class="inline-flex items-center space-x-3 text-foundation-blue font-black group-hover/link:text-foundation-lightblue transition-colors"
                 >
                  <span>{{ t('home.services.view_details') }}</span>
-                 <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                 <svg class="w-5 h-5 group-hover/link:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                </RouterLink>
             </div>
           </div>
@@ -332,10 +332,10 @@ onMounted(() => {
                {{ t('home.cta.description') }}
              </p>
              <div class="flex flex-wrap justify-center gap-6 pt-6">
-                <RouterLink to="/donate" class="px-8 py-4 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-xl hover:-translate-y-2 transition-all">
+                <RouterLink to="/donate" class="px-8 py-4 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-xl hover:scale-105 transition-all">
                   {{ t('home.cta.btn_donate') }}
                 </RouterLink>
-                <RouterLink to="/contact" class="px-8 py-4 bg-white/10 border border-white/20 backdrop-blur-md rounded-3xl font-black text-lg shadow-xl hover:bg-white/20 transition-all">
+                <RouterLink to="/contact" class="px-8 py-4 bg-foundation-lightblue text-white rounded-3xl font-black text-lg shadow-xl hover:scale-105 transition-all">
                   {{ t('home.cta.btn_contact') }}
                 </RouterLink>
              </div>
