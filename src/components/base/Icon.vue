@@ -11,6 +11,9 @@ import youtube from '@/assets/icons/media/youtube.svg';
 import pin from '@/assets/icons/pin.svg';
 import tel from '@/assets/icons/tel.svg';
 import mailOutline from '@/assets/icons/mail-outline.svg';
+import fire from '@/assets/icons/fire.svg';
+import sensors from '@/assets/icons/sensors.svg';
+import arrowForward from '@/assets/icons/arrow-forward.svg';
 
 const icons = {
   favoriteOutline: favoriteOutline,
@@ -23,6 +26,9 @@ const icons = {
   pin: pin,
   tel: tel,
   mailOutline: mailOutline,
+  fire: fire,
+  sensors: sensors,
+  arrowForward: arrowForward,
 };
 
 const props = defineProps({

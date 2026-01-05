@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -41,7 +42,7 @@ const services = computed(() => [
     subtitleKey: 'home.services.home_care.subtitle',
     descKey: 'home.services.home_care.description',
     href: '/service-home-care',
-    icon: 'heart',
+    icon: 'favoriteOutline',
     featuresKeys: ['home.services.home_care.feature1', 'home.services.home_care.feature2', 'home.services.home_care.feature3']
   },
   {
@@ -57,7 +58,7 @@ const services = computed(() => [
     subtitleKey: 'home.services.fall_detection.subtitle',
     descKey: 'home.services.fall_detection.description',
     href: '/service-fall-detection',
-    icon: 'activity',
+    icon: 'sensors',
     featuresKeys: ['home.services.fall_detection.feature1', 'home.services.fall_detection.feature2', 'home.services.fall_detection.feature3']
   },
   {
@@ -65,7 +66,7 @@ const services = computed(() => [
     subtitleKey: 'home.services.tracking.subtitle',
     descKey: 'home.services.tracking.description',
     href: '/service-tracking',
-    icon: 'map-pin',
+    icon: 'pin',
     featuresKeys: ['home.services.tracking.feature1', 'home.services.tracking.feature2', 'home.services.tracking.feature3']
   },
 ])
@@ -253,11 +254,7 @@ onMounted(() => {
             <div class="mb-10 flex items-start justify-between">
                <div class="w-16 h-16 rounded-3xl bg-foundation-blue/5 flex items-center justify-center text-foundation-blue group-hover:bg-foundation-blue group-hover:text-white transition-all duration-500 shadow-xl shadow-transparent group-hover:shadow-foundation-blue/20">
                   <!-- Custom Icon Map (Icons from Lucide-like SVG) -->
-                  <svg v-if="service.icon === 'fire'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14l2.879 2.121z" /></svg>
-                  <svg v-if="service.icon === 'heart'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                  <svg v-if="service.icon === 'activity'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                  <svg v-if="service.icon === 'map-pin'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  <svg v-if="service.icon === 'chat'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                  <Icon :name="service.icon" class="w-8 h-8" />
                </div>
             </div>
 
@@ -280,7 +277,7 @@ onMounted(() => {
                  class="inline-flex items-center space-x-3 text-foundation-blue font-black group-hover/link:text-foundation-lightblue transition-colors"
                 >
                  <span>{{ t('home.services.view_details') }}</span>
-                 <svg class="w-5 h-5 group-hover/link:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                 <Icon name="arrowForward" class="w-5 h-5 group-hover/link:translate-x-2 transition-transform duration-300" />
                </RouterLink>
             </div>
           </div>
@@ -298,7 +295,7 @@ onMounted(() => {
             </div>
             <RouterLink to="/news" class="font-black text-foundation-blue hover:text-foundation-orange transition-colors flex items-center group">
               {{ t('home.news.view_all') }}
-              <svg class="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              <Icon name="arrowForward" class="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
             </RouterLink>
          </div>
 
