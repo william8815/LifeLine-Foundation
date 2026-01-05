@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import PageHeader from '../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -103,7 +104,7 @@ const donationMethods = computed(() => [
           <div class="pt-8 flex justify-center">
             <div class="bg-foundation-blue/5 rounded-3xl p-6 md:p-8 flex items-center space-x-6 border border-foundation-blue/10 group hover:bg-foundation-blue hover:text-white transition-all duration-500 cursor-pointer shadow-sm">
                <div class="w-14 h-14 rounded-2xl bg-foundation-blue flex items-center justify-center text-white shrink-0 shadow-lg group-hover:bg-white group-hover:text-foundation-blue">
-                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                <Icon name="tel" class="w-8 h-8" />
                </div>
                <div class="text-left text-foundation-blue group-hover:text-white">
                  <p class="text-sm font-black uppercase tracking-widest opacity-60">{{ t('donate.intro.phone_label') }}</p>
@@ -126,10 +127,10 @@ const donationMethods = computed(() => [
             <div class="flex gap-2 items-center justify-between mb-4">
               <h3 class="text-3xl font-black text-foundation-blue tracking-tighter">{{ method.title }}</h3>
               <div class="w-16 h-16 bg-foundation-blue/5 rounded-3xl flex items-center justify-center text-foundation-blue group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                  <svg v-if="method.icon === 'post'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                  <svg v-if="method.icon === 'atm'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <svg v-if="method.icon === 'check'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <svg v-if="method.icon === 'cash'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  <Icon v-if="method.icon === 'post'" name="mailOutline" class="w-8 h-8" />
+                  <Icon v-if="method.icon === 'atm'" name="bank" class="w-8 h-8" />
+                  <Icon v-if="method.icon === 'check'" name="checkOutline" class="w-8 h-8" />
+                  <Icon v-if="method.icon === 'cash'" name="cash" class="w-8 h-8" />
               </div>
             </div>
             <div class="space-y-3">
@@ -147,8 +148,8 @@ const donationMethods = computed(() => [
               {{ t('donate.process_title') }}
             </h4>
             <ul class="space-y-4">
-              <li v-for="(step, sIdx) in method.steps" :key="sIdx" class="flex items-start group/li transition-all">
-                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-foundation-blue/5 text-foundation-blue text-[10px] font-black mr-4 mt-1 shrink-0 group-hover/li:bg-foundation-blue group-hover/li:text-white transition-colors">{{ sIdx + 1 }}</span>
+              <li v-for="(step, sIdx) in method.steps" :key="sIdx" class="flex items-start">
+                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-foundation-lightblue text-white text-[10px] font-black mr-4 mt-1 shrink-0 transition-colors">{{ sIdx + 1 }}</span>
                 <p class="text-gray-500 font-medium leading-relaxed italic">{{ step }}</p>
               </li>
             </ul>
