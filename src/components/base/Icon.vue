@@ -20,6 +20,10 @@ import quate from '@/assets/icons/quate.svg';
 import home from '@/assets/icons/home.svg';
 import key from '@/assets/icons/key.svg';
 import verifiedUser from "@/assets/icons/verified-user.svg";
+import rainbow from "@/assets/icons/rainbow.svg";
+import building from "@/assets/icons/building.svg";
+import check from "@/assets/icons/check.svg";
+import checkOutline from "@/assets/icons/check-outline.svg";
 
 const icons = {
   favoriteOutline: favoriteOutline,
@@ -41,6 +45,10 @@ const icons = {
   home: home,
   key: key,
   verifiedUser: verifiedUser,
+  rainbow: rainbow,
+  building: building,
+  check: check,
+  checkOutline: checkOutline,
 };
 
 const props = defineProps({

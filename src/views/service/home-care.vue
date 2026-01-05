@@ -3,6 +3,7 @@ import { ref, reactive, nextTick, computed } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
+import Icon from '@/components/base/Icon.vue'
 
 const { t } = useI18n()
 
@@ -241,7 +242,6 @@ const submitSurvey = () => {
                   <h2 class="text-3xl md:text-5xl font-black text-foundation-blue leading-[1.15] mb-10">
                     <span class="text-foundation-lightblue relative inline-block">
                       {{ t('service_home_care.intro.title_line1') }}
-                      <!-- <svg class="absolute -bottom-4 left-0 w-full h-3 text-foundation-lightblue/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5 L 100 10 L 0 10 Z" fill="currentColor"/></svg> -->
                     </span>{{ t('service_home_care.intro.title_line2') }}
                   </h2>
                   <div class="prose prose-xl max-w-none text-gray-500 leading-relaxed font-medium space-y-8">
@@ -250,7 +250,7 @@ const submitSurvey = () => {
                     </p>
                     <div class="p-10 md:p-14 bg-gradient-to-br from-foundation-blue to-blue-800 rounded-[50px] shadow-2xl shadow-foundation-blue/30 relative overflow-hidden group">
                       <div class="relative z-10">
-                        <svg class="w-12 h-12 text-foundation-lightblue mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.01703V14H12.017C14.2262 14 16.017 15.7909 16.017 18V21H14.017ZM17.017 21V18C17.017 15.2386 14.7785 13 12.017 13H9.01703V11H12.017C15.883 11 19.017 14.134 19.017 18V21H17.017Z" opacity="0.3"/><path d="M11 11H8V14H6V11H3V9H6V6H8V9H11V11Z"/></svg>
+                        <Icon name="rainbow" class="w-12 h-12 text-foundation-lightblue mb-2" />
                         <p class="text-white italic text-xl md:text-3xl leading-snug font-black">
                           {{ t('service_home_care.intro.highlight') }}
                         </p>
@@ -297,7 +297,7 @@ const submitSurvey = () => {
                        </div>
                        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full"></div>
                        <div class="absolute top-10 right-10 opacity-10">
-                          <svg class="w-40 h-40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-8 9z"/></svg>
+                          <Icon name="checkOutline" class="w-40 h-40" />
                        </div>
                      </div>
                    </div>
@@ -339,8 +339,8 @@ const submitSurvey = () => {
                   <!-- Feature Card 1 -->
                   <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
                     <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-blue/10 transition-colors">
-                      <div class="w-20 h-20 bg-foundation-blue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-blue group-hover:rotate-12 transition-all duration-500">
-                        <svg class="w-10 h-10 text-foundation-blue group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                      <div class="w-20 h-20 bg-foundation-blue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-blue transition-all duration-500">
+                        <Icon name="building" class="w-10 h-10 text-foundation-blue group-hover:text-white" />
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">{{ t('service_home_care.advantage.feature1_title') }}</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">{{ t('service_home_care.advantage.feature1_desc') }}</p>
@@ -360,8 +360,8 @@ const submitSurvey = () => {
                   <!-- Feature Card 2 -->
                   <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
                     <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-lightblue/10 transition-colors">
-                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-lightblue group-hover:-rotate-12 transition-all duration-500">
-                        <svg class="w-10 h-10 text-foundation-lightblue group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-lightblue transition-all duration-500">
+                        <Icon name="verifiedUser" class="w-10 h-10 text-foundation-lightblue group-hover:text-white" />
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">{{ t('service_home_care.advantage.feature2_title') }}</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">{{ t('service_home_care.advantage.feature2_desc') }}</p>
@@ -381,8 +381,8 @@ const submitSurvey = () => {
                   <!-- Feature Card 3 -->
                   <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
                     <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-lightblue/10 transition-colors">
-                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-lightblue group-hover:-rotate-12 transition-all duration-500">
-                        <svg class="w-10 h-10 text-foundation-lightblue group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-lightblue transition-all duration-500">
+                        <Icon name="verifiedUser" class="w-10 h-10 text-foundation-lightblue group-hover:text-white" />
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">{{ t('service_home_care.advantage.feature3_title') }}</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">{{ t('service_home_care.advantage.feature3_desc') }}</p>
@@ -411,7 +411,7 @@ const submitSurvey = () => {
                      <h3 class="text-3xl font-black text-white leading-tight">{{ t('service_home_care.advantage.excellence_title') }}</h3>
                     </div>
                     <div class=" w-16 h-16 bg-foundation-lightblue rounded-3xl shadow-2xl animate-bounce-slow flex items-center justify-center">
-                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                      <Icon name="tel" class="w-8 h-8 text-white" />
                     </div>
                     <p class="col-span-2 text-white/50 text-xl leading-relaxed font-medium italic">{{ t('service_home_care.advantage.excellence_desc') }}</p>
                    </div>
@@ -528,7 +528,7 @@ const submitSurvey = () => {
 
                     <div class="flex justify-between items-center pt-10 border-t border-gray-200 mt-6 lg:mt-12">
                       <button @click="goToPrev" class="text-gray-400 font-black hover:text-gray-600 transition-colors flex items-center">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                        <Icon name="arrowForward" class="w-4 h-4 mr-2 rotate-180" />
                         {{ t('service_home_care.survey.prev_step') }}
                       </button>
                       <button @click="goToNext" class="px-6 lg:px-14 py-3 lg:py-5 bg-foundation-blue text-white rounded-2xl font-black shadow-xl hover:-translate-y-1 active:scale-95 transition-all">{{ t('service_home_care.survey.next_step') }}</button>
@@ -547,7 +547,7 @@ const submitSurvey = () => {
                          <div class="space-y-3">
                            <label v-for="opt in notJoiningReasonsOptions" :key="opt" class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
                               <div class="w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center transition-colors" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
-                                 <svg v-if="surveyData.notJoiningReasons.includes(opt)" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                 <Icon v-if="surveyData.notJoiningReasons.includes(opt)" name="check" class="w-3.5 h-3.5 text-white" />
                               </div>
                               <input type="checkbox" v-model="surveyData.notJoiningReasons" :value="opt" :disabled="surveyData.notJoiningReasons.length >= 3 && !surveyData.notJoiningReasons.includes(opt)" class="hidden">
                               <span class="font-bold text-gray-700 text-sm">{{ opt }}</span>
@@ -558,7 +558,7 @@ const submitSurvey = () => {
                     </div>
                     <div class="flex justify-between items-center pt-10 border-t border-gray-200 mt-6 lg:mt-12">
                       <button @click="goToPrev" class="text-gray-400 font-black hover:text-gray-600 flex items-center">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                        <Icon name="arrowForward" class="w-4 h-4 mr-2 rotate-180" />
                         {{ t('service_home_care.survey.prev_step') }}
                       </button>
                       <button @click="goToNext" class="px-6 lg:px-14 py-3 lg:py-5 bg-foundation-blue text-white rounded-2xl font-black shadow-xl hover:-translate-y-1 active:scale-95 transition-all">{{ t('service_home_care.survey.next_step') }}</button>
@@ -585,7 +585,7 @@ const submitSurvey = () => {
                        <div class="space-y-3">
                           <label v-for="svc in desiredServicesOptions" :key="svc" class="flex items-center flex-wrap p-3 lg:p-5 rounded-3xl bg-white border-2 border-gray-50 cursor-pointer hover:shadow-xl hover:border-foundation-blue/30 transition-all group">
                              <div class="shrink-0 w-6 h-6 rounded-lg border-2 mr-4 flex items-center justify-center transition-colors shadow-sm" :class="surveyData.desiredServices.includes(svc) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
-                                <svg v-if="surveyData.desiredServices.includes(svc)" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                <Icon v-if="surveyData.desiredServices.includes(svc)" name="check" class="w-4 h-4 text-white" />
                              </div>
                              <input type="checkbox" v-model="surveyData.desiredServices" :value="svc" class="hidden">
                              <span class="text-sm font-black text-gray-700">{{ svc }}</span>
@@ -662,10 +662,10 @@ const submitSurvey = () => {
                        </div>
                        
                        <div class="pt-16">
-                          <button @click="submitSurvey" class="w-full py-4 lg:py-8 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-[0_30px_70px_rgba(30,64,175,0.3)] hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6">
+                          <button @click="submitSurvey" class="w-full py-4 lg:py-8 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6">
                             <span >{{ t('service_home_care.survey.submit_button') }}</span>
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                              <svg class="w-6 h-6 animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                              <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />
                             </div>
                           </button>
                           <p class="text-center text-gray-400 text-xs mt-8 font-medium italic">{{ t('service_home_care.survey.submit_note') }}</p>
@@ -674,7 +674,7 @@ const submitSurvey = () => {
 
                     <div class="flex justify-center mt-12">
                       <button @click="goToPrev" class="text-gray-400 font-bold hover:text-gray-600 flex items-center text-sm transition-colors border-b border-transparent hover:border-gray-200 pb-1">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                        <Icon name="arrowForward" class="w-5 h-5 mr-3 rotate-180" />
                         {{ t('service_home_care.survey.back_to_modify') }}
                       </button>
                     </div>
