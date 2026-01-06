@@ -98,7 +98,7 @@ const partners = computed(() => [
               <div class="w-12 h-12 bg-foundation-blue/5 rounded-2xl flex items-center justify-center text-foundation-blue group-hover:bg-white/20 group-hover:text-white transition-all">
                 <Icon name="cycle" class="w-6 h-6" />
               </div>
-              <Icon name="external" class="w-5 h-5 text-foundation-lightblue/30 group-hover:text-white transition-colors" />
+              <Icon name="external" class="w-5 h-5 text-foundation-lightblue group-hover:text-foundation-beige transition-colors" />
             </div>
             
             <h3 class="text-2xl font-black text-foundation-blue group-hover:text-white transition-colors">
@@ -109,8 +109,8 @@ const partners = computed(() => [
               {{ partner.desc }}
             </p>
 
-            <div class="pt-6 flex items-center text-xs font-black uppercase tracking-widest text-foundation-lightblue group-hover:text-white/60 transition-colors">
-              <span class="w-8 h-px bg-foundation-lightblue/20 group-hover:bg-white/20 mr-3"></span>
+            <div class="pt-6 flex items-center text-xs font-black uppercase tracking-widest text-foundation-lightblue group-hover:text-foundation-beige transition-colors">
+              <span class="w-8 h-px bg-foundation-lightblue/20 group-hover:bg-foundation-beige mr-3"></span>
               {{ t('links.visit_partner') }}
             </div>
           </div>

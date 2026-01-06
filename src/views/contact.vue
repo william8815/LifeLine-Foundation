@@ -141,7 +141,7 @@ const transportation = computed(() => [
       <!-- Transportation Section -->
       <section class="space-y-8">
         <div class="flex items-center space-x-4 mb-12">
-          <div class="w-20 h-1.5 bg-foundation-blue rounded-full"></div>
+          <div class="w-20 h-1.5 bg-foundation-beige rounded-full"></div>
           <h2 class="text-3xl font-black text-foundation-blue italic">{{ t('contact.transportation.section_title') }}</h2>
         </div>
 

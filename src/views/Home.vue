@@ -134,7 +134,7 @@ onMounted(() => {
             class="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 transition-all duration-1000"
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
-            <span class="w-2.5 h-2.5 bg-foundation-orange rounded-full animate-pulse"></span>
+            <span class="w-2.5 h-2.5 bg-foundation-lightblue rounded-full animate-pulse"></span>
             <span class="text-white text-sm font-black uppercase tracking-[0.3em]">{{ t('home.hero.badge') }}</span>
           </div>
 
@@ -143,7 +143,7 @@ onMounted(() => {
             :class="[isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
           >
              {{ t('home.hero.title_line1') }}<br>
-             <span class="text-foundation-lightblue italic">{{ t('home.hero.title_line2') }}</span>
+             <span class="text-foundation-lightblue italic ml-8">{{ t('home.hero.title_line2') }}</span>
           </h1>
 
           <p 
@@ -160,7 +160,7 @@ onMounted(() => {
             <RouterLink to="/service-home-care" class="px-6 py-4 lg:px-12 lg:py-6 bg-white text-foundation-blue rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all">
               {{ t('home.hero.btn_services') }}
             </RouterLink>
-            <RouterLink to="/donate" class="px-6 py-4 lg:px-12 lg:py-6 bg-foundation-lightblue text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
+            <RouterLink to="/donate" class="px-6 py-4 lg:px-12 lg:py-6 bg-foundation-lightblue hover:bg-foundation-blue text-white rounded-3xl font-black text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">
               {{ t('home.hero.btn_donate') }}
             </RouterLink>
           </div>
@@ -173,7 +173,7 @@ onMounted(() => {
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
           <div v-for="stat in stats" :key="stat.labelKey" class="text-center group">
-            <p class="text-[1rem] font-black uppercase tracking-[0.3em] text-foundation-lightblue mb-4">{{ t(stat.labelKey) }}</p>
+            <p class="text-[1rem] font-black uppercase tracking-[0.3em] text-foundation-beige mb-4">{{ t(stat.labelKey) }}</p>
             <div class="flex items-baseline justify-center space-x-1 group-hover:scale-110 transition-transform duration-500">
                <span class="text-4xl md:text-5xl font-black text-white italic tracking-tighter">{{ formatNumber(stat.value) }}{{ stat.showPlus ? '+' : '' }}</span>
                <span class="text-xl md:text-2xl font-bold text-white/50">{{ t(stat.suffixKey) }}</span>
@@ -190,7 +190,7 @@ onMounted(() => {
         <div class="flex flex-col lg:flex-row items-center gap-20">
           <div class="lg:w-1/2 space-y-12">
             <div class="space-y-6">
-              <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.mission.badge') }}</span>
+              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.mission.badge') }}</span>
               <h2 class="text-4xl md:text-6xl font-black text-foundation-blue tracking-tighter italic">
                 {{ t('home.mission.title_line1') }}<br>
                 <span class="text-foundation-lightblue pl-[2rem]">{{ t('home.mission.title_line2') }}</span>
@@ -238,7 +238,7 @@ onMounted(() => {
     <section class="py-8 md:py-32 bg-gray-50 relative">
       <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="text-center mb-24 max-w-3xl mx-auto space-y-6">
-          <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.services.badge') }}</span>
+          <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.services.badge') }}</span>
           <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic">{{ t('home.services.title') }}</h2>
           <p class="text-gray-500 font-medium text-lg leading-relaxed italic">
             {{ t('home.services.description') }}
@@ -265,7 +265,7 @@ onMounted(() => {
                
                <ul class="pt-8 space-y-3">
                   <li v-for="fKey in service.featuresKeys" :key="fKey" class="flex items-center text-sm font-bold text-gray-500">
-                     <span class="w-1.5 h-1.5 rounded-full bg-foundation-blue mr-3"></span>
+                     <span class="w-1.5 h-1.5 rounded-full bg-foundation-lightblue mr-3"></span>
                      {{ t(fKey) }}
                   </li>
                </ul>
@@ -290,10 +290,10 @@ onMounted(() => {
        <div class="container mx-auto px-4 md:px-6">
          <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div class="space-y-4">
-              <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.news.badge') }}</span>
+              <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('home.news.badge') }}</span>
               <h2 class="text-4xl md:text-6xl font-black text-foundation-blue italic italic">{{ t('home.news.title') }}</h2>
             </div>
-            <RouterLink to="/news" class="font-black text-foundation-blue hover:text-foundation-orange transition-colors flex items-center group">
+            <RouterLink to="/news" class="font-black text-foundation-blue hover:text-foundation-lightblue transition-colors flex items-center group">
               {{ t('home.news.view_all') }}
               <Icon name="arrowForward" class="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
             </RouterLink>

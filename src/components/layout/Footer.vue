@@ -46,7 +46,7 @@ const footerLinks = [
             </div> -->
             <div class="flex flex-col">
               <span class="text-white font-bold text-lg leading-tight uppercase tracking-wider">LifeLine</span>
-              <span class="text-foundation-lightblue text-xs font-medium">生命連線基金會</span>
+              <span class="text-foundation-lightblue text-xs font-bold">生命連線基金會</span>
             </div>
           </RouterLink>
           <p class="text-white text-sm leading-relaxed">
@@ -84,7 +84,7 @@ const footerLinks = [
           </h3>
           <ul class="space-y-3">
             <li v-for="link in section.links" :key="link.name">
-              <RouterLink :to="link.href" class="text-foundation-lightblue/80 hover:text-white hover:translate-x-1 inline-block transition-all duration-200 text-sm">
+              <RouterLink :to="link.href" class="text-foundation-white hover:font-bold hover:text-foundation-lightblue hover:translate-x-1 inline-block transition-all duration-200 text-sm">
                 {{ link.name }}
               </RouterLink>
             </li>

@@ -222,7 +222,7 @@ const submitSurvey = () => {
               >
                 <span :class="[
                   'w-1.5 h-1.5 rounded-full transition-all duration-300',
-                  activeTab === tab.id ? 'bg-foundation-lightblue scale-150' : 'bg-gray-300 group-hover:bg-foundation-blue'
+                  activeTab === tab.id ? 'bg-foundation-beige scale-150' : 'bg-gray-300 group-hover:bg-foundation-beige'
                 ]"></span>
                 <span class="font-black tracking-widest text-sm text-left">{{ tab.name }}</span>
               </button>
@@ -238,7 +238,7 @@ const submitSurvey = () => {
               <!-- Tab 1: Intro -->
               <div v-if="activeTab === 'intro'" key="intro" class="space-y-16 animate-fade-in">
                 <div class="max-w-4xl">
-                  <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-8 border border-foundation-blue/10">{{ t('service_home_care.intro.badge') }}</span>
+                  <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-8 border border-foundation-orange/10">{{ t('service_home_care.intro.badge') }}</span>
                   <h2 class="text-3xl md:text-5xl font-black text-foundation-blue leading-[1.15] mb-10">
                     <span class="text-foundation-lightblue relative inline-block">
                       {{ t('service_home_care.intro.title_line1') }}
@@ -250,7 +250,7 @@ const submitSurvey = () => {
                     </p>
                     <div class="p-10 md:p-14 bg-gradient-to-br from-foundation-blue to-blue-800 rounded-[50px] shadow-2xl shadow-foundation-blue/30 relative overflow-hidden group">
                       <div class="relative z-10">
-                        <Icon name="rainbow" class="w-12 h-12 text-foundation-lightblue mb-2" />
+                        <Icon name="rainbow" class="w-12 h-12 text-foundation-beige mb-2" />
                         <p class="text-white italic text-xl md:text-3xl leading-snug font-black">
                           {{ t('service_home_care.intro.highlight') }}
                         </p>
@@ -268,11 +268,11 @@ const submitSurvey = () => {
               </div>
 
               <!-- Tab 2: Performance -->
-              <div v-else-if="activeTab === 'performance'" key="performance" class="space-y-24 animate-fade-in">
+              <div v-else-if="activeTab === 'performance'" key="performance" class="space-y-12 animate-fade-in">
                 <!-- Section 1 -->
                 <div class="grid grid-cols-1 gap-20 items-center">
                    <div class="space-y-8">
-                     <span class="px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-[10px] font-black tracking-widest uppercase border border-foundation-blue/10">{{ t('service_home_care.performance.badge') }}</span>
+                     <span class="px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-[10px] font-black tracking-widest uppercase border border-foundation-orange/10">{{ t('service_home_care.performance.badge') }}</span>
                      <h3 class="text-4xl md:text-5xl font-black text-foundation-blue leading-tight">{{ t('service_home_care.performance.title_line1') }}<br><span class="text-foundation-lightblue">{{ t('service_home_care.performance.title_line2') }}</span></h3>
                      <p class="text-gray-500 font-medium text-lg italic leading-relaxed">{{ t('service_home_care.performance.description') }}</p>
                      
@@ -290,8 +290,7 @@ const submitSurvey = () => {
                    <div class="bg-white rounded-[50px] p-2 shadow-[0_40px_100px_rgba(0,0,0,0.08)]">
                      <div class="bg-foundation-blue rounded-[48px] p-12 md:p-16 text-white relative overflow-hidden h-full">
                        <div class="relative z-10">
-                         <div class="w-16 h-1 bg-foundation-lightblue mb-8 rounded-full"></div>
-                         <p class="text-foundation-lightblue font-black text-8xl mb-6 italic tracking-tighter drop-shadow-2xl">{{ t('service_home_care.performance.experience_value') }}</p>
+                         <p class="text-foundation-beige font-black text-8xl mb-6 italic tracking-tighter drop-shadow-2xl">{{ t('service_home_care.performance.experience_value') }}</p>
                          <h4 class="text-2xl font-bold mb-6 tracking-wide leading-snug" v-html="t('service_home_care.performance.experience_title')"></h4>
                          <p class="text-white/60 leading-relaxed font-bold max-w-xs italic">{{ t('service_home_care.performance.experience_desc') }}</p>
                        </div>
@@ -304,14 +303,14 @@ const submitSurvey = () => {
                 </div>
 
                 <!-- Section 2: Video -->
-                <div class="pt-24 border-t border-gray-100">
-                   <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8 text-center md:text-left">
+                <div class="pt-12 border-t border-gray-100">
+                  <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8 text-center md:text-left">
                     <div>
-                      <h3 class="text-3xl md:text-4xl font-black text-foundation-blue mb-4 tracking-tighter underline decoration-foundation-lightblue decoration-8 underline-offset-8">{{ t('service_home_care.performance.video_title') }}</h3>
+                      <h3 class="text-3xl md:text-4xl font-black text-foundation-blue mb-4">{{ t('service_home_care.performance.video_title') }}</h3>
                       <p class="text-gray-400 font-medium italic text-lg mt-6">{{ t('service_home_care.performance.video_subtitle') }}</p>
                     </div>
                   </div>
-                  <div class="aspect-video bg-gray-900 rounded-md shadow-[0_50px_120px_rgba(0,0,0,0.2)] overflow-hidden flex items-center justify-center relative group cursor-pointer border-[6px] border-foundation-lightblue">
+                  <div class="aspect-video bg-gray-900 rounded-md shadow-lg flex items-center justify-center relative group cursor-pointer border-[6px] border-foundation-lightblue">
                     <video controls="" controlslist="nodownload" width="100%">
                       <!-- <source src="../images/6/R5.mp4" type="video/mp4"> -->
                       {{ t('service_home_care.performance.video_placeholder') }}
@@ -323,7 +322,7 @@ const submitSurvey = () => {
               <!-- Tab 3: Advantage -->
               <div v-else-if="activeTab === 'advantage'" key="advantage" class="space-y-12 lg:space-y-24 animate-fade-in">
                 <div class="text-center group max-w-5xl mx-auto">
-                  <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-[10px] font-black uppercase tracking-widest mb-10 border border-foundation-lightblue/10">{{ t('service_home_care.advantage.badge') }}</span>
+                  <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-[10px] font-black uppercase tracking-widest mb-10 border border-foundation-orange/10">{{ t('service_home_care.advantage.badge') }}</span>
                   <h2 class="text-4xl md:text-6xl font-black text-foundation-blue mb-10 tracking-tighter leading-none">
                     {{ t('service_home_care.advantage.title_part1') }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-foundation-lightblue to-foundation-blue drop-shadow-sm">{{ t('service_home_care.advantage.title_part2') }}</span>
                   </h2>
@@ -359,9 +358,9 @@ const submitSurvey = () => {
 
                   <!-- Feature Card 2 -->
                   <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
-                    <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-lightblue/10 transition-colors">
-                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-lightblue transition-all duration-500">
-                        <Icon name="verifiedUser" class="w-10 h-10 text-foundation-lightblue group-hover:text-white" />
+                    <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-blue/10 transition-colors">
+                      <div class="w-20 h-20 bg-foundation-blue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-blue transition-all duration-500">
+                        <Icon name="verifiedUser" class="w-10 h-10 text-foundation-blue group-hover:text-white" />
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">{{ t('service_home_care.advantage.feature2_title') }}</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">{{ t('service_home_care.advantage.feature2_desc') }}</p>
@@ -380,9 +379,9 @@ const submitSurvey = () => {
 
                   <!-- Feature Card 3 -->
                   <div class="group p-2 rounded-[56px] bg-gradient-to-br from-gray-50 to-white hover:shadow-2xl transition-all duration-700">
-                    <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-lightblue/10 transition-colors">
-                      <div class="w-20 h-20 bg-foundation-lightblue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-lightblue transition-all duration-500">
-                        <Icon name="verifiedUser" class="w-10 h-10 text-foundation-lightblue group-hover:text-white" />
+                    <div class="bg-white rounded-[50px] p-6 lg:p-12 h-full border border-gray-100 group-hover:border-foundation-blue/10 transition-colors">
+                      <div class="w-20 h-20 bg-foundation-blue/5 rounded-3xl flex items-center justify-center mb-4 md:mb-10 group-hover:bg-foundation-blue transition-all duration-500">
+                        <Icon name="verifiedUser" class="w-10 h-10 text-foundation-blue group-hover:text-white" />
                       </div>
                       <h4 class="text-2xl md:text-3xl font-black text-foundation-blue mb-6">{{ t('service_home_care.advantage.feature3_title') }}</h4>
                       <p class="text-gray-500 leading-relaxed font-bold mb-10 text-lg italic tracking-tight">{{ t('service_home_care.advantage.feature3_desc') }}</p>
@@ -407,7 +406,7 @@ const submitSurvey = () => {
                 <div class="bg-foundation-blue rounded-[64px] p-8 lg:p-12 relative overflow-hidden flex flex-col gap-[2rem] items-center">
                    <div class="relative z-10 grid grid-cols-[1fr_auto] items-center gap-[2rem]">
                     <div>
-                     <span class="text-foundation-lightblue font-black text-sm tracking-[0.3em] uppercase">{{ t('service_home_care.advantage.excellence_badge') }}</span>
+                     <span class="text-foundation-beige font-black text-sm tracking-[0.3em] uppercase">{{ t('service_home_care.advantage.excellence_badge') }}</span>
                      <h3 class="text-3xl font-black text-white leading-tight">{{ t('service_home_care.advantage.excellence_title') }}</h3>
                     </div>
                     <div class=" w-16 h-16 bg-foundation-lightblue rounded-3xl shadow-2xl animate-bounce-slow flex items-center justify-center">
@@ -475,19 +474,19 @@ const submitSurvey = () => {
                       
                       <div class="space-y-6">
                         <div class="space-y-3">
-                           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.group_name') }}</label>
-                           <input v-model="surveyData.groupName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm" :placeholder="t('service_home_care.survey.group_name_placeholder')">
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.group_name') }}</label>
+                           <input v-model="surveyData.groupName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm" :placeholder="t('service_home_care.survey.group_name_placeholder')">
                         </div>
                         
                         <div class="space-y-3">
-                           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.still_operating') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.still_operating') }}</label>
                            <div class="flex space-x-4">
-                              <button v-for="opt in [{l: t('service_home_care.survey.yes'), v:true}, {l: t('service_home_care.survey.no'), v:false}]" :key="opt.l" @click="surveyData.stillOperating = opt.v" :class="['flex-1 py-3 lg:py-5 rounded-2xl font-black transition-all border-2', surveyData.stillOperating === opt.v ? 'bg-foundation-blue text-white border-foundation-blue shadow-lg shadow-foundation-blue/20' : 'bg-white text-gray-500 border-gray-100 hover:border-foundation-blue/30']">{{ opt.l }}</button>
+                              <button v-for="opt in [{l: t('service_home_care.survey.yes'), v:true}, {l: t('service_home_care.survey.no'), v:false}]" :key="opt.l" @click="surveyData.stillOperating = opt.v" :class="['flex-1 py-3 rounded-2xl font-black transition-all border-2', surveyData.stillOperating === opt.v ? 'bg-foundation-blue text-white border-foundation-blue shadow-lg shadow-foundation-blue/20' : 'bg-white text-gray-500 border-gray-100 hover:border-foundation-blue/30']">{{ opt.l }}</button>
                            </div>
                         </div>
 
                         <div class="space-y-4">
-                           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.founded_how') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.founded_how') }}</label>
                            <div class="space-y-3">
                              <label v-for="opt in foundedByOptions" :key="opt" class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border border-gray-100 cursor-pointer hover:border-foundation-blue/30 transition-all group">
                                 <div class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-foundation-blue">
@@ -501,7 +500,7 @@ const submitSurvey = () => {
                         </div>
 
                         <div class="space-y-4">
-                           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.admin_location_label') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.admin_location_label') }}</label>
                            <div class="space-y-3">
                              <label v-for="opt in adminLocationOptions" :key="opt" class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border border-gray-100 cursor-pointer hover:border-foundation-blue/30 transition-all group">
                                 <div class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-foundation-blue">
@@ -515,9 +514,9 @@ const submitSurvey = () => {
                         </div>
 
                         <div class="space-y-4">
-                           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.motivation_label') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.motivation_label') }}</label>
                            <div class="flex flex-wrap gap-2">
-                             <label v-for="opt in motivationOptions" :key="opt" class="flex items-center px-6 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" :class="surveyData.motivation.includes(opt) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
+                             <label v-for="opt in motivationOptions" :key="opt" class="flex items-center px-5 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" :class="surveyData.motivation.includes(opt) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
                                 <input type="checkbox" v-model="surveyData.motivation" :value="opt" :disabled="surveyData.motivation.length >= 3 && !surveyData.motivation.includes(opt)" class="hidden">
                                 <span>{{ opt }}</span>
                              </label>
@@ -543,7 +542,7 @@ const submitSurvey = () => {
                         {{ t('service_home_care.survey.step3_title') }}
                       </p>
                       <div class="space-y-4">
-                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.step3_subtitle') }}</label>
+                         <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.step3_subtitle') }}</label>
                          <div class="space-y-3">
                            <label v-for="opt in notJoiningReasonsOptions" :key="opt" class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
                               <div class="w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center transition-colors" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
@@ -572,15 +571,15 @@ const submitSurvey = () => {
                         <p class="text-xl font-black mb-8 italic leading-snug">{{ t('service_home_care.survey.step4_question') }}</p>
                         <div class="flex flex-wrap gap-4">
                           <button @click="surveyData.interestInFuture = 'yes'" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'yes' ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_yes') }}</button>
-                          <button @click="surveyData.interestInFuture = 'no'" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'no' ? 'bg-gray-800 text-white scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_no') }}</button>
+                          <button @click="surveyData.interestInFuture = 'no'" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'no' ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_no') }}</button>
                         </div>
                       </div>
                       <div class="absolute -right-20 -top-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
                     </div>
 
                     <div class="space-y-5">
-                       <h4 class="text-foundation-blue font-black uppercase tracking-widest text-xs flex items-center bg-foundation-blue/5 self-start px-4 py-2 rounded-full">
-                         {{ t('service_home_care.survey.desired_services_label') }}
+                       <h4 class="text-foundation-blue font-black uppercase tracking-widest flex items-center self-start p-2">
+                         {{ t('service_home_care.survey.desired_services_label') }} ?
                        </h4>
                        <div class="space-y-3">
                           <label v-for="svc in desiredServicesOptions" :key="svc" class="flex items-center flex-wrap p-3 lg:p-5 rounded-3xl bg-white border-2 border-gray-50 cursor-pointer hover:shadow-xl hover:border-foundation-blue/30 transition-all group">
@@ -595,22 +594,22 @@ const submitSurvey = () => {
 
                     <div class="space-y-5 pt-8 border-t border-gray-100">
                        <div class="space-y-2">
-                         <h4 class="text-foundation-blue font-black uppercase tracking-widest text-xs ml-1">{{ t('service_home_care.survey.contact_title') }}</h4>
-                         <p class="text-gray-400 text-xs">{{ t('service_home_care.survey.contact_subtitle') }}</p>
+                         <h4 class="text-foundation-blue font-black uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_title') }}</h4>
+                         <p class="text-gray-400 text-sm">{{ t('service_home_care.survey.contact_subtitle') }}</p>
                        </div>
                        
                        <div class="space-y-6">
                           <!-- Single Column Start -->
                           <div class="space-y-3">
-                            <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_name') }}</label>
-                            <input v-model="surveyData.contact.clinicName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm">
+                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_name') }}</label>
+                            <input v-model="surveyData.contact.clinicName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm">
                           </div>
 
                           <div class="space-y-3">
-                            <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_person') }}</label>
+                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_person') }}</label>
                             <div class="flex flex-col sm:flex-row gap-4">
-                              <input v-model="surveyData.contact.name" :placeholder="t('service_home_care.survey.name_placeholder')" class="flex-[2] bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
-                              <select v-model="surveyData.contact.jobTitle" class="flex-1 bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue text-gray-500 font-black text-sm shadow-sm">
+                              <input v-model="surveyData.contact.name" :placeholder="t('service_home_care.survey.name_placeholder')" class="flex-[2] bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <select v-model="surveyData.contact.jobTitle" class="flex-1 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-gray-500 font-black text-sm shadow-sm">
                                 <option value="" disabled>{{ t('service_home_care.survey.select_job_title') }}</option>
                                 <option v-for="title in jobTitleOptions" :key="title" :value="title">{{ title }}</option>
                               </select>
@@ -618,18 +617,18 @@ const submitSurvey = () => {
                           </div>
 
                           <div class="space-y-3">
-                            <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_method') }}</label>
+                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_method') }}</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              <input v-model="surveyData.contact.phone" :placeholder="t('service_home_care.survey.phone_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
-                              <input v-model="surveyData.contact.mobile" :placeholder="t('service_home_care.survey.mobile_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <input v-model="surveyData.contact.phone" :placeholder="t('service_home_care.survey.phone_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <input v-model="surveyData.contact.mobile" :placeholder="t('service_home_care.survey.mobile_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
                             </div>
-                            <input v-model="surveyData.contact.email" :placeholder="t('service_home_care.survey.email_placeholder')" class="w-full mt-4 bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                            <input v-model="surveyData.contact.email" :placeholder="t('service_home_care.survey.email_placeholder')" class="w-full mt-4 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
                           </div>
 
                           <div class="space-y-4">
-                             <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_type_label') }}</label>
+                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_type_label') }}</label>
                              <div class="flex flex-wrap gap-2">
-                               <label v-for="type in clinicTypeOptions" :key="type" class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-[12px] font-black" :class="surveyData.contact.clinicType.includes(type) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
+                               <label v-for="type in clinicTypeOptions" :key="type" class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-sm font-black" :class="surveyData.contact.clinicType.includes(type) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
                                  <input type="checkbox" v-model="surveyData.contact.clinicType" :value="type" class="hidden">
                                  <span>{{ type }}</span>
                                </label>
@@ -637,23 +636,23 @@ const submitSurvey = () => {
                           </div>
 
                           <div class="space-y-3">
-                             <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_address') }}</label>
-                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                               <select v-model="surveyData.contact.address.city" class="bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue text-xs font-black shadow-sm">
+                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_address') }}</label>
+                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                               <select v-model="surveyData.contact.address.city" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
                                  <option value="">{{ t('service_home_care.survey.select_city') }}</option>
                                </select>
-                               <select v-model="surveyData.contact.address.district" class="bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue text-xs font-black shadow-sm">
+                               <select v-model="surveyData.contact.address.district" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
                                  <option value="">{{ t('service_home_care.survey.select_district') }}</option>
                                </select>
-                               <input v-model="surveyData.contact.address.detail" :placeholder="t('service_home_care.survey.address_detail')" class="bg-white rounded-2xl text-sm lg:text-base px-4 lg:px-8 py-3 lg:py-5 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                               <input v-model="surveyData.contact.address.detail" :placeholder="t('service_home_care.survey.address_detail')" class="sm:col-span-2 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
                              </div>
                           </div>
 
                           <div class="space-y-3">
                             <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.preferred_time') }}</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                               <label v-for="time in preferredTimeOptions" :key="time" class="flex flex-col items-center justify-center p-3 lg:p-4 rounded-2xl border-2 cursor-pointer transition-all" :class="surveyData.contact.preferredTime.includes(time) ? 'bg-foundation-blue/5 border-foundation-blue text-foundation-blue' : 'bg-white border-gray-100 text-gray-400 hover:border-foundation-blue/20'">
-                                 <input type="checkbox" v-model="surveyData.contact.preferredTime" :value="time" class="mb-2 accent-foundation-blue">
+                               <label v-for="time in preferredTimeOptions" :key="time" class="flex gap-2 items-center justify-center py-3 px-4 rounded-2xl border-2 cursor-pointer transition-all" :class="surveyData.contact.preferredTime.includes(time) ? 'bg-foundation-blue/5 border-foundation-blue text-foundation-blue' : 'bg-white border-gray-100 text-gray-400 hover:border-foundation-blue/20'">
+                                 <input type="checkbox" v-model="surveyData.contact.preferredTime" :value="time" class="accent-foundation-blue">
                                  <span class="text-xs font-bold">{{ time }}</span>
                                </label>
                             </div>
@@ -661,8 +660,8 @@ const submitSurvey = () => {
                           <!-- Single Column End -->
                        </div>
                        
-                       <div class="pt-16">
-                          <button @click="submitSurvey" class="w-full py-4 lg:py-8 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6">
+                       <div class="pt-16 flex flex-col items-center justify-center">
+                          <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6">
                             <span >{{ t('service_home_care.survey.submit_button') }}</span>
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                               <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />

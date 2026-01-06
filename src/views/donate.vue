@@ -98,7 +98,7 @@ const donationMethods = computed(() => [
       <section class="bg-white rounded-[40px] shadow-premium p-8 md:p-10 mb-16 relative overflow-hidden text-center border border-gray-100">
         <div class="absolute top-0 right-0 w-64 h-64 bg-foundation-blue/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
         <div class="relative z-10 max-w-3xl mx-auto space-y-6">
-          <span class="inline-block px-4 py-1.5 bg-foundation-blue/10 text-foundation-blue rounded-full text-xs font-black tracking-widest uppercase">{{ t('donate.intro.badge') }}</span>
+          <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('donate.intro.badge') }}</span>
           <h2 class="text-2xl md:text-5xl font-black text-foundation-blue leading-tight italic" v-html="t('donate.intro.title')"></h2>
           <p class="text-gray-500 text-lg font-medium leading-relaxed italic" v-html="t('donate.intro.description')"></p>
           <div class="pt-8 flex justify-center">
@@ -126,7 +126,7 @@ const donationMethods = computed(() => [
           <div class="border-b border-gray-50 bg-gradient-to-br from-white to-gray-50/50">
             <div class="flex gap-2 items-center justify-between mb-4">
               <h3 class="text-3xl font-black text-foundation-blue tracking-tighter">{{ method.title }}</h3>
-              <div class="w-16 h-16 bg-foundation-blue/5 rounded-3xl flex items-center justify-center text-foundation-blue group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+              <div class="w-16 h-16 bg-foundation-blue/5 rounded-3xl flex items-center justify-center text-foundation-blue group-hover:bg-foundation-blue group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                   <Icon v-if="method.icon === 'post'" name="mailOutline" class="w-8 h-8" />
                   <Icon v-if="method.icon === 'atm'" name="bank" class="w-8 h-8" />
                   <Icon v-if="method.icon === 'check'" name="checkOutline" class="w-8 h-8" />
@@ -159,7 +159,7 @@ const donationMethods = computed(() => [
 
       <!-- Footer Help Section -->
       <section class="mt-24 text-center space-y-8 pb-10">
-         <div class="w-20 h-1 bg-foundation-lightblue mx-auto rounded-full"></div>
+         <div class="w-20 h-1 bg-foundation-beige mx-auto rounded-full"></div>
          <p class="text-foundation-blue font-black text-xl italic">
            {{ t('donate.footer.message') }}
          </p>

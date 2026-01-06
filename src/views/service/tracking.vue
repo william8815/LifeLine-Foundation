@@ -81,7 +81,7 @@ const reportingMethods = computed(() => [
               >
                 <span :class="[
                   'w-1.5 h-1.5 rounded-full transition-all duration-300',
-                  activeTab === tab.id ? 'bg-foundation-lightblue scale-150' : 'bg-gray-300 group-hover:bg-foundation-blue'
+                  activeTab === tab.id ? 'bg-foundation-beige scale-150' : 'bg-gray-300 group-hover:bg-foundation-beige'
                 ]"></span>
                 <span class="font-black tracking-widest text-sm text-left">{{ tab.name }}</span>
               </button>
@@ -96,7 +96,7 @@ const reportingMethods = computed(() => [
             <div v-if="activeTab === 'workflow'" :key="'workflow'" class="space-y-12">
                <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100 overflow-hidden">
                   <h2 class="text-3xl font-black text-foundation-blue mb-8 italic flex items-center">
-                    <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
+                    <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
                     {{ t('service_tracking.workflow.title') }}
                   </h2>
                   <p class="text-gray-500 text-lg md:text-xl font-medium leading-[1.8] mb-12 italic">
@@ -142,16 +142,19 @@ const reportingMethods = computed(() => [
             <!-- Tab: Device -->
             <div v-else-if="activeTab === 'device'" :key="'device'" class="space-y-12">
                <div class="bg-white rounded-[40px] p-10 shadow-premium border border-gray-100">
-                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-                    <h2 class="lg:col-span-2 text-4xl font-black text-foundation-blue tracking-tighter italic">{{ t('service_tracking.device.title') }}</h2>
-                    <p class="lg:col-span-2 text-foundation-lightblue font-black text-lg ">{{ t('service_tracking.device.subtitle') }}</p>
-                    <div class="lg:col-span-2 relative rounded-[1.5rem] overflow-hidden shadow-xl border border-gray-50 group">
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                    <h2 class="text-3xl font-black text-foundation-blue italic flex items-center">
+                      <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                      {{ t('service_tracking.device.title') }}
+                    </h2>
+                    <p class="lg:col-span-2 text-gray-500 text-lg ">{{ t('service_tracking.device.subtitle') }}</p>
+                    <div class="md:col-span-1 relative rounded-[1.5rem] overflow-hidden shadow-xl border border-gray-50 group">
                       <img :src="tracking2_1" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded.tracking2_1 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking2_1 = true">
                       <div class="absolute top-6 left-6">
                         <span class="px-6 py-2 bg-foundation-blue text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">{{ t('service_tracking.device.badge') }}</span>
                       </div>
                     </div>
-                    <p class="lg:col-span-2 text-gray-500 font-medium leading-relaxed italic">
+                    <p class="md:col-span-1 text-gray-500 font-medium leading-relaxed italic">
                       {{ t('service_tracking.device.description') }}
                     </p>
                     <!-- Features List -->
@@ -176,25 +179,29 @@ const reportingMethods = computed(() => [
             <!-- Tab: Pricing -->
             <div v-else-if="activeTab === 'pricing'" :key="'pricing'" class="space-y-12">
                <div class="bg-white rounded-[40px] p-4 lg:p-10 shadow-premium border border-gray-100 relative overflow-hidden">
-                  <div class="relative z-10 max-w-2xl mx-auto grid gap-6">
-                    <h2 class="text-4xl font-black text-foundation-blue italic">{{ t('service_tracking.pricing.title') }}</h2>
-                    <p class="text-gray-500 font-medium text-lg leading-relaxed">
-                      {{ t('service_tracking.pricing.description') }}
-                    </p>
+                  <div class="relative z-10 max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6">
+                    <h2 class="text-3xl font-black text-foundation-blue italic flex items-center md:col-span-2">
+                      <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                      {{ t('service_tracking.pricing.title') }}
+                    </h2>
+                    <div>
+                      <p class="text-gray-500 font-medium text-lg leading-relaxed mb-3">
+                        {{ t('service_tracking.pricing.description') }}
+                      </p>
+                      <p class="text-gray-400 font-bold text-sm" v-html="t('service_tracking.pricing.notes')"></p>
+                    </div>
 
                     <div class="p-4 bg-foundation-blue rounded-[40px] text-white shadow-2xl shadow-foundation-blue/20 flex flex-col items-center gap-4 justify-center mx-auto min-w-[250px]">
-                       <span class="text-blue-200 font-black uppercase tracking-widest text-sm ">{{ t('service_tracking.pricing.device_label') }}</span>
-                       <div class="flex items-baseline space-x-2">
-                          <span class="text-2xl font-black opacity-60">NT.</span>
-                          <span class="text-5xl font-black italic tracking-tighter">200</span>
-                       </div>
+                      <span class="text-blue-200 font-black uppercase tracking-widest text-sm ">{{ t('service_tracking.pricing.device_label') }}</span>
+                      <div class="flex items-baseline space-x-2">
+                        <span class="text-2xl font-black opacity-60">NT.</span>
+                        <span class="text-5xl font-black italic tracking-tighter">200</span>
+                      </div>
                        
                        <a href="#" class="w-full md:w-auto px-8 py-3 bg-white text-foundation-blue rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl text-center">
                          {{ t('service_tracking.pricing.buy_now') }}
                        </a>
                     </div>
-
-                    <p class="text-gray-400 font-bold text-sm" v-html="t('service_tracking.pricing.notes')"></p>
                   </div>
                </div>
             </div>

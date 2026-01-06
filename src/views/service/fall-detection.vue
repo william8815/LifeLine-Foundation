@@ -106,7 +106,7 @@ const subsidies = computed(() => [
               >
                 <span :class="[
                   'w-1.5 h-1.5 rounded-full transition-all duration-300',
-                  activeTab === tab.id ? 'bg-foundation-lightblue scale-150' : 'bg-gray-300 group-hover:bg-foundation-blue'
+                  activeTab === tab.id ? 'bg-foundation-beige scale-150' : 'bg-gray-300 group-hover:bg-foundation-beige'
                 ]"></span>
                 <span class="font-black tracking-widest text-sm text-left">{{ tab.name }}</span>
               </button>
@@ -121,7 +121,7 @@ const subsidies = computed(() => [
             <div v-if="activeTab === 'device'" :key="'device'" class="space-y-12">
                <div class="bg-white rounded-[40px] p-6 md:p-10 shadow-premium border border-gray-100">
                   <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-12 italic flex items-center">
-                    <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
+                    <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
                     {{ t('service_fall_detection.device.title') }}
                   </h2>
                   
@@ -141,21 +141,27 @@ const subsidies = computed(() => [
 
             <!-- Tab: Features -->
             <div v-else-if="activeTab === 'features'" :key="'features'" class="space-y-8">
-               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div 
-                    v-for="(feature, idx) in features" 
-                    :key="idx"
-                    class="bg-white rounded-[40px] overflow-hidden shadow-premium border border-gray-100 group"
-                  >
-                    <div class="aspect-[16/9] overflow-hidden">
-                       <img :src="feature.image" class="w-full h-full object-contain transition-all duration-500" :class="imageLoaded.falldetection1_1 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.falldetection1_1 = true">
+              <div class="bg-white rounded-[40px] p-6 md:p-10 shadow-premium border border-gray-100">
+                <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-12 italic flex items-center">
+                  <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                  {{ t('service_fall_detection.tabs.features') }}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div 
+                      v-for="(feature, idx) in features" 
+                      :key="idx"
+                      class="bg-white rounded-[40px] overflow-hidden shadow-premium border border-gray-100 group"
+                    >
+                      <div class="aspect-[16/9] overflow-hidden">
+                        <img :src="feature.image" class="w-full h-full object-contain transition-all duration-500" :class="imageLoaded.falldetection1_1 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.falldetection1_1 = true">
+                      </div>
+                      <div class="p-10">
+                        <h3 class="text-2xl font-black text-foundation-blue mb-4 tracking-tighter italic">{{ feature.title }}</h3>
+                        <p class="text-gray-500 font-medium leading-relaxed">{{ feature.desc }}</p>
+                      </div>
                     </div>
-                    <div class="p-10">
-                       <h3 class="text-2xl font-black text-foundation-blue mb-4 tracking-tighter italic">{{ feature.title }}</h3>
-                       <p class="text-gray-500 font-medium leading-relaxed">{{ feature.desc }}</p>
-                    </div>
-                  </div>
-               </div>
+                </div>
+              </div>
             </div>
 
             <!-- Tab: Pricing -->
@@ -172,7 +178,10 @@ const subsidies = computed(() => [
                   <!-- Price Card -->
                   <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 items-center">
                     <div class="xl:col-span-7 space-y-10">
-                       <h2 class="text-2xl md:text-4xl font-black text-foundation-blue italic">{{ t('service_fall_detection.pricing.title') }}</h2>
+                        <h2 class="text-2xl md:text-3xl font-black text-foundation-blue mb-12 italic flex items-center">
+                          <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                          {{ t('service_fall_detection.pricing.title') }}
+                        </h2>
                        <div class="space-y-4">
                           <div v-for="sub in subsidies" :key="sub.level" class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-foundation-blue transition-all duration-300">
                              <div class="flex items-center space-x-4">

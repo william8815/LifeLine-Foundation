@@ -104,7 +104,7 @@ const submitForm = async () => {
         <section class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100 overflow-hidden relative">
           <div class="relative z-10">
             <h2 class="text-3xl font-black text-foundation-blue mb-8 italic flex items-center">
-              <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
+              <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
               {{ t('service_risk_check.intro.title') }}
             </h2>
             <div class="space-y-6 text-gray-500 text-lg md:text-xl font-medium leading-relaxed italic">
@@ -132,13 +132,13 @@ const submitForm = async () => {
               </thead>
               <tbody class="divide-y divide-gray-50">
                 <tr v-for="(q, idx) in questions" :key="idx" class="group hover:bg-foundation-blue/10 transition-colors">
-                  <td class="px-4 md:px-8 py-6 md:py-10 transition-colors">
+                  <td class="px-4 py-6 transition-colors">
                     <div class="flex items-center gap-3 md:gap-6">
-                       <span class="text-foundation-lightblue font-black text-base md:text-xl italic group-hover:scale-110 transition-transform shrink-0">{{ String(idx + 1).padStart(2, '0') }}</span>
+                       <span class="text-foundation-blue font-black text-base md:text-xl italic group-hover:scale-110 transition-transform shrink-0">{{ String(idx + 1).padStart(2, '0') }}</span>
                        <span class="text-gray-600 font-bold text-sm md:text-lg leading-relaxed group-hover:text-foundation-blue transition-colors">{{ q }}</span>
                     </div>
                   </td>
-                  <td class="px-2 md:px-8 py-6 md:py-10 text-center ">
+                  <td class="px-2 py-6 text-center ">
                     <label class="relative inline-flex items-center cursor-pointer group/radio">
                       <input 
                         type="radio" 
@@ -155,7 +155,7 @@ const submitForm = async () => {
                       </div>
                     </label>
                   </td>
-                  <td class="px-2 md:px-8 py-6 md:py-10 text-center ">
+                  <td class="px-2 py-6 text-center ">
                     <label class="relative inline-flex items-center cursor-pointer group/radio">
                       <input 
                         type="radio" 
@@ -177,16 +177,16 @@ const submitForm = async () => {
             </table>
           </div>
 
-          <div class="p-8 md:p-12 flex flex-col md:flex-row justify-center gap-4 md:gap-6">
+          <div class="p-6 md:p-10 flex flex-col md:flex-row justify-center md:justify-end gap-4 md:gap-6">
              <button 
                @click="clearForm"
-               class="w-full md:w-auto px-12 py-4 md:py-5 bg-gray-100 text-gray-500 rounded-3xl font-black text-base md:text-lg hover:bg-gray-200 transition-all active:scale-95"
+               class="w-full md:w-auto px-8 py-4 bg-gray-100 text-gray-500 rounded-3xl font-black text-base md:text-lg hover:bg-gray-200 transition-all active:scale-95"
              >
                 {{ t('service_risk_check.survey.clear_button') }}
              </button>
              <button 
                @click="submitForm"
-               class="w-full md:w-auto px-20 py-4 md:py-5 bg-foundation-blue text-white rounded-3xl font-black text-base md:text-lg shadow-xl shadow-foundation-blue/20 hover:scale-105 transition-all active:scale-95"
+               class="w-full md:w-auto px-8 py-4 bg-foundation-blue text-white rounded-3xl font-black text-base md:text-lg shadow-xl shadow-foundation-blue/20 hover:scale-105 transition-all active:scale-95"
              >
                 {{ t('service_risk_check.survey.submit_button') }}
              </button>
@@ -251,7 +251,7 @@ const submitForm = async () => {
                    </div>
 
                    <div class="pt-10">
-                      <RouterLink to="/service-emergency" class="inline-flex items-center space-x-4 px-12 py-5 bg-foundation-blue text-white rounded-[24px] font-black shadow-2xl hover:scale-105 transition-all">
+                      <RouterLink to="/service-emergency" class="inline-flex items-center space-x-4 px-12 py-5 bg-foundation-blue text-white rounded-[24px] font-black shadow-xl hover:scale-105 transition-all">
                          <span>{{ t('service_risk_check.result.cta_button') }}</span>
                          <Icon name="arrowForward" class="w-6 h-6" />
                       </RouterLink>

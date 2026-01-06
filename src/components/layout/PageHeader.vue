@@ -36,7 +36,7 @@ defineProps({
     <div class="container mx-auto px-4 md:px-6 relative z-10">
       <div class="max-w-4xl">
         <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6 group cursor-default">
-          <span class="w-2 h-2 bg-foundation-orange rounded-full animate-pulse"></span>
+          <span class="w-2 h-2 bg-foundation-beige rounded-full animate-pulse"></span>
           <span class="text-white/80 text-xs font-black uppercase tracking-[0.2em]">Lifeline Foundation</span>
         </div>
         
@@ -45,7 +45,7 @@ defineProps({
         </h1>
         
         <div v-if="subtitle" class="flex items-center">
-          <div class="h-px w-12 bg-foundation-orange mr-6"></div>
+          <div class="h-px w-12 bg-foundation-beige mr-6"></div>
           <p class="text-foundation-beige font-bold text-lg md:text-2xl tracking-wide uppercase opacity-90">
             {{ subtitle }}
           </p>

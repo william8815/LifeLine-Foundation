@@ -60,7 +60,7 @@ useSeoMeta({
                 </div>
                 <div class="bg-foundation-blue rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
                   <div class="relative z-10 flex flex-col h-full justify-center">
-                    <Icon name="quate" class="w-12 h-12 text-foundation-orange mb-2" />
+                    <Icon name="quate" class="w-12 h-12 text-foundation-beige mb-2" />
                     <p class="text-xl font-bold leading-relaxed italic mb-0">
                       {{ t('about_origin.content.quote') }}
                     </p>

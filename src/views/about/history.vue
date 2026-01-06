@@ -89,8 +89,7 @@ const timeline = computed(() => [
                   </div>
 
                   <!-- Center Dot -->
-                  <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-4 border-white shadow-md z-20 -translate-x-1/2 transition-all duration-500 group-hover:scale-150"
-                       :class="item.type === 'award' ? 'bg-foundation-orange shadow-foundation-orange/50' : 'bg-foundation-orange shadow-foundation-orange/50'">
+                  <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-foundation-beige shadow-foundation-beige border-4 border-white shadow-md z-20 -translate-x-1/2 transition-all duration-500 group-hover:scale-150 group-hover:bg-foundation-orange">
                   </div>
 
                   <!-- Date for MD+ screens -->

@@ -182,7 +182,7 @@ const devices = computed(() => ({
               >
                 <span :class="[
                   'w-1.5 h-1.5 rounded-full transition-all duration-300',
-                  activeTab === tab.id ? 'bg-foundation-lightblue scale-150' : 'bg-gray-300 group-hover:bg-foundation-blue'
+                  activeTab === tab.id ? 'bg-foundation-beige scale-150' : 'bg-gray-300 group-hover:bg-foundation-beige'
                 ]"></span>
                 <span class="font-black tracking-widest text-sm text-left">{{ tab.name }}</span>
               </button>
@@ -201,7 +201,7 @@ const devices = computed(() => ({
               <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100 relative overflow-hidden">
                 <div class="relative z-10">
                    <h2 class="text-3xl md:text-4xl font-black text-foundation-blue mb-8 flex items-center italic">
-                     <span class="w-12 h-1.5 bg-foundation-lightblue mr-6 rounded-full"></span>
+                     <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
                      {{ t('service_emergency.intro.title') }}
                    </h2>
                    <div class="space-y-6 text-gray-500 text-lg md:text-xl font-medium leading-[2] italic">
@@ -216,7 +216,11 @@ const devices = computed(() => ({
             <!-- Tab: Workflow -->
             <div v-else-if="activeTab === 'workflow'" :key="'workflow'" class="space-y-12">
               <div class="bg-white rounded-[40px] p-8 md:p-16 shadow-premium border border-gray-100 overflow-hidden">
-                <h2 class="text-3xl font-black text-foundation-blue mb-16 italic text-center">{{ t('service_emergency.workflow.title') }}</h2>
+
+                <h2 class="text-3xl md:text-4xl font-black text-foundation-blue mb-8 flex items-center italic">
+                  <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                  {{ t('service_emergency.workflow.title') }}
+                </h2>
                 
                 <div class="space-y-16 md:space-y-24 relative">
                    <!-- Vertical connector line for desktop -->
@@ -230,7 +234,7 @@ const devices = computed(() => ({
                    >
                       <!-- Image Side -->
                       <div class="w-full md:w-1/2">
-                        <div class="relative aspect-video rounded-[32px] overflow-hidden shadow-xl border border-gray-100 transition-all duration-700 group-hover:shadow-foundation-blue/10 group-hover:-translate-y-2">
+                        <div class="relative rounded-[32px] overflow-hidden shadow-xl border border-gray-100 transition-all duration-700 group-hover:shadow-foundation-blue/10 group-hover:-translate-y-2">
                            <img :src="step.image" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" :class="imageLoaded[step.image] ? 'opacity-100' : 'opacity-0'"  :alt="step.title" loading="lazy" @load="imageLoaded[step.image] = true">
                            <!-- Step Number Badge Overlay -->
                            <div class="absolute top-4" :class="idx % 2 === 1 ? 'right-4' : 'left-4'">
@@ -266,8 +270,10 @@ const devices = computed(() => ({
                 <!-- Peace Machines -->
                 <section>
                   <div class="flex items-center space-x-6 mb-10">
-                    <h2 class="text-3xl font-black text-foundation-blue">{{ t('service_emergency.devices.machines_title') }}</h2>
-                    <div class="h-px flex-grow bg-gray-100"></div>
+                    <h2 class="text-3xl md:text-4xl font-black text-foundation-blue flex items-center italic">
+                      <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                      {{ t('service_emergency.devices.machines_title') }}
+                    </h2>
                   </div>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div v-for="machine in devices.machines" :key="machine.type" class="bg-white rounded-[40px] overflow-hidden shadow-premium border border-gray-100 group">
@@ -277,7 +283,7 @@ const devices = computed(() => ({
                             <span class="px-6 py-2 bg-foundation-blue text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">{{ machine.type }}</span>
                           </div>
                         </div>
-                        <div class="p-6 md:p-10">
+                        <div class="p-6">
                           <p class="text-gray-500 font-medium mb-8 italic-prose leading-relaxed">{{ machine.desc }}</p>
                           <ul class="space-y-4">
                               <li v-for="f in machine.features" :key="f" class="flex items-start text-sm font-medium text-gray-400 group/li">
@@ -293,17 +299,19 @@ const devices = computed(() => ({
                 <!-- Transmitters -->
                 <section>
                   <div class="flex items-center space-x-6 mt-10 mb-10">
-                    <h2 class="text-3xl font-black text-foundation-blue">{{ t('service_emergency.devices.transmitters_title') }}</h2>
-                    <div class="h-px flex-grow bg-gray-100"></div>
+                    <h2 class="text-3xl md:text-4xl font-black text-foundation-blue flex items-center italic">
+                      <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                      {{ t('service_emergency.devices.transmitters_title') }}
+                    </h2>
                   </div>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div v-for="item in devices.transmitters" :key="item.type" class="bg-white rounded-[40px] p-10 shadow-premium border border-gray-100 group">
-                        <div class="aspect-square rounded-[32px] overflow-hidden mb-10 border border-gray-50">
+                    <div v-for="item in devices.transmitters" :key="item.type" class="bg-white rounded-[40px] p-6 shadow-premium border border-gray-100 group">
+                        <div class="aspect-square rounded-[32px] overflow-hidden mb-4 border border-gray-50">
                           <img :src="item.image" class="w-full h-full object-cover transition-transform duration-1000">
                         </div>
                         <h3 class="text-2xl font-black text-foundation-blue mb-4 tracking-tighter">{{ item.type }}</h3>
-                        <p class="text-gray-400 font-medium text-sm mb-8 leading-relaxed italic">{{ item.desc }}</p>
-                        <ul class="space-y-3 border-t border-gray-50">
+                        <p class="text-gray-400 font-medium text-sm mb-4 leading-relaxed italic">{{ item.desc }}</p>
+                        <ul class="space-y-2 border-t border-gray-50 pt-4">
                           <li v-for="spec in item.specs" :key="spec" class="flex items-start text-xs font-bold text-gray-400">
                               <span class="w-1.5 h-1.5 rounded-full bg-foundation-lightblue mr-3 mt-1.5 shrink-0"></span>
                               {{ spec }}
@@ -320,12 +328,15 @@ const devices = computed(() => ({
               <div class="bg-white rounded-[40px] p-10 md:p-16 shadow-premium border border-gray-100 relative overflow-hidden">
                 <div class="relative z-10 flex flex-col xl:flex-row items-center gap-16">
                    <div class="flex-grow space-y-8">
-                      <h2 class="text-3xl md:text-4xl font-black text-foundation-blue italic">{{ t('service_emergency.fees.title') }}</h2>
+                      <h2 class="text-3xl md:text-4xl font-black text-foundation-blue flex items-center italic">
+                        <span class="w-12 h-1.5 bg-foundation-beige mr-6 rounded-full"></span>
+                        {{ t('service_emergency.fees.title') }}
+                      </h2>
                       <div class="space-y-6 text-gray-500 text-lg font-medium leading-relaxed italic">
                          <p>{{ t('service_emergency.fees.paragraph1') }}</p>
                          <p>{{ t('service_emergency.fees.paragraph2') }}</p>
                          <p class="text-foundation-blue font-black">{{ t('service_emergency.fees.paragraph3') }}</p>
-                         <p class="text-sm bg-gray-50 p-4 rounded-xl border-l-4 border-foundation-lightblue">{{ t('service_emergency.fees.note') }}</p>
+                         <p class="text-sm bg-gray-50 p-4 rounded-xl border-l-4 border-foundation-beige">{{ t('service_emergency.fees.note') }}</p>
                       </div>
                    </div>
                    <div class="w-full md:w-80 shrink-0">
@@ -333,7 +344,7 @@ const devices = computed(() => ({
                          <div class="relative z-10 space-y-8">
                             <div>
                                <p class="text-[10px] font-black uppercase tracking-widest text-blue-200 mb-2">{{ t('service_emergency.fees.hotline_label') }}</p>
-                               <a href="tel:0800056789" class="text-2xl font-black hover:text-foundation-lightblue transition-colors">0800-056-789</a>
+                               <a href="tel:0800056789" class="text-2xl font-black hover:text-foundation-beige transition-colors">0800-056-789</a>
                             </div>
                             <div class="pt-8 border-t border-white/10">
                                <p class="text-sm font-bold opacity-80 mb-6 italic">{{ t('service_emergency.fees.more_info') }}</p>

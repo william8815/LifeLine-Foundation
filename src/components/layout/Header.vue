@@ -73,13 +73,9 @@ const isActive = (path) => route.path === path
     <div class="container mx-auto px-4 md:px-6 flex justify-between items-center w-full">
       <!-- Logo Section -->
       <RouterLink to="/" class="flex items-center group" @click="closeMenu">
-        <!-- <div class="relative w-11 h-11 bg-foundation-blue rounded-xl flex items-center justify-center shadow-md group-hover:rotate-12 transition-transform duration-300">
-          <span class="text-white font-black text-2xl tracking-tighter">L</span>
-          <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-foundation-orange rounded-full border-2 border-white"></div>
-        </div> -->
         <div class="flex flex-col">
           <span class="text-foundation-blue font-extrabold text-xl leading-none tracking-tight uppercase">{{ t('common.foundation_name_en') }}</span>
-          <span class="text-foundation-orange text-[10px] font-bold tracking-widest uppercase mt-1">{{ t('common.foundation_name') }}</span>
+          <span class="text-foundation-lightblue text-[10px] font-bold tracking-widest uppercase mt-1">{{ t('common.foundation_name') }}</span>
         </div>
       </RouterLink>
 
@@ -131,7 +127,7 @@ const isActive = (path) => route.path === path
 
         <!-- CTA Button -->
         <div class="ml-4 px-4 border-l border-gray-200">
-          <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-full bg-foundation-lightblue text-white text-sm font-black shadow-lg shadow-foundation-blue/30 hover:scale-105 active:scale-95 transition-all">
+          <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-full bg-foundation-lightblue text-white hover:bg-foundation-blue hover:text-white text-sm font-black shadow-lg shadow-foundation-blue/30 hover:scale-105 active:scale-95 transition-all">
             {{ t('nav.donate') }}
             <Icon name="favoriteOutline" class="h-4 w-4 ml-2" />
           </RouterLink>
@@ -146,12 +142,9 @@ const isActive = (path) => route.path === path
       <!-- Mobile Controls -->
       <div class="flex items-center lg:hidden">
         <LanguageSwitcher />
-        <!-- <RouterLink to="/donate" class="mx-2 px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black uppercase tracking-tight">
-          {{ t('nav.donate_short') }}
-        </RouterLink> -->
         <button 
           @click="toggleMenu"
-          class="p-2 text-foundation-blue focus:outline-none"
+          class="p-2 text-gray-500 focus:outline-none"
         >
           <div class="w-6 h-5 flex flex-col justify-between relative">
             <span :class="['w-6 h-0.5 bg-current transition-all duration-300', isMenuOpen ? 'rotate-45 translate-y-2' : '']"></span>

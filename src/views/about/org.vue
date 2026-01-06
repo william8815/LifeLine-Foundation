@@ -64,8 +64,8 @@ const partners = computed(() => [
             <div class="relative mb-16">
               <div class="grid grid-cols-1 gap-16 items-center">
                 <div class="">
-                  <div class="inline-flex items-center space-x-2 bg-foundation-blue/5 text-foundation-blue px-4 py-2 rounded-full mb-8">
-                    <div class="w-1.5 h-1.5 bg-foundation-blue rounded-full animate-ping"></div>
+                  <div class="inline-flex items-center space-x-2 bg-foundation-orange/5 text-foundation-orange px-4 py-2 rounded-full mb-8">
+                    <div class="w-1.5 h-1.5 bg-foundation-orange rounded-full animate-ping"></div>
                     <span class="text-xs font-black uppercase tracking-widest">{{ t('about_org.service.badge') }}</span>
                   </div>
                   <h2 class="text-4xl md:text-6xl font-black text-foundation-blue leading-tight mb-8">
@@ -90,7 +90,6 @@ const partners = computed(() => [
 
             <!-- Stats Bar Section -->
             <div class="mb-32 relative">
-              <div class="absolute -left-12 top-1/2 -translate-y-1/2 w-1 h-24 bg-foundation-orange/30"></div>
               <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-12">
                 <div v-for="(stat, index) in stats" :key="stat.labelKey" class="relative">
                   <div class="flex flex-col items-center">
@@ -112,7 +111,7 @@ const partners = computed(() => [
                     <div class="relative z-10">
                       <p class="text-white/60 text-sm font-black tracking-widest uppercase mb-4">{{ t('about_org.history.founded') }}</p>
                       <p class="text-7xl font-black text-white tracking-tighter italic">{{ t('about_org.stats.stat4_value') }}</p>
-                      <div class="w-12 h-1 bg-foundation-orange mx-auto mt-6 rounded-full"></div>
+                      <div class="w-12 h-1 bg-foundation-beige mx-auto mt-6 rounded-full"></div>
                     </div>
                   </div>
                   <div class="lg:w-2/3 p-6 md:p-10 space-y-8">
@@ -120,7 +119,7 @@ const partners = computed(() => [
                       <h3 class="text-3xl font-black text-foundation-blue mb-6">{{ t('about_org.history.title') }}</h3>
                       <p class="text-gray-600 leading-relaxed text-lg" v-html="t('about_org.history.description')"></p>
                     </div>
-                    <div class="bg-foundation-blue/5 rounded-3xl p-8 border-l-4 border-foundation-orange">
+                    <div class="bg-foundation-blue/5 rounded-3xl p-8 border-l-4 border-foundation-beige">
                       <p class="text-gray-700 font-bold leading-relaxed mb-0 italic">
                         {{ t('about_org.history.quote') }}
                       </p>
