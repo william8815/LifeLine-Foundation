@@ -188,7 +188,11 @@ const reportingMethods = computed(() => [
                       <p class="text-gray-500 font-medium text-lg leading-relaxed mb-3">
                         {{ t('service_tracking.pricing.description') }}
                       </p>
-                      <p class="text-gray-400 font-bold text-sm" v-html="t('service_tracking.pricing.notes')"></p>
+                      <p class="text-gray-400 font-bold text-sm">
+                        <span>{{ t("service_tracking.pricing.notes") }}</span>
+                        <br>
+                        <span>{{ t("service_tracking.pricing.notes2") }}</span>
+                      </p>
                     </div>
 
                     <div class="p-4 bg-foundation-blue rounded-[40px] text-white shadow-2xl shadow-foundation-blue/20 flex flex-col items-center gap-4 justify-center mx-auto min-w-[250px]">

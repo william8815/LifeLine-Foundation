@@ -534,7 +534,8 @@
     },
     "pricing": {
       "title": "费用与政府补助",
-      "notice": "购买前须经政府设置或委托办理之辅具服务单位辅具评估人员（含该单位特约之辅具评估人员）申请开立<span class=\"underline decoration-foundation-lightblue underline-offset-4\">辅具评估报告书</span>。",
+      "notice": "购买前须经政府设置或委托办理之辅具服务单位辅具评估人员（含该单位特约之辅具评估人员）申请开立",
+      "notice2": "辅具评估报告书",
       "subsidy1_level": "低收入户",
       "subsidy1_rate": "最高全额补助",
       "subsidy2_level": "中低收入户",
@@ -592,7 +593,8 @@
       "description": "我们致力于提供可负担且完善的协寻解决方案，让科技守护与预防不再遥不可及。",
       "device_label": "NFC 失踪协寻手环",
       "buy_now": "立即购买",
-      "notes": "* 购买后包含首年协寻平台基本使用权限。<br>* 详细购买细节与退换货政策请参阅平台规范。"
+      "notes": "* 购买后包含首年协寻平台基本使用权限。",
+      "notes2": "* 详细购买细节与退换货政策请参阅平台规范。"
     }
   },
   "service_risk_check": {
@@ -736,8 +738,10 @@
     },
     "intro": {
       "badge": "Donation Support",
-      "title": "守护弱势长者的健康，<br><span class=\"text-foundation-lightblue\">您也可以尽一份力！</span>",
-      "description": "您的爱心可透过下列管道，传达到长者的身上，<br class=\"hidden md:block\">生命连线基金会感谢您的热心参与。",
+      "title": "守护弱势长者的健康，",
+      "subTitle": "您也可以尽一份力！",
+      "description": "您的爱心可透过下列管道，传达到长者的身上，",
+      "description2": "生命连线基金会感谢您的热心参与。",
       "phone_label": "Toll-Free Support"
     },
     "process_title": "流程说明",

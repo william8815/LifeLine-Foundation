@@ -172,7 +172,10 @@ const subsidies = computed(() => [
                     <div class="w-12 h-12 rounded-2xl bg-foundation-blue text-white flex items-center justify-center shrink-0 shadow-lg">
                       <Icon name="info" class="w-6 h-6" />
                     </div>
-                    <p class="text-foundation-blue font-bold text-lg leading-relaxed" v-html="t('service_fall_detection.pricing.notice')"></p>
+                    <p class="text-foundation-blue font-bold text-lg leading-relaxed">
+                      <span>{{ t('service_fall_detection.pricing.notice') }}</span>
+                      <span class="underline decoration-foundation-lightblue underline-offset-4">{{ t('service_fall_detection.pricing.notice2') }}</span>。
+                    </p>
                   </div>
 
                   <!-- Price Card -->

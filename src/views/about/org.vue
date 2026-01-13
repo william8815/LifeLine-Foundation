@@ -117,7 +117,7 @@ const partners = computed(() => [
                   <div class="lg:w-2/3 p-6 md:p-10 space-y-8">
                     <div>
                       <h3 class="text-3xl font-black text-foundation-blue mb-6">{{ t('about_org.history.title') }}</h3>
-                      <p class="text-gray-600 leading-relaxed text-lg" v-html="t('about_org.history.description')"></p>
+                      <p class="text-gray-600 leading-relaxed text-lg">{{ t("about_org.history.description") }}</p>
                     </div>
                     <div class="bg-foundation-blue/5 rounded-3xl p-8 border-l-4 border-foundation-beige">
                       <p class="text-gray-700 font-bold leading-relaxed mb-0 italic">
@@ -134,7 +134,7 @@ const partners = computed(() => [
               <div>
                 <span class="text-foundation-orange font-black uppercase tracking-widest text-xs mb-4 block">{{ t('about_org.trust.badge') }}</span>
                 <h3 class="text-3xl font-black text-foundation-blue mb-8 leading-tight">{{ t('about_org.trust.title_line1') }}<br>{{ t('about_org.trust.title_line2') }}</h3>
-                <p class="text-gray-600 leading-relaxed text-lg mb-8" v-html="t('about_org.trust.description')"></p>
+                <p class="text-gray-600 leading-relaxed text-lg mb-8">{{ t('about_org.trust.description') }}</p>
                 <div class="flex items-center space-x-6 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   <div class="flex flex-col">
                     <span class="text-4xl font-black text-foundation-blue italic tracking-tighter">{{ t('about_org.trust.north_america') }}</span>

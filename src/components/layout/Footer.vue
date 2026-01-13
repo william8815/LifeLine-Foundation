@@ -61,7 +61,7 @@ const footerLinks = [
             <!-- LINE -->
             <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00c300] transition-all duration-300">
               <span class="sr-only">LINE</span>
-              <Icon name="line" size="20" />
+              <Icon name="line" :size="20" />
             </a>
             <!-- Twitter / X -->
             <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all duration-300">

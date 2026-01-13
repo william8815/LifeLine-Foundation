@@ -534,7 +534,8 @@
     },
     "pricing": {
       "title": "費用與政府補助",
-      "notice": "購買前須經政府設置或委託辦理之輔具服務單位輔具評估人員（含該單位特約之輔具評估人員）申請開立<span class=\"underline decoration-foundation-lightblue underline-offset-4\">輔具評估報告書</span>。",
+      "notice": "購買前須經政府設置或委託辦理之輔具服務單位輔具評估人員（含該單位特約之輔具評估人員）申請開立",
+      "notice2": "輔具評估報告書",
       "subsidy1_level": "低收入戶",
       "subsidy1_rate": "最高全額補助",
       "subsidy2_level": "中低收入戶",
@@ -592,7 +593,8 @@
       "description": "我們致力於提供可負擔且完善的協尋解決方案，讓科技守護與預防不再遙不可及。",
       "device_label": "NFC 失蹤協尋手環",
       "buy_now": "立即購買",
-      "notes": "* 購買後包含首年協尋平台基本使用權限。<br>* 詳細購買細節與退換貨政策請參閱平台規範。"
+      "notes": "* 購買後包含首年協尋平台基本使用權限。",
+      "notes2": "* 詳細購買細節與退換貨政策請參閱平台規範。"
     }
   },
   "service_risk_check": {
@@ -736,8 +738,10 @@
     },
     "intro": {
       "badge": "Donation Support",
-      "title": "守護弱勢長者的健康，<br><span class=\"text-foundation-lightblue\">您也可以盡一份力！</span>",
-      "description": "您的愛心可透過下列管道，傳達到長者的身上，<br class=\"hidden md:block\">生命連線基金會感謝您的熱心參與。",
+      "title": "守護弱勢長者的健康，",
+      "subTitle": "您也可以盡一份力！",
+      "description": "您的愛心可透過下列管道，傳達到長者的身上，",
+      "description2": "生命連線基金會感謝您的熱心參與。",
       "phone_label": "Toll-Free Support"
     },
     "process_title": "流程說明",

@@ -258,7 +258,7 @@ const submitSurvey = () => {
                       </div>
                       <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors duration-1000"></div>
                     </div>
-                    <p class="pt-6" v-html="t('service_home_care.intro.paragraph2')"></p>
+                    <p class="pt-6">{{ t("service_home_care.intro.paragraph2") }}</p>
                   </div>
                 </div>
                 <!-- Image Placeholder -->
@@ -290,9 +290,9 @@ const submitSurvey = () => {
                    <div class="bg-white rounded-[50px] p-2 shadow-[0_40px_100px_rgba(0,0,0,0.08)]">
                      <div class="bg-foundation-blue rounded-[48px] p-12 md:p-16 text-white relative overflow-hidden h-full">
                        <div class="relative z-10">
-                         <p class="text-foundation-beige font-black text-8xl mb-6 italic tracking-tighter drop-shadow-2xl">{{ t('service_home_care.performance.experience_value') }}</p>
-                         <h4 class="text-2xl font-bold mb-6 tracking-wide leading-snug" v-html="t('service_home_care.performance.experience_title')"></h4>
-                         <p class="text-white/60 leading-relaxed font-bold max-w-xs italic">{{ t('service_home_care.performance.experience_desc') }}</p>
+                         <p class="text-foundation-beige font-black text-8xl mb-6 italic tracking-tighter drop-shadow-2xl">{{ t("service_home_care.performance.experience_value") }}</p>
+                         <h4 class="text-2xl font-bold mb-6 tracking-wide leading-snug">{{ t("service_home_care.performance.experience_title") }}</h4>
+                         <p class="text-white/60 leading-relaxed font-bold max-w-xs italic">{{ t("service_home_care.performance.experience_desc") }}</p>
                        </div>
                        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full"></div>
                        <div class="absolute top-10 right-10 opacity-10">

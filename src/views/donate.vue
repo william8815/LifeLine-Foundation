@@ -99,8 +99,16 @@ const donationMethods = computed(() => [
         <div class="absolute top-0 right-0 w-64 h-64 bg-foundation-blue/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
         <div class="relative z-10 max-w-3xl mx-auto space-y-6">
           <span class="inline-block px-4 py-1.5 bg-foundation-orange/10 text-foundation-orange rounded-full text-xs font-black tracking-widest uppercase">{{ t('donate.intro.badge') }}</span>
-          <h2 class="text-2xl md:text-5xl font-black text-foundation-blue leading-tight italic" v-html="t('donate.intro.title')"></h2>
-          <p class="text-gray-500 text-lg font-medium leading-relaxed italic" v-html="t('donate.intro.description')"></p>
+          <h2 class="text-2xl md:text-5xl font-black text-foundation-blue leading-tight italic">
+            <span>{{ t("donate.intro.title") }}</span>
+            <br>
+            <span class="text-foundation-lightblue">{{ t("donate.intro.subTitle") }}</span>
+          </h2>
+          <p class="text-gray-500 text-lg font-medium leading-relaxed italic">
+            {{ t("donate.intro.description") }}
+            <br>
+            {{ t("donate.intro.description2") }}
+          </p>
           <div class="pt-8 flex justify-center">
             <div class="bg-foundation-blue/5 rounded-3xl p-6 md:p-8 flex items-center space-x-6 border border-foundation-blue/10 group hover:bg-foundation-blue hover:text-white transition-all duration-500 cursor-pointer shadow-sm">
                <div class="w-14 h-14 rounded-2xl bg-foundation-blue flex items-center justify-center text-white shrink-0 shadow-lg group-hover:bg-white group-hover:text-foundation-blue">
@@ -164,7 +172,7 @@ const donationMethods = computed(() => [
            {{ t('donate.footer.message') }}
          </p>
          <div class="flex flex-wrap justify-center gap-4">
-            <RouterLink to="/service/home-care" class="px-10 py-5 bg-foundation-blue text-white rounded-2xl font-black shadow-xl hover:-translate-y-1 transition-all">
+            <RouterLink to="/service-home-care" class="px-10 py-5 bg-foundation-blue text-white rounded-2xl font-black shadow-xl hover:-translate-y-1 transition-all">
               {{ t('donate.footer.button1') }}
             </RouterLink>
             <RouterLink to="/news" class="px-10 py-5 bg-white text-foundation-blue border border-gray-100 rounded-2xl font-black shadow-lg hover:shadow-xl transition-all">
