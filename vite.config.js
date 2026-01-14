@@ -20,5 +20,19 @@ export default defineConfig(({ mode }) => {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
+    server: {
+      proxy: {
+        "/api": {
+          target: env.VITE_API_URL,
+          secure: false,
+          changeOrigin: true,
+        },
+        "/Form": {
+          target: env.VITE_API_URL,
+          secure: false,
+          changeOrigin: true,
+        },
+      },
+    },
   };
 });

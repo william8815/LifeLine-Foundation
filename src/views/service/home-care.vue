@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, nextTick, computed } from 'vue'
+import { ref, reactive, nextTick, computed, watch } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
@@ -130,7 +130,7 @@ const preferredTimeOptions = computed(() => [
 ])
 
 // Survey State
-const surveyStep = ref(1) // 1: Filter, 2: Yes-Path, 3: No-Path, 4: Final Information
+const surveyStep = ref(1) // 1: Filter, 2: Yes-Path, 3: No-Path, 4: Final Information, 5: Success
 const surveyRef = ref(null)
 
 const scrollToTop = async () => {
@@ -142,37 +142,40 @@ const scrollToTop = async () => {
   }
 }
 const surveyData = reactive({
-  joinedBefore: null, // 'yes' or 'no'
-  // Step 2 & 3 & 4 data
-  groupName: '',
-  foundedBy: '',
-  foundedByOther: '',
-  motivation: [],
-  adminLocation: '',
-  adminLocationOther: '',
-  stillOperating: null,
-  notJoiningReasons: [],
-  interestInFuture: null,
-  desiredServices: [],
-  contact: {
-    phone: '',
+  hasJoined: true, // 'true' or 'false'
+  // Step 2 data
+  groupName: '', // 醫療群名稱
+  isRunning: true, // 醫療群(貴診所)是否仍在運作
+  createReason: '由合作醫院輔導成立', // 貴醫療群當初是如何成立
+  createReasonOther: '',
+  location: '', // 醫療群實際負責行政業務之單位在何處
+  locationOther: '',
+  joinMotivation: [], // 參與家醫計畫的主要動機為何
+  // Step 3 data
+  notJoinReason: [], // 未加入原因
+  notJoinReasonOther : "",
+  // Step 4 data
+  motivationBySupport: true, // 是否有意願加入家醫計畫？
+  expectService: [], // 期待從第三方獲得哪些服務
+  userInfo: {
+    tel: '',
     mobile: '',
     name: '',
     jobTitle: '',
-    jobTitleOther: '',
     email: '',
     clinicName: '',
     clinicType: [],
-    clinicTypeOther: '',
-    address: { city: '', district: '', detail: '' },
-    preferredTime: []
+    city: "",
+    dist: "",
+    address: "",
+    contactTime: [], 
   }
 })
 
 const goToNext = async () => {
   if (surveyStep.value === 1) {
-    if (surveyData.joinedBefore === 'yes') surveyStep.value = 2
-    else if (surveyData.joinedBefore === 'no') surveyStep.value = 3
+    if (surveyData.hasJoined) surveyStep.value = 2
+    else if (!surveyData.hasJoined) surveyStep.value = 3
   } else if (surveyStep.value === 2 || surveyStep.value === 3) {
     surveyStep.value = 4
   }
@@ -183,21 +186,214 @@ const goToPrev = async () => {
   if (surveyStep.value === 2 || surveyStep.value === 3) {
     surveyStep.value = 1
   } else if (surveyStep.value === 4) {
-    surveyStep.value = surveyData.joinedBefore === 'yes' ? 2 : 3
+    surveyStep.value = surveyData.hasJoined ? 2 : 3
   }
   await scrollToTop()
 }
 
-const selectInitialPath = async (path) => {
-  surveyData.joinedBefore = path
-  surveyStep.value = path === 'yes' ? 2 : 3
+const selectInitialPath = async (state) => {
+  surveyData.hasJoined = state
+  surveyStep.value = state ? 2 : 3
   await scrollToTop()
 }
 
-const submitSurvey = () => {
-  console.log('Survey Submitted:', surveyData)
-  alert('感謝您的填寫，我們將盡速與您聯繫！')
+// Reset survey to initial state
+const resetSurvey = async () => {
+  // Reset all survey data to defaults
+  surveyData.hasJoined = true
+  surveyData.groupName = ''
+  surveyData.isRunning = true
+  surveyData.createReason = '由合作醫院輔導成立'
+  surveyData.createReasonOther = ''
+  surveyData.location = ''
+  surveyData.locationOther = ''
+  surveyData.joinMotivation = []
+  surveyData.notJoinReason = []
+  surveyData.notJoinReasonOther = ''
+  surveyData.motivationBySupport = true
+  surveyData.expectService = []
+  surveyData.userInfo = {
+    tel: '',
+    mobile: '',
+    name: '',
+    jobTitle: '',
+    email: '',
+    clinicName: '',
+    clinicType: [],
+    city: "",
+    dist: "",
+    address: '',
+    contactTime: []
+  }
+  
+  // Go back to step 1
+  surveyStep.value = 1
+  await scrollToTop()
 }
+
+function tidyData() {
+  let output = JSON.parse(JSON.stringify(surveyData))
+  // 假設 hasJoined 為 true，則一定要刪除 表單 3 的屬性
+  if (output.hasJoined) {
+    delete output.notJoinReason
+    delete output.notJoinReasonOther
+    // 設定傳出格式
+    if (output.createReason === t('service_home_care.survey.other')) {
+      output.createReason = `${output.createReason}:${output.createReasonOther}`
+    }
+    delete output.createReasonOther
+    if (output.location === t("service_home_care.survey.other")) {
+      output.location = `${output.location}:${output.locationOther}`
+    }
+    delete output.locationOther
+    if (output.joinMotivation?.length > 0) {
+      output.joinMotivation = output.joinMotivation.join(",")
+    }
+  }
+  // 假設 hasJoined 為 false，則一定要刪除 表單 2 的屬性
+  if (!output.hasJoined) {
+    delete output.groupName
+    delete output.isRunning
+    delete output.createReason
+    delete output.createReasonOther
+    delete output.location
+    delete output.locationOther
+    delete output.joinMotivation
+    // 設定輸出格式
+    if (output.notJoinReason?.length > 0) {
+      if (output.notJoinReason.includes(t('service_home_care.survey.other'))) {
+        let index = output.notJoinReason.indexOf(t('service_home_care.survey.other'))
+        output.notJoinReason[index] = `${output.notJoinReason[index]}:${output.notJoinReasonOther}`
+      }
+      output.notJoinReason = output.notJoinReason.join(",")
+    }
+    delete output.notJoinReasonOther
+  }
+  if (output.expectService?.length > 0) {
+    output.expectService = output.expectService.join(",")
+  }
+  if (output.userInfo.clinicType?.length > 0) {
+    output.userInfo.clinicType = output.userInfo.clinicType.join(",")
+  }
+  if (output.userInfo.contactTime?.length > 0) {
+    output.userInfo.contactTime = output.userInfo.contactTime.join(",")
+  }
+  return output
+}
+const isSubmitting = ref(false)
+
+// Toast notification state
+const toast = reactive({
+  show: false,
+  type: 'success', // 'success' or 'error'
+  message: ''
+})
+
+const showToast = (type, message) => {
+  toast.type = type
+  toast.message = message
+  toast.show = true
+  
+  // Auto hide after 5 seconds
+  setTimeout(() => {
+    toast.show = false
+  }, 3000)
+}
+
+const closeToast = () => {
+  toast.show = false
+}
+
+const submitSurvey = async () => {
+  try {
+    let output = tidyData()
+    isSubmitting.value = true
+
+    const documentJSONString = JSON.stringify(output)
+    const response = await fetch("/Form/AddNHIForm", {
+      method : "POST",
+      headers : {
+        "Content-Type" : "application/json"
+      },
+      body : JSON.stringify({
+        DocumentJSON : documentJSONString
+      })
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    // Navigate to success step (step 5)
+    surveyStep.value = 5
+    await scrollToTop()
+    
+  } catch(error) {
+    console.error("submit data error", error)
+    
+    // Show error message
+    showToast('error', t('service_home_care.survey.error_submit_failed'))
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// api get city options
+const cityOptions = ref([])
+const cityOptionsLoading = ref(false)
+const fetchCityOptions = async () => {
+  cityOptionsLoading.value = true
+  try {
+    const response = await fetch('/api/zip/tw/')
+    const data = await response.json()
+    if (data?.length > 0) {
+      let list = data[0].Childs?.length > 0 ? data[0].Childs : []
+      cityOptions.value = list.map((item)=> {
+        return {
+          value: item.Name,
+          label: item.Name,
+          code: item.Code
+        }
+      })
+    }
+  } catch(error) {
+    console.log("get city options error")
+  } finally {
+    cityOptionsLoading.value = false
+  }
+}
+fetchCityOptions()
+
+// api get dist options
+const distOptions = ref([])
+const distOptionsLoading = ref(false)
+const fetchDistOptions = async (cityName) => {
+  let code = cityOptions.value.find((item) => item.value === cityName)?.code
+  if (code) {
+    try {
+      distOptionsLoading.value = true
+      const response = await fetch(`/api/zip/tw/${code}`)
+      const data = await response.json()
+      if (data?.length > 0 && data[0].Childs?.length > 0) {
+        distOptions.value = data[0].Childs.map((item)=> {
+          return {
+            value: item.Name,
+            label: item.Name,
+            code: item.Code,
+            zip : item.Zip
+          }
+        })
+      }
+    } catch(error) {
+      console.log('get dist options error')
+    } finally {
+      distOptionsLoading.value = false
+    }
+  }
+}
+watch(()=> surveyData.userInfo.city, (data)=> {
+  fetchDistOptions(data)
+})
 </script>
 
 <template>
@@ -461,11 +657,11 @@ const submitSurvey = () => {
                   <div v-if="surveyStep === 1" class="transition-all">
                     <h3 class="text-xl font-black text-foundation-blue mb-10">{{ t('service_home_care.survey.step1_question') }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                       <button @click="selectInitialPath('yes')" class="p-4 lg:p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
+                       <button @click="selectInitialPath(true)" class="p-4 lg:p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
                           <p class="text-xl font-black text-foundation-blue group-hover:text-white mb-2">{{ t('service_home_care.survey.step1_yes') }}</p>
                           <p class="text-gray-400 font-bold group-hover:text-white/60">{{ t('service_home_care.survey.step1_yes_desc') }}</p>
                        </button>
-                       <button @click="selectInitialPath('no')" class="p-4 lg:p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
+                       <button @click="selectInitialPath(false)" class="p-4 lg:p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
                           <p class="text-xl font-black text-foundation-blue group-hover:text-white mb-2">{{ t('service_home_care.survey.step1_no') }}</p>
                           <p class="text-gray-400 font-bold group-hover:text-white/60">{{ t('service_home_care.survey.step1_no_desc') }}</p>
                        </button>
@@ -489,7 +685,7 @@ const submitSurvey = () => {
                         <div class="space-y-3">
                            <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.still_operating') }}</label>
                            <div class="flex space-x-4">
-                              <button v-for="opt in [{l: t('service_home_care.survey.yes'), v:true}, {l: t('service_home_care.survey.no'), v:false}]" :key="opt.l" @click="surveyData.stillOperating = opt.v" :class="['flex-1 py-3 rounded-2xl font-black transition-all border-2', surveyData.stillOperating === opt.v ? 'bg-foundation-blue text-white border-foundation-blue shadow-lg shadow-foundation-blue/20' : 'bg-white text-gray-500 border-gray-100 hover:border-foundation-blue/30']">{{ opt.l }}</button>
+                              <button v-for="opt in [{l: t('service_home_care.survey.yes'), v:true}, {l: t('service_home_care.survey.no'), v:false}]" :key="opt.l" @click="surveyData.isRunning = opt.v" :class="['flex-1 py-3 rounded-2xl font-black transition-all border-2', surveyData.isRunning === opt.v ? 'bg-foundation-blue text-white border-foundation-blue shadow-lg shadow-foundation-blue/20' : 'bg-white text-gray-500 border-gray-100 hover:border-foundation-blue/30']">{{ opt.l }}</button>
                            </div>
                         </div>
 
@@ -498,11 +694,11 @@ const submitSurvey = () => {
                            <div class="space-y-3">
                              <label v-for="opt in foundedByOptions" :key="opt" class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border border-gray-100 cursor-pointer hover:border-foundation-blue/30 transition-all group">
                                 <div class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-foundation-blue">
-                                   <div v-if="surveyData.foundedBy === opt" class="w-2.5 h-2.5 bg-foundation-blue rounded-full"></div>
+                                   <div v-if="surveyData.createReason === opt" class="w-2.5 h-2.5 bg-foundation-blue rounded-full"></div>
                                 </div>
-                                <input type="radio" v-model="surveyData.foundedBy" :value="opt" class="hidden">
+                                <input type="radio" v-model="surveyData.createReason" :value="opt" class="hidden">
                                 <span class="shrink-0 text-sm font-bold text-gray-700">{{ opt }}</span>
-                                <input v-if="opt === t('service_home_care.survey.other') && surveyData.foundedBy === t('service_home_care.survey.other')" v-model="surveyData.foundedByOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify')">
+                                <input v-if="opt === t('service_home_care.survey.other') && surveyData.createReason === t('service_home_care.survey.other')" v-model="surveyData.createReasonOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify')">
                              </label>
                            </div>
                         </div>
@@ -512,11 +708,11 @@ const submitSurvey = () => {
                            <div class="space-y-3">
                              <label v-for="opt in adminLocationOptions" :key="opt" class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border border-gray-100 cursor-pointer hover:border-foundation-blue/30 transition-all group">
                                 <div class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-foundation-blue">
-                                   <div v-if="surveyData.adminLocation === opt" class="w-2.5 h-2.5 bg-foundation-blue rounded-full"></div>
+                                   <div v-if="surveyData.location === opt" class="w-2.5 h-2.5 bg-foundation-blue rounded-full"></div>
                                 </div>
-                                <input type="radio" v-model="surveyData.adminLocation" :value="opt" class="hidden">
+                                <input type="radio" v-model="surveyData.location" :value="opt" class="hidden">
                                 <span class="shrink-0 text-sm font-bold text-gray-700">{{ opt }}</span>
-                                <input v-if="opt === t('service_home_care.survey.other') && surveyData.adminLocation === t('service_home_care.survey.other')" v-model="surveyData.adminLocationOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify')">
+                                <input v-if="opt === t('service_home_care.survey.other') && surveyData.location === t('service_home_care.survey.other')" v-model="surveyData.locationOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify')">
                              </label>
                            </div>
                         </div>
@@ -524,8 +720,8 @@ const submitSurvey = () => {
                         <div class="space-y-4">
                            <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.motivation_label') }}</label>
                            <div class="flex flex-wrap gap-2">
-                             <label v-for="opt in motivationOptions" :key="opt" class="flex items-center px-5 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" :class="surveyData.motivation.includes(opt) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
-                                <input type="checkbox" v-model="surveyData.motivation" :value="opt" :disabled="surveyData.motivation.length >= 3 && !surveyData.motivation.includes(opt)" class="hidden">
+                             <label v-for="opt in motivationOptions" :key="opt" class="flex items-center px-5 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" :class="surveyData.joinMotivation.includes(opt) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
+                                <input type="checkbox" v-model="surveyData.joinMotivation" :value="opt" :disabled="surveyData.joinMotivation.length >= 3 && !surveyData.joinMotivation.includes(opt)" class="hidden">
                                 <span>{{ opt }}</span>
                              </label>
                            </div>
@@ -552,13 +748,13 @@ const submitSurvey = () => {
                       <div class="space-y-4">
                          <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.step3_subtitle') }}</label>
                          <div class="space-y-3">
-                           <label v-for="opt in notJoiningReasonsOptions" :key="opt" class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
-                              <div class="w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center transition-colors" :class="surveyData.notJoiningReasons.includes(opt) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
-                                 <Icon v-if="surveyData.notJoiningReasons.includes(opt)" name="check" class="w-3.5 h-3.5 text-white" />
+                           <label v-for="opt in notJoiningReasonsOptions" :key="opt" class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoinReason.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
+                              <div class="w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center transition-colors" :class="surveyData.notJoinReason.includes(opt) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
+                                 <Icon v-if="surveyData.notJoinReason.includes(opt)" name="check" class="w-3.5 h-3.5 text-white" />
                               </div>
-                              <input type="checkbox" v-model="surveyData.notJoiningReasons" :value="opt" :disabled="surveyData.notJoiningReasons.length >= 3 && !surveyData.notJoiningReasons.includes(opt)" class="hidden">
+                              <input type="checkbox" v-model="surveyData.notJoinReason" :value="opt" :disabled="surveyData.notJoinReason.length >= 3 && !surveyData.notJoinReason.includes(opt)" class="hidden">
                               <span class="font-bold text-gray-700 text-sm">{{ opt }}</span>
-                              <input v-if="opt === t('service_home_care.survey.other') && surveyData.notJoiningReasons.includes(t('service_home_care.survey.other'))" v-model="surveyData.notJoiningOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify_reason')">
+                              <input v-if="opt === t('service_home_care.survey.other') && surveyData.notJoinReason.includes(t('service_home_care.survey.other'))" v-model="surveyData.notJoinReasonOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify_reason')">
                            </label>
                          </div>
                       </div>
@@ -578,8 +774,8 @@ const submitSurvey = () => {
                       <div class="relative z-10">
                         <p class="text-xl font-black mb-8 italic leading-snug">{{ t('service_home_care.survey.step4_question') }}</p>
                         <div class="flex flex-wrap gap-4">
-                          <button @click="surveyData.interestInFuture = 'yes'" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'yes' ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_yes') }}</button>
-                          <button @click="surveyData.interestInFuture = 'no'" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.interestInFuture === 'no' ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_no') }}</button>
+                          <button @click="surveyData.motivationBySupport = true" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', surveyData.motivationBySupport ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_yes') }}</button>
+                          <button @click="surveyData.motivationBySupport = false" :class="['px-3 lg:px-4 py-2 lg:py-3 rounded-xl font-black transition-all text-lg shadow-lg', !surveyData.motivationBySupport ? 'bg-white text-foundation-blue scale-105' : 'bg-white/10 hover:bg-white/20']">{{ t('service_home_care.survey.step4_no') }}</button>
                         </div>
                       </div>
                       <div class="absolute -right-20 -top-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
@@ -591,10 +787,10 @@ const submitSurvey = () => {
                        </h4>
                        <div class="space-y-3">
                           <label v-for="svc in desiredServicesOptions" :key="svc" class="flex items-center flex-wrap p-3 lg:p-5 rounded-3xl bg-white border-2 border-gray-50 cursor-pointer hover:shadow-xl hover:border-foundation-blue/30 transition-all group">
-                             <div class="shrink-0 w-6 h-6 rounded-lg border-2 mr-4 flex items-center justify-center transition-colors shadow-sm" :class="surveyData.desiredServices.includes(svc) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
-                                <Icon v-if="surveyData.desiredServices.includes(svc)" name="check" class="w-4 h-4 text-white" />
+                             <div class="shrink-0 w-6 h-6 rounded-lg border-2 mr-4 flex items-center justify-center transition-colors shadow-sm" :class="surveyData.expectService.includes(svc) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
+                                <Icon v-if="surveyData.expectService.includes(svc)" name="check" class="w-4 h-4 text-white" />
                              </div>
-                             <input type="checkbox" v-model="surveyData.desiredServices" :value="svc" class="hidden">
+                             <input type="checkbox" v-model="surveyData.expectService" :value="svc" class="hidden">
                              <span class="text-sm font-black text-gray-700">{{ svc }}</span>
                           </label>
                        </div>
@@ -610,14 +806,14 @@ const submitSurvey = () => {
                           <!-- Single Column Start -->
                           <div class="space-y-3">
                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_name') }}</label>
-                            <input v-model="surveyData.contact.clinicName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm">
+                            <input v-model="surveyData.userInfo.clinicName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm">
                           </div>
 
                           <div class="space-y-3">
                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_person') }}</label>
                             <div class="flex flex-col sm:flex-row gap-4">
-                              <input v-model="surveyData.contact.name" :placeholder="t('service_home_care.survey.name_placeholder')" class="flex-[2] bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
-                              <select v-model="surveyData.contact.jobTitle" class="flex-1 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-gray-500 font-black text-sm shadow-sm">
+                              <input v-model="surveyData.userInfo.name" :placeholder="t('service_home_care.survey.name_placeholder')" class="flex-[2] bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <select v-model="surveyData.userInfo.jobTitle" class="flex-1 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-gray-500 font-black text-sm shadow-sm">
                                 <option value="" disabled>{{ t('service_home_care.survey.select_job_title') }}</option>
                                 <option v-for="title in jobTitleOptions" :key="title" :value="title">{{ title }}</option>
                               </select>
@@ -627,17 +823,17 @@ const submitSurvey = () => {
                           <div class="space-y-3">
                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_method') }}</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              <input v-model="surveyData.contact.phone" :placeholder="t('service_home_care.survey.phone_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
-                              <input v-model="surveyData.contact.mobile" :placeholder="t('service_home_care.survey.mobile_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <input v-model="surveyData.userInfo.tel" :placeholder="t('service_home_care.survey.phone_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <input v-model="surveyData.userInfo.mobile" :placeholder="t('service_home_care.survey.mobile_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
                             </div>
-                            <input v-model="surveyData.contact.email" :placeholder="t('service_home_care.survey.email_placeholder')" class="w-full mt-4 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                            <input v-model="surveyData.userInfo.email" :placeholder="t('service_home_care.survey.email_placeholder')" class="w-full mt-4 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
                           </div>
 
                           <div class="space-y-4">
                              <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_type_label') }}</label>
                              <div class="flex flex-wrap gap-2">
-                               <label v-for="type in clinicTypeOptions" :key="type" class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-sm font-black" :class="surveyData.contact.clinicType.includes(type) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
-                                 <input type="checkbox" v-model="surveyData.contact.clinicType" :value="type" class="hidden">
+                               <label v-for="type in clinicTypeOptions" :key="type" class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-sm font-black" :class="surveyData.userInfo.clinicType.includes(type) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
+                                 <input type="checkbox" v-model="surveyData.userInfo.clinicType" :value="type" class="hidden">
                                  <span>{{ type }}</span>
                                </label>
                              </div>
@@ -646,21 +842,23 @@ const submitSurvey = () => {
                           <div class="space-y-3">
                              <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_address') }}</label>
                              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                               <select v-model="surveyData.contact.address.city" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
-                                 <option value="">{{ t('service_home_care.survey.select_city') }}</option>
+                               <select v-model="surveyData.userInfo.city" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
+                                  <option value="" disabled>{{ t('service_home_care.survey.select_city') }}</option>
+                                 <option v-for="city in cityOptions" :key="city.value" :value="city.value">{{ city.label }}</option>
                                </select>
-                               <select v-model="surveyData.contact.address.district" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
-                                 <option value="">{{ t('service_home_care.survey.select_district') }}</option>
+                               <select v-model="surveyData.userInfo.dist" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
+                                 <option value="" disabled>{{ t('service_home_care.survey.select_district') }}</option>
+                                 <option v-for="dist in distOptions" :key="dist.value" :value="dist.value">{{ dist.label }}</option>
                                </select>
-                               <input v-model="surveyData.contact.address.detail" :placeholder="t('service_home_care.survey.address_detail')" class="sm:col-span-2 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                               <input v-model="surveyData.userInfo.address" :placeholder="t('service_home_care.survey.address_detail')" class="sm:col-span-2 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
                              </div>
                           </div>
 
                           <div class="space-y-3">
                             <label class="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.preferred_time') }}</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                               <label v-for="time in preferredTimeOptions" :key="time" class="flex gap-2 items-center justify-center py-3 px-4 rounded-2xl border-2 cursor-pointer transition-all" :class="surveyData.contact.preferredTime.includes(time) ? 'bg-foundation-blue/5 border-foundation-blue text-foundation-blue' : 'bg-white border-gray-100 text-gray-400 hover:border-foundation-blue/20'">
-                                 <input type="checkbox" v-model="surveyData.contact.preferredTime" :value="time" class="accent-foundation-blue">
+                               <label v-for="time in preferredTimeOptions" :key="time" class="flex gap-2 items-center justify-center py-3 px-4 rounded-2xl border-2 cursor-pointer transition-all" :class="surveyData.userInfo.contactTime.includes(time) ? 'bg-foundation-blue/5 border-foundation-blue text-foundation-blue' : 'bg-white border-gray-100 text-gray-400 hover:border-foundation-blue/20'">
+                                 <input type="checkbox" v-model="surveyData.userInfo.contactTime" :value="time" class="accent-foundation-blue">
                                  <span class="text-xs font-bold">{{ time }}</span>
                                </label>
                             </div>
@@ -669,7 +867,7 @@ const submitSurvey = () => {
                        </div>
                        
                        <div class="pt-16 flex flex-col items-center justify-center">
-                          <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6">
+                          <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
                             <span >{{ t('service_home_care.survey.submit_button') }}</span>
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                               <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />
@@ -688,11 +886,168 @@ const submitSurvey = () => {
                   </div>
                 </div>
               </div>
-            </transition>
-          </div>
+              </transition>
+
+              <!-- Step 5: Success Page -->
+              <transition name="fade-slide" mode="out-in">
+                <div v-if="activeTab === 'survey' && surveyStep === 5" key="step-5" class="space-y-8">
+                  <div class="bg-white rounded-[40px] p-12 md:p-20 shadow-premium border border-gray-100 text-center">
+                    <div class="max-w-2xl mx-auto space-y-8">
+                      <!-- Success Icon -->
+                      <div class="flex justify-center">
+                        <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center shadow-2xl shadow-green-500/30 animate-bounce">
+                          <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <!-- Success Message -->
+                      <div class="space-y-4">
+                        <h2 class="text-3xl md:text-5xl font-black text-foundation-blue italic tracking-tight">
+                          {{ t('service_home_care.survey.success_title') }}
+                        </h2>
+                        <p class="text-lg md:text-xl text-gray-500 font-medium leading-relaxed italic">
+                          {{ t('service_home_care.survey.success_message') }}
+                        </p>
+                      </div>
+
+                      <!-- Decorative Line -->
+                      <div class="flex items-center justify-center space-x-4 py-8">
+                        <div class="w-20 h-1 bg-gradient-to-r from-transparent via-foundation-blue to-transparent rounded-full"></div>
+                        <div class="w-3 h-3 bg-foundation-blue rounded-full"></div>
+                        <div class="w-20 h-1 bg-gradient-to-r from-transparent via-foundation-blue to-transparent rounded-full"></div>
+                      </div>
+
+                      <!-- Additional Info -->
+                      <div class="bg-foundation-blue/5 rounded-3xl p-8 border border-foundation-blue/10">
+                        <p class="text-foundation-blue font-bold text-base leading-relaxed">
+                          {{ t('service_home_care.survey.success_team_message') }}
+                        </p>
+                      </div>
+
+                      <!-- Reset Button -->
+                      <div class="pt-8">
+                        <button 
+                          @click="resetSurvey" 
+                          class="px-10 py-4 rounded-3xl bg-white border-2 border-foundation-blue text-foundation-blue font-black text-lg hover:bg-foundation-blue hover:text-white transition-all shadow-lg hover:shadow-2xl hover:-translate-y-1 active:scale-95"
+                        >
+                          {{ t('service_home_care.survey.success_reset_button') }}
+                        </button>
+                      </div>
+
+                      <!-- Contact Info -->
+                      <div class="pt-8 border-t border-gray-100">
+                        <p class="text-sm text-gray-400 font-medium">
+                          {{ t('service_home_care.survey.success_contact_prompt') }}
+                        </p>
+                        <a href="tel:0809088999" class="text-foundation-blue font-black text-lg hover:text-foundation-lightblue transition-colors inline-block mt-2">
+                          0809-088-999
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </transition>
+            </div>
         </div>
       </div>
     </main>
+
+    <!-- Toast Notification -->
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="translate-y-2 opacity-0"
+      enter-to-class="translate-y-0 opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="translate-y-0 opacity-100"
+      leave-to-class="translate-y-2 opacity-0"
+    >
+      <div
+        v-if="toast.show"
+        class="fixed top-24 right-4 md:right-8 z-[200] max-w-md"
+      >
+        <div
+          :class="[
+            'rounded-2xl shadow-2xl border p-6 backdrop-blur-xl',
+            toast.type === 'success' 
+              ? 'bg-green-50/95 border-green-200 text-green-800' 
+              : 'bg-red-50/95 border-red-200 text-red-800'
+          ]"
+        >
+          <div class="flex items-start space-x-4">
+            <!-- Icon -->
+            <div
+              :class="[
+                'flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center',
+                toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+              ]"
+            >
+              <svg
+                v-if="toast.type === 'success'"
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <svg
+                v-else
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+
+            <!-- Message -->
+            <div class="flex-1 pt-1">
+              <p class="font-bold text-base leading-relaxed">
+                {{ toast.message }}
+              </p>
+            </div>
+
+            <!-- Close Button -->
+            <button
+              @click="closeToast"
+              :class="[
+                'flex-shrink-0 p-1 rounded-lg transition-colors',
+                toast.type === 'success' 
+                  ? 'hover:bg-green-200/50 text-green-600' 
+                  : 'hover:bg-red-200/50 text-red-600'
+              ]"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 

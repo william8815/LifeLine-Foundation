@@ -412,7 +412,13 @@
       "submit_note": "提交後由基金會專人於 3 個工作天內主動與您聯繫。",
       "prev_step": "上一步",
       "next_step": "下一步",
-      "back_to_modify": "返回上一步修改資料"
+      "back_to_modify": "返回上一步修改資料",
+      "success_title": "表單提交成功！",
+      "success_message": "感謝您撥冗填寫問卷。我們已收到您的資料，將盡快與您聯繫。",
+      "success_team_message": "我們的專業團隊將在 1-2 個工作天內與您聯繫，討論後續合作事宜。",
+      "success_reset_button": "重新填寫問卷",
+      "success_contact_prompt": "如有任何疑問，歡迎隨時與我們聯繫",
+      "error_submit_failed": "提交失敗，請稍後再試或聯繫我們。"
     }
   },
   "service_emergency": {

@@ -412,7 +412,13 @@
       "submit_note": "提交后由基金会专人于 3 个工作天内主动与您联系。",
       "prev_step": "上一步",
       "next_step": "下一步",
-      "back_to_modify": "返回上一步修改资料"
+      "back_to_modify": "返回上一步修改资料",
+      "success_title": "表单提交成功！",
+      "success_message": "感谢您拨冗填写问卷。我们已收到您的资料，将尽快与您联系。",
+      "success_team_message": "我们的专业团队将在 1-2 个工作天内与您联系，讨论后续合作事宜。",
+      "success_reset_button": "重新填写问卷",
+      "success_contact_prompt": "如有任何疑问，欢迎随时与我们联系",
+      "error_submit_failed": "提交失败，请稍后再试或联系我们。"
     }
   },
   "service_emergency": {
