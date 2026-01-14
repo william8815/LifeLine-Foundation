@@ -5,7 +5,8 @@ import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import Icon from '@/components/base/Icon.vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const isZh_TW = computed(()=> locale.value === 'zh-TW')
 
 // SEO Metadata
 useHead({
@@ -30,13 +31,19 @@ useSeoMeta({
 })
 // images
 import tracking1_1 from "@/assets/images/services/tracking1_1.png"
+import tracking1_1_cn from "@/assets/images/services/tracking1_1_cn.png"
 import tracking1_2 from "@/assets/images/services/tracking1_2.png"
+import tracking1_2_cn from "@/assets/images/services/tracking1_2_cn.png"
 import tracking1_3 from "@/assets/images/services/tracking1_3.png"
+import tracking1_3_cn from "@/assets/images/services/tracking1_3_cn.png"
 import tracking2_1 from "@/assets/images/services/tracking2_1.png"
 const imageLoaded = ref({
   tracking1_1: false,
+  tracking1_1_cn : false,
   tracking1_2: false,
+  tracking1_2_cn : false,
   tracking1_3: false,
+  tracking1_3_cn : false,
   tracking2_1: false,
 })
 
@@ -105,7 +112,8 @@ const reportingMethods = computed(() => [
 
                   <!-- Hero Image -->
                   <div class="relative rounded-[40px] overflow-hidden mb-16 shadow-2xl border border-gray-50 group">
-                    <img :src="tracking1_1" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded.tracking1_1 ? 'opacity-100' : 'opacity-0'" alt="Workflow Intro" loading="lazy" @load="imageLoaded.tracking1_1 = true">
+                    <img  v-if="isZh_TW" :src="tracking1_1" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded.tracking1_1 ? 'opacity-100' : 'opacity-0'" alt="Workflow Intro" loading="lazy" @load="imageLoaded.tracking1_1 = true">
+                    <img  v-else :src="tracking1_1_cn" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded.tracking1_1_cn ? 'opacity-100' : 'opacity-0'" alt="Workflow Intro" loading="lazy" @load="imageLoaded.tracking1_1_cn = true">
                     <div class="absolute inset-0 bg-gradient-to-t from-foundation-lightblue/40 to-transparent"></div>
                   </div>
 
@@ -129,10 +137,12 @@ const reportingMethods = computed(() => [
                     <div class="flex justify-center gap-6">
                       <!-- Mobile Demos -->
                       <div class="w-1/2 aspect-[447/763] bg-gray-900 rounded-[1.5rem] p-2 shadow-2xl border-[6px] border-gray-800 rotate-[-5deg]">
-                         <img :src="tracking1_2" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_2 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_2 = true">
+                         <img v-if="isZh_TW" :src="tracking1_2" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_2 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_2 = true">
+                         <img v-else :src="tracking1_2_cn" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_2_cn ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_2_cn = true">
                       </div>
                       <div class="w-1/2 aspect-[447/763] bg-gray-900 rounded-[1.5rem] p-2 shadow-2xl border-[6px] border-gray-800 translate-y-10 rotate-[5deg] ">
-                         <img :src="tracking1_3" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_3 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_3 = true">
+                         <img v-if="isZh_TW" :src="tracking1_3" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_3 ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_3 = true">
+                         <img v-else :src="tracking1_3_cn" class="w-full h-full object-cover rounded-[1rem] duration-500 transition-all" :class="imageLoaded.tracking1_3_cn ? 'opacity-100' : 'opacity-0'" loading="lazy" @load="imageLoaded.tracking1_3_cn = true">
                       </div>
                     </div>
                   </div>

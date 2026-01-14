@@ -5,7 +5,8 @@ import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import Icon from '@/components/base/Icon.vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const isZh_TW = computed(() => locale.value === 'zh-TW')
 
 // SEO Metadata
 useHead({
@@ -37,7 +38,7 @@ import emergency2_1 from "@/assets/images/services/emergency2_1.png"
 import emergency2_2 from "@/assets/images/services/emergency2_2.png"
 import emergency2_3 from "@/assets/images/services/emergency2_3.png"
 import emergency2_4 from "@/assets/images/services/emergency2_4.png"
-import emergency2_5 from "@/assets/images/services/emergency2_5.png"
+import emergency2_5 from "@/assets/images/services/emergency2_5.jpg"
 
 const imageLoaded = ref({
   emergency1_1: false,
@@ -278,7 +279,7 @@ const devices = computed(() => ({
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div v-for="machine in devices.machines" :key="machine.type" class="bg-white rounded-[40px] overflow-hidden shadow-premium border border-gray-100 group">
                         <div class="overflow-hidden relative aspect-[1/1]">
-                          <img :src="machine.image" class="w-full h-full object-cover transition-all duration-500" :class="imageLoaded[machine.type] ? 'opacity-100' : 'opacity-0'" :alt="machine.type" loading="lazy" @load="imageLoaded[machine.type] = true">
+                          <img :src="machine.image" class="w-full h-full object-contain transition-all duration-500" :class="imageLoaded[machine.type] ? 'opacity-100' : 'opacity-0'" :alt="machine.type" loading="lazy" @load="imageLoaded[machine.type] = true">
                           <div class="absolute top-6 left-6">
                             <span class="px-6 py-2 bg-foundation-blue text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">{{ machine.type }}</span>
                           </div>
@@ -307,7 +308,7 @@ const devices = computed(() => ({
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div v-for="item in devices.transmitters" :key="item.type" class="bg-white rounded-[40px] p-6 shadow-premium border border-gray-100 group">
                         <div class="aspect-square rounded-[32px] overflow-hidden mb-4 border border-gray-50">
-                          <img :src="item.image" class="w-full h-full object-cover transition-transform duration-1000">
+                          <img :src="item.image" class="w-full h-full object-contain transition-transform duration-1000">
                         </div>
                         <h3 class="text-2xl font-black text-foundation-blue mb-4 tracking-tighter">{{ item.type }}</h3>
                         <p class="text-gray-400 font-medium text-sm mb-4 leading-relaxed italic">{{ item.desc }}</p>

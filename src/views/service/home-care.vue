@@ -5,7 +5,8 @@ import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import Icon from '@/components/base/Icon.vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const isZh_TW = computed(() => locale.value === 'zh-TW')
 
 // SEO Metadata
 useHead({
@@ -31,7 +32,9 @@ useSeoMeta({
 
 // images
 import homeCare1 from '@/assets/images/services/home-care1.png'
+import homeCare1_cn from '@/assets/images/services/home-care1_cn.png'
 import homeCare3_1 from '@/assets/images/services/home-care3_1.jpg'
+import homeCare3_1_cn from "@/assets/images/services/home-care3_1_cn.png"
 import homeCare3_2 from '@/assets/images/services/home-care3_2.jpg'
 import homeCare3_3 from '@/assets/images/services/home-care3_3.jpg'
 import homeCare3_4 from '@/assets/images/services/home-care3_4.jpg'
@@ -39,7 +42,9 @@ import homeCare3_5 from '@/assets/images/services/home-care3_5.jpg'
 import homeCare3_6 from '@/assets/images/services/home-care3_6.jpg'
 import homeCare3_7 from '@/assets/images/services/home-care3_7.jpg'
 const homeCare1Loaded = ref(false)
+const homeCare1_cnLoaded = ref(false)
 const homeCare3_1Loaded = ref(false)
+const homeCare3_1_cnLoaded = ref(false)
 const homeCare3_2Loaded = ref(false)
 const homeCare3_3Loaded = ref(false)
 const homeCare3_4Loaded = ref(false)
@@ -263,7 +268,8 @@ const submitSurvey = () => {
                 </div>
                 <!-- Image Placeholder -->
                 <div class="rounded-[32px] overflow-hidden shadow-2xl border-8 border-white group relative">
-                   <img :src="homeCare1" class="w-full h-full object-contain transition-opacity duration-300" :class="homeCare1Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare1Loaded = true" />
+                   <img v-if="isZh_TW" :src="homeCare1" class="w-full h-full object-contain transition-opacity duration-300" :class="homeCare1Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare1Loaded = true" />
+                   <img v-else :src="homeCare1_cn" class="w-full h-full object-contain transition-opacity duration-300" :class="homeCare1_cnLoaded ? 'opacity-100' : 'opacity-0'" @load="homeCare1_cnLoaded = true" />
                 </div>
               </div>
 
@@ -329,8 +335,10 @@ const submitSurvey = () => {
                   <p class="text-gray-400 text-xl font-medium max-w-2xl mx-auto italic mb-16">{{ t('service_home_care.advantage.subtitle') }}</p>
                   
                   <div class="relative rounded-[60px] overflow-hidden shadow-2xl aspect-[1177/987] border-8 border-white bg-gray-50">
-                    <img :src="homeCare3_1" class="w-full h-full object-contain transition-all duration-500"
+                    <img v-if="isZh_TW" :src="homeCare3_1" class="w-full h-full object-contain transition-all duration-500"
                     :class="homeCare3_1Loaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_1Loaded = true" loading="lazy" alt="Advantage Comparison">
+                    <img v-else :src="homeCare3_1_cn" class="w-full h-full object-contain transition-all duration-500"
+                    :class="homeCare3_1_cnLoaded ? 'opacity-100' : 'opacity-0'" @load="homeCare3_1_cnLoaded = true" loading="lazy" alt="Advantage Comparison">
                   </div>
                 </div>
 
