@@ -306,12 +306,13 @@ const closeToast = () => {
 
 // 產品階段才需要 VITE_API_URL
 const submitSurvey = async () => {
+  const API_URL = import.meta.env.PROD ? `${import.meta.env.VITE_API_URL}/Form/AddNHIForm` : `/Form/AddNHIForm`
   try {
     let output = tidyData()
     isSubmitting.value = true
 
     const documentJSONString = JSON.stringify(output)
-    const response = await fetch("/Form/AddNHIForm", {
+    const response = await fetch(API_URL, {
       method : "POST",
       headers : {
         "Content-Type" : "application/json"
@@ -345,8 +346,9 @@ const cityOptionsLoading = ref(false)
 const fetchCityOptions = async () => {
   cityOptionsLoading.value = true
   const country = isZh_TW.value ? "tw" : "cn"
+  const API_URL = import.meta.env.PROD ? `${import.meta.env.VITE_API_URL}/api/zip/${country}/` : `/api/zip/${country}/`
   try {
-    const response = await fetch(`/api/zip/${country}/`)
+    const response = await fetch(API_URL)
     const data = await response.json()
     if (data?.length > 0) {
       let list = data[0].Childs?.length > 0 ? data[0].Childs : []
@@ -377,7 +379,8 @@ const fetchDistOptions = async (cityName) => {
     try {
       distOptionsLoading.value = true
       const country = isZh_TW.value ? "tw" : "cn"
-      const response = await fetch(`/api/zip/${country}/${code}`)
+      const API_URL = import.meta.env.PROD ? `${import.meta.env.VITE_API_URL}/api/zip/${country}/${code}` : `/api/zip/${country}/${code}`
+      const response = await fetch(API_URL)
       const data = await response.json()
       if (data?.length > 0 && data[0].Childs?.length > 0) {
         distOptions.value = data[0].Childs.map((item)=> {
