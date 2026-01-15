@@ -3,6 +3,10 @@
     {
       "source": "/:path*",
       "destination": "/:path*.html"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "http://www.lifecare.org.tw/api/:path*"
     }
   ]
 }
