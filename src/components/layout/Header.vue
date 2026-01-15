@@ -4,6 +4,8 @@ import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 import Icon from '@/components/base/Icon.vue'
+// image
+import logo from '@/assets/images/logo_lifeline.gif'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -74,8 +76,9 @@ const isActive = (path) => route.path === path
       <!-- Logo Section -->
       <RouterLink to="/" class="flex items-center group" @click="closeMenu">
         <div class="flex flex-col">
-          <span class="text-foundation-blue font-extrabold text-xl leading-none tracking-tight uppercase">{{ t('common.foundation_name_en') }}</span>
-          <span class="text-foundation-lightblue text-[10px] font-bold tracking-widest uppercase mt-1">{{ t('common.foundation_name') }}</span>
+          <img :src="logo" alt="Logo" class="w-32 h-8">
+          <!-- <span class="text-foundation-blue font-extrabold text-xl leading-none tracking-tight uppercase">{{ t('common.foundation_name_en') }}</span>
+          <span class="text-foundation-lightblue text-[10px] font-bold tracking-widest uppercase mt-1">{{ t('common.foundation_name') }}</span> -->
         </div>
       </RouterLink>
 

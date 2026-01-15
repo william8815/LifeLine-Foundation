@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import Icon from '@/components/base/Icon.vue'
+// image
+import logo from '@/assets/images/logo_lifeline.gif'
 
 const currentYear = new Date().getFullYear()
 
@@ -41,12 +43,10 @@ const footerLinks = [
         <!-- Brand & Info -->
         <div class="space-y-4">
           <RouterLink to="/" class="flex items-center space-x-2">
-            <!-- <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
-              <span class="text-foundation-blue font-bold text-xl">L</span>
-            </div> -->
             <div class="flex flex-col">
-              <span class="text-white font-bold text-lg leading-tight uppercase tracking-wider">LifeLine</span>
-              <span class="text-foundation-beige text-xs font-bold">生命連線基金會</span>
+              <img :src="logo" alt="Logo" class="w-32 h-8">
+              <!-- <span class="text-white font-bold text-lg leading-tight uppercase tracking-wider">LifeLine</span>
+              <span class="text-foundation-beige text-xs font-bold">生命連線基金會</span> -->
             </div>
           </RouterLink>
           <p class="text-white text-sm leading-relaxed">
@@ -54,7 +54,7 @@ const footerLinks = [
           </p>
           <div class="flex space-x-4">
             <!-- Facebook -->
-            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-foundation-blue transition-all duration-300">
+            <a href="https://www.facebook.com/profile.php?id=100070009235861&locale=zh_TW" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-foundation-blue transition-all duration-300" target="_blank">
               <span class="sr-only">Facebook</span>
               <Icon name="facebook" class="w-5 h-5" />
             </a>
@@ -64,12 +64,12 @@ const footerLinks = [
               <Icon name="line" :size="20" />
             </a>
             <!-- Twitter / X -->
-            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all duration-300">
+            <!-- <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all duration-300">
               <span class="sr-only">Twitter</span>
               <Icon name="twitter" class="w-4 h-4" />
-            </a>
+            </a> -->
             <!-- YouTube -->
-            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff0000] transition-all duration-300">
+            <a href="https://www.youtube.com/@%E7%94%9F%E5%91%BD%E9%80%A3%E7%B7%9A%E5%9F%BA%E9%87%91%E6%9C%83-y3z" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff0000] transition-all duration-300" target="_blank">
               <span class="sr-only">YouTube</span>
               <Icon name="youtube" class="w-5 h-5" />
             </a>
