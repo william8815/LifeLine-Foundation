@@ -345,8 +345,9 @@ const cityOptions = ref([])
 const cityOptionsLoading = ref(false)
 const fetchCityOptions = async () => {
   cityOptionsLoading.value = true
+  const country = isZh_TW.value ? "tw" : "cn"
   try {
-    const response = await fetch(`${baseURL}/api/zip/tw/`)
+    const response = await fetch(`${baseURL}/api/zip/${country}/`)
     const data = await response.json()
     if (data?.length > 0) {
       let list = data[0].Childs?.length > 0 ? data[0].Childs : []
@@ -374,7 +375,8 @@ const fetchDistOptions = async (cityName) => {
   if (code) {
     try {
       distOptionsLoading.value = true
-      const response = await fetch(`${baseURL}/api/zip/tw/${code}`)
+      const country = isZh_TW.value ? "tw" : "cn"
+      const response = await fetch(`${baseURL}/api/zip/${country}/${code}`)
       const data = await response.json()
       if (data?.length > 0 && data[0].Childs?.length > 0) {
         distOptions.value = data[0].Childs.map((item)=> {
