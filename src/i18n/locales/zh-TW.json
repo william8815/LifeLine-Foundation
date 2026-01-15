@@ -116,13 +116,7 @@
     "news": {
       "badge": "Latest Updates",
       "title": "最新動態",
-      "view_all": "探索所有動態",
-      "news1_title": "生命連線 20 週年：厚澤民生，共創未來",
-      "news1_date": "2023.12.24",
-      "news2_title": "寒冬送暖：基金會走訪偏鄉提供智慧醫療包",
-      "news2_date": "2023.12.15",
-      "news3_title": "愛心無界：企業回饋資助清寒老人專案",
-      "news3_date": "2023.12.01"
+      "view_all": "探索更多"
     },
     "cta": {
       "title_line1": "您的愛心，",

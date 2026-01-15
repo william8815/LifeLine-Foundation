@@ -91,26 +91,66 @@ const stats = computed(() => [
   { labelKey: 'home.stats.team', value: 1000, suffixKey: 'home.stats.suffix_members', showPlus: true }
 ])
 
-const latestNews = computed(() => [
+const posts = [
   {
-    id: 1,
-    titleKey: 'home.news.news1_title',
-    dateKey: 'home.news.news1_date',
-    image: 'https://picsum.photos/800/600?random=1'
+    id: "4059319334310295_3799303623645202",
+    message: "【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」的初衷。未來我們將持續引入美國 Lifeline 技術，強化雲端智慧醫療，守護每一位長輩的笑容！",
+    full_picture: "https://picsum.photos/800/600?random=1",
+    created_time: "2024-10-29T12:26:32+0000"
   },
   {
-    id: 2,
-    titleKey: 'home.news.news2_title',
-    dateKey: 'home.news.news2_date',
-    image: 'https://picsum.photos/800/600?random=2'
+    id: "4059319334310295_1716316915277227",
+    message: "秋意漸濃，長輩的關節照護更不能馬虎！醫師建議每日進行 10 分鐘的居家拉伸運動，能有效減緩關節晨僵現象。若您家中長輩有相關困擾，可以諮詢加盟診所的家醫計畫醫師，規劃專屬的運動方案。#健康長壽 #家醫計畫 #關節照護",
+    full_picture: "https://picsum.photos/800/600?random=2",
+    created_time: "2016-07-02T14:58:26+0000"
   },
   {
-    id: 3,
-    titleKey: 'home.news.news3_title',
-    dateKey: 'home.news.news3_date',
-    image: 'https://picsum.photos/800/600?random=3'
+    id: "4059319334310295_1547912345451019",
+    message: "上週末在信義區舉行的「銀髮樂齡派對」圓滿結束！看到長輩們戴上我們的智慧偵測手環，開心地跳著律動舞，志工們都深感欣慰。我們不只是提供通報，更是提供一份「安心」的陪伴。我們的愛心特派員也在現場捕捉到了許多動人的畫面，歡迎大家點擊查看更多現場精彩照片！",
+    full_picture: "https://picsum.photos/800/600?random=3",
+    created_time: "2015-02-04T07:25:00+0000"
+  },
+  {
+    id: "4059319334310295_3799303623645202",
+    message: "【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」的初衷。未來我們將持續引入美國 Lifeline 技術，強化雲端智慧醫療，守護每一位長輩的笑容！",
+    full_picture: "https://picsum.photos/800/600?random=1",
+    created_time: "2024-10-29T12:26:32+0000"
+  },
+  {
+    id: "4059319334310295_1716316915277227",
+    message: "秋意漸濃，長輩的關節照護更不能馬虎！醫師建議每日進行 10 分鐘的居家拉伸運動，能有效減緩關節晨僵現象。若您家中長輩有相關困擾，可以諮詢加盟診所的家醫計畫醫師，規劃專屬的運動方案。#健康長壽 #家醫計畫 #關節照護",
+    full_picture: "https://picsum.photos/800/600?random=2",
+    created_time: "2016-07-02T14:58:26+0000"
+  },
+  {
+    id: "4059319334310295_1547912345451019",
+    message: "上週末在信義區舉行的「銀髮樂齡派對」圓滿結束！看到長輩們戴上我們的智慧偵測手環，開心地跳著律動舞，志工們都深感欣慰。我們不只是提供通報，更是提供一份「安心」的陪伴。我們的愛心特派員也在現場捕捉到了許多動人的畫面，歡迎大家點擊查看更多現場精彩照片！",
+    full_picture: "https://picsum.photos/800/600?random=3",
+    created_time: "2015-02-04T07:25:00+0000"
   }
-])
+]
+const newsList = ref([])
+initPosts()
+function initPosts() {
+  newsList.value = posts.map((item)=> {
+    return {
+      id: item.id,
+      created_time: item?.created_time ? formatDate(item.created_time) : "",
+      message: item?.message || "",
+      images: item?.full_picture ? [item.full_picture] : [],
+      imageLoaded: false
+    }
+  })
+}
+
+// 處理日期格式
+function formatDate(dateString) {
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
 
 const isVisible = ref(false)
 onMounted(() => {
@@ -301,18 +341,18 @@ onMounted(() => {
 
          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <RouterLink 
-              v-for="news in latestNews" 
+              v-for="news in newsList" 
               :key="news.id"
               :to="`/news/${news.id}`"
               class="group flex flex-col items-start"
             >
               <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700">
-                <img :src="news.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                <img :src="news.images[0]" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
               </div>
-              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ t(news.dateKey) }}</span>
-              <h3 class="text-xl md:text-2xl font-black text-foundation-blue leading-tight group-hover:text-foundation-lightblue transition-colors line-clamp-2 italic tracking-tighter">
-                {{ t(news.titleKey) }}
-              </h3>
+              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ t(news.created_time) }}</span>
+              <p class="text-lg font-black text-gray-800 leading-tight group-hover:text-foundation-lightblue transition-colors line-clamp-2 italic tracking-tighter">
+                {{ news.message }}
+              </p>
             </RouterLink>
          </div>
        </div>
