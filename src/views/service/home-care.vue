@@ -304,13 +304,15 @@ const closeToast = () => {
   toast.show = false
 }
 
+// 產品階段才需要 VITE_API_URL
+const baseURL = import.meta.env.PROD ? import.meta.env.VITE_API_URL : ""
 const submitSurvey = async () => {
   try {
     let output = tidyData()
     isSubmitting.value = true
 
     const documentJSONString = JSON.stringify(output)
-    const response = await fetch("/Form/AddNHIForm", {
+    const response = await fetch(`${baseURL}/Form/AddNHIForm`, {
       method : "POST",
       headers : {
         "Content-Type" : "application/json"
@@ -344,7 +346,7 @@ const cityOptionsLoading = ref(false)
 const fetchCityOptions = async () => {
   cityOptionsLoading.value = true
   try {
-    const response = await fetch('/api/zip/tw/')
+    const response = await fetch(`${baseURL}/api/zip/tw/`)
     const data = await response.json()
     if (data?.length > 0) {
       let list = data[0].Childs?.length > 0 ? data[0].Childs : []
@@ -372,7 +374,7 @@ const fetchDistOptions = async (cityName) => {
   if (code) {
     try {
       distOptionsLoading.value = true
-      const response = await fetch(`/api/zip/tw/${code}`)
+      const response = await fetch(`${baseURL}/api/zip/tw/${code}`)
       const data = await response.json()
       if (data?.length > 0 && data[0].Childs?.length > 0) {
         distOptions.value = data[0].Childs.map((item)=> {
