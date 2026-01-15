@@ -1,4 +1,6 @@
 <script setup>
+import watermark from '@/assets/images/watermark.png'
+
 defineProps({
   title: {
     type: String,
@@ -19,17 +21,9 @@ defineProps({
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#2563eb_0%,#1e40af_100%)]"></div>
       
       <!-- Geometric Patterns (Pure CSS) -->
-      <div class="absolute top-0 right-0 w-1/2 h-full opacity-10">
-        <svg viewBox="0 0 100 100" class="w-full h-full fill-white">
-          <circle cx="80" cy="20" r="30" />
-          <circle cx="100" cy="60" r="20" />
-          <path d="M0,100 L100,0 L100,100 Z" />
-        </svg>
+      <div class="absolute top-[10%] right-[-10%] w-1/2 h-full opacity-10">
+        <img :src="watermark" class="w-full h-full object-contain" alt="">
       </div>
-      
-      <!-- Decorative Accent -->
-      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-foundation-orange/10 rounded-full blur-3xl"></div>
-      <div class="absolute top-10 right-20 w-32 h-32 border border-white/10 rounded-full"></div>
     </div>
 
     <!-- Content -->
