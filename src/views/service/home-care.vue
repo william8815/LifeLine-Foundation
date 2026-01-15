@@ -305,14 +305,13 @@ const closeToast = () => {
 }
 
 // 產品階段才需要 VITE_API_URL
-const submitAPIUrl = import.meta.env.PROD ? "/api/form/submit" : `/Form/AddNHIForm`
 const submitSurvey = async () => {
   try {
     let output = tidyData()
     isSubmitting.value = true
 
     const documentJSONString = JSON.stringify(output)
-    const response = await fetch(submitAPIUrl, {
+    const response = await fetch("/Form/AddNHIForm", {
       method : "POST",
       headers : {
         "Content-Type" : "application/json"
