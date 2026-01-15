@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, nextTick, computed, watch } from 'vue'
+import { ref, reactive, nextTick, computed, watch, onMounted } from 'vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
@@ -305,13 +305,14 @@ const closeToast = () => {
 }
 
 // 產品階段才需要 VITE_API_URL
+const submitAPIUrl = import.meta.env.PRODUCT_MODE ? "/api/form/submit" : `/Form/AddNHIForm`
 const submitSurvey = async () => {
   try {
     let output = tidyData()
     isSubmitting.value = true
 
     const documentJSONString = JSON.stringify(output)
-    const response = await fetch(`/Form/AddNHIForm`, {
+    const response = await fetch(submitAPIUrl, {
       method : "POST",
       headers : {
         "Content-Type" : "application/json"
@@ -364,7 +365,9 @@ const fetchCityOptions = async () => {
     cityOptionsLoading.value = false
   }
 }
-fetchCityOptions()
+onMounted(()=> {
+  fetchCityOptions()
+})
 
 // api get dist options
 const distOptions = ref([])
