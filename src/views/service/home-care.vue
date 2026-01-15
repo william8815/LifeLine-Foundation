@@ -305,7 +305,7 @@ const closeToast = () => {
 }
 
 // 產品階段才需要 VITE_API_URL
-const submitAPIUrl = import.meta.env.PRODUCT_MODE ? "/api/form/submit" : `/Form/AddNHIForm`
+const submitAPIUrl = import.meta.env.PROD ? "/api/form/submit" : `/Form/AddNHIForm`
 const submitSurvey = async () => {
   try {
     let output = tidyData()
