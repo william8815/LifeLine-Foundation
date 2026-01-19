@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useHead, useSeoMeta } from '@unhead/vue'
+import { formatFBNews } from '@/utils/formatFBNews'
 
 // SEO Metadata
 useHead({
@@ -26,66 +27,11 @@ useSeoMeta({
   twitterDescription: '掌握最新的健康衛教與基金會動態。'
 })
 
-const posts = [
-  {
-    id: "4059319334310295_3799303623645202",
-    message: "【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」的初衷。未來我們將持續引入美國 Lifeline 技術，強化雲端智慧醫療，守護每一位長輩的笑容！",
-    full_picture: "https://picsum.photos/800/600?random=1",
-    created_time: "2024-10-29T12:26:32+0000"
-  },
-  {
-    id: "4059319334310295_1716316915277227",
-    message: "秋意漸濃，長輩的關節照護更不能馬虎！醫師建議每日進行 10 分鐘的居家拉伸運動，能有效減緩關節晨僵現象。若您家中長輩有相關困擾，可以諮詢加盟診所的家醫計畫醫師，規劃專屬的運動方案。#健康長壽 #家醫計畫 #關節照護",
-    full_picture: "https://picsum.photos/800/600?random=2",
-    created_time: "2016-07-02T14:58:26+0000"
-  },
-  {
-    id: "4059319334310295_1547912345451019",
-    message: "上週末在信義區舉行的「銀髮樂齡派對」圓滿結束！看到長輩們戴上我們的智慧偵測手環，開心地跳著律動舞，志工們都深感欣慰。我們不只是提供通報，更是提供一份「安心」的陪伴。我們的愛心特派員也在現場捕捉到了許多動人的畫面，歡迎大家點擊查看更多現場精彩照片！",
-    full_picture: "https://picsum.photos/800/600?random=3",
-    created_time: "2015-02-04T07:25:00+0000"
-  },
-  {
-    id: "4059319334310295_3799303623645202",
-    message: "【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」的初衷。未來我們將持續引入美國 Lifeline 技術，強化雲端智慧醫療，守護每一位長輩的笑容！",
-    full_picture: "https://picsum.photos/800/600?random=1",
-    created_time: "2024-10-29T12:26:32+0000"
-  },
-  {
-    id: "4059319334310295_1716316915277227",
-    message: "秋意漸濃，長輩的關節照護更不能馬虎！醫師建議每日進行 10 分鐘的居家拉伸運動，能有效減緩關節晨僵現象。若您家中長輩有相關困擾，可以諮詢加盟診所的家醫計畫醫師，規劃專屬的運動方案。#健康長壽 #家醫計畫 #關節照護",
-    full_picture: "https://picsum.photos/800/600?random=2",
-    created_time: "2016-07-02T14:58:26+0000"
-  },
-  {
-    id: "4059319334310295_1547912345451019",
-    message: "上週末在信義區舉行的「銀髮樂齡派對」圓滿結束！看到長輩們戴上我們的智慧偵測手環，開心地跳著律動舞，志工們都深感欣慰。我們不只是提供通報，更是提供一份「安心」的陪伴。我們的愛心特派員也在現場捕捉到了許多動人的畫面，歡迎大家點擊查看更多現場精彩照片！",
-    full_picture: "https://picsum.photos/800/600?random=3",
-    created_time: "2015-02-04T07:25:00+0000"
-  }
-]
-
+import news from '@/constants/FB_News.json'
 const newsList = ref([])
 initPosts()
 function initPosts() {
-  newsList.value = posts.map((item)=> {
-    return {
-      id: item.id,
-      created_time: item?.created_time ? formatDate(item.created_time) : "",
-      message: item?.message || "",
-      images: item?.full_picture ? [item.full_picture] : [],
-      imageLoaded: false
-    }
-  })
-}
-
-// 處理日期格式
-function formatDate(dateString) {
-  const date = new Date(dateString)
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
+  newsList.value = formatFBNews(news.data)
 }
 
 const goToDetail = (id) => {
@@ -115,7 +61,7 @@ const goToDetail = (id) => {
           <!-- Card Image -->
           <div class="relative aspect-[16/10] overflow-hidden bg-gray-100 overflow-hidden">
             <img 
-              :src="item.images[0]" 
+              :src="item.full_picture" 
               class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" 
               :class="item.imageLoaded ? 'opacity-100' : 'opacity-0'"
               loading="lazy"
@@ -126,7 +72,7 @@ const goToDetail = (id) => {
           <!-- Card Body -->
           <div class="p-8 flex-grow flex flex-col">
             <p class="text-gray-500 leading-relaxed font-medium text-sm line-clamp-3 mb-8" :style="{whiteSpace: 'pre-wrap', overflowWrap: 'break-word'}">
-              {{ item.message }}
+              <span v-html="item.formattedMessage"></span>
             </p>
 
             <div class="mt-auto flex items-center justify-between pt-6 border-t border-gray-50">

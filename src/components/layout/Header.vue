@@ -130,7 +130,7 @@ const isActive = (path) => route.path === path
 
         <!-- CTA Button -->
         <div class="ml-4 px-4 border-l border-gray-200">
-          <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-full bg-foundation-lightblue text-white hover:bg-foundation-blue hover:text-white text-sm font-black shadow-lg shadow-foundation-blue/30 hover:scale-105 active:scale-95 transition-all">
+          <RouterLink to="/donate" class="inline-flex items-center px-6 py-2.5 rounded-xl bg-foundation-lightblue text-white hover:bg-foundation-blue hover:text-white text-sm font-black shadow-lg shadow-foundation-blue/30 hover:scale-105 active:scale-95 transition-all">
             {{ t('nav.donate') }}
             <Icon name="favoriteOutline" class="h-4 w-4 ml-2" />
           </RouterLink>

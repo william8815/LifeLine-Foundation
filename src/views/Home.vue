@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, nextTick } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import Icon from '@/components/base/Icon.vue'
+import { formatFBNews } from '@/utils/formatFBNews'
 
 const { t } = useI18n()
 
@@ -91,65 +92,36 @@ const stats = computed(() => [
   { labelKey: 'home.stats.team', value: 1000, suffixKey: 'home.stats.suffix_members', showPlus: true }
 ])
 
-const posts = [
-  {
-    id: "4059319334310295_3799303623645202",
-    message: "【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」的初衷。未來我們將持續引入美國 Lifeline 技術，強化雲端智慧醫療，守護每一位長輩的笑容！",
-    full_picture: "https://picsum.photos/800/600?random=1",
-    created_time: "2024-10-29T12:26:32+0000"
-  },
-  {
-    id: "4059319334310295_1716316915277227",
-    message: "秋意漸濃，長輩的關節照護更不能馬虎！醫師建議每日進行 10 分鐘的居家拉伸運動，能有效減緩關節晨僵現象。若您家中長輩有相關困擾，可以諮詢加盟診所的家醫計畫醫師，規劃專屬的運動方案。#健康長壽 #家醫計畫 #關節照護",
-    full_picture: "https://picsum.photos/800/600?random=2",
-    created_time: "2016-07-02T14:58:26+0000"
-  },
-  {
-    id: "4059319334310295_1547912345451019",
-    message: "上週末在信義區舉行的「銀髮樂齡派對」圓滿結束！看到長輩們戴上我們的智慧偵測手環，開心地跳著律動舞，志工們都深感欣慰。我們不只是提供通報，更是提供一份「安心」的陪伴。我們的愛心特派員也在現場捕捉到了許多動人的畫面，歡迎大家點擊查看更多現場精彩照片！",
-    full_picture: "https://picsum.photos/800/600?random=3",
-    created_time: "2015-02-04T07:25:00+0000"
-  },
-  {
-    id: "4059319334310295_3799303623645202",
-    message: "【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」的初衷。未來我們將持續引入美國 Lifeline 技術，強化雲端智慧醫療，守護每一位長輩的笑容！",
-    full_picture: "https://picsum.photos/800/600?random=1",
-    created_time: "2024-10-29T12:26:32+0000"
-  },
-  {
-    id: "4059319334310295_1716316915277227",
-    message: "秋意漸濃，長輩的關節照護更不能馬虎！醫師建議每日進行 10 分鐘的居家拉伸運動，能有效減緩關節晨僵現象。若您家中長輩有相關困擾，可以諮詢加盟診所的家醫計畫醫師，規劃專屬的運動方案。#健康長壽 #家醫計畫 #關節照護",
-    full_picture: "https://picsum.photos/800/600?random=2",
-    created_time: "2016-07-02T14:58:26+0000"
-  },
-  {
-    id: "4059319334310295_1547912345451019",
-    message: "上週末在信義區舉行的「銀髮樂齡派對」圓滿結束！看到長輩們戴上我們的智慧偵測手環，開心地跳著律動舞，志工們都深感欣慰。我們不只是提供通報，更是提供一份「安心」的陪伴。我們的愛心特派員也在現場捕捉到了許多動人的畫面，歡迎大家點擊查看更多現場精彩照片！",
-    full_picture: "https://picsum.photos/800/600?random=3",
-    created_time: "2015-02-04T07:25:00+0000"
-  }
-]
+import news from '@/constants/FB_News.json'
 const newsList = ref([])
 initPosts()
 function initPosts() {
-  newsList.value = posts.map((item)=> {
-    return {
-      id: item.id,
-      created_time: item?.created_time ? formatDate(item.created_time) : "",
-      message: item?.message || "",
-      images: item?.full_picture ? [item.full_picture] : [],
-      imageLoaded: false
-    }
+  newsList.value = news?.data?.length ? formatFBNews(news.data.slice(0, 6)) : []
+  nextTick(()=> {
+    // 新增 觀察器
+    handleLazyLoadedImage()
   })
 }
-
-// 處理日期格式
-function formatDate(dateString) {
-  const date = new Date(dateString)
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
+function handleLazyLoadedImage() {
+  const config = {
+    threshold: 0.1
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let img = entry.target
+        img.src = img.dataset.src
+        observer.unobserve(img)
+      }
+    })
+  }, config)
+  // 觀察器
+  const images = document.querySelectorAll('.news-image')
+  images.forEach(element => {
+    observer.observe(element)
+  })
+  const heroImage2 = document.querySelector('.hero-image2')
+  observer.observe(heroImage2)
 }
 
 const isVisible = ref(false)
@@ -163,8 +135,10 @@ onMounted(() => {
     <!-- Hero Section -->
     <section class="relative h-[calc(100vh-80px)] flex items-center overflow-hidden">
       <div class="absolute inset-0 z-0">
-        <img :src="imgHero" class="w-full h-full object-cover transition-opacity duration-500" alt="Hero Background" loading="lazy" :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
-        @load="heroImageLoaded = true" />
+        <picture>
+          <img :src="imgHero" class="w-full h-full object-cover transition-opacity duration-500" alt="Hero Background" loading="lazy" :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
+          @load="heroImageLoaded = true" fetchpriority="high" decoding="async"/>
+        </picture>
         <div class="absolute inset-0 bg-black/60"></div>
       </div>
       
@@ -262,9 +236,15 @@ onMounted(() => {
             </div>
           </div>
           <div class="lg:w-1/2 relative">
-            <div class="relative rounded-[60px] overflow-hidden shadow-2xl group">
-               <img :src="imgHero_2" class="w-full h-full object-cover transition-opacity duration-500" alt="Mission Image" :class="heroImage2Loaded ? 'opacity-100' : 'opacity-0'" @load="heroImage2Loaded = true" loading="lazy">
-               <div class="absolute inset-0 bg-gradient-to-t from-foundation-blue/40 to-transparent"></div>
+            <div class="relative rounded-[60px] overflow-hidden shadow-2xl group aspect-video">
+              <!-- Skeleton UI -->
+              <div 
+                v-if="!heroImage2Loaded" 
+                class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
+              >
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+              </div>
+               <img :data-src="imgHero_2" class="hero-image2 w-full h-full object-cover transition-opacity duration-500" alt="Mission Image" :class="heroImage2Loaded ? 'opacity-100' : 'opacity-0'" @load="heroImage2Loaded = true" loading="lazy">
             </div>
             <!-- Decorative Elements -->
             <div class="absolute -right-10 -top-10 w-40 h-40 bg-foundation-orange/10 rounded-full blur-3xl animate-pulse"></div>
@@ -346,12 +326,28 @@ onMounted(() => {
               :to="`/news/${news.id}`"
               class="group flex flex-col items-start"
             >
-              <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700">
-                <img :src="news.images[0]" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+              <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700 relative bg-gray-100">
+                <!-- Skeleton UI -->
+                <div 
+                  v-if="!news.imageLoaded" 
+                  class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
+                >
+                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+                </div>
+                
+                <!-- Actual Image -->
+                <img 
+                  :data-src="news.full_picture" 
+                  class="news-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
+                  :class="news.imageLoaded ? 'opacity-100' : 'opacity-0'" 
+                  @load="news.imageLoaded = true" 
+                  :alt="news.message" 
+                  loading="lazy"
+                >
               </div>
-              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ t(news.created_time) }}</span>
+              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ news.created_time }}</span>
               <p class="text-lg font-black text-gray-800 leading-tight group-hover:text-foundation-lightblue transition-colors line-clamp-2 italic tracking-tighter">
-                {{ news.message }}
+                <span v-html="news.formattedMessage"></span>
               </p>
             </RouterLink>
          </div>
@@ -396,5 +392,18 @@ onMounted(() => {
 
 .shadow-premium {
   box-shadow: 0 30px 100px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }
 </style>

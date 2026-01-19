@@ -1,34 +1,76 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import Icon from '@/components/base/Icon.vue'
+import { formatFBNews } from '@/utils/formatFBNews'
 
 const route = useRoute()
 const router = useRouter()
 
 // Mock logic to "fetch" news based on ID (using the same data structure as index.vue)
-const newsItem = ref({
-  id: route.params.id,
-  category: '基金會消息',
-  author: '生命連線基金會',
-  date: '2023.12.24',
-  title: '生命連線 20 週年：厚澤民生，共創未來',
-  content: `【賀！生命連線 20 週年】感謝大家陪伴我們走過二十個年頭。從創立初期的幾間診所，到現在全台五百家加盟醫護點的守護網，我們始終堅持「厚澤民生」協助整合計畫執行，更與您共創健康價值的願景。
-
-廿年來，生命連線已是全台大最大的獨居老人緊急救護通報中心，服務對象已超過百萬名。近年，生命連線基金會承接「社區醫療群」第三方服務專案，遍及北區、中區及澎湖外島，績效卓著。
-
-未來我們將持續引入美國 Lifeline 技術，發展雲端智慧醫療照護暨個性化高端健康管家服務，守護每一位長輩的笑容！`,
-  images: [
-    'https://picsum.photos/1200/800?random=1',
-    'https://picsum.photos/1200/800?random=2',
-    'https://picsum.photos/1200/800?random=3'
-  ],
-  likes: 245,
-  comments: 12,
-  isHot: true
-})
+import news from "@/constants/FB_News.json"
+const newsItem = ref({})
+initNewsItem()
+function initNewsItem() {
+  const newsList = formatFBNews(news.data)
+  newsItem.value = newsList.find((item) => item.id === route.params.id)
+  console.log(newsItem.value)
+  // newsItem.value = {
+  //   id: item.id,
+  //   created_time: item?.created_time ? formatDate(item.created_time) : "",
+  //   message: item?.message || "",
+  //   images: item?.full_picture ? [{
+  //     src: item.full_picture,
+  //     alt: item.message,
+  //     imageLoaded: false
+  //   }] : [],
+  //   permalink_url: item?.permalink_url || ""
+  // }
+}
+// 處理日期格式
+function formatDate(dateString) {
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
 
 const goBack = () => {
   router.push('/news')
+}
+
+// 分享功能
+const handleShare = async () => {
+  const shareData = {
+    title: '生命連線基金會 - 最新消息',
+    text: newsItem.value.message.substring(0, 100) + '...',
+    url: newsItem.value.permalink_url
+  }
+
+  try {
+    // 檢查瀏覽器是否支援 Web Share API
+    if (navigator.share) {
+      await navigator.share(shareData)
+      console.log('分享成功')
+    } else {
+      // 降級方案：複製連結到剪貼簿
+      await navigator.clipboard.writeText(window.location.href)
+      console.log('連結已複製到剪貼簿！')
+    }
+  } catch (error) {
+    // 使用者取消分享或發生錯誤
+    if (error.name !== 'AbortError') {
+      console.error('分享失敗:', error)
+      // 最終降級方案：嘗試複製連結
+      try {
+        await navigator.clipboard.writeText(window.location.href)
+        console.log('連結已複製到剪貼簿！')
+      } catch (clipboardError) {
+        console.error('複製失敗:', clipboardError)
+      }
+    }
+  }
 }
 
 onMounted(() => {
@@ -39,8 +81,8 @@ onMounted(() => {
 <template>
   <div class="bg-white min-h-screen pb-32">
     <!-- Article Header Area -->
-    <div class="relative h-[60vh] min-h-[400px] overflow-hidden bg-gray-900">
-      <img :src="newsItem.images[0]" class="w-full h-full object-cover opacity-70 scale-105 animate-slow-zoom" alt="News Image">
+    <div class="relative h-[30vh] min-h-[300px] overflow-hidden bg-gray-900">
+      <img :src="newsItem.full_picture" class="w-full h-full object-cover opacity-70 animate-slow-zoom" :alt="newsItem.message" loading="lazy">
       <div class="absolute inset-0 bg-gradient-to-t from-white to-black/30"></div>
       
       <!-- Sticky Back Button -->
@@ -48,71 +90,94 @@ onMounted(() => {
         @click="goBack" 
         class="absolute top-10 left-10 z-50 p-4 bg-white/10 hover:bg-white text-white hover:text-foundation-blue rounded-full backdrop-blur-xl border border-white/20 transition-all duration-300 group shadow-2xl"
       >
-        <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        <Icon name="arrowForward" class="w-6 h-6 rotate-180"></Icon>
       </button>
-
-      <!-- Overlay Content -->
-      <div class="absolute bottom-0 left-0 w-full p-10 md:p-20 container mx-auto px-4 md:px-6">
-        <!-- 文字加上白色陰影 -->
-         <span class="inline-block px-4 py-1.5 bg-foundation-blue text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-xl">
-           {{ newsItem.category }}
-         </span>
-         <h1 class="text-4xl md:text-6xl font-black text-foundation-blue leading-tight mb-8">
-           {{ newsItem.title }}
-         </h1>
-         <div class="flex items-center space-x-6 text-gray-500 font-bold">
-            <div class="flex items-center">
-               <div class="w-10 h-10 rounded-full bg-foundation-blue flex items-center justify-center text-white mr-3 shadow-lg">L</div>
-               <span>{{ newsItem.author }}</span>
-            </div>
-            <span>|</span>
-            <span>{{ newsItem.date }}</span>
-         </div>
-      </div>
     </div>
 
     <!-- Article Content Area -->
-    <main class="container mx-auto px-4 md:px-6 pt-20">
+    <main class="container mx-auto px-4 md:px-6 pt-12">
+      <div class="flex items-center justify-between space-x-6 text-gray-500 font-bold mb-8">
+        <span class="italic text-gray-400">{{ newsItem.created_time }}</span>
+        <button @click="handleShare" class="px-6 py-3 bg-foundation-lightblue hover:bg-foundation-blue text-white rounded-xl shadow-xl transition-all duration-300 font-black flex items-center">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+          分享
+        </button>
+      </div>
       <article class="prose prose-xl max-w-none">
         <div class="space-y-10 text-gray-600 leading-[1.8] font-medium text-lg md:text-xl">
-           <p v-for="(p, i) in newsItem.content.split('\n\n')" :key="i">
-             {{ p }}
-           </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-20">
-           <div v-for="(img, idx) in newsItem.images.slice(1)" :key="idx" class="rounded-[40px] overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 aspect-[4/3]">
-              <img :src="img" class="w-full h-full object-cover" alt="Article Image">
-           </div>
-        </div>
-
-        <div class="p-10 md:p-14 bg-gray-50 rounded-[50px] border border-gray-100 my-20 relative overflow-hidden group">
-           <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-              <div class="space-y-2 text-center md:text-left">
-                <p class="text-2xl font-black text-foundation-blue italic">覺得這篇內容有幫助嗎？</p>
-                <p class="text-gray-400 font-bold">分享給更多需要健康資訊的朋友吧！</p>
-              </div>
-              <div class="flex items-center space-x-4">
-                 <button class="px-10 py-5 bg-white rounded-2xl shadow-lg border border-gray-100 hover:bg-foundation-blue hover:text-white transition-all duration-300 font-black flex items-center">
-                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M14 10h4.757c1.27 0 1.912 1.537 1.011 2.438l-7.108 7.108a1 1 0 01-1.414 0l-7.108-7.108C3.235 11.537 3.877 10 5.147 10H10V4.243a1 1 0 011.707-.707L14 10z" /></svg>
-                    讚
-                 </button>
-                 <button class="px-10 py-5 bg-foundation-blue text-white rounded-2xl shadow-xl hover:scale-105 transition-all duration-300 font-black flex items-center">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
-                    分享
-                 </button>
-              </div>
-           </div>
-           <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-foundation-blue/5 rounded-full blur-3xl"></div>
+           <span v-html="newsItem.formattedMessage"></span>
         </div>
       </article>
+      <!-- 標籤 -->
+      <div v-if="newsItem?.tags?.length" class="my-4 py-4">
+        <div class="flex items-center gap-4 flex-wrap font-bold">
+          <span v-for="tag in newsItem.tags" :key="tag" class="bg-foundation-lightblue py-2 px-4 rounded-full text-white"># {{ tag }}</span>
+        </div>
+      </div>
+      <!-- 媒體列表 -->
+      <div v-if="newsItem.media && newsItem.media.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-8 my-4">
+        <h3 class="text-2xl font-black mb-2 md:col-span-2 text-foundation-blue">媒體列表</h3>
+        <!-- 照片 -->
+        <div 
+          v-for="(media, idx) in newsItem.media.filter(m => m.type === 'photo')" 
+          :key="`photo-${idx}`" 
+          class="rounded-xl overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 aspect-square relative bg-gray-100 max-h-[300px]"
+        >
+          <a 
+            :href="media.url" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="block w-full h-full relative group"
+            >
+            <!-- Skeleton UI -->
+            <div 
+              v-if="!media.loaded" 
+              class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
+            >
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+            </div>
+            
+            <img 
+              :src="media.src" 
+              class="w-full h-full object-cover transition-opacity duration-500" 
+              :class="media.loaded ? 'opacity-100' : 'opacity-0'" 
+              :alt="newsItem.message" 
+              @load="media.loaded = true" 
+              loading="lazy"
+            >
+          </a>
+        </div>
 
-      <!-- Back To List Bottom -->
-      <div class="flex justify-center mt-32">
-         <button @click="goBack" class="px-14 py-6 bg-white text-foundation-blue rounded-3xl font-black shadow-2xl hover:-translate-y-2 transition-all flex items-center group">
-            <svg class="w-5 h-5 mr-4 group-hover:-translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" /></svg>
-            回到消息總覽
-         </button>
+        <!-- 影片 -->
+        <div 
+          v-for="(media, idx) in newsItem.media.filter(m => m.type === 'video')" 
+          :key="`video-${idx}`" 
+          class="rounded-xl overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 aspect-video relative bg-gray-900 max-h-[300px] "
+        >
+          <a 
+            :href="media.url" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="block w-full h-full relative group"
+          >
+            <!-- 影片縮圖 -->
+            <img 
+              :src="media.thumbnail" 
+              class="w-full h-full object-cover" 
+              :alt="newsItem.url"
+              loading="lazy"
+            >
+            
+            <!-- 播放按鈕 -->
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+              <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg class="w-10 h-10 text-foundation-blue ml-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </main>
   </div>
@@ -120,10 +185,10 @@ onMounted(() => {
 
 <style scoped>
 @keyframes slow-zoom {
-  from { transform: scale(1.05); }
+  from { transform: scale(1); }
   to { transform: scale(1.15); }
 }
 .animate-slow-zoom {
-  animation: slow-zoom 20s linear infinite alternate;
+  animation: slow-zoom 10s linear infinite alternate;
 }
 </style>
