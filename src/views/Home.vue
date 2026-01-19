@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, nextTick } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
@@ -95,12 +95,11 @@ const stats = computed(() => [
 import news from '@/constants/FB_News.json'
 const newsList = ref([])
 initPosts()
+onMounted(()=> {
+  handleLazyLoadedImage()
+})
 function initPosts() {
   newsList.value = news?.data?.length ? formatFBNews(news.data.slice(0, 6)) : []
-  nextTick(()=> {
-    // 新增 觀察器
-    handleLazyLoadedImage()
-  })
 }
 function handleLazyLoadedImage() {
   const config = {
