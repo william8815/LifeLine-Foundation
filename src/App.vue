@@ -5,13 +5,18 @@ import Header from "./components/layout/Header.vue";
 import Footer from "./components/layout/Footer.vue";
 
 // 預設 SEO Meta 資訊
+useHead({
+  link: [
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
+    { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/favicon-64.png' },
+  ]
+})
 useSeoMeta({
   title: "生命連線基金會 - 官方網站",
   description: "致力於家醫計畫、緊急救援系統與老人協尋等守護生命的服務。",
   keywords: "生命連線, 基金會, 家醫計畫, 緊急救援, 老人協尋, 跌倒偵測",
-  // ... (keep other SEO meta as needed, but updating for project context)
 });
-// ... (rest of search engine optimizations)
 </script>
 
 <template>
