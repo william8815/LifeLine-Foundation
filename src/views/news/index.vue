@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import PageHeader from '../../components/layout/PageHeader.vue'
@@ -27,11 +27,59 @@ useSeoMeta({
   twitterDescription: '掌握最新的健康衛教與基金會動態。'
 })
 
-import news from '@/constants/FB_News.json'
+const allNews = ref([])
 const newsList = ref([])
-initPosts()
-function initPosts() {
-  newsList.value = formatFBNews(news.data)
+const isLoadingNews = ref(false)
+const newsError = ref(null)
+const currentPage = ref(1)
+const pageData = ref({
+  size: 12,
+  total: null,
+})
+onMounted(async()=> {
+  await initPosts()
+})
+async function initPosts() {
+  isLoadingNews.value = true
+  newsError.value = null
+
+  try {
+    // Facebook Graph API 設定
+    const BASE_URL = "https://graph.facebook.com"
+    const PAGE_ID = "211410289347262"
+    const ACCESS_TOKEN = "EAAMIs5yrlVIBQbZCHqjV0t5KZBGVivehw9tMQi5gZBNZAMDeNH9OPfnGjPwzcDJaMRA0ZBUy92JdmmNYihNOfeqxUlRoI2kLAOiUHZBEAVM4cP7AJKAqR3eolAnMDcCtmg6EhYFo1eCqbAs90vxG89H4si5lKnbfQA8eLbgUjn7ZAr1epqHIOzyF2StqlcddJZC6c4ZCs"
+    const FIELDS = "id,message,full_picture,created_time,permalink_url,attachments{media_type,media,url},status_type"
+    
+    // 建構 API URL
+    const apiUrl = `${BASE_URL}/${PAGE_ID}/posts?access_token=${ACCESS_TOKEN}&fields=${FIELDS}`
+    
+    // 發送 GET 請求
+    const response = await fetch(apiUrl)
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`)
+    }
+    
+    const data = await response.json()
+    
+    // 採用分頁處理 (先做 format 處理，9 筆為一頁)
+    if (data?.data?.length) {
+      pageData.value.total = Math.ceil(data.data.length / pageData.value.size)
+      allNews.value = formatFBNews(data.data)
+      newsList.value = allNews.value.slice((currentPage.value - 1) * pageData.value.size, currentPage.value * pageData.value.size)
+      console.log(pageData.value)
+    } 
+  } catch (error) {
+    console.error('Failed to fetch Facebook posts:', error)
+    newsError.value = error.message
+  } finally {
+    isLoadingNews.value = false
+  }
+}
+
+const changePage = (page) => {
+  currentPage.value = page
+  newsList.value = allNews.value.slice((currentPage.value - 1) * pageData.value.size, currentPage.value * pageData.value.size)
 }
 
 const goToDetail = (id) => {
@@ -48,15 +96,43 @@ const goToDetail = (id) => {
 
     <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-30">
       <!-- Grid Feed -->
+      <!-- Skeleton UI Loading State -->
+      <div v-if="isLoadingNews" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div 
+          v-for="n in 12" 
+          :key="n" 
+          class="bg-white rounded-[16px] shadow-premium overflow-hidden border border-gray-100/50 flex flex-col h-full"
+        >
+          <!-- Image Skeleton -->
+          <div class="aspect-[16/10] bg-gray-200 animate-pulse relative overflow-hidden">
+             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+          </div>
+          
+          <!-- Body Skeleton -->
+          <div class="p-8 flex-grow flex flex-col space-y-4">
+             <div class="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
+             <div class="h-4 bg-gray-200 rounded w-5/6 animate-pulse"></div>
+             <div class="h-4 bg-gray-200 rounded w-4/6 animate-pulse"></div>
+             
+             <div class="mt-auto pt-6 border-t border-gray-50 flex justify-between items-center">
+               <div class="h-3 bg-gray-200 rounded w-24 animate-pulse"></div>
+               <div class="h-4 bg-gray-200 rounded w-20 animate-pulse"></div>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Feed -->
       <transition-group 
+        v-else-if="newsList.length > 0"
         name="list" 
         tag="div" 
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
       >
         <div 
           v-for="item in newsList" 
           :key="item.id"
-          class="bg-white rounded-[32px] shadow-premium overflow-hidden border border-gray-100/50 hover:shadow-2xl transition-all duration-500 group flex flex-col h-full"
+          class="bg-white rounded-[16px] shadow-premium overflow-hidden border border-gray-100/50 hover:shadow-2xl transition-all duration-500 group flex flex-col h-full"
         >
           <!-- Card Image -->
           <div class="relative aspect-[16/10] overflow-hidden bg-gray-100 overflow-hidden">
@@ -91,14 +167,23 @@ const goToDetail = (id) => {
         </div>
       </transition-group>
 
-      <!-- Load More -->
-      <!-- <div v-if="filteredItems.length > 0" class="flex justify-center mt-20 pb-10">
-        <button class="px-10 py-5 bg-white rounded-2xl text-foundation-blue font-black shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all border border-gray-100 flex items-center space-x-2">
-          <svg class="w-5 h-5 animate-spin text-foundation-lightblue" fill="none" viewBox="0 0 24 24" v-if="loading"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-          <span>載入更多精采動態</span>
-        </button>
-      </div> -->
+      <!-- Empty State -->
+      <div v-else class="flex flex-col items-center justify-center py-20 text-center">
+        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+          <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-700 mb-2">目前沒有最新消息</h3>
+        <p class="text-gray-500">基金會目前沒有發佈新的動態，請稍後再回來查看。</p>
+      </div>
+
+      <!-- pagination -->
+      <div class="flex items-center justify-center mt-10 max-w-[600px] mx-auto flex-wrap gap-2">
+        <button v-for="page in pageData.total" :key="page" @click="changePage(page)" class="py-2 px-4 rounded-md shadow-md" :class="currentPage === page ? 'bg-foundation-blue text-white' : 'bg-white text-foundation-blue'">{{ page }}</button>
+      </div>
     </main>
+
   </div>
 </template>
 
@@ -146,5 +231,17 @@ const goToDetail = (id) => {
 }
 .list-move {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
 }
 </style>

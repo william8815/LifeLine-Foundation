@@ -92,14 +92,48 @@ const stats = computed(() => [
   { labelKey: 'home.stats.team', value: 1000, suffixKey: 'home.stats.suffix_members', showPlus: true }
 ])
 
-import news from '@/constants/FB_News.json'
 const newsList = ref([])
-initPosts()
-onMounted(()=> {
+const isLoadingNews = ref(false)
+const newsError = ref(null)
+
+onMounted(async () => {
+  await initPosts()
   handleLazyLoadedImage()
 })
-function initPosts() {
-  newsList.value = news?.data?.length ? formatFBNews(news.data.slice(0, 6)) : []
+
+async function initPosts() {
+  isLoadingNews.value = true
+  newsError.value = null
+
+  try {
+    // Facebook Graph API 設定
+    const BASE_URL = "https://graph.facebook.com"
+    const PAGE_ID = "211410289347262"
+    const ACCESS_TOKEN = "EAAMIs5yrlVIBQbZCHqjV0t5KZBGVivehw9tMQi5gZBNZAMDeNH9OPfnGjPwzcDJaMRA0ZBUy92JdmmNYihNOfeqxUlRoI2kLAOiUHZBEAVM4cP7AJKAqR3eolAnMDcCtmg6EhYFo1eCqbAs90vxG89H4si5lKnbfQA8eLbgUjn7ZAr1epqHIOzyF2StqlcddJZC6c4ZCs"
+    const FIELDS = "id,message,full_picture,created_time,permalink_url,attachments{media_type,media,url},status_type"
+    
+    // 建構 API URL
+    const apiUrl = `${BASE_URL}/${PAGE_ID}/posts?access_token=${ACCESS_TOKEN}&fields=${FIELDS}`
+    
+    // 發送 GET 請求
+    const response = await fetch(apiUrl)
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`)
+    }
+    
+    const data = await response.json()
+    
+    // 格式化資料並只取前 6 筆
+    if (data?.data?.length) {
+      newsList.value = formatFBNews(data.data.slice(0, 6))
+    }
+  } catch (error) {
+    console.error('Failed to fetch Facebook posts:', error)
+    newsError.value = error.message
+  } finally {
+    isLoadingNews.value = false
+  }
 }
 function handleLazyLoadedImage() {
   const config = {
@@ -319,36 +353,68 @@ onMounted(() => {
          </div>
 
          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <RouterLink 
-              v-for="news in newsList" 
-              :key="news.id"
-              :to="`/news/${news.id}`"
-              class="group flex flex-col items-start"
-            >
-              <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700 relative bg-gray-100">
-                <!-- Skeleton UI -->
-                <div 
-                  v-if="!news.imageLoaded" 
-                  class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
-                >
+            <!-- Skeleton UI Loading State -->
+            <template v-if="isLoadingNews">
+              <div 
+                v-for="n in 6" 
+                :key="n" 
+                class="group flex flex-col items-start"
+              >
+                <!-- Image Skeleton -->
+                <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm bg-gray-100 relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"></div>
                   <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
                 </div>
-                
-                <!-- Actual Image -->
-                <img 
-                  :data-src="news.full_picture" 
-                  class="news-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
-                  :class="news.imageLoaded ? 'opacity-100' : 'opacity-0'" 
-                  @load="news.imageLoaded = true" 
-                  :alt="news.message" 
-                  loading="lazy"
-                >
+                <!-- Text Custom Skeleton -->
+                <div class="h-3 bg-gray-200 rounded w-24 mb-3 animate-pulse"></div>
+                <div class="h-6 bg-gray-200 rounded w-full mb-2 animate-pulse"></div>
+                <div class="h-6 bg-gray-200 rounded w-2/3 animate-pulse"></div>
               </div>
-              <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ news.created_time }}</span>
-              <p class="text-lg font-black text-gray-800 leading-tight group-hover:text-foundation-lightblue transition-colors line-clamp-2 italic tracking-tighter">
-                <span v-html="news.formattedMessage"></span>
-              </p>
-            </RouterLink>
+            </template>
+
+            <!-- News Cards -->
+            <template v-else-if="newsList.length > 0">
+              <RouterLink 
+                v-for="news in newsList" 
+                :key="news.id"
+                :to="`/news/${news.id}`"
+                class="group flex flex-col items-start"
+              >
+                <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700 relative bg-gray-100">
+                  <!-- Skeleton UI (Image Loading) -->
+                  <div 
+                    v-if="!news.imageLoaded" 
+                    class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
+                  >
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+                  </div>
+                  
+                  <!-- Actual Image -->
+                  <img 
+                    :data-src="news.full_picture" 
+                    class="news-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
+                    :class="news.imageLoaded ? 'opacity-100' : 'opacity-0'" 
+                    @load="news.imageLoaded = true" 
+                    :alt="news.message" 
+                    loading="lazy"
+                  >
+                </div>
+                <span class="text-xs font-bold text-gray-400 mb-3 tracking-widest">{{ news.created_time }}</span>
+                <p class="text-lg font-black text-gray-800 leading-tight group-hover:text-foundation-lightblue transition-colors line-clamp-2 italic tracking-tighter">
+                  <span v-html="news.formattedMessage"></span>
+                </p>
+              </RouterLink>
+            </template>
+
+            <!-- Empty State -->
+            <div v-else class="col-span-1 md:col-span-2 lg:col-span-3 flex flex-col items-center justify-center py-12 text-center text-gray-400">
+               <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+               </div>
+               <p class="font-bold">目前暫無最新消息</p>
+            </div>
          </div>
        </div>
     </section>
