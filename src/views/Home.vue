@@ -94,6 +94,7 @@ const stats = computed(() => [
 
 const newsList = ref([])
 const isLoadingNews = ref(false)
+const isLoadedNews = ref(false)
 const newsError = ref(null)
 
 onMounted(async () => {
@@ -133,6 +134,7 @@ async function initPosts() {
     newsError.value = error.message
   } finally {
     isLoadingNews.value = false
+    isLoadedNews.value = true
   }
 }
 function handleLazyLoadedImage() {
@@ -354,7 +356,7 @@ onMounted(() => {
 
          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Skeleton UI Loading State -->
-            <template v-if="isLoadingNews">
+            <template v-if="isLoadingNews && !isLoadedNews">
               <div 
                 v-for="n in 6" 
                 :key="n" 

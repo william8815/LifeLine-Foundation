@@ -30,6 +30,7 @@ useSeoMeta({
 const allNews = ref([])
 const newsList = ref([])
 const isLoadingNews = ref(false)
+const isLoadedNews = ref(false)
 const newsError = ref(null)
 const currentPage = ref(1)
 const pageData = ref({
@@ -74,6 +75,7 @@ async function initPosts() {
     newsError.value = error.message
   } finally {
     isLoadingNews.value = false
+    isLoadedNews.value = true
   }
 }
 
@@ -97,7 +99,7 @@ const goToDetail = (id) => {
     <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-30">
       <!-- Grid Feed -->
       <!-- Skeleton UI Loading State -->
-      <div v-if="isLoadingNews" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div v-if="isLoadingNews && !isLoadedNews" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         <div 
           v-for="n in 12" 
           :key="n" 
