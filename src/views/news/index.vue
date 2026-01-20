@@ -83,7 +83,7 @@ const changePage = (page) => {
 }
 
 const goToDetail = (id) => {
-  router.push(`/news/${id}`)
+  router.push(`/news-detail?id=${id}`)
 }
 </script>
 
@@ -180,7 +180,7 @@ const goToDetail = (id) => {
 
       <!-- pagination -->
       <div class="flex items-center justify-center mt-10 max-w-[600px] mx-auto flex-wrap gap-2">
-        <button v-for="page in pageData.total" :key="page" @click="changePage(page)" class="py-2 px-4 rounded-md shadow-md" :class="currentPage === page ? 'bg-foundation-blue text-white' : 'bg-white text-foundation-blue'">{{ page }}</button>
+        <button v-for="page in pageData.total" :key="page" @click="changePage(page)" class="py-2 px-4 rounded-md shadow-md" :class="currentPage === page ? 'bg-foundation-blue text-white' : 'bg-white text-foundation-blue hover:bg-foundation-lightblue hover:text-white'">{{ page }}</button>
       </div>
     </main>
 

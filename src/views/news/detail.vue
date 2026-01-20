@@ -24,7 +24,7 @@ async function initPostItem() {
   try {
     // Facebook Graph API 設定
     const BASE_URL = "https://graph.facebook.com/v19.0"
-    const TWEET_ID = route.params.id
+    const TWEET_ID = route?.query?.id || ""
     const ACCESS_TOKEN = "EAAMIs5yrlVIBQbZCHqjV0t5KZBGVivehw9tMQi5gZBNZAMDeNH9OPfnGjPwzcDJaMRA0ZBUy92JdmmNYihNOfeqxUlRoI2kLAOiUHZBEAVM4cP7AJKAqR3eolAnMDcCtmg6EhYFo1eCqbAs90vxG89H4si5lKnbfQA8eLbgUjn7ZAr1epqHIOzyF2StqlcddJZC6c4ZCs"
     const FIELDS = "id,message,full_picture,created_time,permalink_url,attachments{media_type,media,url},status_type"
     

@@ -377,7 +377,7 @@ onMounted(() => {
               <RouterLink 
                 v-for="news in newsList" 
                 :key="news.id"
-                :to="`/news/${news.id}`"
+                :to="`/news-detail?id=${news.id}`"
                 class="group flex flex-col items-start"
               >
                 <div class="w-full aspect-video rounded-[40px] overflow-hidden mb-8 border border-gray-50 shadow-sm group-hover:shadow-2xl transition-all duration-700 relative bg-gray-100">

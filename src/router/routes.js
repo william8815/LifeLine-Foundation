@@ -53,9 +53,9 @@ export const routes = [
     component: () => import("../views/news/index.vue"),
   },
   {
-    path: "/news/:id",
+    path: "/news-detail",
     name: "NewsDetail",
-    component: () => import("../views/news/[id].vue"),
+    component: () => import("../views/news/detail.vue"),
   },
   // Others
   {
