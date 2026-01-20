@@ -789,8 +789,14 @@
     },
     "footer": {
       "message": "「愛心無界，長者有依」— 您的善款入帳後，基金會皆會依法開立正式收據。",
-      "button1": "了解服務內容",
-      "button2": "查看最新動態"
+      "button1": "了解服務內容"
     }
-  }
+  },
+  "share": "分享",
+  "publish_date": "發佈日期",
+  "media_list": "媒體列表",
+  "share_success": "分享成功",
+  "link_copied": "連結已複製到剪貼簿！",
+  "share_failed": "分享失敗",
+  "copy_failed": "複製失敗"
 }

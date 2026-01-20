@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import Icon from '@/components/base/Icon.vue'
 import { formatFBNews } from '@/utils/formatFBNews'
+
+const { t } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
@@ -141,10 +144,10 @@ onMounted(() => {
       <!-- Article Content Area -->
       <main class="container mx-auto px-4 md:px-6 pt-12">
         <div class="flex items-center justify-between space-x-6 text-gray-500 font-bold mb-8">
-          <span class="italic text-gray-400">發佈日期 : {{ newsItem.created_time }}</span>
+          <span class="italic text-gray-400">{{ t('publish_date') }} : {{ newsItem.created_time }}</span>
           <button @click="handleShare" class="px-6 py-3 bg-foundation-blue text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-black flex items-center">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
-            分享
+            {{ t('share') }}
           </button>
         </div>
         <article class="prose prose-xl max-w-none">
@@ -160,7 +163,7 @@ onMounted(() => {
         </div>
         <!-- 媒體列表 -->
         <div v-if="newsItem.media && newsItem.media.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-8 my-4">
-          <h3 class="text-2xl font-black mb-2 md:col-span-2 text-foundation-blue">媒體列表</h3>
+          <h3 class="text-2xl font-black mb-2 md:col-span-2 text-foundation-blue">{{ t('media_list') }}</h3>
           <!-- 照片 -->
           <div 
             v-for="(media, idx) in newsItem.media.filter(m => m.type === 'photo')" 

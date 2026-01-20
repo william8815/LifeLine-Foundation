@@ -789,8 +789,14 @@
     },
     "footer": {
       "message": "「爱心无界，长者有依」— 您的善款入帐后，基金会皆会依法开立正式收据。",
-      "button1": "了解服务内容",
-      "button2": "查看最新动态"
+      "button1": "了解服务内容"
     }
-  }
+  },
+  "share": "分享",
+  "publish_date": "发布日期",
+  "media_list": "媒体列表",
+  "share_success": "分享成功",
+  "link_copied": "链接已复制到剪贴簿！",
+  "share_failed": "分享失败",
+  "copy_failed": "复制失败"
 }
