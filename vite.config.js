@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    base: `/v/usmcapark5${env.VITE_PATH_URL}`,
+    base: `${env.VITE_PATH_URL}`,
     plugins: [vue(), svgLoader()],
     resolve: {
       alias: {

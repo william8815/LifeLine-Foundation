@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/:path*",
-      "destination": "/v/usmcapark5/:path*.html"
+      "destination": "/:path*.html"
     }
   ]
 }
