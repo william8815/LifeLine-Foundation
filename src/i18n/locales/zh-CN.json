@@ -412,7 +412,10 @@
       "success_team_message": "我们的专业团队将在 1-2 个工作天内与您联系，讨论后续合作事宜。",
       "success_reset_button": "重新填写问卷",
       "success_contact_prompt": "如有任何疑问，欢迎随时与我们联系",
-      "error_submit_failed": "提交失败，请稍后再试或联系我们。"
+      "error_submit_failed": "提交失败，请稍后再试或联系我们。",
+      "email_body_greeting": "您好，感谢您愿意深入了解家医计划 !",
+      "email_body_content_intro": "以下是您的表单填写内容 :",
+      "email_body_closing": "我们将会尽快给予您回复。"
     }
   },
   "service_emergency": {

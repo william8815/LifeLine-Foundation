@@ -405,11 +405,10 @@ watch(()=> surveyData.userInfo.city, (data)=> {
 
 const MailLink = computed(()=> {
   const parts = []
+  let questionIndex = 1
 
   // Step 1
-  parts.push(`1. ${t('service_home_care.survey.step1_question')} : ${surveyData.hasJoined ? t('service_home_care.survey.step1_yes') : t('service_home_care.survey.step1_no')}`)
-
-  let questionIndex = 2
+  parts.push(`${questionIndex++}. ${t('service_home_care.survey.step1_question')} : ${surveyData.hasJoined ? t('service_home_care.survey.step1_yes') : t('service_home_care.survey.step1_no')}`)
 
   if (surveyData.hasJoined) {
     // Step 2
@@ -439,7 +438,7 @@ const MailLink = computed(()=> {
       }
       return r
     })
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.step3_subtitle')} : ${reasons.join(', ')}`)
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.step3_title')} : ${reasons.join(', ')}`)
   }
 
   // Step 4
@@ -456,11 +455,11 @@ const MailLink = computed(()=> {
   const jobTitle = surveyData.userInfo.jobTitle ? `(${surveyData.userInfo.jobTitle})` : ''
   parts.push(`${t('service_home_care.survey.contact_person')} : ${surveyData.userInfo.name} ${jobTitle}`)
   
-  const contactMethods = []
-  if (surveyData.userInfo.tel) contactMethods.push(`${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
-  if (surveyData.userInfo.mobile) contactMethods.push(`${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
-  if (surveyData.userInfo.email) contactMethods.push(`${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
-  parts.push(`${t('service_home_care.survey.contact_method')} : ${contactMethods.join(', ')}`)
+  // const contactMethods = []
+  if (surveyData.userInfo.tel) parts.push(`${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
+  if (surveyData.userInfo.mobile) parts.push(`${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
+  if (surveyData.userInfo.email) parts.push(`${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
+  // parts.push(`${t('service_home_care.survey.contact_method')} : ${contactMethods.join(', ')}`)
 
   parts.push(`${t('service_home_care.survey.clinic_type_label')} : ${surveyData.userInfo.clinicType.join(', ')}`)
   parts.push(`${t('service_home_care.survey.clinic_address')} : ${surveyData.userInfo.city}${surveyData.userInfo.dist}${surveyData.userInfo.address}`)
@@ -468,14 +467,14 @@ const MailLink = computed(()=> {
 
   const mail = {
     to: "williamhsu88157976@gmail.com",
-    subject: "home-care-details-form",
+    subject: `${t("service_home_care")}-${t('service_home_care.survey.title')}`,
     body: `
-      您好，感謝您願意深入了解計畫內容 !
+      ${t('service_home_care.survey.email_body_greeting')}
 
-      以下是您的表單填寫內容 :
+      ${t('service_home_care.survey.email_body_content_intro')}
       ${parts.join('\n')}
 
-      我們將會依照使用者填寫的內容，盡快與您回復。
+      ${t('service_home_care.survey.email_body_closing')}
     `
   }
 
