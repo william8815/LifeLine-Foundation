@@ -402,6 +402,85 @@ const fetchDistOptions = async (cityName) => {
 watch(()=> surveyData.userInfo.city, (data)=> {
   fetchDistOptions(data)
 })
+
+const MailLink = computed(()=> {
+  const parts = []
+
+  // Step 1
+  parts.push(`1. ${t('service_home_care.survey.step1_question')} : ${surveyData.hasJoined ? t('service_home_care.survey.step1_yes') : t('service_home_care.survey.step1_no')}`)
+
+  let questionIndex = 2
+
+  if (surveyData.hasJoined) {
+    // Step 2
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.group_name')} : ${surveyData.groupName}`)
+    
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.still_operating')} : ${surveyData.isRunning ? t('service_home_care.survey.yes') : t('service_home_care.survey.no')}`)
+
+    let finalCreateReason = surveyData.createReason
+    if (finalCreateReason === t('service_home_care.survey.other')) {
+      finalCreateReason += ` : ${surveyData.createReasonOther}`
+    }
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.founded_how')} : ${finalCreateReason}`)
+
+    let finalLocation = surveyData.location
+    if (finalLocation === t('service_home_care.survey.other')) {
+      finalLocation += ` : ${surveyData.locationOther}`
+    }
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.admin_location_label')} : ${finalLocation}`)
+
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.motivation_label')} : ${surveyData.joinMotivation.join(', ')}`)
+
+  } else {
+    // Step 3
+    let reasons = surveyData.notJoinReason.map(r => {
+      if (r === t('service_home_care.survey.other')) {
+        return `${r} : ${surveyData.notJoinReasonOther}`
+      }
+      return r
+    })
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.step3_subtitle')} : ${reasons.join(', ')}`)
+  }
+
+  // Step 4
+  parts.push(`${questionIndex++}. ${t('service_home_care.survey.step4_question')} : ${surveyData.motivationBySupport ? t('service_home_care.survey.step4_yes') : t('service_home_care.survey.step4_no')}`)
+
+  const desiredServices = surveyData.expectService.join(', ')
+  parts.push(`${questionIndex++}. ${t('service_home_care.survey.desired_services_label')} : ${desiredServices}`)
+
+  // Contact Info
+  parts.push('')
+  parts.push(`${t('service_home_care.survey.contact_title')} :`)
+  parts.push(`${t('service_home_care.survey.clinic_name')} : ${surveyData.userInfo.clinicName}`)
+  
+  const jobTitle = surveyData.userInfo.jobTitle ? `(${surveyData.userInfo.jobTitle})` : ''
+  parts.push(`${t('service_home_care.survey.contact_person')} : ${surveyData.userInfo.name} ${jobTitle}`)
+  
+  const contactMethods = []
+  if (surveyData.userInfo.tel) contactMethods.push(`${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
+  if (surveyData.userInfo.mobile) contactMethods.push(`${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
+  if (surveyData.userInfo.email) contactMethods.push(`${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
+  parts.push(`${t('service_home_care.survey.contact_method')} : ${contactMethods.join(', ')}`)
+
+  parts.push(`${t('service_home_care.survey.clinic_type_label')} : ${surveyData.userInfo.clinicType.join(', ')}`)
+  parts.push(`${t('service_home_care.survey.clinic_address')} : ${surveyData.userInfo.city}${surveyData.userInfo.dist}${surveyData.userInfo.address}`)
+  parts.push(`${t('service_home_care.survey.preferred_time')} : ${surveyData.userInfo.contactTime.join(', ')}`)
+
+  const mail = {
+    to: "williamhsu88157976@gmail.com",
+    subject: "home-care-details-form",
+    body: `
+      您好，感謝您願意深入了解計畫內容 !
+
+      以下是您的表單填寫內容 :
+      ${parts.join('\n')}
+
+      我們將會依照使用者填寫的內容，盡快與您回復。
+    `
+  }
+
+  return `mailto:${mail.to}?subject=${mail.subject}&body=${encodeURIComponent(mail.body)}`
+})
 </script>
 
 <template>
@@ -875,12 +954,21 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                        </div>
                        
                        <div class="pt-16 flex flex-col items-center justify-center">
-                          <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
+                          <!-- <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
                             <span >{{ t('service_home_care.survey.submit_button') }}</span>
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                               <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />
                             </div>
-                          </button>
+                          </button> -->
+                          <a
+                            :href="MailLink"
+                            class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <span >{{ t('service_home_care.survey.submit_button') }}</span>
+                            <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                              <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />
+                            </div>
+                          </a>
                           <p class="text-center text-gray-400 text-xs mt-8 font-medium italic">{{ t('service_home_care.survey.submit_note') }}</p>
                        </div>
                     </div>
