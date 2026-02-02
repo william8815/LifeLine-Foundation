@@ -176,7 +176,7 @@ const donationMethods = computed(() => [
               {{ t('donate.footer.button1') }}
             </RouterLink>
             <RouterLink to="/news" class="px-10 py-5 bg-white text-foundation-blue border border-gray-100 rounded-2xl font-black shadow-lg hover:shadow-xl transition-all">
-              {{ t('donate.footer.button2') }}
+              {{ t('nav.news') }}
             </RouterLink>
          </div>
       </section>
