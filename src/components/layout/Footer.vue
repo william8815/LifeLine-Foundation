@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 import Icon from '@/components/base/Icon.vue'
 // image
-import logo from '@/assets/images/logo_lifeline.gif'
+import logo from '@/assets/images/lifeline_logo.png'
 
 const currentYear = new Date().getFullYear()
 
@@ -43,10 +43,8 @@ const footerLinks = [
         <!-- Brand & Info -->
         <div class="space-y-4">
           <RouterLink to="/" class="flex items-center space-x-2">
-            <div class="flex flex-col">
+            <div class="px-4 py-2 bg-white rounded-xl">
               <img :src="logo" alt="Logo" class="w-32 h-8">
-              <!-- <span class="text-white font-bold text-lg leading-tight uppercase tracking-wider">LifeLine</span>
-              <span class="text-foundation-beige text-xs font-bold">生命連線基金會</span> -->
             </div>
           </RouterLink>
           <p class="text-white text-sm leading-relaxed">

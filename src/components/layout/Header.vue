@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 import Icon from '@/components/base/Icon.vue'
 // image
-import logo from '@/assets/images/logo_lifeline.gif'
+import logo from '@/assets/images/lifeline_logo.png'
 
 const { t } = useI18n()
 const route = useRoute()
