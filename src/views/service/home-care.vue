@@ -466,7 +466,7 @@ const MailLink = computed(()=> {
   parts.push(`8. ${t('service_home_care.survey.preferred_time')} : ${surveyData.userInfo.contactTime.join(', ')}`)
 
   const mail = {
-    to: "williamhsu88157976@gmail.com",
+    to: "williamhsu@carenet.net.tw",
     subject: `${t("nav.service_home_care")}-${t('service_home_care.survey.title')}`,
     body: `
       ${t('service_home_care.survey.email_body_greeting')}
