@@ -231,12 +231,12 @@ const validateCurrentStep = () => {
   }
 
   if (!isValid) {
-     nextTick(() => {
-        const firstError = document.querySelector('.text-red-500.text-xs.font-bold')
-        if (firstError) {
-           firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-     })
+    nextTick(() => {
+      const firstError = document.querySelector('.error-label')
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    })
   }
 
   return isValid
@@ -831,7 +831,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                       
                       <div class="space-y-6">
                         <div class="space-y-3">
-                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.group_name') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.groupName ? 'error-label' : ''">{{ t('service_home_care.survey.group_name') }}</label>
                            <input v-model="surveyData.groupName" type="text" 
                              class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm"
                              :class="validationErrors.groupName ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'"
@@ -864,7 +864,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                         </div>
 
                         <div class="space-y-4">
-                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.admin_location_label') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.location ? 'error-label' : ''">{{ t('service_home_care.survey.admin_location_label') }}</label>
                            <div class="space-y-3">
                              <label v-for="opt in adminLocationOptions" :key="opt" 
                                class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border cursor-pointer hover:border-foundation-blue/30 transition-all group"
@@ -881,7 +881,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                         </div>
 
                         <div class="space-y-4">
-                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.motivation_label') }}</label>
+                           <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.joinMotivation ? 'error-label' : ''">{{ t('service_home_care.survey.motivation_label') }}</label>
                            <div class="flex flex-wrap gap-2">
                              <label v-for="opt in motivationOptions" :key="opt" 
                                class="flex items-center px-5 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" 
@@ -915,7 +915,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                         {{ t('service_home_care.survey.step3_title') }}
                       </p>
                       <div class="space-y-4">
-                         <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.step3_subtitle') }}</label>
+                         <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.notJoinReason ? 'error-label' : ''">{{ t('service_home_care.survey.step3_subtitle') }}</label>
                          <div class="space-y-3">
                            <label v-for="opt in notJoiningReasonsOptions" :key="opt" 
                              class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" 
@@ -957,7 +957,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                     </div>
 
                     <div class="space-y-5">
-                       <h4 class="text-foundation-blue font-black uppercase tracking-widest flex items-center self-start p-2">
+                       <h4 class="text-foundation-blue font-black uppercase tracking-widest flex items-center self-start p-2" :class="validationErrors.expectService ? 'error-label' : ''">
                          {{ t('service_home_care.survey.desired_services_label') }} ?
                        </h4>
                        <div class="space-y-3">
@@ -983,7 +983,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                        <div class="space-y-6">
                           <!-- Single Column Start -->
                           <div class="space-y-3">
-                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_name') }}</label>
+                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.clinicName ? 'error-label' : ''">{{ t('service_home_care.survey.clinic_name') }}</label>
                             <input v-model="surveyData.userInfo.clinicName" type="text" 
                               class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm"
                               :class="validationErrors.clinicName ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'" />
@@ -991,7 +991,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                           </div>
 
                           <div class="space-y-3">
-                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_person') }}</label>
+                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.name || validationErrors.jobTitle ? 'error-label' : ''">{{ t('service_home_care.survey.contact_person') }}</label>
                             <div class="flex flex-col sm:flex-row gap-4">
                               <div class="flex-[2] space-y-1">
                                 <input v-model="surveyData.userInfo.name" :placeholder="t('service_home_care.survey.name_placeholder')" 
@@ -1011,7 +1011,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                           </div>
 
                           <div class="space-y-3">
-                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_method') }}</label>
+                            <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.tel || validationErrors.email ? 'error-label' : ''">{{ t('service_home_care.survey.contact_method') }}</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                               <div class="space-y-1">
                                 <input v-model="surveyData.userInfo.tel" :placeholder="t('service_home_care.survey.phone_placeholder')" 
@@ -1033,7 +1033,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                           </div>
 
                           <div class="space-y-4">
-                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_type_label') }}</label>
+                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.clinicType ? 'error-label' : ''">{{ t('service_home_care.survey.clinic_type_label') }}</label>
                              <div class="flex flex-wrap gap-2">
                                <label v-for="type in clinicTypeOptions" :key="type" 
                                  class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-sm font-black" 
@@ -1049,7 +1049,7 @@ watch(()=> surveyData.userInfo.city, (data)=> {
                           </div>
 
                           <div class="space-y-3">
-                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_address') }}</label>
+                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1" :class="validationErrors.city || validationErrors.district || validationErrors.address ? 'error-label' : ''">{{ t('service_home_care.survey.clinic_address') }}</label>
                              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                <div class="space-y-1">
                                  <select v-model="surveyData.userInfo.city" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:border-foundation-blue text-sm font-black shadow-sm"
