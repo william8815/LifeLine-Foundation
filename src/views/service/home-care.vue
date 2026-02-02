@@ -172,11 +172,85 @@ const surveyData = reactive({
   }
 })
 
+// Validation State
+const validationErrors = reactive({
+  groupName: false,
+  createReason: false,
+  location: false,
+  joinMotivation: false,
+  notJoinReason: false,
+  expectService: false,
+  clinicName: false,
+  name: false,
+  jobTitle: false,
+  tel: false,
+  mobile: false,
+  email: false,
+  clinicType: false,
+  city: false,
+  dist: false,
+  address: false
+})
+
+const validateCurrentStep = () => {
+  // Reset errors for current step scope (simplification: reset all relevant to step)
+  // Actually, let's just reset specific fields based on step to avoid side effects
+  
+  let isValid = true
+
+  if (surveyStep.value === 2) {
+    validationErrors.groupName = !surveyData.groupName
+    validationErrors.createReason = !surveyData.createReason
+    validationErrors.location = !surveyData.location
+    validationErrors.joinMotivation = surveyData.joinMotivation.length === 0
+
+    if (validationErrors.groupName || validationErrors.createReason || validationErrors.location || validationErrors.joinMotivation) {
+      isValid = false
+    }
+  } else if (surveyStep.value === 3) {
+    validationErrors.notJoinReason = surveyData.notJoinReason.length === 0
+    if (validationErrors.notJoinReason) {
+      isValid = false
+    }
+  } else if (surveyStep.value === 4) {
+    validationErrors.expectService = surveyData.expectService.length === 0
+    validationErrors.clinicName = !surveyData.userInfo.clinicName
+    validationErrors.name = !surveyData.userInfo.name
+    validationErrors.jobTitle = !surveyData.userInfo.jobTitle
+    validationErrors.tel = !surveyData.userInfo.tel
+    validationErrors.mobile = !surveyData.userInfo.mobile
+    validationErrors.email = !surveyData.userInfo.email
+    validationErrors.clinicType = surveyData.userInfo.clinicType.length === 0
+    validationErrors.city = !surveyData.userInfo.city
+    validationErrors.dist = !surveyData.userInfo.dist
+    validationErrors.address = !surveyData.userInfo.address
+    
+    if (validationErrors.clinicName || validationErrors.name || validationErrors.tel || validationErrors.clinicType || validationErrors.city || validationErrors.dist || validationErrors.address) {
+      isValid = false
+    }
+  }
+
+  if (!isValid) {
+     nextTick(() => {
+        const firstError = document.querySelector('.text-red-500.text-xs.font-bold')
+        if (firstError) {
+           firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+     })
+  }
+
+  return isValid
+}
+
 const goToNext = async () => {
   if (surveyStep.value === 1) {
     if (surveyData.hasJoined) surveyStep.value = 2
     else if (!surveyData.hasJoined) surveyStep.value = 3
-  } else if (surveyStep.value === 2 || surveyStep.value === 3) {
+  } else if (surveyStep.value === 2) {
+    if (!validateCurrentStep()) return
+    surveyStep.value = 4
+  } else if (surveyStep.value === 3) {
+    if (!validateCurrentStep()) return
     surveyStep.value = 4
   }
   await scrollToTop()
@@ -305,36 +379,107 @@ const closeToast = () => {
 }
 
 // 產品階段才需要 VITE_API_URL
-const submitSurvey = async () => {
-  const API_URL = import.meta.env.PROD ? `${import.meta.env.VITE_API_URL}/Form/AddNHIForm` : `/Form/AddNHIForm`
-  try {
-    let output = tidyData()
-    isSubmitting.value = true
+const MailLink = computed(()=> {
+  const parts = []
+  let questionIndex = 1
 
-    const documentJSONString = JSON.stringify(output)
-    const response = await fetch(API_URL, {
-      method : "POST",
-      headers : {
-        "Content-Type" : "application/json"
-      },
-      body : JSON.stringify({
-        DocumentJSON : documentJSONString
-      })
-    })
+  // Step 1
+  parts.push(`${questionIndex++}. ${t('service_home_care.survey.step1_question')} : ${surveyData.hasJoined ? t('service_home_care.survey.step1_yes') : t('service_home_care.survey.step1_no')}`)
+
+  if (surveyData.hasJoined) {
+    // Step 2
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.group_name')} : ${surveyData.groupName}`)
     
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.still_operating')} : ${surveyData.isRunning ? t('service_home_care.survey.yes') : t('service_home_care.survey.no')}`)
+
+    let finalCreateReason = surveyData.createReason
+    if (finalCreateReason === t('service_home_care.survey.other')) {
+      finalCreateReason += ` : ${surveyData.createReasonOther}`
     }
-    
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.founded_how')} : ${finalCreateReason}`)
+
+    let finalLocation = surveyData.location
+    if (finalLocation === t('service_home_care.survey.other')) {
+      finalLocation += ` : ${surveyData.locationOther}`
+    }
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.admin_location_label')} : ${finalLocation}`)
+
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.motivation_label')} : ${surveyData.joinMotivation.join(', ')}`)
+
+  } else {
+    // Step 3
+    let reasons = surveyData.notJoinReason.map(r => {
+      if (r === t('service_home_care.survey.other')) {
+        return `${r} : ${surveyData.notJoinReasonOther}`
+      }
+      return r
+    })
+    parts.push(`${questionIndex++}. ${t('service_home_care.survey.step3_title')} : ${reasons.join(', ')}`)
+  }
+
+  // Step 4
+  parts.push(`${questionIndex++}. ${t('service_home_care.survey.step4_question')} : ${surveyData.motivationBySupport ? t('service_home_care.survey.step4_yes') : t('service_home_care.survey.step4_no')}`)
+
+  const desiredServices = surveyData.expectService.join(', ')
+  parts.push(`${questionIndex++}. ${t('service_home_care.survey.desired_services_label')} : ${desiredServices}`)
+
+  // Contact Info
+  parts.push('')
+  parts.push(`${t('service_home_care.survey.contact_title')} :`)
+  parts.push(`1. ${t('service_home_care.survey.clinic_name')} : ${surveyData.userInfo.clinicName}`)
+  
+  const jobTitle = surveyData.userInfo.jobTitle ? `(${surveyData.userInfo.jobTitle})` : ''
+  parts.push(`2. ${t('service_home_care.survey.contact_person')} : ${surveyData.userInfo.name} ${jobTitle}`)
+  
+  // const contactMethods = []
+  if (surveyData.userInfo.tel) parts.push(`3. ${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
+  if (surveyData.userInfo.mobile) parts.push(`4. ${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
+  if (surveyData.userInfo.email) parts.push(`5. ${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
+  // parts.push(`${t('service_home_care.survey.contact_method')} : ${contactMethods.join(', ')}`)
+
+  parts.push(`6. ${t('service_home_care.survey.clinic_type_label')} : ${surveyData.userInfo.clinicType.join(', ')}`)
+  parts.push(`7. ${t('service_home_care.survey.clinic_address')} : ${surveyData.userInfo.city}${surveyData.userInfo.dist}${surveyData.userInfo.address}`)
+  parts.push(`8. ${t('service_home_care.survey.preferred_time')} : ${surveyData.userInfo.contactTime.join(', ')}`)
+
+  const mail = {
+    to: "services@lifecare.org.tw",
+    subject: `${t("nav.service_home_care")}-${t('service_home_care.survey.title')}`,
+    body: `
+      ${t('service_home_care.survey.email_body_greeting')}
+
+      ${t('service_home_care.survey.email_body_content_intro')}
+      ${parts.join('\n')}
+
+      ${t('service_home_care.survey.email_body_closing')}
+    `
+  }
+
+  return `mailto:${mail.to}?subject=${mail.subject}&body=${encodeURIComponent(mail.body)}`
+})
+const submitSurvey = async () => {
+  // step1 : 驗證 surveyStep = 4 欄位
+  if (!validateCurrentStep()) return
+
+  try {
+    // step2 : 整理寄出資料 (MailLink)
+    const mailtoLink = MailLink.value
+
+    // step3 : 生成 <a :href="MailLink"></a>，寄出信件
+    const link = document.createElement('a')
+    link.href = mailtoLink
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
     // Navigate to success step (step 5)
-    surveyStep.value = 5
-    await scrollToTop()
+    // surveyStep.value = 5
+    // await scrollToTop()
     
   } catch(error) {
     console.error("submit data error", error)
     
     // Show error message
-    showToast('error', t('service_home_care.survey.error_submit_failed'))
+    // showToast('error', t('service_home_care.survey.error_submit_failed'))
   } finally {
     isSubmitting.value = false
   }
@@ -401,84 +546,6 @@ const fetchDistOptions = async (cityName) => {
 }
 watch(()=> surveyData.userInfo.city, (data)=> {
   fetchDistOptions(data)
-})
-
-const MailLink = computed(()=> {
-  const parts = []
-  let questionIndex = 1
-
-  // Step 1
-  parts.push(`${questionIndex++}. ${t('service_home_care.survey.step1_question')} : ${surveyData.hasJoined ? t('service_home_care.survey.step1_yes') : t('service_home_care.survey.step1_no')}`)
-
-  if (surveyData.hasJoined) {
-    // Step 2
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.group_name')} : ${surveyData.groupName}`)
-    
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.still_operating')} : ${surveyData.isRunning ? t('service_home_care.survey.yes') : t('service_home_care.survey.no')}`)
-
-    let finalCreateReason = surveyData.createReason
-    if (finalCreateReason === t('service_home_care.survey.other')) {
-      finalCreateReason += ` : ${surveyData.createReasonOther}`
-    }
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.founded_how')} : ${finalCreateReason}`)
-
-    let finalLocation = surveyData.location
-    if (finalLocation === t('service_home_care.survey.other')) {
-      finalLocation += ` : ${surveyData.locationOther}`
-    }
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.admin_location_label')} : ${finalLocation}`)
-
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.motivation_label')} : ${surveyData.joinMotivation.join(', ')}`)
-
-  } else {
-    // Step 3
-    let reasons = surveyData.notJoinReason.map(r => {
-      if (r === t('service_home_care.survey.other')) {
-        return `${r} : ${surveyData.notJoinReasonOther}`
-      }
-      return r
-    })
-    parts.push(`${questionIndex++}. ${t('service_home_care.survey.step3_title')} : ${reasons.join(', ')}`)
-  }
-
-  // Step 4
-  parts.push(`${questionIndex++}. ${t('service_home_care.survey.step4_question')} : ${surveyData.motivationBySupport ? t('service_home_care.survey.step4_yes') : t('service_home_care.survey.step4_no')}`)
-
-  const desiredServices = surveyData.expectService.join(', ')
-  parts.push(`${questionIndex++}. ${t('service_home_care.survey.desired_services_label')} : ${desiredServices}`)
-
-  // Contact Info
-  parts.push('')
-  parts.push(`${t('service_home_care.survey.contact_title')} :`)
-  parts.push(`1. ${t('service_home_care.survey.clinic_name')} : ${surveyData.userInfo.clinicName}`)
-  
-  const jobTitle = surveyData.userInfo.jobTitle ? `(${surveyData.userInfo.jobTitle})` : ''
-  parts.push(`2. ${t('service_home_care.survey.contact_person')} : ${surveyData.userInfo.name} ${jobTitle}`)
-  
-  // const contactMethods = []
-  if (surveyData.userInfo.tel) parts.push(`3. ${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
-  if (surveyData.userInfo.mobile) parts.push(`4. ${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
-  if (surveyData.userInfo.email) parts.push(`5. ${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
-  // parts.push(`${t('service_home_care.survey.contact_method')} : ${contactMethods.join(', ')}`)
-
-  parts.push(`6. ${t('service_home_care.survey.clinic_type_label')} : ${surveyData.userInfo.clinicType.join(', ')}`)
-  parts.push(`7. ${t('service_home_care.survey.clinic_address')} : ${surveyData.userInfo.city}${surveyData.userInfo.dist}${surveyData.userInfo.address}`)
-  parts.push(`8. ${t('service_home_care.survey.preferred_time')} : ${surveyData.userInfo.contactTime.join(', ')}`)
-
-  const mail = {
-    to: "williamhsu@carenet.net.tw",
-    subject: `${t("nav.service_home_care")}-${t('service_home_care.survey.title')}`,
-    body: `
-      ${t('service_home_care.survey.email_body_greeting')}
-
-      ${t('service_home_care.survey.email_body_content_intro')}
-      ${parts.join('\n')}
-
-      ${t('service_home_care.survey.email_body_closing')}
-    `
-  }
-
-  return `mailto:${mail.to}?subject=${mail.subject}&body=${encodeURIComponent(mail.body)}`
 })
 </script>
 
@@ -765,7 +832,11 @@ const MailLink = computed(()=> {
                       <div class="space-y-6">
                         <div class="space-y-3">
                            <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.group_name') }}</label>
-                           <input v-model="surveyData.groupName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm" :placeholder="t('service_home_care.survey.group_name_placeholder')">
+                           <input v-model="surveyData.groupName" type="text" 
+                             class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm"
+                             :class="validationErrors.groupName ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'"
+                             :placeholder="t('service_home_care.survey.group_name_placeholder')">
+                           <span v-if="validationErrors.groupName" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
                         </div>
                         
                         <div class="space-y-3">
@@ -778,7 +849,9 @@ const MailLink = computed(()=> {
                         <div class="space-y-4">
                            <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.founded_how') }}</label>
                            <div class="space-y-3">
-                             <label v-for="opt in foundedByOptions" :key="opt" class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border border-gray-100 cursor-pointer hover:border-foundation-blue/30 transition-all group">
+                             <label v-for="opt in foundedByOptions" :key="opt" 
+                               class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border cursor-pointer hover:border-foundation-blue/30 transition-all group"
+                               :class="validationErrors.createReason ? '!border-red-500' : 'border-gray-100'">
                                 <div class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-foundation-blue">
                                    <div v-if="surveyData.createReason === opt" class="w-2.5 h-2.5 bg-foundation-blue rounded-full"></div>
                                 </div>
@@ -787,12 +860,15 @@ const MailLink = computed(()=> {
                                 <input v-if="opt === t('service_home_care.survey.other') && surveyData.createReason === t('service_home_care.survey.other')" v-model="surveyData.createReasonOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify')">
                              </label>
                            </div>
+                           <span v-if="validationErrors.createReason" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
                         </div>
 
                         <div class="space-y-4">
                            <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.admin_location_label') }}</label>
                            <div class="space-y-3">
-                             <label v-for="opt in adminLocationOptions" :key="opt" class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border border-gray-100 cursor-pointer hover:border-foundation-blue/30 transition-all group">
+                             <label v-for="opt in adminLocationOptions" :key="opt" 
+                               class="flex flex-wrap items-center p-3 lg:p-5 rounded-2xl bg-white border cursor-pointer hover:border-foundation-blue/30 transition-all group"
+                               :class="validationErrors.location ? '!border-red-500' : 'border-gray-100'">
                                 <div class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-foundation-blue">
                                    <div v-if="surveyData.location === opt" class="w-2.5 h-2.5 bg-foundation-blue rounded-full"></div>
                                 </div>
@@ -801,16 +877,23 @@ const MailLink = computed(()=> {
                                 <input v-if="opt === t('service_home_care.survey.other') && surveyData.location === t('service_home_care.survey.other')" v-model="surveyData.locationOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify')">
                              </label>
                            </div>
+                           <span v-if="validationErrors.location" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
                         </div>
 
                         <div class="space-y-4">
                            <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.motivation_label') }}</label>
                            <div class="flex flex-wrap gap-2">
-                             <label v-for="opt in motivationOptions" :key="opt" class="flex items-center px-5 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" :class="surveyData.joinMotivation.includes(opt) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
+                             <label v-for="opt in motivationOptions" :key="opt" 
+                               class="flex items-center px-5 py-3 rounded-full border-2 cursor-pointer transition-all font-black text-xs" 
+                               :class="[
+                                  surveyData.joinMotivation.includes(opt) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30',
+                                  validationErrors.joinMotivation ? '!border-red-500' : ''
+                               ]">
                                 <input type="checkbox" v-model="surveyData.joinMotivation" :value="opt" :disabled="surveyData.joinMotivation.length >= 3 && !surveyData.joinMotivation.includes(opt)" class="hidden">
                                 <span>{{ opt }}</span>
                              </label>
                            </div>
+                           <span v-if="validationErrors.joinMotivation" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
                         </div>
                       </div>
                     </div>
@@ -834,7 +917,12 @@ const MailLink = computed(()=> {
                       <div class="space-y-4">
                          <label class="block text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.step3_subtitle') }}</label>
                          <div class="space-y-3">
-                           <label v-for="opt in notJoiningReasonsOptions" :key="opt" class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" :class="surveyData.notJoinReason.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30'">
+                           <label v-for="opt in notJoiningReasonsOptions" :key="opt" 
+                             class="flex items-center flex-wrap p-3 lg:p-5 rounded-2xl border-2 cursor-pointer transition-all group" 
+                             :class="[
+                                surveyData.notJoinReason.includes(opt) ? 'bg-foundation-lightblue/30 border-foundation-blue' : 'bg-white border-gray-100 hover:border-foundation-blue/30',
+                                validationErrors.notJoinReason ? '!border-red-500' : ''
+                             ]">
                               <div class="w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center transition-colors" :class="surveyData.notJoinReason.includes(opt) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
                                  <Icon v-if="surveyData.notJoinReason.includes(opt)" name="check" class="w-3.5 h-3.5 text-white" />
                               </div>
@@ -843,6 +931,7 @@ const MailLink = computed(()=> {
                               <input v-if="opt === t('service_home_care.survey.other') && surveyData.notJoinReason.includes(t('service_home_care.survey.other'))" v-model="surveyData.notJoinReasonOther" type="text" class="ml-4 border-b-2 border-foundation-blue outline-none text-sm w-full max-w-[200px] bg-transparent" :placeholder="t('service_home_care.survey.please_specify_reason')">
                            </label>
                          </div>
+                         <span v-if="validationErrors.notJoinReason" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
                       </div>
                     </div>
                     <div class="flex justify-between items-center pt-10 border-t border-gray-200 mt-6 lg:mt-12">
@@ -872,7 +961,9 @@ const MailLink = computed(()=> {
                          {{ t('service_home_care.survey.desired_services_label') }} ?
                        </h4>
                        <div class="space-y-3">
-                          <label v-for="svc in desiredServicesOptions" :key="svc" class="flex items-center flex-wrap p-3 lg:p-5 rounded-3xl bg-white border-2 border-gray-50 cursor-pointer hover:shadow-xl hover:border-foundation-blue/30 transition-all group">
+                          <label v-for="svc in desiredServicesOptions" :key="svc" class="flex items-center flex-wrap p-3 lg:p-5 rounded-3xl bg-white border-2 cursor-pointer hover:shadow-xl hover:border-foundation-blue/30 transition-all group"
+                          :class="validationErrors.expectService ? '!border-red-500' : 'border-gray-100'"
+                          >
                              <div class="shrink-0 w-6 h-6 rounded-lg border-2 mr-4 flex items-center justify-center transition-colors shadow-sm" :class="surveyData.expectService.includes(svc) ? 'bg-foundation-blue border-foundation-blue' : 'border-gray-200 group-hover:border-foundation-blue'">
                                 <Icon v-if="surveyData.expectService.includes(svc)" name="check" class="w-4 h-4 text-white" />
                              </div>
@@ -880,6 +971,7 @@ const MailLink = computed(()=> {
                              <span class="text-sm font-black text-gray-700">{{ svc }}</span>
                           </label>
                        </div>
+                       <span v-if="validationErrors.expectService" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
                     </div>
 
                     <div class="space-y-5 pt-8 border-t border-gray-100">
@@ -892,51 +984,93 @@ const MailLink = computed(()=> {
                           <!-- Single Column Start -->
                           <div class="space-y-3">
                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_name') }}</label>
-                            <input v-model="surveyData.userInfo.clinicName" type="text" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm">
+                            <input v-model="surveyData.userInfo.clinicName" type="text" 
+                              class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl focus:ring-4 focus:ring-foundation-blue/5 transition-all shadow-sm"
+                              :class="validationErrors.clinicName ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'" />
+                            <span v-if="validationErrors.clinicName" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
                           </div>
 
                           <div class="space-y-3">
                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_person') }}</label>
                             <div class="flex flex-col sm:flex-row gap-4">
-                              <input v-model="surveyData.userInfo.name" :placeholder="t('service_home_care.survey.name_placeholder')" class="flex-[2] bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
-                              <select v-model="surveyData.userInfo.jobTitle" class="flex-1 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-gray-500 font-black text-sm shadow-sm">
-                                <option value="" disabled>{{ t('service_home_care.survey.select_job_title') }}</option>
-                                <option v-for="title in jobTitleOptions" :key="title" :value="title">{{ title }}</option>
-                              </select>
+                              <div class="flex-[2] space-y-1">
+                                <input v-model="surveyData.userInfo.name" :placeholder="t('service_home_care.survey.name_placeholder')" 
+                                  class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl transition-all shadow-sm"
+                                  :class="validationErrors.name ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'" />
+                                <span v-if="validationErrors.name" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
+                              </div>
+                              <div class="flex-1 space-y-1">
+                                <select v-model="surveyData.userInfo.jobTitle" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none text-gray-500 font-black text-sm shadow-sm"
+                                :class="validationErrors.jobTitle ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'">
+                                  <option value="" disabled>{{ t('service_home_care.survey.select_job_title') }}</option>
+                                  <option v-for="title in jobTitleOptions" :key="title" :value="title">{{ title }}</option>
+                                </select>
+                                <span v-if="validationErrors.jobTitle" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
+                              </div>
                             </div>
                           </div>
 
                           <div class="space-y-3">
                             <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.contact_method') }}</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              <input v-model="surveyData.userInfo.tel" :placeholder="t('service_home_care.survey.phone_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
-                              <input v-model="surveyData.userInfo.mobile" :placeholder="t('service_home_care.survey.mobile_placeholder')" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                              <div class="space-y-1">
+                                <input v-model="surveyData.userInfo.tel" :placeholder="t('service_home_care.survey.phone_placeholder')" 
+                                  class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl transition-all shadow-sm"
+                                  :class="validationErrors.tel ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'" />
+                                <span v-if="validationErrors.tel" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
+                              </div>
+                              <div class="space-y-1">
+                                <input v-model="surveyData.userInfo.mobile" :placeholder="t('service_home_care.survey.mobile_placeholder')" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl transition-all shadow-sm"
+                                  :class="validationErrors.mobile ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'">
+                                <span v-if="validationErrors.mobile" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
+                              </div>
                             </div>
-                            <input v-model="surveyData.userInfo.email" :placeholder="t('service_home_care.survey.email_placeholder')" class="w-full mt-4 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                            <div class="space-y-1">
+                              <input v-model="surveyData.userInfo.email" :placeholder="t('service_home_care.survey.email_placeholder')" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl transition-all shadow-sm"
+                                  :class="validationErrors.email ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'">
+                              <span v-if="validationErrors.email" class="text-red-500 text-xs font-bold ml-1">{{ t('service_home_care.survey.required_field') }}</span>
+                            </div>
                           </div>
 
                           <div class="space-y-4">
                              <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_type_label') }}</label>
                              <div class="flex flex-wrap gap-2">
-                               <label v-for="type in clinicTypeOptions" :key="type" class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-sm font-black" :class="surveyData.userInfo.clinicType.includes(type) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30'">
+                               <label v-for="type in clinicTypeOptions" :key="type" 
+                                 class="flex items-center px-4 py-2 rounded-full border-2 cursor-pointer transition-all text-sm font-black" 
+                                 :class="[
+                                    surveyData.userInfo.clinicType.includes(type) ? 'bg-foundation-blue text-white border-foundation-blue' : 'bg-white text-gray-400 border-gray-100 hover:border-foundation-blue/30',
+                                    validationErrors.clinicType ? '!border-red-500' : ''
+                                 ]">
                                  <input type="checkbox" v-model="surveyData.userInfo.clinicType" :value="type" class="hidden">
                                  <span>{{ type }}</span>
                                </label>
                              </div>
+                             <span v-if="validationErrors.clinicType" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
                           </div>
 
                           <div class="space-y-3">
                              <label class="text-sm font-black text-gray-400 uppercase tracking-widest ml-1">{{ t('service_home_care.survey.clinic_address') }}</label>
                              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                               <select v-model="surveyData.userInfo.city" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
-                                  <option value="" disabled>{{ t('service_home_care.survey.select_city') }}</option>
-                                 <option v-for="city in cityOptions" :key="city.value" :value="city.value">{{ city.label }}</option>
-                               </select>
-                               <select v-model="surveyData.userInfo.dist" class="bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue text-sm font-black shadow-sm">
-                                 <option value="" disabled>{{ t('service_home_care.survey.select_district') }}</option>
-                                 <option v-for="dist in distOptions" :key="dist.value" :value="dist.value">{{ dist.label }}</option>
-                               </select>
-                               <input v-model="surveyData.userInfo.address" :placeholder="t('service_home_care.survey.address_detail')" class="sm:col-span-2 bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border border-gray-100 outline-none focus:border-foundation-blue focus:shadow-xl transition-all shadow-sm">
+                               <div class="space-y-1">
+                                 <select v-model="surveyData.userInfo.city" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:border-foundation-blue text-sm font-black shadow-sm"
+                                  :class="validationErrors.city ? '!border-red-500' : 'border-gray-100'">
+                                    <option value="" disabled>{{ t('service_home_care.survey.select_city') }}</option>
+                                   <option v-for="city in cityOptions" :key="city.value" :value="city.value">{{ city.label }}</option>
+                                 </select>
+                               </div>
+                               <div class="space-y-1">
+                                 <select v-model="surveyData.userInfo.dist" class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:border-foundation-blue text-sm font-black shadow-sm"
+                                  :class="validationErrors.dist ? '!border-red-500' : 'border-gray-100'">
+                                   <option value="" disabled>{{ t('service_home_care.survey.select_district') }}</option>
+                                   <option v-for="dist in distOptions" :key="dist.value" :value="dist.value">{{ dist.label }}</option>
+                                 </select>
+                               </div>
+                               <div class="sm:col-span-2 space-y-1">
+                                 <input v-model="surveyData.userInfo.address" :placeholder="t('service_home_care.survey.address_detail')" 
+                                  class="w-full bg-white rounded-2xl text-sm lg:text-base px-4 py-3 border outline-none focus:shadow-xl transition-all shadow-sm"
+                                  :class="validationErrors.address ? '!border-red-500' : 'border-gray-100 focus:border-foundation-blue'" />
+                                 <span v-if="validationErrors.city || validationErrors.dist || validationErrors.address" class="text-red-500 text-xs font-bold ml-1 block">{{ t('service_home_care.survey.required_field') }}</span>
+                               </div>
                              </div>
                           </div>
 
@@ -953,13 +1087,13 @@ const MailLink = computed(()=> {
                        </div>
                        
                        <div class="pt-16 flex flex-col items-center justify-center">
-                          <!-- <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
+                          <button @click="submitSurvey" class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
                             <span >{{ t('service_home_care.survey.submit_button') }}</span>
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                               <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />
                             </div>
-                          </button> -->
-                          <a
+                          </button>
+                          <!-- <a
                             :href="MailLink"
                             class="px-6 py-4 rounded-[36px] bg-foundation-blue text-white font-black lg:text-2xl shadow-2xl hover:-translate-y-2 active:scale-95 transition-all flex items-center justify-center space-x-6 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
@@ -967,7 +1101,7 @@ const MailLink = computed(()=> {
                             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                               <Icon name="arrowForward" class="w-6 h-6 animate-bounce-horizontal" />
                             </div>
-                          </a>
+                          </a> -->
                           <p class="text-center text-gray-400 text-xs mt-8 font-medium italic">{{ t('service_home_care.survey.submit_note') }}</p>
                        </div>
                     </div>

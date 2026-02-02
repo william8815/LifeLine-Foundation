@@ -96,7 +96,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-white min-h-screen pb-32">
+  <div class="bg-white min-h-screen pb-16">
     <!-- Skeleton Loading State -->
     <div v-if="isLoadingNews">
       <!-- Header Skeleton -->
@@ -145,10 +145,15 @@ onMounted(() => {
       <main class="container mx-auto px-4 md:px-6 pt-12">
         <div class="flex items-center justify-between space-x-6 text-gray-500 font-bold mb-8">
           <span class="italic text-gray-400">{{ t('publish_date') }} : {{ newsItem.created_time }}</span>
-          <button @click="handleShare" class="px-6 py-3 bg-foundation-blue text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-black flex items-center">
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
-            {{ t('share') }}
-          </button>
+          <div class="flex gap-4">
+            <button @click="handleShare" class="px-6 py-3 bg-foundation-blue text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-black flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+              {{ t('share') }}
+            </button>
+            <a :href="newsItem.permalink_url" target="_blank" class="px-6 py-3 bg-foundation-blue text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-black flex items-center">
+              前往 FB 查看
+          </a>
+          </div>
         </div>
         <article class="prose prose-xl max-w-none">
           <div class="space-y-10 text-gray-600 leading-[1.8] font-medium text-lg md:text-xl">
@@ -158,72 +163,99 @@ onMounted(() => {
         <!-- 標籤 -->
         <div v-if="newsItem?.tags?.length" class="my-4 py-4">
           <div class="flex items-center gap-4 flex-wrap font-bold">
-            <span v-for="tag in newsItem.tags" :key="tag" class="text-sm bg-foundation-blue py-2 px-4 rounded-full text-white"># {{ tag }}</span>
+            <span v-for="tag in newsItem.tags" :key="tag" class="text-sm bg-white text-foundation-blue border border-foundation-blue py-2 px-4 rounded-full"># {{ tag }}</span>
           </div>
         </div>
         <!-- 媒體列表 -->
-        <div v-if="newsItem.media && newsItem.media.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-8 my-4">
+        <div class="mt-8 mb-4">
           <h3 class="text-2xl font-black mb-2 md:col-span-2 text-foundation-blue">{{ t('media_list') }}</h3>
-          <!-- 照片 -->
-          <div 
-            v-for="(media, idx) in newsItem.media.filter(m => m.type === 'photo')" 
-            :key="`photo-${idx}`" 
-            class="rounded-xl overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 aspect-square relative bg-gray-100 max-h-[300px]"
-          >
-            <a 
-              :href="media.url" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="block w-full h-full relative group"
-              >
-              <!-- Skeleton UI -->
-              <div 
-                v-if="!media.loaded" 
-                class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
-              >
-                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
-              </div>
-              
-              <img 
-                :src="media.src" 
-                class="w-full h-full object-cover transition-opacity duration-500" 
-                :class="media.loaded ? 'opacity-100' : 'opacity-0'" 
-                :alt="newsItem.message" 
-                @load="media.loaded = true" 
-                loading="lazy"
-              >
-            </a>
-          </div>
 
-          <!-- 影片 -->
-          <div 
-            v-for="(media, idx) in newsItem.media.filter(m => m.type === 'video')" 
-            :key="`video-${idx}`" 
-            class="rounded-xl overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 aspect-video relative bg-gray-900 max-h-[300px] "
-          >
-            <a 
-              :href="media.url" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="block w-full h-full relative group"
+          <div class="flex gap-4 items-center overflow-x-auto overflow-y-hidden">
+            <!-- 照片 -->
+            <div 
+              v-for="(media, idx) in newsItem.media" 
+              :key="`photo-${idx}`" 
+              class="rounded-xl overflow-hidden aspect-square relative bg-gray-100 h-[200px] aspect-[4/3]"
             >
-              <!-- 影片縮圖 -->
-              <img 
-                :src="media.thumbnail" 
-                class="w-full h-full object-cover" 
-                :alt="newsItem.url"
-                loading="lazy"
-              >
-              
-              <!-- 播放按鈕 -->
-              <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
-                <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg class="w-10 h-10 text-foundation-blue ml-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
-                  </svg>
+              <a 
+                v-if="media.type === 'photo'"
+                :href="media.src || media.url" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block w-full h-full relative group"
+                >
+                <!-- Skeleton UI -->
+                <div 
+                  v-if="!media.loaded" 
+                  class="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse"
+                >
+                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
                 </div>
-              </div>
-            </a>
+                
+                <img 
+                  :src="media.src" 
+                  class="w-full h-full object-cover transition-opacity duration-500" 
+                  :class="media.loaded ? 'opacity-100' : 'opacity-0'" 
+                  :alt="newsItem.message" 
+                  @load="media.loaded = true" 
+                  loading="lazy"
+                >
+              </a>
+
+              <a 
+                v-if="media.type === 'video'"
+                :href="media.source || media.url" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block w-full h-full relative group"
+              >
+                <!-- 影片縮圖 -->
+                <img 
+                  :src="media.thumbnail" 
+                  class="w-full h-full object-cover" 
+                  :alt="newsItem.url"
+                  loading="lazy"
+                >
+                
+                <!-- 播放按鈕 -->
+                <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+                  <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg class="w-10 h-10 text-foundation-blue ml-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- 影片 -->
+            <!-- <div 
+              v-for="(media, idx) in newsItem.media.filter(m => m.type === 'video')" 
+              :key="`video-${idx}`" 
+              class="rounded-xl overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 aspect-video relative bg-gray-900 max-h-[200px] "
+            >
+              <a 
+                :href="media.source || media.url" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block w-full h-full relative group"
+              >
+                <img 
+                  :src="media.thumbnail" 
+                  class="w-full h-full object-cover" 
+                  :alt="newsItem.url"
+                  loading="lazy"
+                >
+                
+                <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+                  <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg class="w-10 h-10 text-foundation-blue ml-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div> -->
           </div>
         </div>
       </main>

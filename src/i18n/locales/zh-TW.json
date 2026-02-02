@@ -415,7 +415,8 @@
       "error_submit_failed": "提交失敗，請稍後再試或聯繫我們。",
       "email_body_greeting": "您好，感謝您願意深入了解家醫計畫 !",
       "email_body_content_intro": "以下是您的表單填寫內容 :",
-      "email_body_closing": "我們將會盡快給予您回覆。"
+      "email_body_closing": "我們將會盡快給予您回覆。",
+      "required_field": "此為必填欄位"
     }
   },
   "service_emergency": {
