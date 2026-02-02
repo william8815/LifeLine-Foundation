@@ -450,24 +450,24 @@ const MailLink = computed(()=> {
   // Contact Info
   parts.push('')
   parts.push(`${t('service_home_care.survey.contact_title')} :`)
-  parts.push(`${t('service_home_care.survey.clinic_name')} : ${surveyData.userInfo.clinicName}`)
+  parts.push(`1. ${t('service_home_care.survey.clinic_name')} : ${surveyData.userInfo.clinicName}`)
   
   const jobTitle = surveyData.userInfo.jobTitle ? `(${surveyData.userInfo.jobTitle})` : ''
-  parts.push(`${t('service_home_care.survey.contact_person')} : ${surveyData.userInfo.name} ${jobTitle}`)
+  parts.push(`2. ${t('service_home_care.survey.contact_person')} : ${surveyData.userInfo.name} ${jobTitle}`)
   
   // const contactMethods = []
-  if (surveyData.userInfo.tel) parts.push(`${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
-  if (surveyData.userInfo.mobile) parts.push(`${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
-  if (surveyData.userInfo.email) parts.push(`${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
+  if (surveyData.userInfo.tel) parts.push(`3. ${t('service_home_care.survey.phone_placeholder')}: ${surveyData.userInfo.tel}`)
+  if (surveyData.userInfo.mobile) parts.push(`4. ${t('service_home_care.survey.mobile_placeholder')}: ${surveyData.userInfo.mobile}`)
+  if (surveyData.userInfo.email) parts.push(`5. ${t('service_home_care.survey.email_placeholder')}: ${surveyData.userInfo.email}`)
   // parts.push(`${t('service_home_care.survey.contact_method')} : ${contactMethods.join(', ')}`)
 
-  parts.push(`${t('service_home_care.survey.clinic_type_label')} : ${surveyData.userInfo.clinicType.join(', ')}`)
-  parts.push(`${t('service_home_care.survey.clinic_address')} : ${surveyData.userInfo.city}${surveyData.userInfo.dist}${surveyData.userInfo.address}`)
-  parts.push(`${t('service_home_care.survey.preferred_time')} : ${surveyData.userInfo.contactTime.join(', ')}`)
+  parts.push(`6. ${t('service_home_care.survey.clinic_type_label')} : ${surveyData.userInfo.clinicType.join(', ')}`)
+  parts.push(`7. ${t('service_home_care.survey.clinic_address')} : ${surveyData.userInfo.city}${surveyData.userInfo.dist}${surveyData.userInfo.address}`)
+  parts.push(`8. ${t('service_home_care.survey.preferred_time')} : ${surveyData.userInfo.contactTime.join(', ')}`)
 
   const mail = {
     to: "williamhsu88157976@gmail.com",
-    subject: `${t("service_home_care")}-${t('service_home_care.survey.title')}`,
+    subject: `${t("nav.service_home_care")}-${t('service_home_care.survey.title')}`,
     body: `
       ${t('service_home_care.survey.email_body_greeting')}
 
@@ -741,7 +741,7 @@ const MailLink = computed(()=> {
 
                   <!-- Step 1 -->
                   <div v-if="surveyStep === 1" class="transition-all">
-                    <h3 class="text-xl font-black text-foundation-blue mb-10">{{ t('service_home_care.survey.step1_question') }}</h3>
+                    <h3 class="text-xl font-black text-foundation-blue mb-10">1. {{ t('service_home_care.survey.step1_question') }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                        <button @click="selectInitialPath(true)" class="p-4 lg:p-8 rounded-3xl bg-white border-4 border-transparent hover:border-foundation-blue/20 hover:bg-foundation-blue text-left group transition-all">
                           <p class="text-xl font-black text-foundation-blue group-hover:text-white mb-2">{{ t('service_home_care.survey.step1_yes') }}</p>
